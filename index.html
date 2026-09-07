@@ -1,57 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>FISSHHFILET</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{background:#000;color:#fff;font-family:Inter,Helvetica,Arial,sans-serif;height:100%;width:100%;overflow:hidden}
-#app{min-height:100vh;width:100%;display:flex;flex-direction:column}
-header{display:flex;justify-content:space-between;align-items:center;padding:28px 24px}
-.logo{font-size:11px;letter-spacing:0.5em;font-weight:400}
-.back{border:1px solid #222;padding:10px 18px;font-size:11px;letter-spacing:0.3em;background:transparent;color:#fff}
-.center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px}
-.stack{font-weight:900;font-size:42px;line-height:0.95;letter-spacing:-0.02em;text-transform:uppercase}
-.stack div{cursor:pointer;padding:4px 0}
-.big{font-weight:900;font-size:64px;line-height:0.9;letter-spacing:-0.03em;text-align:center}
-.small{margin-top:36px;font-size:11px;letter-spacing:0.32em;color:#7a7a7a}
-@media(min-width:768px){.stack{font-size:56px}.big{font-size:96px}}
+body{background:#000;color:#fff;font-family:-apple-system,BlinkMacSystemFont,sans-serif;display:flex;flex-direction:column;min-height:100vh;align-items:center}
+.top{width:100%;padding:16px;text-align:center;font-weight:800;letter-spacing:4px;font-size:18px}
+.video-wrap{width:100%;max-width:480px;position:relative;background:#000;aspect-ratio:9/16;overflow:hidden}
+video{width:100%;height:100%;object-fit:cover;display:block}
+.outro{position:absolute;inset:0;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:5}
+.outro img{width:120px;height:120px;object-fit:contain}
+.outro span{color:#f5c518;margin-top:12px;background:#111;padding:6px 14px;border-radius:20px;font-size:14px}
+.info{width:100%;max-width:480px;padding:16px}
+.info h1{font-size:18px;line-height:1.3;font-weight:600}
+.info p{font-size:13px;color:#aaa;margin-top:8px;line-height:1.4}
+.actions{display:flex;gap:8px;margin-top:16px}
+.btn{flex:1;background:#1a1a1a;border:0;color:#fff;padding:12px;border-radius:24px;font-weight:600;font-size:14px}
+.btn.primary{background:#fff;color:#000}
+#adminPanel{display:none;background:#111;margin-top:20px;padding:12px;border-radius:12px;font-size:13px;line-height:2}
+#adminPanel b{color:#888}
 </style>
 </head>
 <body>
-<div id="app">
-<header>
-<div class="logo">FISSHHFILET</div>
-<button id="backBtn" class="back" style="display:none">← BACK</button>
-</header>
-<div id="content" class="center"></div>
+<div class="top">FISSHHFILET</div>
+
+<div class="video-wrap" id="wrap">
+  <video id="v" autoplay muted loop playsinline controls poster="">
+    <source src="video.mp4" type="video/mp4">
+  </video>
+  <div class="outro" id="outro">
+    <img src="https://i.imgur.com/8Qm5N9L.png" id="outroImg" alt="@fisshhfilet">
+    <span>@fisshhfilet</span>
+  </div>
 </div>
+
+<div class="info">
+  <h1>Red Script Tattoo Reveal - Striped Lounge Set & Luxury Closet Aesthetic</h1>
+  <p>Fresh red ink script tattoo reveal in striped two piece. Luxury shoe closet in background.</p>
+  
+  <div class="actions">
+    <button class="btn primary" onclick="share()">Share</button>
+    <button class="btn" onclick="copyLink()">Copy Link</button>
+  </div>
+
+  <div id="adminPanel">
+    <div style="color:#f5c518;margin-bottom:8px">PRIVATE - ONLY YOU</div>
+    <div><b>Impressions:</b> <span id="imp">0</span></div>
+    <div><b>Video views:</b> <span id="vv">0</span></div>
+    <div><b>Played at 95%:</b> <span id="p95">0</span></div>
+    <div><b>Avg play time:</b> <span id="apt">0:00</span></div>
+    <div><b>Total play time:</b> <span id="tpt">0 min</span></div>
+    <div style="margin-top:8px;color:#555">Add ?admin to URL to see this. Others see clean video only.</div>
+  </div>
+</div>
+
 <script>
-const home = `<div class="stack"><div data-v="galleries">GALLERIES</div><div data-v="video">VIDEO</div><div data-v="objects">OBJECTS</div><div data-v="creators">CREATORS</div><div data-v="archive">ARCHIVE</div></div>`;
-const pages = {
-galleries: {t1:'Restocking',t2:'Soon'},
-video: {t1:'Visuals',t2:'Loading'},
-objects: {t1:'Objects',t2:'Incoming'},
-creators: {t1:'Creators',t2:'Soon'},
-archive: {t1:'Archive',t2:'Loading'}
-};
-const content = document.getElementById('content');
-const backBtn = document.getElementById('backBtn');
-function showHome(){
- backBtn.style.display='none';
- content.innerHTML = home;
- document.querySelectorAll('[data-v]').forEach(el=>{
-   el.onclick = ()=> showPage(el.dataset.v);
- });
+// PRIVATE ANALYTICS - only shows with ?admin
+const isAdmin = location.search.includes('admin');
+const panel = document.getElementById('adminPanel');
+if(isAdmin) panel.style.display='block';
+
+let stats = JSON.parse(localStorage.getItem('ff_stats')||'{"imp":0,"views":0,"p95":0,"totalSec":0,"plays":[]}');
+stats.imp++;
+localStorage.setItem('ff_stats', JSON.stringify(stats));
+
+const v = document.getElementById('v');
+const outro = document.getElementById('outro');
+let startTime=0;
+
+v.addEventListener('play',()=>{
+  if(v.currentTime<0.5){
+    stats.views++;
+    startTime=Date.now();
+    localStorage.setItem('ff_stats', JSON.stringify(stats));
+  }
+});
+
+v.addEventListener('timeupdate',()=>{
+  if(v.duration && v.currentTime/v.duration>0.95){
+    if(!v._counted95){
+      v._counted95=true;
+      stats.p95++;
+      localStorage.setItem('ff_stats', JSON.stringify(stats));
+    }
+  }
+  // show outro at end then loop
+  if(v.duration - v.currentTime < 0.3){
+    outro.style.display='flex';
+    setTimeout(()=>{ outro.style.display='none'; v.currentTime=0; v.play(); v._counted95=false; },2000);
+  }
+});
+
+v.addEventListener('pause',()=>{
+  if(startTime){
+    let sec = Math.round((Date.now()-startTime)/1000);
+    stats.totalSec+=sec;
+    localStorage.setItem('ff_stats', JSON.stringify(stats));
+    startTime=0;
+  }
+});
+
+function updateAdmin(){
+  if(!isAdmin) return;
+  document.getElementById('imp').textContent=stats.imp;
+  document.getElementById('vv').textContent=stats.views;
+  document.getElementById('p95').textContent=stats.p95;
+  let avg = stats.views?Math.round(stats.totalSec/stats.views):0;
+  document.getElementById('apt').textContent='0:'+(avg<10?'0'+avg:avg);
+  document.getElementById('tpt').textContent=Math.round(stats.totalSec/60)+' min';
 }
-function showPage(k){
- const p = pages[k];
- backBtn.style.display='block';
- content.innerHTML = `<div class="big">${p.t1}<br>${p.t2}</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div>`;
+setInterval(updateAdmin,1000);
+updateAdmin();
+
+function share(){
+  if(navigator.share){
+    navigator.share({title:'FISSHHFILET', url:location.href});
+  } else { copyLink(); }
 }
-backBtn.onclick = showHome;
-showHome();
+function copyLink(){
+  navigator.clipboard.writeText(location.href);
+  alert('Link copied');
+}
 </script>
 </body>
 </html>
