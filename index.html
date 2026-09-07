@@ -2,39 +2,74 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FISSHHFILET</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:#fff;font-family:-apple-system,BlinkMacSystemFont,sans-serif;display:flex;flex-direction:column;min-height:100vh;align-items:center}
-.top{width:100%;padding:16px;text-align:center;font-weight:800;letter-spacing:4px;font-size:18px}
-.video-wrap{width:100%;max-width:480px;position:relative;background:#000;aspect-ratio:9/16;overflow:hidden}
+body{background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif;min-height:100vh;display:flex;flex-direction:column}
+.top{padding:22px 20px;font-size:13px;letter-spacing:6px;color:#fff}
+.menu{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px}
+.menu div{font-size:52px;line-height:0.95;font-weight:900;letter-spacing:-1px;text-transform:uppercase}
+.video-section{width:100%;max-width:420px;margin:0 auto;padding:0 14px 20px}
+.video-box{width:100%;aspect-ratio:9/16;background:#111;position:relative;overflow:hidden;border:1px solid #222}
 video{width:100%;height:100%;object-fit:cover;display:block}
-.outro{position:absolute;inset:0;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:5}
-.outro img{width:120px;height:120px;object-fit:contain}
-.outro span{color:#f5c518;margin-top:12px;background:#111;padding:6px 14px;border-radius:20px;font-size:14px}
-.info{width:100%;max-width:480px;padding:16px}
-.info h1{font-size:18px;line-height:1.3;font-weight:600}
-.info p{font-size:13px;color:#aaa;margin-top:8px;line-height:1.4}
-.actions{display:flex;gap:8px;margin-top:16px}
-.btn{flex:1;background:#1a1a1a;border:0;color:#fff;padding:12px;border-radius:24px;font-weight:600;font-size:14px}
-.btn.primary{background:#fff;color:#000}
-#adminPanel{display:none;background:#111;margin-top:20px;padding:12px;border-radius:12px;font-size:13px;line-height:2}
-#adminPanel b{color:#888}
+.caption{padding:14px 2px 0}
+.caption h1{font-size:15px;font-weight:700;line-height:1.3}
+.caption p{font-size:12px;color:#777;margin-top:6px;line-height:1.4}
+.bottom-bar{position:sticky;bottom:0;background:#fff;width:100%;display:flex;justify-content:center;padding:14px;border-top:1px solid #eee}
+.save-btn{background:#e60023;color:#fff;border:0;padding:12px 28px;border-radius:30px;font-weight:700;font-size:15px}
+#admin{display:none;background:#111;color:#aaa;font-size:11px;padding:10px;margin:10px;border-radius:8px;line-height:2}
 </style>
 </head>
 <body>
 <div class="top">FISSHHFILET</div>
 
-<div class="video-wrap" id="wrap">
-  <video id="v" autoplay muted loop playsinline controls poster="">
-    <source src="video.mp4" type="video/mp4">
-  </video>
-  <div class="outro" id="outro">
-    <img src="https://i.imgur.com/8Qm5N9L.png" id="outroImg" alt="@fisshhfilet">
-    <span>@fisshhfilet</span>
-  </div>
+<div class="menu">
+<div>GALLERIES</div>
+<div>VIDEO</div>
+<div>OBJECTS</div>
+<div>CREATORS</div>
+<div>ARCHIVE</div>
 </div>
+
+<div class="video-section">
+<div class="video-box">
+<video id="v" autoplay muted loop playsinline controls>
+<source src="./video.mp4?v=5" type="video/mp4">
+</video>
+</div>
+<div class="caption">
+<h1>Red Script Tattoo Reveal - Striped Lounge Set & Luxury Closet Aesthetic</h1>
+<p>Fresh red ink script tattoo reveal in striped two piece. Luxury shoe closet in background.</p>
+</div>
+<div id="admin">
+<div style="color:#f5c518">PRIVATE ?admin ONLY</div>
+Impressions: <span id="a1">0</span><br>
+Views: <span id="a2">0</span><br>
+95%: <span id="a3">0</span><br>
+From Pinterest: <span id="a4">0</span>
+</div>
+</div>
+
+<div class="bottom-bar">
+<button class="save-btn" onclick="share()">Save</button>
+</div>
+
+<script>
+let s=JSON.parse(localStorage.getItem('ff3')||'{"imp":0,"v":0,"p95":0,"pin":0}');
+s.imp++;
+if(document.referrer.includes('pinterest')) s.pin++;
+localStorage.setItem('ff3',JSON.stringify(s));
+let v=document.getElementById('v');
+v.addEventListener('play',()=>{if(v.currentTime<1){s.v++;localStorage.setItem('ff3',JSON.stringify(s))}});
+v.addEventListener('timeupdate',()=>{if(v.duration&&v.currentTime/v.duration>0.95&&!v._c){v._c=1;s.p95++;localStorage.setItem('ff3',JSON.stringify(s))}});
+if(location.search.includes('admin')){document.getElementById('admin').style.display='block';}
+function upd(){document.getElementById('a1').textContent=s.imp;document.getElementById('a2').textContent=s.v;document.getElementById('a3').textContent=s.p95;document.getElementById('a4').textContent=s.pin}
+setInterval(upd,500);
+function share(){if(navigator.share){navigator.share({url:location.href})}else{navigator.clipboard.writeText(location.href);alert('Link copied')}} 
+</script>
+</body>
+</html>
 
 <div class="info">
   <h1>Red Script Tattoo Reveal - Striped Lounge Set & Luxury Closet Aesthetic</h1>
