@@ -6,158 +6,80 @@
 <title>FISSHHFILET</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif;min-height:100vh;display:flex;flex-direction:column}
-.top{padding:22px 20px;font-size:13px;letter-spacing:6px;color:#fff}
-.menu{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px}
-.menu div{font-size:52px;line-height:0.95;font-weight:900;letter-spacing:-1px;text-transform:uppercase}
-.video-section{width:100%;max-width:420px;margin:0 auto;padding:0 14px 20px}
-.video-box{width:100%;aspect-ratio:9/16;background:#111;position:relative;overflow:hidden;border:1px solid #222}
-video{width:100%;height:100%;object-fit:cover;display:block}
-.caption{padding:14px 2px 0}
-.caption h1{font-size:15px;font-weight:700;line-height:1.3}
-.caption p{font-size:12px;color:#777;margin-top:6px;line-height:1.4}
-.bottom-bar{position:sticky;bottom:0;background:#fff;width:100%;display:flex;justify-content:center;padding:14px;border-top:1px solid #eee}
-.save-btn{background:#e60023;color:#fff;border:0;padding:12px 28px;border-radius:30px;font-weight:700;font-size:15px}
-#admin{display:none;background:#111;color:#aaa;font-size:11px;padding:10px;margin:10px;border-radius:8px;line-height:2}
+body{background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif}
+.top{padding:20px;font-size:12px;letter-spacing:7px}
+.banner{background:#f5c518;color:#000;text-align:center;padding:10px;font-weight:800;font-size:13px;letter-spacing:1px}
+.menu{display:flex;flex-direction:column;align-items:center;padding:30px 20px 20px;gap:2px}
+.menu button{background:none;border:0;color:#fff;font-size:52px;font-weight:900;line-height:0.95;letter-spacing:-1px;cursor:pointer}
+.menu button:hover{color:#f5c518}
+.video-section{max-width:460px;margin:0 auto;padding:20px 14px}
+.vbox{width:100%;aspect-ratio:9/16;background:#111;border:1px solid #222;overflow:hidden}
+video{width:100%;height:100%;object-fit:cover}
+.info{padding:14px 4px 0}
+.info h1{font-size:16px;line-height:1.3}
+.info p{font-size:12px;color:#888;margin-top:8px}
+.restock{border:1px solid #222;padding:16px;margin-top:20px;text-align:center}
+.restock h2{font-size:14px;letter-spacing:2px}
+.restock p{font-size:12px;color:#aaa;margin-top:8px}
+.restock a{display:inline-block;margin-top:12px;background:#fff;color:#000;padding:10px 22px;border-radius:20px;font-weight:700;text-decoration:none;font-size:13px}
+.bottom{position:sticky;bottom:0;background:#fff;display:flex;justify-content:center;padding:12px}
+.save{background:#e60023;color:#fff;border:0;padding:12px 28px;border-radius:30px;font-weight:700;font-size:15px}
+#admin{display:none;background:#111;margin-top:16px;padding:12px;border-radius:10px;font-size:11px;line-height:2;color:#666}
+#admin b{color:#fff}
 </style>
 </head>
 <body>
 <div class="top">FISSHHFILET</div>
+<div class="banner">RESTOCKING SOON - OBJECTS DROP 09.15 - TAP OBJECTS TO JOIN</div>
 
 <div class="menu">
-<div>GALLERIES</div>
-<div>VIDEO</div>
-<div>OBJECTS</div>
-<div>CREATORS</div>
-<div>ARCHIVE</div>
+<button onclick="go('galleries')">GALLERIES</button>
+<button onclick="go('video')">VIDEO</button>
+<button onclick="go('objects')">OBJECTS</button>
+<button onclick="go('creators')">CREATORS</button>
+<button onclick="go('archive')">ARCHIVE</button>
 </div>
 
 <div class="video-section">
-<div class="video-box">
-<video id="v" autoplay muted loop playsinline controls>
-<source src="./video.mp4?v=5" type="video/mp4">
+<div id="video" class="vbox">
+<video autoplay muted loop playsinline controls poster="">
+<source src="./video.mp4?v=7" type="video/mp4">
 </video>
 </div>
-<div class="caption">
+<div class="info">
 <h1>Red Script Tattoo Reveal - Striped Lounge Set & Luxury Closet Aesthetic</h1>
 <p>Fresh red ink script tattoo reveal in striped two piece. Luxury shoe closet in background.</p>
 </div>
+
+<div id="objects" class="restock">
+<h2>OBJECTS - RESTOCKING</h2>
+<p>We are restocking luxury pieces. New drop Sept 15. Get notified first.</p>
+<a href="https://instagram.com/fisshhfilet" target="_blank">JOIN WAITLIST ON IG</a>
+</div>
+
 <div id="admin">
-<div style="color:#f5c518">PRIVATE ?admin ONLY</div>
-Impressions: <span id="a1">0</span><br>
-Views: <span id="a2">0</span><br>
-95%: <span id="a3">0</span><br>
-From Pinterest: <span id="a4">0</span>
+<div style="color:#f5c518;font-weight:700">PRIVATE - ONLY YOU (?admin)</div>
+<b>Impressions:</b> <span id="a1">0</span><br>
+<b>Views:</b> <span id="a2">0</span><br>
+<b>95%:</b> <span id="a3">0</span><br>
+<b>From Pinterest:</b> <span id="a4">0</span>
 </div>
 </div>
 
-<div class="bottom-bar">
-<button class="save-btn" onclick="share()">Save</button>
-</div>
+<div class="bottom"><button class="save" onclick="share()">Save</button></div>
 
 <script>
-let s=JSON.parse(localStorage.getItem('ff3')||'{"imp":0,"v":0,"p95":0,"pin":0}');
-s.imp++;
-if(document.referrer.includes('pinterest')) s.pin++;
-localStorage.setItem('ff3',JSON.stringify(s));
-let v=document.getElementById('v');
-v.addEventListener('play',()=>{if(v.currentTime<1){s.v++;localStorage.setItem('ff3',JSON.stringify(s))}});
-v.addEventListener('timeupdate',()=>{if(v.duration&&v.currentTime/v.duration>0.95&&!v._c){v._c=1;s.p95++;localStorage.setItem('ff3',JSON.stringify(s))}});
-if(location.search.includes('admin')){document.getElementById('admin').style.display='block';}
+function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+let s=JSON.parse(localStorage.getItem('ff4')||'{"imp":0,"v":0,"p95":0,"pin":0}');
+s.imp++; if(document.referrer.includes('pinterest')) s.pin++;
+localStorage.setItem('ff4',JSON.stringify(s));
+let v=document.querySelector('video');
+v.addEventListener('play',()=>{if(v.currentTime<1){s.v++;localStorage.setItem('ff4',JSON.stringify(s))}});
+v.addEventListener('timeupdate',()=>{if(v.duration&&v.currentTime/v.duration>0.95&&!v._c){v._c=1;s.p95++;localStorage.setItem('ff4',JSON.stringify(s))}});
+if(location.search.includes('admin')) document.getElementById('admin').style.display='block';
 function upd(){document.getElementById('a1').textContent=s.imp;document.getElementById('a2').textContent=s.v;document.getElementById('a3').textContent=s.p95;document.getElementById('a4').textContent=s.pin}
-setInterval(upd,500);
-function share(){if(navigator.share){navigator.share({url:location.href})}else{navigator.clipboard.writeText(location.href);alert('Link copied')}} 
-</script>
-</body>
-</html>
-
-<div class="info">
-  <h1>Red Script Tattoo Reveal - Striped Lounge Set & Luxury Closet Aesthetic</h1>
-  <p>Fresh red ink script tattoo reveal in striped two piece. Luxury shoe closet in background.</p>
-  
-  <div class="actions">
-    <button class="btn primary" onclick="share()">Share</button>
-    <button class="btn" onclick="copyLink()">Copy Link</button>
-  </div>
-
-  <div id="adminPanel">
-    <div style="color:#f5c518;margin-bottom:8px">PRIVATE - ONLY YOU</div>
-    <div><b>Impressions:</b> <span id="imp">0</span></div>
-    <div><b>Video views:</b> <span id="vv">0</span></div>
-    <div><b>Played at 95%:</b> <span id="p95">0</span></div>
-    <div><b>Avg play time:</b> <span id="apt">0:00</span></div>
-    <div><b>Total play time:</b> <span id="tpt">0 min</span></div>
-    <div style="margin-top:8px;color:#555">Add ?admin to URL to see this. Others see clean video only.</div>
-  </div>
-</div>
-
-<script>
-// PRIVATE ANALYTICS - only shows with ?admin
-const isAdmin = location.search.includes('admin');
-const panel = document.getElementById('adminPanel');
-if(isAdmin) panel.style.display='block';
-
-let stats = JSON.parse(localStorage.getItem('ff_stats')||'{"imp":0,"views":0,"p95":0,"totalSec":0,"plays":[]}');
-stats.imp++;
-localStorage.setItem('ff_stats', JSON.stringify(stats));
-
-const v = document.getElementById('v');
-const outro = document.getElementById('outro');
-let startTime=0;
-
-v.addEventListener('play',()=>{
-  if(v.currentTime<0.5){
-    stats.views++;
-    startTime=Date.now();
-    localStorage.setItem('ff_stats', JSON.stringify(stats));
-  }
-});
-
-v.addEventListener('timeupdate',()=>{
-  if(v.duration && v.currentTime/v.duration>0.95){
-    if(!v._counted95){
-      v._counted95=true;
-      stats.p95++;
-      localStorage.setItem('ff_stats', JSON.stringify(stats));
-    }
-  }
-  // show outro at end then loop
-  if(v.duration - v.currentTime < 0.3){
-    outro.style.display='flex';
-    setTimeout(()=>{ outro.style.display='none'; v.currentTime=0; v.play(); v._counted95=false; },2000);
-  }
-});
-
-v.addEventListener('pause',()=>{
-  if(startTime){
-    let sec = Math.round((Date.now()-startTime)/1000);
-    stats.totalSec+=sec;
-    localStorage.setItem('ff_stats', JSON.stringify(stats));
-    startTime=0;
-  }
-});
-
-function updateAdmin(){
-  if(!isAdmin) return;
-  document.getElementById('imp').textContent=stats.imp;
-  document.getElementById('vv').textContent=stats.views;
-  document.getElementById('p95').textContent=stats.p95;
-  let avg = stats.views?Math.round(stats.totalSec/stats.views):0;
-  document.getElementById('apt').textContent='0:'+(avg<10?'0'+avg:avg);
-  document.getElementById('tpt').textContent=Math.round(stats.totalSec/60)+' min';
-}
-setInterval(updateAdmin,1000);
-updateAdmin();
-
-function share(){
-  if(navigator.share){
-    navigator.share({title:'FISSHHFILET', url:location.href});
-  } else { copyLink(); }
-}
-function copyLink(){
-  navigator.clipboard.writeText(location.href);
-  alert('Link copied');
-}
+setInterval(upd,500); upd();
+function share(){navigator.share?navigator.share({url:location.href}):(navigator.clipboard.writeText(location.href),alert('Link copied'))}
 </script>
 </body>
 </html>
