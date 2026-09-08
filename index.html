@@ -11,14 +11,13 @@ body{background:#000;color:#fff;font-family:Arial;overflow:hidden}
 .logo{font-size:10px;letter-spacing:6px}
 .page{display:none;height:100vh;height:100dvh;background:#000;overflow-y:auto}
 .page.active{display:flex}
-#top10{flex-direction:column;background:#F5DCC3}
+#top10{flex-direction:column;background:#F5DCC3;padding-top:44px;align-items:center;position:relative}
+#top10 img{width:100%;height:auto;display:block}
+.arrow-hit{position:absolute;right:2%;top:12%;width:40%;height:12%;z-index:20;cursor:pointer}
 #waista{flex-direction:column;background:#000}
 .main{flex:1;position:relative;background:#000;display:flex}
 .main img{width:100%;height:100%;object-fit:contain;background:#000}
-.qr-hit{position:absolute;right:4%;top:42%;width:28%;height:28%}
-.tiny-arrow{position:absolute;right:2%;top:46%;font-size:14px;color:#ff1a1a}
-.footer{height:90px;min-height:90px;background:#2b1a0f;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;flex-shrink:0}
-.footer span{font-size:14px;letter-spacing:0.3px}
+.footer{height:90px;min-height:90px;background:#2b1a0f;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;flex-shrink:0;width:100%}
 .pill{width:42px;height:4px;background:#fff;border-radius:10px}
 #home{flex-direction:column;align-items:center;padding-top:50px}
 .menu{width:100%;text-align:center;margin-top:10px}
@@ -36,14 +35,13 @@ body{background:#000;color:#fff;font-family:Arial;overflow:hidden}
 <div class="top"><div class="logo">FISSHHFILET</div></div>
 <button id="backBtn" class="back" onclick="goBack()">← BACK</button>
 
-<div id="top10" class="page active" onclick="openTop10()" style="background:#F5DCC3;">
-<img src="./top_10_sources_betty_boop.webp" style="width:100%;height:100vh;object-fit:cover;display:block;">
+<div id="top10" class="page active" onclick="openTop10()">
+<img src="./top_10_sources_betty_boop.webp">
+<div class="arrow-hit" onclick="openTop10()"></div>
 </div>
 
 <div id="waista" class="page">
-<div class="main" onclick="enterHome()">
-<img src="./waista.jpg"><div class="qr-hit"></div><div class="tiny-arrow">↗</div>
-</div>
+<div class="main" onclick="enterHome()"><img src="./waista.jpg"></div>
 <div class="footer" onclick="enterHome()"><span>Swipe up to explore area</span><div class="pill"></div></div>
 </div>
 
@@ -55,17 +53,22 @@ body{background:#000;color:#fff;font-family:Arial;overflow:hidden}
 <button onclick="openPage('creators')">CREATORS</button>
 <button onclick="openPage('archive')">ARCHIVE</button>
 </div>
-<div class="v"><video id="bootyV" playsinline controls preload="metadata"><source src="./video.mp4" type="video/mp4"></video></div>
+<div class="v"><video playsinline controls><source src="./video.mp4" type="video/mp4"></video></div>
 </div>
 
-<div id="galleries" class="page sub"><div><div class="big">Restocking<br>Soon</div><div class="small">DM "WAITLIST"<br>@CLUB52VOGUE.SHOP</div></div></div>
-<div id="videoP" class="page sub"><div style="width:92%"><video id="video2V" playsinline controls style="width:100%;height:70vh;object-fit:cover"><source src="./video2.mp4" type="video/mp4"></video></div></div>
-<div id="objects" class="page sub"><div><div class="big">Objects<br>Incoming</div><div class="small">DM "WAITLIST"<br>@CLUB52VOGUE.SHOP</div></div></div>
-<div id="creators" class="page sub"><div><div class="big">Creators<br>Soon</div><div class="small">DM "WAITLIST"<br>@CLUB52VOGUE.SHOP</div></div></div>
-<div id="archive" class="page sub"><div><div class="big">Archive<br>Soon</div><div class="small">DM "WAITLIST"<br>@CLUB52VOGUE.SHOP</div></div></div>
+<div id="galleries" class="page sub"><div><div class="big">Restocking<br>Soon</div></div></div>
+<div id="videoP" class="page sub"><div style="width:92%"><video playsinline controls style="width:100%;height:70vh;object-fit:cover"><source src="./video2.mp4"></video></div></div>
+<div id="objects" class="page sub"><div><div class="big">Objects<br>Incoming</div></div></div>
+<div id="creators" class="page sub"><div><div class="big">Creators<br>Soon</div></div></div>
+<div id="archive" class="page sub"><div><div class="big">Archive<br>Soon</div></div></div>
 
 <script>
-function stopAll(){document.querySelectorAll('video').forEach(v=>v.pause())}
 let stack=['top10'];
-function openTop10(){stopAll();document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('waista').classList.add('active');document.getElementById('backBtn').classList.add('show');stack=['top10','waista'];}
-function enterHome(){stopAll();document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('home').classList.add('active');document.getElementById('backBtn').classList.add('
+function openTop10(){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('waista').classList.add('active');document.getElementById('backBtn').classList.add('show');stack=['top10','waista'];}
+function enterHome(){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('home').classList.add('active');stack=['top10','waista','home'];}
+function openPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');stack.push(id);}
+function goBack(){let cur=stack.pop();document.getElementById(cur).classList.remove('active');let prev=stack[stack.length-1];document.getElementById(prev).classList.add('active');if(prev==='top10'){document.getElementById('backBtn').classList.remove('show')}}
+let sy=0;document.addEventListener('touchstart',e=>{sy=e.touches[0].clientY},{passive:true});document.addEventListener('touchend',e=>{if(sy-e.changedTouches[0].clientY>60&&document.getElementById('waista').classList.contains('active'))enterHome()},{passive:true});
+</script>
+</body>
+</html>
