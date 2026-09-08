@@ -6,72 +6,62 @@
 <title>FISSHHFILET</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:#fff;font-family:Arial Black,Arial,sans-serif}
-.top{padding:24px 22px;font-size:12px;letter-spacing:8px;font-family:Arial,sans-serif}
-.menu{text-align:center;padding:40px 0 20px}
-.menu a{display:block;color:#fff;font-size:56px;line-height:0.9;font-weight:900;text-decoration:none;letter-spacing:-1px}
-.menu a:hover{color:#f5c518}
-.video-wrap{max-width:340px;margin:20px auto 0;padding:0 14px}
-.video-box{width:100%;aspect-ratio:9/16;background:#111;border:1px solid #222;overflow:hidden}
+body{background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif}
+.top{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;padding:26px 24px;background:#000;z-index:10}
+.logo{font-size:12px;letter-spacing:6px}
+.back{border:1px solid #222;background:none;color:#fff;padding:10px 20px;font-size:11px;letter-spacing:3px;display:none}
+.page{display:none;min-height:100vh;padding-top:100px}
+.page.active{display:flex;flex-direction:column;justify-content:center;align-items:center}
+.big{font-size:72px;font-weight:900;line-height:.9;text-align:center}
+.small{margin-top:24px;font-size:10px;letter-spacing:3px;color:#666}
+#home{display:flex;flex-direction:column;min-height:100vh;padding:100px 0 70px}
+.menu{text-align:center}
+.menu button{display:block;width:100%;background:none;border:0;color:#fff;font-size:60px;font-weight:900;line-height:.85;cursor:pointer}
+.video-area{max-width:320px;margin:24px auto 0}
+.vbox{width:100%;aspect-ratio:9/16;background:#000;overflow:hidden}
 video{width:100%;height:100%;object-fit:cover;display:block}
-.restock{display:none;max-width:340px;margin:20px auto;border:1px solid #222;padding:18px;text-align:center;font-family:Arial,sans-serif}
-.restock h2{font-size:13px;letter-spacing:2px}
-.restock p{font-size:12px;color:#888;margin-top:8px}
 .bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:center;padding:12px}
-.save{background:#e60023;color:#fff;border:0;padding:12px 28px;border-radius:30px;font-weight:700}
-#admin{display:none;max-width:340px;margin:20px auto;background:#111;padding:12px;border-radius:10px;font-family:Arial,sans-serif;font-size:11px;line-height:2;color:#666}
-#admin b{color:#fff}
+.save{background:#e60023;color:#fff;border:0;padding:11px 26px;border-radius:30px;font-weight:700}
+#admin{display:none;max-width:320px;margin:14px auto;background:#111;padding:10px;font-size:11px;color:#666}
 </style>
 </head>
 <body>
-<div class="top">FISSHHFILET</div>
+<div class="top">
+<div class="logo">FISSHHFILET</div>
+<button id="backBtn" class="back" onclick="goHome()">← BACK</button>
+</div>
 
+<div id="home" class="page active">
 <div class="menu">
-<a href="#" onclick="show('galleries');return false">GALLERIES</a>
-<a href="#" onclick="document.getElementById('vid').scrollIntoView({behavior:'smooth'});return false">VIDEO</a>
-<a href="#" onclick="show('objects');return false">OBJECTS</a>
-<a href="#" onclick="show('creators');return false">CREATORS</a>
-<a href="#" onclick="show('archive');return false">ARCHIVE</a>
+<button onclick="openPage('galleries')">GALLERIES</button>
+<button onclick="openPage('video')">VIDEO</button>
+<button onclick="openPage('objects')">OBJECTS</button>
+<button onclick="openPage('creators')">CREATORS</button>
+<button onclick="openPage('archive')">ARCHIVE</button>
+</div>
+<div class="video-area">
+<div class="vbox"><video autoplay muted loop playsinline controls><source src="./video.mp4?v=11" type="video/mp4"></video></div>
+<div id="admin"><div style="color:#f5c518">PRIVATE - ONLY YOU</div>Views: <span id="a1">0</span> | 95%: <span id="a2">0</span> | Pinterest: <span id="a3">0</span></div>
+</div>
 </div>
 
-<div id="vid" class="video-wrap">
-<div class="video-box">
-<video autoplay muted loop playsinline controls>
-<source src="./video.mp4?v=9" type="video/mp4">
-</video>
-</div>
+<div id="galleries" class="page"><div class="big">Restocking<br>Soon</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div></div>
+<div id="video" class="page"><div class="big">Visuals<br>Loading</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div></div>
+<div id="objects" class="page"><div class="big">Objects<br>Incoming</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div></div>
+<div id="creators" class="page"><div class="big">Creators<br>Soon</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div></div>
+<div id="archive" class="page"><div class="big">Archive<br>Loading</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div></div>
 
-<div id="objects" class="restock"><h2>OBJECTS - RESTOCKING SOON</h2><p>Drop 09.15 - Follow @fisshhfilet for first access</p></div>
-<div id="creators" class="restock"><h2>CREATORS</h2><p>Coming soon</p></div>
-<div id="archive" class="restock"><h2>ARCHIVE</h2><p>Coming soon</p></div>
-<div id="galleries" class="restock"><h2>GALLERIES</h2><p>Coming soon</p></div>
-
-<div id="admin">
-<div style="color:#f5c518;font-weight:700">PRIVATE - ONLY YOU</div>
-<b>Impressions:</b> <span id="a1">0</span><br>
-<b>Video views:</b> <span id="a2">0</span><br>
-<b>95%:</b> <span id="a3">0</span><br>
-<b>From Pinterest:</b> <span id="a4">0</span>
-</div>
-
-</div>
-<div class="bottom"><button class="save" onclick="navigator.clipboard.writeText(location.href);alert('Link copied')">Save</button></div>
+<div class="bottom"><button class="save">Save</button></div>
 
 <script>
-function show(id){
- document.querySelectorAll('.restock').forEach(e=>e.style.display='none');
- document.getElementById(id).style.display='block';
- document.getElementById(id).scrollIntoView({behavior:'smooth'});
-}
-let s=JSON.parse(localStorage.getItem('ff_final')||'{"imp":0,"v":0,"p95":0,"pin":0}');
-s.imp++; if(document.referrer.includes('pinterest')) s.pin++;
-localStorage.setItem('ff_final',JSON.stringify(s));
-let v=document.querySelector('video');
-v.addEventListener('play',()=>{if(v.currentTime<1){s.v++;localStorage.setItem('ff_final',JSON.stringify(s))}});
-v.addEventListener('timeupdate',()=>{if(v.duration&&v.currentTime/v.duration>0.95&&!v._c){v._c=1;s.p95++;localStorage.setItem('ff_final',JSON.stringify(s))}});
+function openPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.getElementById('home').classList.remove('active');document.getElementById('backBtn').style.display='block';}
+function goHome(){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('home').classList.add('active');document.getElementById('backBtn').style.display='none';}
+let s=JSON.parse(localStorage.getItem('ff11')||'{"v":0,"p95":0,"pin":0}'); let v=document.querySelector('video');
+if(document.referrer.includes('pinterest')) s.pin++;
+v.addEventListener('play',()=>{if(v.currentTime<1){s.v++;localStorage.setItem('ff11',JSON.stringify(s))}});
+v.addEventListener('timeupdate',()=>{if(v.duration&&v.currentTime/v.duration>0.95&&!v._c){v._c=1;s.p95++;localStorage.setItem('ff11',JSON.stringify(s))}});
 if(location.search.includes('admin')) document.getElementById('admin').style.display='block';
-function upd(){document.getElementById('a1').textContent=s.imp;document.getElementById('a2').textContent=s.v;document.getElementById('a3').textContent=s.p95;document.getElementById('a4').textContent=s.pin}
-setInterval(upd,500); upd();
+setInterval(()=>{document.getElementById('a1').textContent=s.v;document.getElementById('a2').textContent=s.p95;document.getElementById('a3').textContent=s.pin;},500);
 </script>
 </body>
 </html>
