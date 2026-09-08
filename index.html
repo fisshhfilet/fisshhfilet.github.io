@@ -8,25 +8,23 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif;height:100%;overflow:hidden}
 .top{position:fixed;top:0;left:0;right:0;height:50px;display:flex;align-items:center;padding:0 14px;background:#000;z-index:100}
-.logo{font-size:10px;letter-spacing:6px}
+.logo{font-size:10px;letter-spacing:6px;cursor:pointer}
 .back{position:fixed;top:10px;right:12px;border:1px solid #333;background:#000;color:#fff;padding:6px 12px;font-size:9px;letter-spacing:3px;display:none;z-index:101}
 .page{display:none;height:100vh;height:100dvh;background:#000}
 .page.active{display:flex}
-/* HOME - FIXED, ALL 5 WORDS SHOW */
-#home{flex-direction:column;padding:52px 0 6px;align-items:center;justify-content:flex-start;overflow:hidden}
-#home .menu{width:100%;text-align:center;flex-shrink:0}
-#home .menu button{display:block;width:100%;background:none;border:0;color:#fff;font-size:30px;font-weight:900;line-height:1.1;letter-spacing:-0.5px;cursor:pointer}
-#home .video-wrap{width:230px;max-width:68%;margin-top:8px;flex-shrink:0}
-#home .video-wrap video{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;background:#111}
-/* OTHER PAGES */
-.sub{flex-direction:column;justify-content:center;align-items:center;padding:60px 20px;text-align:center}
-.big{font-size:42px;font-weight:900;line-height:.9}
-.small{margin-top:12px;font-size:9px;letter-spacing:3px;color:#555}
-.coded{flex-direction:column;align-items:center;padding:56px 0 8px}
+#home{flex-direction:column;padding:52px 0 10px;align-items:center;overflow:hidden}
+#home .menu{width:100%;text-align:center}
+#home .menu button{display:block;width:100%;background:none;border:0;color:#fff;font-size:30px;font-weight:900;line-height:1.12;cursor:pointer}
+#home .video-wrap{width:92%;max-width:92%;margin-top:10px}
+#home .video-wrap video{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#111}
+.sub{flex-direction:column;justify-content:center;align-items:center;padding:60px 20px;text-align:center;width:100%}
+.big{font-size:44px;font-weight:900;line-height:.9}
+.small{margin-top:14px;font-size:9px;letter-spacing:3px;color:#555}
+.coded{flex-direction:column;align-items:center;padding:56px 0 10px;width:100%}
 .coded-title{font-size:38px;font-weight:900;padding:6px 0 8px}
-.coded .video-wrap{width:280px;max-width:78%;margin-top:6px}
-.coded .video-wrap video{width:100%;aspect-ratio:9/16;object-fit:cover;background:#111;display:block}
-#admin{display:none;width:280px;margin:6px auto 0;background:#111;padding:8px;font-size:9px;color:#666;border:1px solid #222}
+.coded .video-wrap{width:86%;max-width:86%;margin-top:6px}
+.coded .video-wrap video{width:100%;aspect-ratio:9/14;object-fit:cover;display:block;background:#111}
+#admin{display:none;width:90%;margin:6px auto 0;background:#111;padding:8px;font-size:9px;color:#666;border:1px solid #222}
 </style>
 </head>
 <body>
@@ -49,22 +47,23 @@ html,body{background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif;heig
 </div>
 </div>
 
-<div id="galleries" class="page sub"><div><div class="big">Restocking<br>Soon</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div></div></div>
+<div id="galleries" class="page sub"><div class="big">Restocking<br>Soon</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div></div>
+
 <div id="videoPage" class="page coded">
 <div class="coded-title">VIDEO</div>
 <div class="video-wrap"><video id="v2" playsinline controls preload="metadata"><source src="./video2.mp4" type="video/mp4"></video></div>
 </div>
-<div id="objects" class="page sub"><div><div class="big">Objects<br>Incoming</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div></div></div>
-<div id="creators" class="page sub"><div><div class="big">Creators<br>Soon</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div></div></div>
-<div id="archive" class="page coded">
-<div class="coded-title">ARCHIVE</div>
-<div class="video-wrap"><video id="v3" playsinline controls preload="metadata"><source src="./video.mp4" type="video/mp4"></video></div>
-</div>
+
+<div id="objects" class="page sub"><div class="big">Objects<br>Incoming</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div></div>
+<div id="creators" class="page sub"><div class="big">Creators<br>Soon</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div></div>
+
+<!-- ARCHIVE - ORIGINAL LOOK BACK, NO VIDEO -->
+<div id="archive" class="page sub"><div class="big">Archive<br>Soon</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div></div>
 
 <script>
 const pages=['home','galleries','videoPage','objects','creators','archive'];
-const v1=document.getElementById('v1'),v2=document.getElementById('v2'),v3=document.getElementById('v3');
-function stopAll(){[v1,v2,v3].forEach(v=>{try{v.pause();}catch(e){}});}
+const v1=document.getElementById('v1'),v2=document.getElementById('v2');
+function stopAll(){try{v1.pause()}catch(e){};try{v2.pause()}catch(e){};}
 function go(id){stopAll();pages.forEach(p=>document.getElementById(p).classList.remove('active'));document.getElementById(id).classList.add('active');document.getElementById('backBtn').style.display='block';}
 function goHome(){stopAll();pages.forEach(p=>document.getElementById(p).classList.remove('active'));document.getElementById('home').classList.add('active');document.getElementById('backBtn').style.display='none';}
 function checkCode(){let c=prompt('code'); if(c==='shipped') document.getElementById('admin').style.display='block';}
