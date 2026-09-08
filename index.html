@@ -11,7 +11,7 @@ body{background:#000;color:#fff;font-family:Arial;overflow:hidden}
 .logo{font-size:10px;letter-spacing:6px}
 .page{display:none;height:100vh;height:100dvh;background:#000;overflow-y:auto}
 .page.active{display:flex}
-#top10{flex-direction:column;background:#FFDAB9}
+#top10{flex-direction:column;background:#F5DCC3}
 #waista{flex-direction:column;background:#000}
 .main{flex:1;position:relative;background:#000;display:flex}
 .main img{width:100%;height:100%;object-fit:contain;background:#000}
@@ -36,10 +36,8 @@ body{background:#000;color:#fff;font-family:Arial;overflow:hidden}
 <div class="top"><div class="logo">FISSHHFILET</div></div>
 <button id="backBtn" class="back" onclick="goBack()">← BACK</button>
 
-<div id="top10" class="page active" onclick="openTop10()">
-<div style="width:100%;min-height:100vh;background:#FFDAB9;display:flex;align-items:center;justify-content:center;padding:20px;">
-<img src="./top_10_sources_betty_boop.webp" style="width:95%;max-width:900px;height:auto;">
-</div>
+<div id="top10" class="page active" onclick="openTop10()" style="background:#F5DCC3;">
+<img src="./top_10_sources_betty_boop.webp" style="width:100%;height:100vh;object-fit:cover;display:block;">
 </div>
 
 <div id="waista" class="page">
@@ -70,10 +68,4 @@ body{background:#000;color:#fff;font-family:Arial;overflow:hidden}
 function stopAll(){document.querySelectorAll('video').forEach(v=>v.pause())}
 let stack=['top10'];
 function openTop10(){stopAll();document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('waista').classList.add('active');document.getElementById('backBtn').classList.add('show');stack=['top10','waista'];}
-function enterHome(){stopAll();document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('home').classList.add('active');document.getElementById('backBtn').classList.add('show');stack=['top10','waista','home'];}
-function openPage(id){stopAll();document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');stack.push(id);}
-function goBack(){stopAll();let cur=stack.pop();document.getElementById(cur).classList.remove('active');let prev=stack[stack.length-1];document.getElementById(prev).classList.add('active');if(prev==='top10'){document.getElementById('backBtn').classList.remove('show')}}
-let sy=0;document.addEventListener('touchstart',e=>{sy=e.touches[0].clientY},{passive:true});document.addEventListener('touchend',e=>{if(sy-e.changedTouches[0].clientY>60&&document.getElementById('waista').classList.contains('active'))enterHome()},{passive:true});
-</script>
-</body>
-</html>
+function enterHome(){stopAll();document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('home').classList.add('active');document.getElementById('backBtn').classList.add('
