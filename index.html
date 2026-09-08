@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FISSHHFILET</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -11,20 +11,20 @@ body{background:#000;color:#fff;font-family:Arial;overflow:hidden}
 .logo{font-size:10px;letter-spacing:6px}
 .page{display:none;height:100vh;height:100dvh;background:#000}
 .page.active{display:flex}
-img{image-rendering:-webkit-optimize-contrast;image-rendering:high-quality}
 #waista{flex-direction:column;background:#000}
-.main{flex:1;position:relative;overflow:hidden}
-.main img{width:100%;height:100%;object-fit:cover;object-position:center center;transform:translateZ(0)}
-.qr-hit{position:absolute;right:4%;top:48%;width:28%;height:28%;cursor:pointer}
-.tiny-arrow{position:absolute;right:2%;top:52%;font-size:14px;color:#ff1a1a}
-.footer{height:86px;background:#3d2a1e;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.main{flex:1;position:relative;overflow:hidden;background:#000}
+.main img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.qr-hit{position:absolute;right:4%;top:48%;width:28%;height:28%}
+.tiny-arrow{position:absolute;right:2%;top:51%;font-size:14px;color:#ff1a1a}
+.footer{height:86px;min-height:86px;background:#3d2a1e;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;flex-shrink:0}
 .footer span{font-size:14px}
 .pill{width:40px;height:4px;background:#fff;border-radius:10px}
-#home{flex-direction:column;align-items:center;padding-top:70px;overflow-y:auto}
-.menu{width:100%;text-align:center;margin-top:35px}
-.menu button{display:block;width:100%;background:0;border:0;color:#fff;font-size:28px;font-weight:900;line-height:1.45}
-.v{width:92%;margin-top:45px}
-.v video{width:100%;height:62vh;object-fit:cover;background:#111}
+/* BOOTY BACK TO ORIGINAL SETTING */
+#home{flex-direction:column;align-items:center;padding-top:50px;overflow-y:auto}
+.menu{width:100%;text-align:center;margin-top:10px}
+.menu button{display:block;width:100%;background:0;border:0;color:#fff;font-size:28px;font-weight:900;line-height:1.25}
+.v{width:92%;margin-top:10px}
+.v video{width:100%;height:62vh;min-height:420px;object-fit:cover;background:#111;display:block}
 .sub{flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px}
 .big{font-size:42px;font-weight:900}
 .small{margin-top:14px;font-size:9px;letter-spacing:3px;color:#888}
@@ -38,7 +38,7 @@ img{image-rendering:-webkit-optimize-contrast;image-rendering:high-quality}
 
 <div id="waista" class="page active">
 <div class="main" onclick="enterHome()">
-<img src="./waista.jpg" loading="eager" decoding="sync" fetchpriority="high">
+<img src="./waista.jpg" loading="eager">
 <div class="qr-hit"></div>
 <div class="tiny-arrow">↗</div>
 </div>
