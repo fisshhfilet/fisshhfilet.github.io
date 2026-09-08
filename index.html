@@ -20,8 +20,7 @@ body{background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif;overflow-
 .sub{flex-direction:column;justify-content:center;align-items:center;padding:120px 20px 80px;text-align:center}
 .big{font-size:78px;font-weight:900;line-height:.9;text-align:center;letter-spacing:-1px}
 .small{margin-top:32px;font-size:10px;letter-spacing:3px;color:#666;text-align:center}
-#videoPage.sub{padding-top:90px}
-#videoPage .video-wrap{margin-top:20px}
+#videoPage{justify-content:center;align-items:center;padding:80px 0 0}
 #admin{display:none;width:320px;margin:16px auto 0;background:#111;padding:14px;font-size:11px;color:#666;line-height:2;text-align:left;border:1px solid #222}
 #admin b{color:#f5c518}
 </style>
@@ -42,29 +41,26 @@ body{background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif;overflow-
 <button onclick="go('archive')">ARCHIVE</button>
 </div>
 <div class="video-wrap">
-<video id="v1" autoplay muted loop playsinline controls>
-<source src="./video.mp4?v=15" type="video/mp4">
+<video id="v1" autoplay muted loop playsinline>
+<source src="./video.mp4?v=16" type="video/mp4">
 </video>
 <div id="admin">
 <b>FISSHHFILET ADMINISTRATION</b><br>
-MAIN (video.mp4) Views: <span id="c1">0</span><br>
-MAIN 95% watched: <span id="c2">0</span><br>
-NEW (video2.mp4) Views: <span id="c3">0</span><br>
-NEW 95% watched: <span id="c4">0</span><br>
-Pinterest refs: <span id="c5">0</span>
+MAIN Views: <span id="c1">0</span> | 95%: <span id="c2">0</span><br>
+NEW Views: <span id="c3">0</span> | 95%: <span id="c4">0</span><br>
+Pinterest: <span id="c5">0</span>
 </div>
 </div>
 </div>
 
 <div id="galleries" class="page sub"><div class="big">Restocking<br>Soon</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div></div>
 
-<div id="videoPage" class="page sub">
+<div id="videoPage" class="page">
 <div class="video-wrap">
-<video id="v2" autoplay muted loop playsinline controls>
-<source src="./video2.mp4?v=1" type="video/mp4">
+<video id="v2" loop playsinline controls>
+<source src="./video2.mp4?v=2" type="video/mp4">
 </video>
 </div>
-<div class="small" style="margin-top:20px">FISSHHFILET - NEW DROP</div>
 </div>
 
 <div id="objects" class="page sub"><div class="big">Objects<br>Incoming</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div></div>
@@ -73,28 +69,31 @@ Pinterest refs: <span id="c5">0</span>
 
 <script>
 const pages=['home','galleries','videoPage','objects','creators','archive'];
+const v1=document.getElementById('v1');
+const v2=document.getElementById('v2');
 function go(id){
  pages.forEach(p=>document.getElementById(p).classList.remove('active'));
  document.getElementById(id).classList.add('active');
  document.getElementById('backBtn').style.display='block';
+ if(id==='videoPage'){v1.pause(); v2.play();}
+ else{v2.pause(); v1.pause();}
  window.scrollTo(0,0);
 }
 function goHome(){
  pages.forEach(p=>document.getElementById(p).classList.remove('active'));
  document.getElementById('home').classList.add('active');
  document.getElementById('backBtn').style.display='none';
+ v2.pause();
+ v1.play();
  window.scrollTo(0,0);
 }
 function checkCode(){
- let code=prompt('Enter admin code');
- if(code==='shipped'){document.getElementById('admin').style.display='block'; alert('Admin unlocked');}
+ let code=prompt('Admin code');
+ if(code==='shipped'){document.getElementById('admin').style.display='block';}
 }
-// stats
 let s=JSON.parse(localStorage.getItem('ff_ship')||'{"v1":0,"v1_95":0,"v2":0,"v2_95":0,"pin":0}');
 if(document.referrer.includes('pinterest')){s.pin++}
 if(location.search.includes('shipped')){document.getElementById('admin').style.display='block'}
-const v1=document.getElementById('v1');
-const v2=document.getElementById('v2');
 v1.addEventListener('play',()=>{if(v1.currentTime<1){s.v1++;localStorage.setItem('ff_ship',JSON.stringify(s))}});
 v1.addEventListener('timeupdate',()=>{if(v1.duration&&v1.currentTime/v1.duration>0.95&&!v1._f){v1._f=1;s.v1_95++;localStorage.setItem('ff_ship',JSON.stringify(s))}});
 v2.addEventListener('play',()=>{if(v2.currentTime<1){s.v2++;localStorage.setItem('ff_ship',JSON.stringify(s))}});
@@ -105,8 +104,7 @@ setInterval(()=>{
  document.getElementById('c3').textContent=s.v2;
  document.getElementById('c4').textContent=s.v2_95;
  document.getElementById('c5').textContent=s.pin;
- localStorage.setItem('ff_ship',JSON.stringify(s));
 },600);
 </script>
 </body>
- </html>
+</html>
