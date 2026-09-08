@@ -72,6 +72,4 @@ function enterHome(){stopAll();document.querySelectorAll('.page').forEach(p=>p.c
 function openPage(id){stopAll();document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');stack.push(id);}
 function goBack(){stopAll();let cur=stack.pop();document.getElementById(cur).classList.remove('active');let prev=stack[stack.length-1];document.getElementById(prev).classList.add('active');if(prev==='waista'){document.getElementById('backBtn').classList.remove('show')}}
 let sy=0;document.addEventListener('touchstart',e=>{sy=e.touches[0].clientY},{passive:true});document.addEventListener('touchend',e=>{if(sy-e.changedTouches[0].clientY>60&&document.getElementById('waista').classList.contains('active'))enterHome()},{passive:true});
-</script>
-</body>
-</html>
+</script
