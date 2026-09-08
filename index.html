@@ -2,29 +2,29 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>FISSHHFILET</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif}
-.top{position:fixed;top:0;left:0;right:0;height:68px;display:flex;justify-content:space-between;align-items:center;padding:0 18px;background:#000;z-index:100}
-.logo{font-size:11px;letter-spacing:7px;cursor:pointer}
-.back{border:1px solid #333;background:#000;color:#fff;padding:9px 16px;font-size:10px;letter-spacing:4px;cursor:pointer;display:none}
-.page{display:none;min-height:100vh;background:#000}
+html,body{height:100%;background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif;overflow:hidden}
+.top{position:fixed;top:0;left:0;right:0;height:52px;display:flex;justify-content:space-between;align-items:center;padding:0 16px;background:#000;z-index:100;border-bottom:1px solid #111}
+.logo{font-size:10px;letter-spacing:6px}
+.back{border:1px solid #333;background:#000;color:#fff;padding:7px 14px;font-size:9px;letter-spacing:3px;display:none}
+.page{display:none;height:100vh;height:100dvh;background:#000;overflow-y:auto;overflow-x:hidden}
 .page.active{display:flex}
-#home{flex-direction:column;padding:80px 0 30px}
-.menu{width:100%;text-align:center}
-.menu button{display:block;width:100%;background:none;border:0;color:#fff;font-size:62px;font-weight:900;line-height:.9;letter-spacing:-1px;cursor:pointer}
-.video-wrap{width:340px;max-width:88%;margin:18px auto 0}
+#home{flex-direction:column;padding:62px 0 10px;justify-content:flex-start}
+.menu{width:100%;text-align:center;flex-shrink:0}
+.menu button{display:block;width:100%;background:none;border:0;color:#fff;font-size:38px;font-weight:900;line-height:.95;letter-spacing:-1px;cursor:pointer;padding:2px 0}
+.video-wrap{width:300px;max-width:82%;margin:10px auto 0;flex-shrink:0}
 .video-wrap video{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;background:#111}
-.sub{flex-direction:column;justify-content:center;align-items:center;padding:100px 20px 80px;text-align:center}
-.big{font-size:64px;font-weight:900;line-height:.9}
-.small{margin-top:26px;font-size:10px;letter-spacing:3px;color:#555}
-/* CODED - FIXED ALIGNMENT */
-.coded{flex-direction:column;align-items:center;padding:88px 0 30px 0;background:#000}
-.coded-title{width:100%;text-align:center;font-size:64px;font-weight:900;letter-spacing:-1px;line-height:1;padding:20px 0 24px 0;background:#000}
-#admin{display:none;width:320px;margin:12px auto 0;background:#111;padding:12px;font-size:11px;color:#666;line-height:2;border:1px solid #222}
-#admin b{color:#f5c518}
+.sub{flex-direction:column;justify-content:center;align-items:center;padding:62px 20px 20px;text-align:center}
+.big{font-size:48px;font-weight:900;line-height:.9}
+.small{margin-top:16px;font-size:9px;letter-spacing:3px;color:#555}
+/* ALIGNED - VIDEO + TITLE IN ONE SCREEN */
+.coded{flex-direction:column;align-items:center;justify-content:flex-start;padding:62px 0 10px;background:#000}
+.coded-title{font-size:44px;font-weight:900;letter-spacing:-1px;line-height:1;padding:8px 0 10px;text-align:center;flex-shrink:0}
+.coded .video-wrap{margin-top:4px}
+#admin{display:none;width:300px;margin:8px auto 0;background:#111;padding:10px;font-size:10px;color:#666;line-height:1.8;border:1px solid #222}
 </style>
 </head>
 <body>
@@ -45,7 +45,7 @@ body{background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif}
 <video id="v1" playsinline controls preload="metadata">
 <source src="./video.mp4" type="video/mp4">
 </video>
-<div id="admin"><b>ADMIN shipped</b><br>MAIN: <span id="c1">0</span>/<span id="c2">0</span><br>VIDEO2: <span id="c3">0</span>/<span id="c4">0</span><br>PIN: <span id="c5">0</span></div>
+<div id="admin"><b>ADMIN shipped</b><br>MAIN <span id="c1">0</span>/<span id="c2">0</span> V2 <span id="c3">0</span>/<span id="c4">0</span> PIN <span id="c5">0</span></div>
 </div>
 </div>
 
@@ -74,23 +74,19 @@ body{background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif}
 
 <script>
 const pages=['home','galleries','videoPage','objects','creators','archive'];
-const v1=document.getElementById('v1');
-const v2=document.getElementById('v2');
-const v3=document.getElementById('v3');
+const v1=document.getElementById('v1'),v2=document.getElementById('v2'),v3=document.getElementById('v3');
 function stopAll(){[v1,v2,v3].forEach(v=>{try{v.pause();}catch(e){}});}
 function go(id){
  stopAll();
  pages.forEach(p=>document.getElementById(p).classList.remove('active'));
  document.getElementById(id).classList.add('active');
  document.getElementById('backBtn').style.display='block';
- window.scrollTo(0,0);
 }
 function goHome(){
  stopAll();
  pages.forEach(p=>document.getElementById(p).classList.remove('active'));
  document.getElementById('home').classList.add('active');
  document.getElementById('backBtn').style.display='none';
- window.scrollTo(0,0);
 }
 function checkCode(){let c=prompt('code'); if(c==='shipped') document.getElementById('admin').style.display='block';}
 let s=JSON.parse(localStorage.getItem('ff_ship')||'{"v1":0,"v1_95":0,"v2":0,"v2_95":0,"pin":0}');
