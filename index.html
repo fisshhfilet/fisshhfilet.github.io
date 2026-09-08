@@ -7,26 +7,26 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#000;color:#fff;font-family:Arial;overflow:hidden}
-.top{position:fixed;top:0;left:0;right:0;height:46px;display:flex;align-items:center;padding:0 12px;z-index:30;background:#000}
+.top{position:fixed;top:0;left:0;right:0;height:44px;display:flex;align-items:center;padding:0 12px;z-index:50;background:#000}
 .logo{font-size:10px;letter-spacing:6px}
 .page{display:none;height:100vh;height:100dvh;background:#000}
 .page.active{display:flex}
 #waista{flex-direction:column;background:#000 url(./waista.jpg) center/cover no-repeat}
-#waista.main{flex:1;position:relative}
-.qr{position:absolute;right:12%;top:54%;width:22%;height:20%;cursor:pointer}
-.tiny{position:absolute;right:6%;top:48%;width:40px;height:40px;background:#fff;color:#000;display:flex;align-items:center;justify-content:center;font-size:20px}
-.footer{height:90px;background:#3d2a1e;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
-.footer span{font-size:14px;color:#fff}
-.pill{width:44px;height:4px;background:#fff;border-radius:10px}
-#home{flex-direction:column;align-items:center;padding-top:50px;overflow-y:auto}
+.main{flex:1;position:relative}
+.qr-hit{position:absolute;right:4%;top:48%;width:28%;height:28%;cursor:pointer}
+.tiny-arrow{position:absolute;right:2%;top:52%;font-size:14px;color:#ff1a1a;cursor:pointer}
+.footer{height:86px;background:#3d2a1e;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.footer span{font-size:14px}
+.pill{width:40px;height:4px;background:#fff;border-radius:10px}
+#home{flex-direction:column;align-items:center;padding-top:48px;overflow-y:auto}
 .menu{width:100%;text-align:center}
 .menu button{display:block;width:100%;background:0;border:0;color:#fff;font-size:28px;font-weight:900;line-height:1.25}
 .v{width:92%;margin-top:10px}
 .v video{width:100%;height:62vh;object-fit:cover;background:#111}
-.sub{flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.sub{flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px}
 .big{font-size:42px;font-weight:900}
-.small{font-size:9px;letter-spacing:3px;color:#666;margin-top:10px}
-.back{position:fixed;top:8px;right:10px;z-index:40;display:none;background:#000;color:#fff;border:1px solid #333;padding:6px 12px;font-size:9px}
+.small{margin-top:14px;font-size:9px;letter-spacing:3px;color:#888}
+.back{position:fixed;top:8px;right:10px;z-index:60;display:none;background:#000;color:#fff;border:1px solid #333;padding:6px 12px;font-size:9px;letter-spacing:2px}
 .back.show{display:block}
 </style>
 </head>
@@ -35,36 +35,37 @@ body{background:#000;color:#fff;font-family:Arial;overflow:hidden}
 <button id="backBtn" class="back" onclick="goBack()">← BACK</button>
 
 <div id="waista" class="page active">
-<div class="main" onclick="goHome()">
-<div class="qr"></div>
-<div class="tiny">↗</div>
+<div class="main" onclick="enterHome()">
+<div class="qr-hit"></div>
+<div class="tiny-arrow">↗</div>
 </div>
-<div class="footer" onclick="goHome()"><span>Swipe up to explore area</span><div class="pill"></div></div>
+<div class="footer" onclick="enterHome()"><span>Swipe up to explore area</span><div class="pill"></div></div>
 </div>
 
 <div id="home" class="page">
 <div class="menu">
-<button onclick="openP('galleries')">GALLERIES</button>
-<button onclick="openP('videoP')">VIDEO</button>
-<button onclick="openP('objects')">OBJECTS</button>
-<button onclick="openP('creators')">CREATORS</button>
-<button onclick="openP('archive')">ARCHIVE</button>
+<button onclick="openPage('galleries')">GALLERIES</button>
+<button onclick="openPage('videoP')">VIDEO</button>
+<button onclick="openPage('objects')">OBJECTS</button>
+<button onclick="openPage('creators')">CREATORS</button>
+<button onclick="openPage('archive')">ARCHIVE</button>
 </div>
-<div class="v"><video playsinline controls muted loop id="v1"><source src="./video.mp4" type="video/mp4"></video></div>
+<div class="v"><video id="bootyV" playsinline controls loop muted><source src="./video.mp4" type="video/mp4"></video></div>
 </div>
 
-<div id="galleries" class="page sub"><div class="big">Restocking<br>Soon</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div></div>
-<div id="videoP" class="page sub"><video playsinline controls src="./video2.mp4" style="width:86%;height:70vh;object-fit:cover"></video></div>
-<div id="objects" class="page sub"><div class="big">Objects<br>Incoming</div></div>
-<div id="creators" class="page sub"><div class="big">Creators<br>Soon</div></div>
-<div id="archive" class="page sub"><div class="big">Archive<br>Soon</div></div>
+<div id="galleries" class="page sub"><div><div class="big">Restocking<br>Soon</div><div class="small">DM "WAITLIST"<br>@CLUB52VOGUE.SHOP</div></div></div>
+<div id="videoP" class="page sub"><div style="width:92%"><video id="video2V" playsinline controls style="width:100%;height:70vh;object-fit:cover"><source src="./video2.mp4" type="video/mp4"></video></div></div>
+<div id="objects" class="page sub"><div><div class="big">Objects<br>Incoming</div><div class="small">DM "WAITLIST"<br>@CLUB52VOGUE.SHOP</div></div></div>
+<div id="creators" class="page sub"><div><div class="big">Creators<br>Soon</div><div class="small">DM "WAITLIST"<br>@CLUB52VOGUE.SHOP</div></div></div>
+<div id="archive" class="page sub"><div><div class="big">Archive<br>Soon</div><div class="small">DM "WAITLIST"<br>@CLUB52VOGUE.SHOP</div></div></div>
 
 <script>
-let st=['waista'];
-function goHome(){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('home').classList.add('active');document.getElementById('backBtn').classList.add('show');st=['waista','home'];try{document.getElementById('v1').play()}catch(e){}}
-function openP(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');st.push(id)}
-function goBack(){let cur=st.pop();document.getElementById(cur).classList.remove('active');let prev=st[st.length-1];document.getElementById(prev).classList.add('active');if(prev=='waista'){document.getElementById('backBtn').classList.remove('show')}}
-let sy=0;document.addEventListener('touchstart',e=>{sy=e.touches[0].clientY},{passive:true});document.addEventListener('touchend',e=>{if(sy-e.changedTouches[0].clientY>60&&document.getElementById('waista').classList.contains('active'))goHome()},{passive:true});
+function stopAll(){document.querySelectorAll('video').forEach(v=>{v.pause();v.currentTime=0;})}
+let stack=['waista'];
+function enterHome(){stopAll();document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('home').classList.add('active');document.getElementById('backBtn').classList.add('show');stack=['waista','home'];try{document.getElementById('bootyV').play()}catch(e){}}
+function openPage(id){stopAll();document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');stack.push(id);if(id==='videoP'){try{document.getElementById('video2V').play()}catch(e){}}}
+function goBack(){stopAll();let cur=stack.pop();document.getElementById(cur).classList.remove('active');let prev=stack[stack.length-1];document.getElementById(prev).classList.add('active');if(prev==='waista'){document.getElementById('backBtn').classList.remove('show')}else if(prev==='home'){try{document.getElementById('bootyV').play()}catch(e){}}else if(prev==='videoP'){try{document.getElementById('video2V').play()}catch(e){}}}
+let sy=0;document.addEventListener('touchstart',e=>{sy=e.touches[0].clientY},{passive:true});document.addEventListener('touchend',e=>{if(sy-e.changedTouches[0].clientY>60&&document.getElementById('waista').classList.contains('active'))enterHome()},{passive:true});
 </script>
 </body>
 </html>
