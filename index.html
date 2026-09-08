@@ -2,36 +2,36 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FISSHHFILET</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif;overflow:hidden}
-.top{position:fixed;top:0;left:0;right:0;height:52px;display:flex;justify-content:space-between;align-items:center;padding:0 16px;background:#000;z-index:100;border-bottom:1px solid #111}
+.top{position:fixed;top:0;left:0;right:0;height:48px;display:flex;align-items:center;padding:0 14px;background:#000;z-index:100}
 .logo{font-size:10px;letter-spacing:6px}
-.back{border:1px solid #333;background:#000;color:#fff;padding:7px 14px;font-size:9px;letter-spacing:3px;display:none}
-.page{display:none;height:100vh;height:100dvh;background:#000;overflow-y:auto;overflow-x:hidden}
-.page.active{display:flex}
-#home{flex-direction:column;padding:62px 0 10px;justify-content:flex-start}
-.menu{width:100%;text-align:center;flex-shrink:0}
-.menu button{display:block;width:100%;background:none;border:0;color:#fff;font-size:38px;font-weight:900;line-height:.95;letter-spacing:-1px;cursor:pointer;padding:2px 0}
-.video-wrap{width:300px;max-width:82%;margin:10px auto 0;flex-shrink:0}
-.video-wrap video{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;background:#111}
-.sub{flex-direction:column;justify-content:center;align-items:center;padding:62px 20px 20px;text-align:center}
-.big{font-size:48px;font-weight:900;line-height:.9}
+.back{position:fixed;top:10px;right:12px;border:1px solid #333;background:#000;color:#fff;padding:7px 14px;font-size:9px;letter-spacing:3px;display:none;z-index:101}
+.page{display:none;height:100vh;height:100dvh;background:#000;position:relative}
+.page.active{display:block}
+/* HOME LOCKED */
+#home{overflow:hidden}
+#home .menu{position:absolute;top:58px;left:0;right:0;text-align:center}
+#home .menu button{display:block;width:100%;background:none;border:0;color:#fff;font-size:36px;font-weight:900;line-height:1.05;letter-spacing:-0.5px;cursor:pointer}
+#home .video-wrap{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:320px;max-width:84%;}
+#home .video-wrap video{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;background:#111}
+.sub{flex-direction:column;justify-content:center;align-items:center;padding:60px 20px 20px;text-align:center;display:none;height:100vh}
+.sub.active{display:flex}
+.big{font-size:46px;font-weight:900;line-height:.9}
 .small{margin-top:16px;font-size:9px;letter-spacing:3px;color:#555}
-/* ALIGNED - VIDEO + TITLE IN ONE SCREEN */
-.coded{flex-direction:column;align-items:center;justify-content:flex-start;padding:62px 0 10px;background:#000}
-.coded-title{font-size:44px;font-weight:900;letter-spacing:-1px;line-height:1;padding:8px 0 10px;text-align:center;flex-shrink:0}
-.coded .video-wrap{margin-top:4px}
-#admin{display:none;width:300px;margin:8px auto 0;background:#111;padding:10px;font-size:10px;color:#666;line-height:1.8;border:1px solid #222}
+.coded{padding:58px 0 10px;text-align:center}
+.coded-title{font-size:42px;font-weight:900;padding:6px 0 8px}
+.coded .video-wrap{width:300px;max-width:82%;margin:6px auto 0}
+.coded .video-wrap video{width:100%;aspect-ratio:9/16;object-fit:cover;background:#111;display:block}
+#admin{display:none;width:300px;margin:6px auto 0;background:#111;padding:8px;font-size:10px;color:#666;border:1px solid #222}
 </style>
 </head>
 <body>
-<div class="top">
-<div class="logo" onclick="checkCode()">FISSHHFILET</div>
+<div class="top"><div class="logo" onclick="checkCode()">FISSHHFILET</div></div>
 <button id="backBtn" class="back" onclick="goHome()">← BACK</button>
-</div>
 
 <div id="home" class="page active">
 <div class="menu">
@@ -45,11 +45,11 @@ html,body{height:100%;background:#000;color:#fff;font-family:Arial,Helvetica,san
 <video id="v1" playsinline controls preload="metadata">
 <source src="./video.mp4" type="video/mp4">
 </video>
-<div id="admin"><b>ADMIN shipped</b><br>MAIN <span id="c1">0</span>/<span id="c2">0</span> V2 <span id="c3">0</span>/<span id="c4">0</span> PIN <span id="c5">0</span></div>
+<div id="admin"><b>shipped</b> MAIN <span id="c1">0</span>/<span id="c2">0</span> V2 <span id="c3">0</span>/<span id="c4">0</span> PIN <span id="c5">0</span></div>
 </div>
 </div>
 
-<div id="galleries" class="page sub"><div class="big">Restocking<br>Soon</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div></div>
+<div id="galleries" class="page sub"><div><div class="big">Restocking<br>Soon</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div></div></div>
 
 <div id="videoPage" class="page coded">
 <div class="coded-title">VIDEO</div>
@@ -60,8 +60,8 @@ html,body{height:100%;background:#000;color:#fff;font-family:Arial,Helvetica,san
 </div>
 </div>
 
-<div id="objects" class="page sub"><div class="big">Objects<br>Incoming</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div></div>
-<div id="creators" class="page sub"><div class="big">Creators<br>Soon</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div></div>
+<div id="objects" class="page sub"><div><div class="big">Objects<br>Incoming</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div></div></div>
+<div id="creators" class="page sub"><div><div class="big">Creators<br>Soon</div><div class="small">DM "WAITLIST" @CLUB52VOGUE.SHOP</div></div></div>
 
 <div id="archive" class="page coded">
 <div class="coded-title">ARCHIVE</div>
