@@ -12,7 +12,7 @@ body{background:#000;color:#fff;font-family:Arial;overflow:hidden}
 .page{display:none;height:100vh;height:100dvh;background:#000;overflow-y:auto}
 .page.active{display:flex}
 #top10{flex-direction:column;background:#F5DCC3;padding-top:44px}
-#top10 img{width:100%;height:auto;display:block}
+#top10 img{width:100%;height:auto;display:block;cursor:pointer}
 #waista{flex-direction:column;background:#000;padding-top:44px}
 .main{flex:1;display:flex;background:#000}
 .main img{width:100%;height:100%;object-fit:contain;cursor:pointer}
@@ -35,19 +35,17 @@ body{background:#000;color:#fff;font-family:Arial;overflow:hidden}
 <div class="top"><div class="logo">FISSHHFILET</div></div>
 <button id="backBtn" class="back" onclick="goBack()">← BACK</button>
 
-<!-- TOP 10 - not blocking anymore, tap from menu -->
-<div id="top10" class="page">
-<img src="./top_10_sources_betty_boop.webp" onclick="enterHome()">
+<div id="top10" class="page active" onclick="openTop10()">
+<img src="./top_10_sources_betty_boop.webp">
 </div>
 
-<div id="waista" class="page active">
+<div id="waista" class="page">
 <div class="main" onclick="enterHome()"><img src="./waista.jpg"></div>
 <div class="footer" onclick="enterHome()"><span style="font-size:10px;letter-spacing:2px">Swipe up to explore area</span><div class="pill"></div></div>
 </div>
 
 <div id="home" class="page">
 <div class="menu">
-<button onclick="openPage('top10')">TOP 10</button>
 <button onclick="openPage('galleries')">GALLERIES</button>
 <button onclick="openPage('videoP')">VIDEO</button>
 <button onclick="openPage('objects')">OBJECTS</button>
@@ -65,11 +63,12 @@ body{background:#000;color:#fff;font-family:Arial;overflow:hidden}
 <div id="archive" class="page sub"><div><div class="big">Archive<br>Soon</div></div></div>
 
 <script>
-let stack=['waista'];
-function pauseAll(){document.querySelectorAll('video').forEach(v=>v.pause())}
-function enterHome(){pauseAll();document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('home').classList.add('active');document.getElementById('backBtn').classList.add('show');stack=['waista','home']}
+let stack=['top10'];
+function pauseAll(){document.querySelectorAll('video').forEach(v=>{v.pause();});}
+function openTop10(){pauseAll();document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('waista').classList.add('active');document.getElementById('backBtn').classList.add('show');stack=['top10','waista'];}
+function enterHome(){pauseAll();document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('home').classList.add('active');stack=['top10','waista','home'];}
 function openPage(id){pauseAll();document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');stack.push(id);if(id==='videoP'){setTimeout(()=>document.getElementById('vid2').play().catch(()=>{}),200)}}
-function goBack(){pauseAll();let cur=stack.pop();document.getElementById(cur).classList.remove('active');let prev=stack[stack.length-1];document.getElementById(prev).classList.add('active');if(prev==='waista'){document.getElementById('backBtn').classList.remove('show')}}
+function goBack(){pauseAll();let cur=stack.pop();document.getElementById(cur).classList.remove('active');let prev=stack[stack.length-1];document.getElementById(prev).classList.add('active');if(prev==='top10'){document.getElementById('backBtn').classList.remove('show')}}
 let sy=0;document.addEventListener('touchstart',e=>{sy=e.touches[0].clientY},{passive:true});document.addEventListener('touchend',e=>{if(sy-e.changedTouches[0].clientY>60&&document.getElementById('waista').classList.contains('active'))enterHome()},{passive:true});
 </script>
 </body>
