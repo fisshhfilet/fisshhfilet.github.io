@@ -23,12 +23,12 @@ body{position:fixed;inset:0;background:#000}
 <section class="page"><img src="betty.jpg"></section>
 <section class="page"><img src="waista.jpg"></section>
 <section class="page"><img src="restocking-fisshhfilet.jpg"></section>
-<section class="page video-page"><video src="Sephora.mp4" playsinline preload="auto" loop></video></section>
+<section class="page"><video src="Sephora.mp4" playsinline preload="auto" loop></video></section>
 <section class="page"><img src="adults-only.jpg"></section>
-<section class="page video-page"><video src="RHUDE.mp4" playsinline preload="auto"></video></section>
+<section class="page"><video src="RHUDE.mp4" playsinline preload="auto"></video></section>
 <section class="page"><img src="mc.jpg"></section>
-<section class="page video-page"><video src="liquid.mp4" playsinline preload="auto" loop></video></section>
-<section class="page video-page"><video src="GOMF.mp4" playsinline preload="auto"></video></section>
+<section class="page"><video src="liquid.mp4" playsinline preload="auto" loop></video></section>
+<section class="page"><video src="GOMF.mp4" playsinline preload="auto"></video></section>
 </div></div>
 <script>
 let i=0; const track=document.getElementById('track'); const pages=[...document.querySelectorAll('.page')]; const intro=document.getElementById('intro'); const total=pages.length;
@@ -39,7 +39,7 @@ function render(){
   const v=p.querySelector('video');
   if(!v) return;
   if(k===i){
-   v.currentTime = (k===3?0.2:0); // Sephora skip jump frame
+   v.currentTime = (k===3?0.25:0);
    v.muted=false; v.volume=1;
    setTimeout(()=>v.play().catch(()=>{ v.muted=true; v.play(); }),80);
   } else { v.pause(); }
@@ -47,16 +47,13 @@ function render(){
 }
 function next(){ if(i<total-1){ i++; render(); } }
 function prev(){ if(i>0){ i--; render(); } }
-// intro fade only — medium
 setTimeout(()=>{ intro.style.opacity='0'; setTimeout(()=>intro.remove(),800); },1200);
-// SWIPE ONLY — no tap advance on videos
 let sy=0;
 addEventListener('touchstart', e=>{ sy=e.touches[0].clientY; }, {passive:true});
 addEventListener('touchend', e=>{
  const dy=e.changedTouches[0].clientY-sy;
  if(Math.abs(dy)>45){ dy<0?next():prev(); }
 }, {passive:true});
-// desktop wheel
 addEventListener('wheel', e=>{ if(Math.abs(e.deltaY)>30){ e.deltaY>0?next():prev(); } }, {passive:true});
 render();
 </script>
