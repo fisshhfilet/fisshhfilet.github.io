@@ -20,42 +20,32 @@ body{position:fixed;inset:0;background:#000}
 <body>
 <div id="intro">@fisshhfilet</div>
 <div id="viewport"><div id="track">
-<section class="page"><img src="betty.jpg"></section>
-<section class="page"><img src="waista.jpg"></section>
-<section class="page"><img src="restocking-fisshhfilet.jpg"></section>
-<section class="page"><video src="Sephora.mp4" playsinline preload="auto" loop></video></section>
-<section class="page"><img src="adults-only.jpg"></section>
-<section class="page"><video src="RHUDE.mp4" playsinline preload="auto"></video></section>
-<section class="page"><img src="mc.jpg"></section>
-<section class="page"><video src="liquid.mp4" playsinline preload="auto" loop></video></section>
-<section class="page"><video src="GOMF.mp4" playsinline preload="auto"></video></section>
+<section class="page"><img src="betty.jpg?v=16"></section>
+<section class="page"><img src="waista.jpg?v=16"></section>
+<section class="page"><img src="restocking-fisshhfilet.jpg?v=16"></section>
+<section class="page"><video src="Sephora.mp4?v=16" playsinline preload="auto" loop></video></section>
+<section class="page"><img src="adults-only.jpg?v=16"></section>
+<section class="page"><video src="RHUDE.mp4?v=16" playsinline preload="auto"></video></section>
+<section class="page"><img src="mc.jpg?v=16"></section>
+<section class="page"><video src="liquid.mp4?v=16" playsinline preload="auto" loop></video></section>
+<section class="page"><video src="GOMF.mp4?v=16" playsinline preload="auto"></video></section>
 </div></div>
 <script>
-let i=0; const track=document.getElementById('track'); const pages=[...document.querySelectorAll('.page')]; const intro=document.getElementById('intro'); const total=pages.length;
+let i=0; const track=document.getElementById('track'); const intro=document.getElementById('intro'); const pages=[...document.querySelectorAll('.page')]; const total=pages.length;
 function render(){
  track.style.transform=`translate3d(0,${-i*100}dvh,0)`;
  pages.forEach((p,k)=>{
   p.classList.toggle('active',k===i);
-  const v=p.querySelector('video');
-  if(!v) return;
-  if(k===i){
-   v.currentTime = (k===3?0.25:0);
-   v.muted=false; v.volume=1;
-   setTimeout(()=>v.play().catch(()=>{ v.muted=true; v.play(); }),80);
-  } else { v.pause(); }
+  const v=p.querySelector('video'); if(!v) return;
+  if(k===i){ v.currentTime=k===3?0.25:0; v.muted=false; v.volume=1; setTimeout(()=>v.play().catch(()=>{v.muted=true;v.play();}),80); } else v.pause();
  });
 }
-function next(){ if(i<total-1){ i++; render(); } }
-function prev(){ if(i>0){ i--; render(); } }
-setTimeout(()=>{ intro.style.opacity='0'; setTimeout(()=>intro.remove(),800); },1200);
-let sy=0;
-addEventListener('touchstart', e=>{ sy=e.touches[0].clientY; }, {passive:true});
-addEventListener('touchend', e=>{
- const dy=e.changedTouches[0].clientY-sy;
- if(Math.abs(dy)>45){ dy<0?next():prev(); }
-}, {passive:true});
-addEventListener('wheel', e=>{ if(Math.abs(e.deltaY)>30){ e.deltaY>0?next():prev(); } }, {passive:true});
+function next(){ if(i<total-1){i++;render();} }
+function prev(){ if(i>0){i--;render();} }
+setTimeout(()=>{intro.style.opacity='0'; setTimeout(()=>intro.remove(),800);},1200);
+let sy=0; addEventListener('touchstart',e=>{sy=e.touches[0].clientY;},{passive:true});
+addEventListener('touchend',e=>{const dy=e.changedTouches[0].clientY-sy; if(Math.abs(dy)>45){dy<0?next():prev();}},{passive:true});
 render();
 </script>
 </body>
-</html>
+ </html>
