@@ -6,16 +6,12 @@
 
 <meta
   name="viewport"
-  content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no"
+  content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover"
 >
 
 <title>FISSHHFILET</title>
 
 <style>
-
-/* =====================================================
-   RESET
-===================================================== */
 
 *{
   margin:0;
@@ -33,39 +29,35 @@ body{
 }
 
 body{
-  overscroll-behavior:none;
+  background:#000;
 }
 
 
 /* =====================================================
-   PRIVATE ACCESS INTRO
+   ORIGINAL APP OPENING
 ===================================================== */
 
 #intro{
   position:fixed;
   inset:0;
-  z-index:9999;
+  z-index:1000;
+
+  background:#000;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  background:#000;
   color:#fff;
 
-  font-family:
-    Menlo,
-    Monaco,
-    Consolas,
-    monospace;
+  font-family:Menlo,Monaco,Consolas,monospace;
 
   font-size:11px;
-  letter-spacing:.38em;
+  letter-spacing:.35em;
 
   opacity:1;
 
-  transition:
-    opacity .55s ease;
+  transition:opacity .6s ease;
 
   pointer-events:none;
 }
@@ -76,62 +68,10 @@ body{
 
 
 /* =====================================================
-   ACCESS TEXT
-===================================================== */
-
-.access{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-
-  text-align:center;
-}
-
-.access-name{
-  opacity:0;
-
-  animation:
-    appear .7s ease forwards;
-
-  animation-delay:.15s;
-}
-
-.access-status{
-  margin-top:14px;
-
-  font-size:7px;
-  letter-spacing:.28em;
-
-  color:rgba(255,255,255,.42);
-
-  opacity:0;
-
-  animation:
-    appear .6s ease forwards;
-
-  animation-delay:.65s;
-}
-
-@keyframes appear{
-
-  from{
-    opacity:0;
-  }
-
-  to{
-    opacity:1;
-  }
-
-}
-
-
-/* =====================================================
    MAIN FEED
 ===================================================== */
 
 #viewport{
-
   width:100vw;
   height:100dvh;
 
@@ -141,12 +81,15 @@ body{
   background:#000;
 
   scroll-snap-type:y mandatory;
+  scroll-snap-stop:always;
 
   -webkit-overflow-scrolling:touch;
 
   overscroll-behavior-y:none;
 
   scrollbar-width:none;
+
+  touch-action:pan-y;
 }
 
 #viewport::-webkit-scrollbar{
@@ -159,7 +102,6 @@ body{
 ===================================================== */
 
 .page{
-
   position:relative;
 
   width:100vw;
@@ -175,7 +117,6 @@ body{
   overflow:hidden;
 
   scroll-snap-align:start;
-
 }
 
 
@@ -185,7 +126,6 @@ body{
 
 .page img,
 .page video{
-
   display:block;
 
   width:100%;
@@ -205,11 +145,10 @@ body{
 
 
 /* =====================================================
-   INVISIBLE INSTAGRAM AREA
+   INVISIBLE INSTAGRAM LINK
 ===================================================== */
 
 .ig-cam{
-
   position:absolute;
 
   left:40%;
@@ -218,7 +157,7 @@ body{
   width:20%;
   height:24%;
 
-  z-index:50;
+  z-index:20;
 
   display:block;
 
@@ -229,11 +168,10 @@ body{
 
 
 /* =====================================================
-   INVISIBLE BOAT BEAR AREA
+   INVISIBLE BOAT BEAR LINK
 ===================================================== */
 
 .arrow-box{
-
   position:absolute;
 
   top:2%;
@@ -242,9 +180,7 @@ body{
   width:14%;
   height:8%;
 
-  z-index:50;
-
-  display:block;
+  z-index:20;
 
   background:transparent;
 
@@ -253,13 +189,189 @@ body{
 
 
 /* =====================================================
-   NO BUBBLES
+   LAST VIDEO — PRIVATE ACCESS
 ===================================================== */
 
-/*
-   There are intentionally no visible
-   link bubbles or CTA labels.
-*/
+.private-page{
+  position:relative;
+}
+
+
+/* -----------------------------------------------------
+   PRIVATE ACCESS SCREEN
+----------------------------------------------------- */
+
+.private-access{
+  position:absolute;
+  inset:0;
+
+  z-index:50;
+
+  background:#000;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  opacity:1;
+
+  pointer-events:none;
+
+  transition:
+    opacity 1.1s cubic-bezier(.22,.61,.36,1);
+}
+
+
+/* -----------------------------------------------------
+   PRIVATE ACCESS TEXT
+----------------------------------------------------- */
+
+.private-copy{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  opacity:0;
+
+  transform:translateY(4px);
+
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
+}
+
+.private-access.show .private-copy{
+  opacity:1;
+  transform:translateY(0);
+}
+
+
+/* -----------------------------------------------------
+   STOCK / KALSHI GREEN
+----------------------------------------------------- */
+
+.private-title{
+  color:#42d36f;
+
+  font-family:
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+
+  font-size:10px;
+
+  letter-spacing:.34em;
+
+  padding-left:.34em;
+
+  text-transform:uppercase;
+}
+
+.private-sub{
+  margin-top:15px;
+
+  color:rgba(255,255,255,.38);
+
+  font-family:
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+
+  font-size:7px;
+
+  letter-spacing:.27em;
+
+  padding-left:.27em;
+}
+
+
+/* -----------------------------------------------------
+   THE DOOR
+----------------------------------------------------- */
+
+.private-door{
+  position:absolute;
+  inset:0;
+
+  z-index:60;
+
+  pointer-events:none;
+
+  display:flex;
+
+  overflow:hidden;
+}
+
+
+/* LEFT HALF */
+
+.door-left,
+.door-right{
+  position:relative;
+
+  width:50%;
+  height:100%;
+
+  background:#000;
+
+  transition:
+    transform 1.35s cubic-bezier(.77,0,.175,1);
+}
+
+
+/* subtle luxury seam */
+
+.door-left::after,
+.door-right::after{
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  bottom:0;
+
+  width:1px;
+
+  background:rgba(255,255,255,.035);
+}
+
+.door-left::after{
+  right:0;
+}
+
+.door-right::after{
+  left:0;
+}
+
+
+/* OPEN */
+
+.private-page.open .door-left{
+  transform:translateX(-100%);
+}
+
+.private-page.open .door-right{
+  transform:translateX(100%);
+}
+
+
+/* =====================================================
+   HIDE PRIVATE ACCESS AFTER OPEN
+===================================================== */
+
+.private-page.open .private-access{
+  opacity:0;
+}
+
+
+/* =====================================================
+   NO LINK BUBBLES
+===================================================== */
 
 </style>
 
@@ -269,39 +381,29 @@ body{
 
 
 <!-- =====================================================
-     PRIVATE ACCESS
+     ORIGINAL OPENING
 ===================================================== -->
 
 <div id="intro">
-
-  <div class="access">
-
-    <div class="access-name">
-      @fisshhfilet
-    </div>
-
-    <div class="access-status">
-      PRIVATE ACCESS
-    </div>
-
-  </div>
-
+  @fisshhfilet
 </div>
 
 
 <!-- =====================================================
-     VISUAL FEED
+     FEED
 ===================================================== -->
 
 <main id="viewport">
 
 
-  <!-- 01 -->
+  <!-- =================================================
+       01 BETTY
+  ================================================== -->
 
   <section class="page">
 
     <img
-      src="betty.jpg?v=25"
+      src="betty.jpg?v=30"
       alt=""
       draggable="false"
     >
@@ -309,12 +411,14 @@ body{
   </section>
 
 
-  <!-- 02 -->
+  <!-- =================================================
+       02 WAISTA
+  ================================================== -->
 
   <section class="page">
 
     <img
-      src="waista.jpg?v=25"
+      src="waista.jpg?v=30"
       alt=""
       draggable="false"
     >
@@ -322,7 +426,9 @@ body{
   </section>
 
 
-  <!-- 03 -->
+  <!-- =================================================
+       03 RESTOCKING
+  ================================================== -->
 
   <section class="page">
 
@@ -335,7 +441,7 @@ body{
     ></a>
 
     <img
-      src="restocking-fisshhfilet.jpg?v=25"
+      src="restocking-fisshhfilet.jpg?v=30"
       alt=""
       draggable="false"
     >
@@ -343,12 +449,14 @@ body{
   </section>
 
 
-  <!-- 04 — SEPHORA -->
+  <!-- =================================================
+       04 SEPHORA
+  ================================================== -->
 
   <section class="page">
 
     <video
-      src="Sephora.mp4?v=25"
+      src="Sephora.mp4?v=30"
       playsinline
       muted
       loop
@@ -360,12 +468,14 @@ body{
   </section>
 
 
-  <!-- 05 -->
+  <!-- =================================================
+       05 ADULTS ONLY
+  ================================================== -->
 
   <section class="page">
 
     <img
-      src="adults-only.jpg?v=25"
+      src="adults-only.jpg?v=30"
       alt=""
       draggable="false"
     >
@@ -373,15 +483,15 @@ body{
   </section>
 
 
-  <!-- 06 -->
+  <!-- =================================================
+       06 RHUDE
+  ================================================== -->
 
   <section class="page">
 
     <video
-      src="RHUDE.mp4?v=25"
+      src="RHUDE.mp4?v=30"
       playsinline
-      muted
-      loop
       preload="metadata"
       disablepictureinpicture
       controlslist="nodownload noplaybackrate"
@@ -390,12 +500,14 @@ body{
   </section>
 
 
-  <!-- 07 -->
+  <!-- =================================================
+       07 MC
+  ================================================== -->
 
   <section class="page">
 
     <img
-      src="mc.jpg?v=25"
+      src="mc.jpg?v=30"
       alt=""
       draggable="false"
     >
@@ -403,7 +515,9 @@ body{
   </section>
 
 
-  <!-- 08 — LIQUID IV -->
+  <!-- =================================================
+       08 LIQUID IV
+  ================================================== -->
 
   <section
     class="page"
@@ -411,7 +525,7 @@ body{
   >
 
     <video
-      src="liquid.mp4?v=25"
+      src="liquid.mp4?v=30"
       playsinline
       muted
       loop
@@ -423,7 +537,9 @@ body{
   </section>
 
 
-  <!-- 09 — KALSHI -->
+  <!-- =================================================
+       09 KALSHI
+  ================================================== -->
 
   <section
     class="page"
@@ -431,7 +547,7 @@ body{
   >
 
     <img
-      src="kalshi.jpg?v=25"
+      src="kalshi.jpg?v=30"
       alt=""
       draggable="false"
     >
@@ -439,7 +555,9 @@ body{
   </section>
 
 
-  <!-- 10 — BOAT BEAR -->
+  <!-- =================================================
+       10 BOAT BEAR
+  ================================================== -->
 
   <section
     class="page"
@@ -455,7 +573,7 @@ body{
     ></a>
 
     <img
-      src="boatbear.jpg?v=25"
+      src="boatbear.jpg?v=30"
       alt=""
       draggable="false"
     >
@@ -463,17 +581,51 @@ body{
   </section>
 
 
-  <!-- 11 -->
+  <!-- =================================================
+       11 FINAL VIDEO
+       PRIVATE ACCESS
+  ================================================== -->
 
-  <section class="page">
+  <section class="page private-page">
 
     <video
-      src="GOMF.mp4?v=25"
+      src="GOMF.mp4?v=30"
       playsinline
-      preload="metadata"
+      muted
+      preload="auto"
       disablepictureinpicture
       controlslist="nodownload noplaybackrate"
     ></video>
+
+
+    <!-- PRIVATE ACCESS -->
+
+    <div class="private-access">
+
+      <div class="private-copy">
+
+        <div class="private-title">
+          PRIVATE ACCESS
+        </div>
+
+        <div class="private-sub">
+          MEMBERS ONLY
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- DOOR -->
+
+    <div class="private-door">
+
+      <div class="door-left"></div>
+
+      <div class="door-right"></div>
+
+    </div>
 
   </section>
 
@@ -485,20 +637,7 @@ body{
 
 /* =====================================================
    FISSHHFILET
-   SIMPLE VIDEO ENGINE
-
-   IMPORTANT:
-
-   The browser controls scrolling.
-
-   JavaScript does NOT control scrolling.
-
-   This prevents skipping and fighting with Android.
-===================================================== */
-
-
-/* =====================================================
-   ELEMENTS
+   SIMPLE / STABLE / NATIVE
 ===================================================== */
 
 const viewport =
@@ -517,144 +656,105 @@ const videos =
     document.querySelectorAll("video")
   );
 
+const finalPage =
+  document.querySelector(".private-page");
+
 
 /* =====================================================
-   PRIVATE ACCESS INTRO
+   ORIGINAL OPENING
 ===================================================== */
 
-const introSeen =
-  sessionStorage.getItem(
-    "fisshhfilet_intro_seen"
-  );
+setTimeout(() => {
 
+  if(!intro){
+    return;
+  }
 
-if(introSeen){
-
-  intro.remove();
-
-}else{
-
-  sessionStorage.setItem(
-    "fisshhfilet_intro_seen",
-    "1"
-  );
-
-
-  /*
-    Very short.
-
-    It gets out of the way quickly.
-  */
+  intro.classList.add("hide");
 
   setTimeout(() => {
 
-    intro.classList.add("hide");
+    if(
+      intro &&
+      intro.parentNode
+    ){
 
-    setTimeout(() => {
+      intro.remove();
 
-      if(
-        intro &&
-        intro.parentNode
-      ){
+    }
 
-        intro.remove();
+  },650);
 
-      }
-
-    },600);
-
-  },1150);
-
-}
+},900);
 
 
 /* =====================================================
-   VIDEO STATE
+   VIDEO ENGINE
+=====================================================
+
+   IMPORTANT:
+
+   No IntersectionObserver.
+
+   No scrollIntoView.
+
+   No forced scrolling.
+
+   No custom swipe navigation.
+
+   Native Android scrolling controls the feed.
 ===================================================== */
-
-/*
-   Keep track of the video currently playing.
-
-   There is only ever ONE active video.
-*/
 
 let activeVideo = null;
 
+let scrollTimer = null;
+
 
 /* =====================================================
-   SEPHORA INITIAL POSITION
+   FIND CURRENT PAGE
 ===================================================== */
 
-/*
-   This runs only once.
+function currentPage(){
 
-   It does NOT run every time Sephora
-   becomes visible.
-*/
+  const h =
+    viewport.clientHeight;
 
-const sephora =
-  document.querySelector(
-    'video[src*="Sephora"]'
-  );
+  if(!h){
+    return null;
+  }
 
-
-if(sephora){
-
-  const initializeSephora =
-    () => {
-
-      if(
-        !sephora.dataset.startSet
-      ){
-
-        sephora.dataset.startSet =
-          "true";
-
-        try{
-
-          sephora.currentTime = .5;
-
-        }catch(e){}
-
-      }
-
-    };
-
-
-  if(sephora.readyState >= 1){
-
-    initializeSephora();
-
-  }else{
-
-    sephora.addEventListener(
-      "loadedmetadata",
-      initializeSephora,
-      {
-        once:true
-      }
+  let index =
+    Math.round(
+      viewport.scrollTop / h
     );
 
-  }
+
+  index =
+    Math.max(
+      0,
+      Math.min(
+        pages.length - 1,
+        index
+      )
+    );
+
+
+  return pages[index];
 
 }
 
 
 /* =====================================================
-   STOP ALL VIDEOS
+   STOP ALL OTHER VIDEOS
 ===================================================== */
 
-function stopAllVideos(except){
+function stopOtherVideos(video){
 
-  videos.forEach(video => {
+  videos.forEach(v => {
 
-    if(video !== except){
+    if(v !== video){
 
-      if(!video.paused){
-
-        video.pause();
-
-      }
+      v.pause();
 
     }
 
@@ -664,46 +764,36 @@ function stopAllVideos(except){
 
 
 /* =====================================================
-   PLAY ONE VIDEO
+   START CURRENT VIDEO
 ===================================================== */
 
-function playVideo(video){
+function startCurrentVideo(){
+
+  const page =
+    currentPage();
+
+
+  if(!page){
+    return;
+  }
+
+
+  const video =
+    page.querySelector("video");
+
 
   if(!video){
-    return;
-  }
 
+    stopOtherVideos(null);
 
-  /*
-    Stop everything else first.
-  */
-
-  stopAllVideos(video);
-
-
-  /*
-    If this is already the active video,
-    don't touch its position.
-  */
-
-  if(activeVideo === video){
-
-    if(video.paused){
-
-      video.play().catch(
-        () => {}
-      );
-
-    }
+    activeVideo = null;
 
     return;
 
   }
 
 
-  /*
-    Change active video.
-  */
+  stopOtherVideos(video);
 
   activeVideo = video;
 
@@ -711,11 +801,18 @@ function playVideo(video){
   /*
     IMPORTANT:
 
-    We DO NOT set currentTime here.
+    Every time a video page becomes the
+    selected page after a swipe, restart it.
 
-    Returning to a video resumes exactly
-    where the browser left it.
+    This restores the original FISSHHFILET
+    behavior.
+
+    Sephora specifically starts from
+    the beginning after every swipe.
   */
+
+  video.currentTime = 0;
+
 
   video.play().catch(
     () => {}
@@ -725,61 +822,12 @@ function playVideo(video){
 
 
 /* =====================================================
-   FIND CURRENT PAGE
+   SCROLL SETTLE
 ===================================================== */
-
-function getCurrentPage(){
-
-  const scrollTop =
-    viewport.scrollTop;
-
-  const height =
-    viewport.clientHeight;
-
-  /*
-    Determine the nearest full-screen page.
-
-    No scrollIntoView.
-    No forced scrolling.
-  */
-
-  let index =
-    Math.round(
-      scrollTop / height
-    );
-
-
-  if(index < 0){
-    index = 0;
-  }
-
-  if(index >= pages.length){
-    index = pages.length - 1;
-  }
-
-
-  return pages[index];
-
-}
-
-
-/* =====================================================
-   UPDATE VIDEO AFTER SCROLL
-===================================================== */
-
-let scrollTimer = null;
-
 
 viewport.addEventListener(
   "scroll",
   () => {
-
-    /*
-      Do NOT manipulate scroll position.
-
-      Wait until the user's finger movement
-      has settled.
-    */
 
     clearTimeout(scrollTimer);
 
@@ -787,42 +835,9 @@ viewport.addEventListener(
     scrollTimer =
       setTimeout(() => {
 
-        const page =
-          getCurrentPage();
+        startCurrentVideo();
 
-
-        if(!page){
-
-          return;
-
-        }
-
-
-        const video =
-          page.querySelector(
-            "video"
-          );
-
-
-        if(video){
-
-          playVideo(video);
-
-        }else{
-
-          /*
-            Image page.
-
-            Pause any video.
-          */
-
-          stopAllVideos(null);
-
-          activeVideo = null;
-
-        }
-
-      },180);
+      },220);
 
   },
   {
@@ -837,39 +852,124 @@ viewport.addEventListener(
 
 setTimeout(() => {
 
-  const firstPage =
-    getCurrentPage();
-
-
-  if(firstPage){
-
-    const video =
-      firstPage.querySelector(
-        "video"
-      );
-
-
-    if(video){
-
-      playVideo(video);
-
-    }
-
-  }
+  startCurrentVideo();
 
 },300);
 
 
 /* =====================================================
+   FINAL PRIVATE ACCESS
+===================================================== */
+
+let finalOpened = false;
+
+let finalTimer = null;
+
+
+/*
+   Watch the final page without controlling
+   scrolling.
+*/
+
+function checkFinalPage(){
+
+  const page =
+    currentPage();
+
+
+  if(page !== finalPage){
+
+    return;
+
+  }
+
+
+  if(finalOpened){
+
+    return;
+
+  }
+
+
+  finalOpened = true;
+
+
+  /*
+    Show private access immediately.
+  */
+
+  finalPage
+    .querySelector(".private-access")
+    .classList.add("show");
+
+
+  /*
+    Hold the black/private-access moment
+    for approximately 3.5 seconds.
+  */
+
+  finalTimer =
+    setTimeout(() => {
+
+      finalPage.classList.add(
+        "open"
+      );
+
+
+      /*
+        Give the door time to open.
+      */
+
+      setTimeout(() => {
+
+        const access =
+          finalPage.querySelector(
+            ".private-access"
+          );
+
+        if(access){
+
+          access.classList.remove(
+            "show"
+          );
+
+        }
+
+      },1100);
+
+    },3500);
+
+}
+
+
+/* =====================================================
+   FINAL PAGE CHECK
+===================================================== */
+
+viewport.addEventListener(
+  "scroll",
+  () => {
+
+    clearTimeout(
+      viewport._finalTimer
+    );
+
+
+    viewport._finalTimer =
+      setTimeout(
+        checkFinalPage,
+        260
+      );
+
+  },
+  {
+    passive:true
+  }
+);
+
+
+/* =====================================================
    VISIBILITY
-
-   Android may suspend the tab.
-
-   Pause videos when hidden.
-
-   Resume the current page when returned.
-
-   NEVER reset currentTime.
 ===================================================== */
 
 document.addEventListener(
@@ -890,34 +990,16 @@ document.addEventListener(
 
 
     /*
-      Wait briefly for Android to
-      restore the viewport.
+      When returning to the site,
+      start the current page again.
+
+      This intentionally returns video
+      pages to their beginning.
     */
 
     setTimeout(() => {
 
-      const page =
-        getCurrentPage();
-
-
-      if(!page){
-
-        return;
-
-      }
-
-
-      const video =
-        page.querySelector(
-          "video"
-        );
-
-
-      if(video){
-
-        playVideo(video);
-
-      }
+      startCurrentVideo();
 
     },150);
 
@@ -926,29 +1008,28 @@ document.addEventListener(
 
 
 /* =====================================================
-   EXTERNAL PAGE LINKS
+   EXTERNAL WHOLE-PAGE LINKS
 ===================================================== */
 
-let tapStartX = 0;
-let tapStartY = 0;
-let tapStartTime = 0;
+let tapX = 0;
+let tapY = 0;
+let tapTime = 0;
 
 
 viewport.addEventListener(
   "touchstart",
   event => {
 
-    const touch =
+    const t =
       event.touches[0];
 
+    tapX =
+      t.clientX;
 
-    tapStartX =
-      touch.clientX;
+    tapY =
+      t.clientY;
 
-    tapStartY =
-      touch.clientY;
-
-    tapStartTime =
+    tapTime =
       Date.now();
 
   },
@@ -962,38 +1043,35 @@ viewport.addEventListener(
   "touchend",
   event => {
 
-    const touch =
+    const t =
       event.changedTouches[0];
 
 
-    const movedX =
+    const dx =
       Math.abs(
-        touch.clientX -
-        tapStartX
+        t.clientX - tapX
       );
 
 
-    const movedY =
+    const dy =
       Math.abs(
-        touch.clientY -
-        tapStartY
+        t.clientY - tapY
       );
 
 
     const duration =
-      Date.now() -
-      tapStartTime;
+      Date.now() - tapTime;
 
 
     /*
-      This was a swipe.
+      Moving finger = swipe.
 
-      DO NOTHING.
+      NEVER open a link.
     */
 
     if(
-      movedX > 15 ||
-      movedY > 15
+      dx > 15 ||
+      dy > 15
     ){
 
       return;
@@ -1002,7 +1080,7 @@ viewport.addEventListener(
 
 
     /*
-      Too long = not a tap.
+      Long press = not tap.
     */
 
     if(duration > 400){
@@ -1013,7 +1091,7 @@ viewport.addEventListener(
 
 
     /*
-      Actual anchor.
+      Real anchor handles itself.
     */
 
     if(
@@ -1026,15 +1104,11 @@ viewport.addEventListener(
 
 
     const page =
-      event.target.closest(
-        ".page"
-      );
+      event.target.closest(".page");
 
 
     if(!page){
-
       return;
-
     }
 
 
@@ -1060,7 +1134,7 @@ viewport.addEventListener(
 
 
 /* =====================================================
-   IMAGE DRAGGING
+   IMAGE DRAG
 ===================================================== */
 
 document
@@ -1080,7 +1154,7 @@ document
 
 
 /* =====================================================
-   VIDEO CONTROLS
+   VIDEO SETTINGS
 ===================================================== */
 
 videos.forEach(video => {
@@ -1099,20 +1173,7 @@ videos.forEach(video => {
 
 });
 
-
-/* =====================================================
-   DO NOT ADD:
-
-   IntersectionObserver
-   scrollIntoView()
-   pageshow scroll reset
-   automatic currentTime resets
-   custom swipe scrolling
-
-   Native Android scrolling is in charge.
-===================================================== */
-
 </script>
 
 </body>
-  </html>
+</html>
