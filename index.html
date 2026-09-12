@@ -1,1108 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
-
-<title>FISSHHFILET</title>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>@fisshhfilet</title>
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
--webkit-tap-highlight-color:transparent;
-}
-
-html,body{
-width:100%;
-height:100%;
-background:#000;
-overflow:hidden;
-}
-
-body{
-background:#000;
-}
-
-
-/* =========================================
-   ORIGINAL OPENING
-========================================= */
-
-#intro{
-position:fixed;
-inset:0;
-z-index:9999;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-background:#000;
-color:#fff;
-
-font-family:Menlo,Monaco,Consolas,monospace;
-font-size:11px;
-letter-spacing:.35em;
-
-opacity:1;
-
-transition:opacity .6s ease;
-
-pointer-events:none;
-}
-
-#intro.hide{
-opacity:0;
-}
-
-
-/* =========================================
-   FEED
-========================================= */
-
-#viewport{
-width:100vw;
-height:100dvh;
-
-overflow-y:auto;
-overflow-x:hidden;
-
-background:#000;
-
-scroll-snap-type:y mandatory;
-scroll-snap-stop:always;
-
--webkit-overflow-scrolling:touch;
-
-overscroll-behavior-y:none;
-
-scrollbar-width:none;
-}
-
-#viewport::-webkit-scrollbar{
-display:none;
-}
-
-
-/* =========================================
-   PAGE
-========================================= */
-
-.page{
-position:relative;
-
-width:100vw;
-height:100dvh;
-min-height:100dvh;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-background:#000;
-
-overflow:hidden;
-
-scroll-snap-align:start;
-}
-
-
-/* =========================================
-   MEDIA
-========================================= */
-
-.page img,
-.page video{
-display:block;
-
-width:100%;
-height:100%;
-
-object-fit:contain;
-
-background:#000;
-
-user-select:none;
--webkit-user-select:none;
-
--webkit-user-drag:none;
-
-pointer-events:none;
-}
-
-
-/* =========================================
-   INVISIBLE INSTAGRAM LINK
-========================================= */
-
-.ig-cam{
-position:absolute;
-
-left:40%;
-top:38%;
-
-width:20%;
-height:24%;
-
-z-index:30;
-
-display:block;
-
-background:transparent;
-
-pointer-events:auto;
-}
-
-
-/* =========================================
-   INVISIBLE BOAT BEAR LINK
-========================================= */
-
-.arrow-box{
-position:absolute;
-
-top:2%;
-right:2%;
-
-width:14%;
-height:8%;
-
-z-index:30;
-
-background:transparent;
-
-pointer-events:auto;
-}
-
-
-/* =========================================
-   FINAL PRIVATE ACCESS
-========================================= */
-
-.private-page{
-position:relative;
-}
-
-
-/* =========================================
-   BLACK PRIVATE ACCESS SCREEN
-========================================= */
-
-.private-screen{
-position:absolute;
-inset:0;
-
-z-index:100;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-background:#000;
-
-pointer-events:none;
-
-opacity:1;
-
-transition:opacity 1s ease;
-}
-
-
-/* =========================================
-   PRIVATE TEXT
-========================================= */
-
-.private-copy{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-
-text-align:center;
-
-opacity:0;
-
-transform:translateY(5px);
-
-transition:
-opacity 1s ease,
-transform 1s ease;
-}
-
-.private-screen.visible .private-copy{
-opacity:1;
-transform:translateY(0);
-}
-
-
-/* =========================================
-   FISSHHFILET
-========================================= */
-
-.private-name{
-font-family:Menlo,Monaco,Consolas,monospace;
-
-font-size:9px;
-
-letter-spacing:.35em;
-
-padding-left:.35em;
-
-color:rgba(255,255,255,.55);
-}
-
-
-/* =========================================
-   PRIVATE ACCESS GREEN
-========================================= */
-
-.private-title{
-margin-top:13px;
-
-font-family:Menlo,Monaco,Consolas,monospace;
-
-font-size:10px;
-
-letter-spacing:.34em;
-
-padding-left:.34em;
-
-color:#43d36f;
-
-text-transform:uppercase;
-}
-
-
-/* =========================================
-   SUBTLE PAYWALL SIGNAL
-========================================= */
-
-.private-sub{
-margin-top:13px;
-
-font-family:Menlo,Monaco,Consolas,monospace;
-
-font-size:7px;
-
-letter-spacing:.28em;
-
-padding-left:.28em;
-
-color:rgba(255,255,255,.28);
-}
-
-
-/* =========================================
-   DOORS
-========================================= */
-
-.private-doors{
-position:absolute;
-inset:0;
-
-z-index:110;
-
-display:flex;
-
-pointer-events:none;
-
-overflow:hidden;
-}
-
-.door{
-position:relative;
-
-width:50%;
-height:100%;
-
-background:#000;
-
-transition:
-transform 1.5s cubic-bezier(.77,0,.175,1);
-}
-
-
-/* subtle center seam */
-
-.door-left{
-border-right:1px solid rgba(255,255,255,.025);
-}
-
-.door-right{
-border-left:1px solid rgba(255,255,255,.025);
-}
-
-
-/* =========================================
-   DOOR OPEN
-========================================= */
-
-.private-page.doors-open .door-left{
-transform:translateX(-100%);
-}
-
-.private-page.doors-open .door-right{
-transform:translateX(100%);
-}
-
-
-/* =========================================
-   ACCESS SCREEN DISAPPEARS
-========================================= */
-
-.private-page.doors-open .private-screen{
-opacity:0;
-}
-
-
-/* =========================================
-   NO BUBBLES
-========================================= */
-
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;background:#000;overscroll-behavior:none}
+body{font-family:"Courier New",Courier,monospace;-webkit-font-smoothing:antialiased;overflow:hidden}
+#feed{width:100vw;height:100dvh;overflow-y:scroll;overflow-x:hidden;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;background:#000}
+.page{position:relative;width:100vw;height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.page img,.page video{width:100%;height:100%;object-fit:contain;background:#000;display:block}
+.hotlink{position:absolute;inset:0;z-index:5;display:block;background:transparent;-webkit-tap-highlight-color:transparent}
+#original-opening{position:fixed;inset:0;z-index:9999;background:#000;display:flex;align-items:center;justify-content:center;pointer-events:none}
+#original-opening span{color:#d6d6d6;font-size:11px;letter-spacing:0.22em;opacity:0;font-weight:400;text-transform:lowercase}
+#original-opening.go span{animation:origIn 0.6s ease forwards 0.15s,origOut 0.5s ease forwards 1.25s}
+@keyframes origIn{from{opacity:0}to{opacity:0.9}}@keyframes origOut{from{opacity:0.9}to{opacity:0}}
+#finalPage{background:#000}
+#finalPage video#gomfVideo{position:absolute;inset:0;z-index:1}
+#doors{position:absolute;inset:0;z-index:2;display:flex;pointer-events:none}
+.door{width:50.1%;height:100%;background:#000;will-change:transform;transform:translateX(0);transition:transform 1.55s cubic-bezier(0.77,0,0.175,1)}
+#doors.open.door-left{transform:translateX(-100%)}
+#doors.open.door-right{transform:translateX(100%)}
+#privateOverlay{position:absolute;inset:0;z-index:3;background:#000;display:flex;align-items:center;justify-content:center;flex-direction:column;pointer-events:none;opacity:1;transition:opacity 0.7s ease}
+#privateOverlay.hide{opacity:0}
+.pa-line{opacity:0;will-change:opacity;transition:opacity 0.9s ease;text-align:center;line-height:1}
+.pa-line.show{opacity:1}
+#pa-fisshh{color:#d6d6d6;font-size:11px;letter-spacing:0.22em;margin-bottom:18px}
+#pa-private{color:#2d6a4f;font-size:12px;letter-spacing:0.32em;margin-bottom:22px}
+#pa-members{color:#3a3a3a;font-size:9px;letter-spacing:0.28em}
 </style>
-
 </head>
-
 <body>
-
-
-<!-- =========================================
-     ORIGINAL APP OPENING
-========================================= -->
-
-<div id="intro">
-@fisshhfilet
+<div id="original-opening"><span>@fisshhfilet</span></div>
+<div id="feed">
+  <section class="page"><img src="betty.jpg" alt=""><a class="hotlink" href="https://www.instagram.com/club52vogue.shop/" target="_blank" rel="noopener"></a></section>
+  <section class="page"><img src="waista.jpg" alt=""><a class="hotlink" href="https://www.instagram.com/club52vogue.shop/" target="_blank" rel="noopener"></a></section>
+  <section class="page"><img src="restocking-fisshhfilet.jpg" alt=""><a class="hotlink" href="https://www.instagram.com/club52vogue.shop/" target="_blank" rel="noopener"></a></section>
+  <section class="page" data-video="1"><video id="sephoraVideo" src="Sephora.mp4" playsinline muted loop preload="auto" disablepictureinpicture controlslist="nodownload noplaybackrate nofullscreen" webkit-playsinline></video><a class="hotlink" href="https://www.instagram.com/club52vogue.shop/" target="_blank" rel="noopener"></a></section>
+  <section class="page"><img src="adults-only.jpg" alt=""><a class="hotlink" href="https://www.instagram.com/club52vogue.shop/" target="_blank" rel="noopener"></a></section>
+  <section class="page" data-video="1"><video id="rhudeVideo" src="RHUDE.mp4" playsinline muted loop preload="auto" disablepictureinpicture controlslist="nodownload noplaybackrate nofullscreen" webkit-playsinline></video><a class="hotlink" href="https://www.instagram.com/club52vogue.shop/" target="_blank" rel="noopener"></a></section>
+  <section class="page"><img src="mc.jpg" alt=""><a class="hotlink" href="https://www.instagram.com/club52vogue.shop/" target="_blank" rel="noopener"></a></section>
+  <section class="page" data-video="1"><video id="liquidVideo" src="liquid.mp4" playsinline muted loop preload="auto" disablepictureinpicture controlslist="nodownload noplaybackrate nofullscreen" webkit-playsinline></video><a class="hotlink" href="https://www.liquid-iv.com" target="_blank" rel="noopener"></a></section>
+  <section class="page"><img src="kalshi.jpg" alt=""><a class="hotlink" href="https://kalshi.com" target="_blank" rel="noopener"></a></section>
+  <section class="page"><img src="boatbear.jpg" alt=""><a class="hotlink" href="https://naturalcatchtuna.com/" target="_blank" rel="noopener"></a></section>
+  <section class="page" id="finalPage" data-video="1">
+    <video id="gomfVideo" src="GOMF.mp4" playsinline muted loop preload="auto" disablepictureinpicture controlslist="nodownload noplaybackrate nofullscreen" webkit-playsinline></video>
+    <div id="doors"><div class="door door-left"></div><div class="door door-right"></div></div>
+    <div id="privateOverlay"><div id="pa-fisshh" class="pa-line">@fisshhfilet</div><div id="pa-private" class="pa-line">PRIVATE ACCESS</div><div id="pa-members" class="pa-line">MEMBERS ONLY</div></div>
+    <a class="hotlink" id="finalHotlink" href="https://www.instagram.com/club52vogue.shop/" target="_blank" rel="noopener" style="z-index:4;pointer-events:none"></a>
+  </section>
 </div>
-
-
-<!-- =========================================
-     MAIN FEED
-========================================= -->
-
-<main id="viewport">
-
-
-<section class="page">
-
-<img
-src="betty.jpg?v=40"
-alt=""
-draggable="false">
-
-</section>
-
-
-<section class="page">
-
-<img
-src="waista.jpg?v=40"
-alt=""
-draggable="false">
-
-</section>
-
-
-<section class="page">
-
-<a
-class="ig-cam"
-href="https://www.instagram.com/club52vogue.shop/"
-target="_blank"
-rel="noopener noreferrer">
-</a>
-
-<img
-src="restocking-fisshhfilet.jpg?v=40"
-alt=""
-draggable="false">
-
-</section>
-
-
-<!-- =========================================
-     SEPHORA
-========================================= -->
-
-<section class="page">
-
-<video
-src="Sephora.mp4?v=40"
-playsinline
-muted
-loop
-preload="auto"
-disablepictureinpicture
-controlslist="nodownload noplaybackrate">
-</video>
-
-</section>
-
-
-<section class="page">
-
-<img
-src="adults-only.jpg?v=40"
-alt=""
-draggable="false">
-
-</section>
-
-
-<section class="page">
-
-<video
-src="RHUDE.mp4?v=40"
-playsinline
-preload="metadata"
-disablepictureinpicture
-controlslist="nodownload noplaybackrate">
-</video>
-
-</section>
-
-
-<section class="page">
-
-<img
-src="mc.jpg?v=40"
-alt=""
-draggable="false">
-
-</section>
-
-
-<section
-class="page"
-data-link="https://www.liquid-iv.com">
-
-<video
-src="liquid.mp4?v=40"
-playsinline
-muted
-loop
-preload="metadata"
-disablepictureinpicture
-controlslist="nodownload noplaybackrate">
-</video>
-
-</section>
-
-
-<section
-class="page"
-data-link="https://kalshi.com">
-
-<img
-src="kalshi.jpg?v=40"
-alt=""
-draggable="false">
-
-</section>
-
-
-<section
-class="page"
-data-link="https://naturalcatchtuna.com/">
-
-<a
-class="arrow-box"
-href="https://naturalcatchtuna.com/"
-target="_blank"
-rel="noopener noreferrer">
-</a>
-
-<img
-src="boatbear.jpg?v=40"
-alt=""
-draggable="false">
-
-</section>
-
-
-<!-- =========================================
-     FINAL VIDEO
-     PRIVATE ACCESS → DOORS OPEN
-========================================= -->
-
-<section class="page private-page">
-
-<video
-src="GOMF.mp4?v=40"
-playsinline
-muted
-loop
-preload="auto"
-disablepictureinpicture
-controlslist="nodownload noplaybackrate">
-</video>
-
-
-<!-- PRIVATE ACCESS -->
-
-<div class="private-screen">
-
-<div class="private-copy">
-
-<div class="private-name">
-@fisshhfilet
-</div>
-
-<div class="private-title">
-PRIVATE ACCESS
-</div>
-
-<div class="private-sub">
-MEMBERS ONLY
-</div>
-
-</div>
-
-</div>
-
-
-<!-- TWO BLACK DOORS -->
-
-<div class="private-doors">
-
-<div class="door door-left"></div>
-<div class="door door-right"></div>
-
-</div>
-
-</section>
-
-
-</main>
-
-
 <script>
-
-/* =========================================
-   ELEMENTS
-========================================= */
-
-const viewport =
-document.getElementById("viewport");
-
-const intro =
-document.getElementById("intro");
-
-const pages =
-Array.from(
-document.querySelectorAll(".page")
-);
-
-const videos =
-Array.from(
-document.querySelectorAll("video")
-);
-
-const finalPage =
-document.querySelector(".private-page");
-
-
-/* =========================================
-   ORIGINAL OPENING
-========================================= */
-
-setTimeout(()=>{
-
-intro.classList.add("hide");
-
-setTimeout(()=>{
-
-if(intro && intro.parentNode){
-intro.remove();
-}
-
-},650);
-
-},900);
-
-
-/* =========================================
-   VIDEO ENGINE
-========================================= */
-
-let activeVideo=null;
-
-let scrollTimer=null;
-
-
-/* =========================================
-   CURRENT PAGE
-========================================= */
-
-function getCurrentPage(){
-
-const height=
-viewport.clientHeight;
-
-if(!height){
-return null;
-}
-
-let index=
-Math.round(
-viewport.scrollTop/height
-);
-
-index=
-Math.max(
-0,
-Math.min(
-pages.length-1,
-index
-)
-);
-
-return pages[index];
-
-}
-
-
-/* =========================================
-   STOP VIDEOS
-========================================= */
-
-function stopOtherVideos(current){
-
-videos.forEach(video=>{
-
-if(video!==current){
-video.pause();
-}
-
-});
-
-}
-
-
-/* =========================================
-   PLAY CURRENT VIDEO
-========================================= */
-
-function playCurrentVideo(){
-
-const page=
-getCurrentPage();
-
-if(!page){
-return;
-}
-
-const video=
-page.querySelector("video");
-
-if(!video){
-
-stopOtherVideos(null);
-
-activeVideo=null;
-
-return;
-
-}
-
-stopOtherVideos(video);
-
-activeVideo=video;
-
-
-/*
-  ORIGINAL FISSHHFILET BEHAVIOR:
-
-  Every swipe onto a video
-  starts that video from the beginning.
-*/
-
-try{
-video.currentTime=0;
-}catch(e){}
-
-
-video.play().catch(()=>{});
-
-}
-
-
-/* =========================================
-   SCROLL SETTLE
-========================================= */
-
-viewport.addEventListener(
-"scroll",
-()=>{
-
-clearTimeout(scrollTimer);
-
-scrollTimer=
-setTimeout(()=>{
-
-playCurrentVideo();
-
-checkFinalPage();
-
-},220);
-
-},
-{
-passive:true
-}
-);
-
-
-/* =========================================
-   START FIRST PAGE
-========================================= */
-
-setTimeout(()=>{
-
-playCurrentVideo();
-
-},350);
-
-
-/* =========================================
-   FINAL PRIVATE ACCESS SEQUENCE
-========================================= */
-
-let finalSequenceStarted=false;
-
-
-/* =========================================
-   CHECK FINAL PAGE
-========================================= */
-
-function checkFinalPage(){
-
-const page=
-getCurrentPage();
-
-if(page!==finalPage){
-
-return;
-
-}
-
-if(finalSequenceStarted){
-
-return;
-
-}
-
-finalSequenceStarted=true;
-
-
-/*
-  IMPORTANT:
-
-  The FINAL VIDEO is underneath.
-
-  The black private-access layer
-  is simply hiding it temporarily.
-*/
-
-
-const screen=
-finalPage.querySelector(
-".private-screen"
-);
-
-
-/*
-  Fade in the private access.
-*/
-
-requestAnimationFrame(()=>{
-
-screen.classList.add(
-"visible"
-);
-
-});
-
-
-/*
-  3.5 SECOND PRIVATE ACCESS MOMENT.
-*/
-
-setTimeout(()=>{
-
-/*
-  First fade the text away.
-*/
-
-screen.classList.remove(
-"visible"
-);
-
-
-/*
-  Then open the doors.
-*/
-
-setTimeout(()=>{
-
-finalPage.classList.add(
-"doors-open"
-);
-
-
-/*
-  Start/reveal the final video.
-*/
-
-const video=
-finalPage.querySelector(
-"video"
-);
-
-if(video){
-
-try{
-video.currentTime=0;
-}catch(e){}
-
-video.play().catch(()=>{});
-
-}
-
-},1000);
-
-},3500);
-
-}
-
-
-/* =========================================
-   RESET FINAL ACCESS IF USER LEAVES
-========================================= */
-
-function resetFinalAccess(){
-
-if(
-getCurrentPage()!==finalPage
-){
-
-finalSequenceStarted=false;
-
-finalPage.classList.remove(
-"doors-open"
-);
-
-const screen=
-finalPage.querySelector(
-".private-screen"
-);
-
-screen.classList.remove(
-"visible"
-);
-
-}
-
-}
-
-
-/* =========================================
-   VISIBILITY
-========================================= */
-
-document.addEventListener(
-"visibilitychange",
-()=>{
-
-if(document.hidden){
-
-videos.forEach(video=>{
-video.pause();
-});
-
-return;
-
-}
-
-
-/*
-  Returning to the site:
-
-  Start the current video
-  from the beginning,
-  matching the original behavior.
-*/
-
-setTimeout(()=>{
-
-playCurrentVideo();
-
-},150);
-
-}
-);
-
-
-/* =========================================
-   TOUCH / LINK HANDLING
-========================================= */
-
-let startX=0;
-let startY=0;
-let startTime=0;
-
-
-viewport.addEventListener(
-"touchstart",
-event=>{
-
-const touch=
-event.touches[0];
-
-startX=
-touch.clientX;
-
-startY=
-touch.clientY;
-
-startTime=
-Date.now();
-
-},
-{
-passive:true
-}
-);
-
-
-viewport.addEventListener(
-"touchend",
-event=>{
-
-const touch=
-event.changedTouches[0];
-
-const dx=
-Math.abs(
-touch.clientX-startX
-);
-
-const dy=
-Math.abs(
-touch.clientY-startY
-);
-
-const duration=
-Date.now()-startTime;
-
-
-/*
-  Swipe = do absolutely nothing.
-*/
-
-if(
-dx>15 ||
-dy>15
-){
-
-return;
-
-}
-
-
-/*
-  Long press = do nothing.
-*/
-
-if(duration>400){
-
-return;
-
-}
-
-
-/*
-  Existing anchor.
-*/
-
-if(
-event.target.closest("a")
-){
-
-return;
-
-}
-
-
-const page=
-event.target.closest(".page");
-
-if(!page){
-return;
-}
-
-
-const link=
-page.dataset.link;
-
-if(link){
-
-window.open(
-link,
-"_blank",
-"noopener,noreferrer"
-);
-
-}
-
-},
-{
-passive:true
-}
-);
-
-
-/* =========================================
-   IMAGE DRAG PROTECTION
-========================================= */
-
-document
-.querySelectorAll("img")
-.forEach(img=>{
-
-img.addEventListener(
-"dragstart",
-event=>{
-event.preventDefault();
-}
-);
-
-});
-
-
-/* =========================================
-   VIDEO CONTROLS OFF
-========================================= */
-
-videos.forEach(video=>{
-
-video.controls=false;
-
-video.addEventListener(
-"contextmenu",
-event=>{
-event.preventDefault();
-}
-);
-
-});
-
+(function(){
+  const feed=document.getElementById('feed');
+  const pages=[...document.querySelectorAll('.page')];
+  const opening=document.getElementById('original-opening');
+  const allVideos=[...document.querySelectorAll('video')];
+  requestAnimationFrame(()=>{opening.classList.add('go');setTimeout(()=>{opening.style.display='none'},2000)});
+  let finalTimers=[],finalState='idle';
+  const privateOverlay=document.getElementById('privateOverlay');
+  const doors=document.getElementById('doors');
+  const paFisshh=document.getElementById('pa-fisshh');
+  const paPrivate=document.getElementById('pa-private');
+  const paMembers=document.getElementById('pa-members');
+  const finalHotlink=document.getElementById('finalHotlink');
+  const gomfVideo=document.getElementById('gomfVideo');
+  function clearFinal(){finalTimers.forEach(t=>clearTimeout(t));finalTimers=[]}
+  function resetFinal(){
+    clearFinal();finalState='idle';
+    privateOverlay.classList.remove('hide');doors.classList.remove('open');
+    paFisshh.classList.remove('show');paPrivate.classList.remove('show');paMembers.classList.remove('show');
+    doors.style.transition='none';void doors.offsetWidth;doors.style.transition='';
+    try{gomfVideo.pause();gomfVideo.currentTime=0}catch(e){}
+    finalHotlink.style.pointerEvents='none';
+    paFisshh.style.transition='';paPrivate.style.transition='';paMembers.style.transition='';
+  }
+  function startFinal(){
+    if(finalState!=='idle')return;resetFinal();finalState='running';
+    finalTimers.push(setTimeout(()=>paFisshh.classList.add('show'),500));
+    finalTimers.push(setTimeout(()=>paPrivate.classList.add('show'),1000));
+    finalTimers.push(setTimeout(()=>paMembers.classList.add('show'),1500));
+    finalTimers.push(setTimeout(()=>{
+      paFisshh.style.transition=paPrivate.style.transition=paMembers.style.transition='opacity 0.6s ease';
+      paFisshh.classList.remove('show');paPrivate.classList.remove('show');paMembers.classList.remove('show');
+      finalTimers.push(setTimeout(()=>{
+        privateOverlay.classList.add('hide');finalState='doorsOpening';
+        finalTimers.push(setTimeout(()=>{
+          doors.classList.add('open');
+          finalTimers.push(setTimeout(()=>{
+            finalState='revealed';
+            try{gomfVideo.currentTime=0;gomfVideo.muted=true;gomfVideo.play().catch(()=>{})}catch(e){}
+            finalHotlink.style.pointerEvents='auto';
+          },1550));
+        },200));
+      },650));
+    },5000));
+  }
+  function pauseAll(){allVideos.forEach(v=>{try{v.pause()}catch(e){}})}
+  function playFrom0(v){if(!v)return;try{v.pause();v.currentTime=0;v.muted=true;v.play().catch(()=>{})}catch(e){}}
+  function settledIdx(){const h=window.innerHeight||800;return Math.max(0,Math.min(Math.round(feed.scrollTop/h),pages.length-1))}
+  let last=-1;
+  function onSettled(i){
+    if(i===last)return;const prev=last;last=i;
+    if(prev===10&&i!==10)resetFinal();
+    pauseAll();
+    if(i===10){startFinal();return}
+    const pg=pages[i];
+    if(pg&&pg.getAttribute('data-video')){
+      const vid=pg.querySelector('video');
+      setTimeout(()=>{if(settledIdx()!==i)return;playFrom0(vid)},60);
+    }
+  }
+  let t=null;feed.addEventListener('scroll',()=>{clearTimeout(t);t=setTimeout(()=>onSettled(settledIdx()),120)},{passive:true});
+  window.addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(()=>onSettled(settledIdx()),120)});
+  setTimeout(()=>onSettled(settledIdx()),2100);
+  allVideos.forEach(v=>{v.muted=true;v.playsInline=true;v.setAttribute('playsinline','');v.setAttribute('muted','');try{v.disablePictureInPicture=true}catch(e){}});
+})();
 </script>
-
 </body>
 </html>
