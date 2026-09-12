@@ -4,374 +4,366 @@
 
 <meta charset="UTF-8">
 
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover"
->
+<meta name="viewport"
+content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
 
 <title>FISSHHFILET</title>
 
 <style>
 
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
+margin:0;
+padding:0;
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
 }
 
-html,
+html,body{
+width:100%;
+height:100%;
+background:#000;
+overflow:hidden;
+}
+
 body{
-  width:100%;
-  height:100%;
-  background:#000;
-  overflow:hidden;
-}
-
-body{
-  background:#000;
+background:#000;
 }
 
 
-/* =====================================================
-   ORIGINAL APP OPENING
-===================================================== */
+/* =========================================
+   ORIGINAL OPENING
+========================================= */
 
 #intro{
-  position:fixed;
-  inset:0;
-  z-index:1000;
+position:fixed;
+inset:0;
+z-index:9999;
 
-  background:#000;
+display:flex;
+align-items:center;
+justify-content:center;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+background:#000;
+color:#fff;
 
-  color:#fff;
+font-family:Menlo,Monaco,Consolas,monospace;
+font-size:11px;
+letter-spacing:.35em;
 
-  font-family:Menlo,Monaco,Consolas,monospace;
+opacity:1;
 
-  font-size:11px;
-  letter-spacing:.35em;
+transition:opacity .6s ease;
 
-  opacity:1;
-
-  transition:opacity .6s ease;
-
-  pointer-events:none;
+pointer-events:none;
 }
 
 #intro.hide{
-  opacity:0;
+opacity:0;
 }
 
 
-/* =====================================================
-   MAIN FEED
-===================================================== */
+/* =========================================
+   FEED
+========================================= */
 
 #viewport{
-  width:100vw;
-  height:100dvh;
+width:100vw;
+height:100dvh;
 
-  overflow-y:auto;
-  overflow-x:hidden;
+overflow-y:auto;
+overflow-x:hidden;
 
-  background:#000;
+background:#000;
 
-  scroll-snap-type:y mandatory;
-  scroll-snap-stop:always;
+scroll-snap-type:y mandatory;
+scroll-snap-stop:always;
 
-  -webkit-overflow-scrolling:touch;
+-webkit-overflow-scrolling:touch;
 
-  overscroll-behavior-y:none;
+overscroll-behavior-y:none;
 
-  scrollbar-width:none;
-
-  touch-action:pan-y;
+scrollbar-width:none;
 }
 
 #viewport::-webkit-scrollbar{
-  display:none;
+display:none;
 }
 
 
-/* =====================================================
-   PAGES
-===================================================== */
+/* =========================================
+   PAGE
+========================================= */
 
 .page{
-  position:relative;
+position:relative;
 
-  width:100vw;
-  height:100dvh;
-  min-height:100dvh;
+width:100vw;
+height:100dvh;
+min-height:100dvh;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+display:flex;
+align-items:center;
+justify-content:center;
 
-  background:#000;
+background:#000;
 
-  overflow:hidden;
+overflow:hidden;
 
-  scroll-snap-align:start;
+scroll-snap-align:start;
 }
 
 
-/* =====================================================
+/* =========================================
    MEDIA
-===================================================== */
+========================================= */
 
 .page img,
 .page video{
-  display:block;
+display:block;
 
-  width:100%;
-  height:100%;
+width:100%;
+height:100%;
 
-  object-fit:contain;
+object-fit:contain;
 
-  background:#000;
+background:#000;
 
-  user-select:none;
-  -webkit-user-select:none;
+user-select:none;
+-webkit-user-select:none;
 
-  -webkit-user-drag:none;
+-webkit-user-drag:none;
 
-  pointer-events:none;
+pointer-events:none;
 }
 
 
-/* =====================================================
+/* =========================================
    INVISIBLE INSTAGRAM LINK
-===================================================== */
+========================================= */
 
 .ig-cam{
-  position:absolute;
+position:absolute;
 
-  left:40%;
-  top:38%;
+left:40%;
+top:38%;
 
-  width:20%;
-  height:24%;
+width:20%;
+height:24%;
 
-  z-index:20;
+z-index:30;
 
-  display:block;
+display:block;
 
-  background:transparent;
+background:transparent;
 
-  pointer-events:auto;
+pointer-events:auto;
 }
 
 
-/* =====================================================
+/* =========================================
    INVISIBLE BOAT BEAR LINK
-===================================================== */
+========================================= */
 
 .arrow-box{
-  position:absolute;
+position:absolute;
 
-  top:2%;
-  right:2%;
+top:2%;
+right:2%;
 
-  width:14%;
-  height:8%;
+width:14%;
+height:8%;
 
-  z-index:20;
+z-index:30;
 
-  background:transparent;
+background:transparent;
 
-  pointer-events:auto;
+pointer-events:auto;
 }
 
 
-/* =====================================================
-   LAST VIDEO — PRIVATE ACCESS
-===================================================== */
+/* =========================================
+   FINAL PRIVATE ACCESS
+========================================= */
 
 .private-page{
-  position:relative;
+position:relative;
 }
 
 
-/* -----------------------------------------------------
-   PRIVATE ACCESS SCREEN
------------------------------------------------------ */
+/* =========================================
+   BLACK PRIVATE ACCESS SCREEN
+========================================= */
 
-.private-access{
-  position:absolute;
-  inset:0;
+.private-screen{
+position:absolute;
+inset:0;
 
-  z-index:50;
+z-index:100;
 
-  background:#000;
+display:flex;
+align-items:center;
+justify-content:center;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+background:#000;
 
-  opacity:1;
+pointer-events:none;
 
-  pointer-events:none;
+opacity:1;
 
-  transition:
-    opacity 1.1s cubic-bezier(.22,.61,.36,1);
+transition:opacity 1s ease;
 }
 
 
-/* -----------------------------------------------------
-   PRIVATE ACCESS TEXT
------------------------------------------------------ */
+/* =========================================
+   PRIVATE TEXT
+========================================= */
 
 .private-copy{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
 
-  text-align:center;
+text-align:center;
 
-  opacity:0;
+opacity:0;
 
-  transform:translateY(4px);
+transform:translateY(5px);
 
-  transition:
-    opacity 1s ease,
-    transform 1s ease;
+transition:
+opacity 1s ease,
+transform 1s ease;
 }
 
-.private-access.show .private-copy{
-  opacity:1;
-  transform:translateY(0);
+.private-screen.visible .private-copy{
+opacity:1;
+transform:translateY(0);
 }
 
 
-/* -----------------------------------------------------
-   STOCK / KALSHI GREEN
------------------------------------------------------ */
+/* =========================================
+   FISSHHFILET
+========================================= */
+
+.private-name{
+font-family:Menlo,Monaco,Consolas,monospace;
+
+font-size:9px;
+
+letter-spacing:.35em;
+
+padding-left:.35em;
+
+color:rgba(255,255,255,.55);
+}
+
+
+/* =========================================
+   PRIVATE ACCESS GREEN
+========================================= */
 
 .private-title{
-  color:#42d36f;
+margin-top:13px;
 
-  font-family:
-    Menlo,
-    Monaco,
-    Consolas,
-    monospace;
+font-family:Menlo,Monaco,Consolas,monospace;
 
-  font-size:10px;
+font-size:10px;
 
-  letter-spacing:.34em;
+letter-spacing:.34em;
 
-  padding-left:.34em;
+padding-left:.34em;
 
-  text-transform:uppercase;
+color:#43d36f;
+
+text-transform:uppercase;
 }
+
+
+/* =========================================
+   SUBTLE PAYWALL SIGNAL
+========================================= */
 
 .private-sub{
-  margin-top:15px;
+margin-top:13px;
 
-  color:rgba(255,255,255,.38);
+font-family:Menlo,Monaco,Consolas,monospace;
 
-  font-family:
-    Menlo,
-    Monaco,
-    Consolas,
-    monospace;
+font-size:7px;
 
-  font-size:7px;
+letter-spacing:.28em;
 
-  letter-spacing:.27em;
+padding-left:.28em;
 
-  padding-left:.27em;
+color:rgba(255,255,255,.28);
 }
 
 
-/* -----------------------------------------------------
-   THE DOOR
------------------------------------------------------ */
+/* =========================================
+   DOORS
+========================================= */
 
-.private-door{
-  position:absolute;
-  inset:0;
+.private-doors{
+position:absolute;
+inset:0;
 
-  z-index:60;
+z-index:110;
 
-  pointer-events:none;
+display:flex;
 
-  display:flex;
+pointer-events:none;
 
-  overflow:hidden;
+overflow:hidden;
+}
+
+.door{
+position:relative;
+
+width:50%;
+height:100%;
+
+background:#000;
+
+transition:
+transform 1.5s cubic-bezier(.77,0,.175,1);
 }
 
 
-/* LEFT HALF */
+/* subtle center seam */
 
-.door-left,
+.door-left{
+border-right:1px solid rgba(255,255,255,.025);
+}
+
 .door-right{
-  position:relative;
-
-  width:50%;
-  height:100%;
-
-  background:#000;
-
-  transition:
-    transform 1.35s cubic-bezier(.77,0,.175,1);
+border-left:1px solid rgba(255,255,255,.025);
 }
 
 
-/* subtle luxury seam */
+/* =========================================
+   DOOR OPEN
+========================================= */
 
-.door-left::after,
-.door-right::after{
-  content:"";
-
-  position:absolute;
-
-  top:0;
-  bottom:0;
-
-  width:1px;
-
-  background:rgba(255,255,255,.035);
+.private-page.doors-open .door-left{
+transform:translateX(-100%);
 }
 
-.door-left::after{
-  right:0;
-}
-
-.door-right::after{
-  left:0;
+.private-page.doors-open .door-right{
+transform:translateX(100%);
 }
 
 
-/* OPEN */
+/* =========================================
+   ACCESS SCREEN DISAPPEARS
+========================================= */
 
-.private-page.open .door-left{
-  transform:translateX(-100%);
-}
-
-.private-page.open .door-right{
-  transform:translateX(100%);
-}
-
-
-/* =====================================================
-   HIDE PRIVATE ACCESS AFTER OPEN
-===================================================== */
-
-.private-page.open .private-access{
-  opacity:0;
+.private-page.doors-open .private-screen{
+opacity:0;
 }
 
 
-/* =====================================================
-   NO LINK BUBBLES
-===================================================== */
+/* =========================================
+   NO BUBBLES
+========================================= */
 
 </style>
 
@@ -380,254 +372,210 @@ body{
 <body>
 
 
-<!-- =====================================================
-     ORIGINAL OPENING
-===================================================== -->
+<!-- =========================================
+     ORIGINAL APP OPENING
+========================================= -->
 
 <div id="intro">
-  @fisshhfilet
+@fisshhfilet
 </div>
 
 
-<!-- =====================================================
-     FEED
-===================================================== -->
+<!-- =========================================
+     MAIN FEED
+========================================= -->
 
 <main id="viewport">
 
 
-  <!-- =================================================
-       01 BETTY
-  ================================================== -->
+<section class="page">
 
-  <section class="page">
+<img
+src="betty.jpg?v=40"
+alt=""
+draggable="false">
 
-    <img
-      src="betty.jpg?v=30"
-      alt=""
-      draggable="false"
-    >
+</section>
 
-  </section>
 
+<section class="page">
 
-  <!-- =================================================
-       02 WAISTA
-  ================================================== -->
+<img
+src="waista.jpg?v=40"
+alt=""
+draggable="false">
 
-  <section class="page">
+</section>
 
-    <img
-      src="waista.jpg?v=30"
-      alt=""
-      draggable="false"
-    >
 
-  </section>
+<section class="page">
 
+<a
+class="ig-cam"
+href="https://www.instagram.com/club52vogue.shop/"
+target="_blank"
+rel="noopener noreferrer">
+</a>
 
-  <!-- =================================================
-       03 RESTOCKING
-  ================================================== -->
+<img
+src="restocking-fisshhfilet.jpg?v=40"
+alt=""
+draggable="false">
 
-  <section class="page">
+</section>
 
-    <a
-      class="ig-cam"
-      href="https://www.instagram.com/club52vogue.shop/"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Instagram"
-    ></a>
 
-    <img
-      src="restocking-fisshhfilet.jpg?v=30"
-      alt=""
-      draggable="false"
-    >
+<!-- =========================================
+     SEPHORA
+========================================= -->
 
-  </section>
+<section class="page">
 
+<video
+src="Sephora.mp4?v=40"
+playsinline
+muted
+loop
+preload="auto"
+disablepictureinpicture
+controlslist="nodownload noplaybackrate">
+</video>
 
-  <!-- =================================================
-       04 SEPHORA
-  ================================================== -->
+</section>
 
-  <section class="page">
 
-    <video
-      src="Sephora.mp4?v=30"
-      playsinline
-      muted
-      loop
-      preload="auto"
-      disablepictureinpicture
-      controlslist="nodownload noplaybackrate"
-    ></video>
+<section class="page">
 
-  </section>
+<img
+src="adults-only.jpg?v=40"
+alt=""
+draggable="false">
 
+</section>
 
-  <!-- =================================================
-       05 ADULTS ONLY
-  ================================================== -->
 
-  <section class="page">
+<section class="page">
 
-    <img
-      src="adults-only.jpg?v=30"
-      alt=""
-      draggable="false"
-    >
+<video
+src="RHUDE.mp4?v=40"
+playsinline
+preload="metadata"
+disablepictureinpicture
+controlslist="nodownload noplaybackrate">
+</video>
 
-  </section>
+</section>
 
 
-  <!-- =================================================
-       06 RHUDE
-  ================================================== -->
+<section class="page">
 
-  <section class="page">
+<img
+src="mc.jpg?v=40"
+alt=""
+draggable="false">
 
-    <video
-      src="RHUDE.mp4?v=30"
-      playsinline
-      preload="metadata"
-      disablepictureinpicture
-      controlslist="nodownload noplaybackrate"
-    ></video>
+</section>
 
-  </section>
 
+<section
+class="page"
+data-link="https://www.liquid-iv.com">
 
-  <!-- =================================================
-       07 MC
-  ================================================== -->
+<video
+src="liquid.mp4?v=40"
+playsinline
+muted
+loop
+preload="metadata"
+disablepictureinpicture
+controlslist="nodownload noplaybackrate">
+</video>
 
-  <section class="page">
+</section>
 
-    <img
-      src="mc.jpg?v=30"
-      alt=""
-      draggable="false"
-    >
 
-  </section>
+<section
+class="page"
+data-link="https://kalshi.com">
 
+<img
+src="kalshi.jpg?v=40"
+alt=""
+draggable="false">
 
-  <!-- =================================================
-       08 LIQUID IV
-  ================================================== -->
+</section>
 
-  <section
-    class="page"
-    data-link="https://www.liquid-iv.com"
-  >
 
-    <video
-      src="liquid.mp4?v=30"
-      playsinline
-      muted
-      loop
-      preload="metadata"
-      disablepictureinpicture
-      controlslist="nodownload noplaybackrate"
-    ></video>
+<section
+class="page"
+data-link="https://naturalcatchtuna.com/">
 
-  </section>
+<a
+class="arrow-box"
+href="https://naturalcatchtuna.com/"
+target="_blank"
+rel="noopener noreferrer">
+</a>
 
+<img
+src="boatbear.jpg?v=40"
+alt=""
+draggable="false">
 
-  <!-- =================================================
-       09 KALSHI
-  ================================================== -->
+</section>
 
-  <section
-    class="page"
-    data-link="https://kalshi.com"
-  >
 
-    <img
-      src="kalshi.jpg?v=30"
-      alt=""
-      draggable="false"
-    >
+<!-- =========================================
+     FINAL VIDEO
+     PRIVATE ACCESS → DOORS OPEN
+========================================= -->
 
-  </section>
+<section class="page private-page">
 
+<video
+src="GOMF.mp4?v=40"
+playsinline
+muted
+loop
+preload="auto"
+disablepictureinpicture
+controlslist="nodownload noplaybackrate">
+</video>
 
-  <!-- =================================================
-       10 BOAT BEAR
-  ================================================== -->
 
-  <section
-    class="page"
-    data-link="https://naturalcatchtuna.com/"
-  >
+<!-- PRIVATE ACCESS -->
 
-    <a
-      class="arrow-box"
-      href="https://naturalcatchtuna.com/"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Natural Catch Tuna"
-    ></a>
+<div class="private-screen">
 
-    <img
-      src="boatbear.jpg?v=30"
-      alt=""
-      draggable="false"
-    >
+<div class="private-copy">
 
-  </section>
+<div class="private-name">
+@fisshhfilet
+</div>
 
+<div class="private-title">
+PRIVATE ACCESS
+</div>
 
-  <!-- =================================================
-       11 FINAL VIDEO
-       PRIVATE ACCESS
-  ================================================== -->
+<div class="private-sub">
+MEMBERS ONLY
+</div>
 
-  <section class="page private-page">
+</div>
 
-    <video
-      src="GOMF.mp4?v=30"
-      playsinline
-      muted
-      preload="auto"
-      disablepictureinpicture
-      controlslist="nodownload noplaybackrate"
-    ></video>
+</div>
 
 
-    <!-- PRIVATE ACCESS -->
+<!-- TWO BLACK DOORS -->
 
-    <div class="private-access">
+<div class="private-doors">
 
-      <div class="private-copy">
+<div class="door door-left"></div>
+<div class="door door-right"></div>
 
-        <div class="private-title">
-          PRIVATE ACCESS
-        </div>
+</div>
 
-        <div class="private-sub">
-          MEMBERS ONLY
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- DOOR -->
-
-    <div class="private-door">
-
-      <div class="door-left"></div>
-
-      <div class="door-right"></div>
-
-    </div>
-
-  </section>
+</section>
 
 
 </main>
@@ -635,541 +583,522 @@ body{
 
 <script>
 
-/* =====================================================
-   FISSHHFILET
-   SIMPLE / STABLE / NATIVE
-===================================================== */
+/* =========================================
+   ELEMENTS
+========================================= */
 
 const viewport =
-  document.getElementById("viewport");
+document.getElementById("viewport");
 
 const intro =
-  document.getElementById("intro");
+document.getElementById("intro");
 
 const pages =
-  Array.from(
-    document.querySelectorAll(".page")
-  );
+Array.from(
+document.querySelectorAll(".page")
+);
 
 const videos =
-  Array.from(
-    document.querySelectorAll("video")
-  );
+Array.from(
+document.querySelectorAll("video")
+);
 
 const finalPage =
-  document.querySelector(".private-page");
+document.querySelector(".private-page");
 
 
-/* =====================================================
+/* =========================================
    ORIGINAL OPENING
-===================================================== */
+========================================= */
 
-setTimeout(() => {
+setTimeout(()=>{
 
-  if(!intro){
-    return;
-  }
+intro.classList.add("hide");
 
-  intro.classList.add("hide");
+setTimeout(()=>{
 
-  setTimeout(() => {
+if(intro && intro.parentNode){
+intro.remove();
+}
 
-    if(
-      intro &&
-      intro.parentNode
-    ){
-
-      intro.remove();
-
-    }
-
-  },650);
+},650);
 
 },900);
 
 
-/* =====================================================
+/* =========================================
    VIDEO ENGINE
-=====================================================
+========================================= */
 
-   IMPORTANT:
+let activeVideo=null;
 
-   No IntersectionObserver.
-
-   No scrollIntoView.
-
-   No forced scrolling.
-
-   No custom swipe navigation.
-
-   Native Android scrolling controls the feed.
-===================================================== */
-
-let activeVideo = null;
-
-let scrollTimer = null;
+let scrollTimer=null;
 
 
-/* =====================================================
-   FIND CURRENT PAGE
-===================================================== */
+/* =========================================
+   CURRENT PAGE
+========================================= */
 
-function currentPage(){
+function getCurrentPage(){
 
-  const h =
-    viewport.clientHeight;
+const height=
+viewport.clientHeight;
 
-  if(!h){
-    return null;
-  }
-
-  let index =
-    Math.round(
-      viewport.scrollTop / h
-    );
-
-
-  index =
-    Math.max(
-      0,
-      Math.min(
-        pages.length - 1,
-        index
-      )
-    );
-
-
-  return pages[index];
-
+if(!height){
+return null;
 }
 
-
-/* =====================================================
-   STOP ALL OTHER VIDEOS
-===================================================== */
-
-function stopOtherVideos(video){
-
-  videos.forEach(v => {
-
-    if(v !== video){
-
-      v.pause();
-
-    }
-
-  });
-
-}
-
-
-/* =====================================================
-   START CURRENT VIDEO
-===================================================== */
-
-function startCurrentVideo(){
-
-  const page =
-    currentPage();
-
-
-  if(!page){
-    return;
-  }
-
-
-  const video =
-    page.querySelector("video");
-
-
-  if(!video){
-
-    stopOtherVideos(null);
-
-    activeVideo = null;
-
-    return;
-
-  }
-
-
-  stopOtherVideos(video);
-
-  activeVideo = video;
-
-
-  /*
-    IMPORTANT:
-
-    Every time a video page becomes the
-    selected page after a swipe, restart it.
-
-    This restores the original FISSHHFILET
-    behavior.
-
-    Sephora specifically starts from
-    the beginning after every swipe.
-  */
-
-  video.currentTime = 0;
-
-
-  video.play().catch(
-    () => {}
-  );
-
-}
-
-
-/* =====================================================
-   SCROLL SETTLE
-===================================================== */
-
-viewport.addEventListener(
-  "scroll",
-  () => {
-
-    clearTimeout(scrollTimer);
-
-
-    scrollTimer =
-      setTimeout(() => {
-
-        startCurrentVideo();
-
-      },220);
-
-  },
-  {
-    passive:true
-  }
+let index=
+Math.round(
+viewport.scrollTop/height
 );
 
+index=
+Math.max(
+0,
+Math.min(
+pages.length-1,
+index
+)
+);
 
-/* =====================================================
-   INITIAL VIDEO
-===================================================== */
+return pages[index];
 
-setTimeout(() => {
-
-  startCurrentVideo();
-
-},300);
+}
 
 
-/* =====================================================
-   FINAL PRIVATE ACCESS
-===================================================== */
+/* =========================================
+   STOP VIDEOS
+========================================= */
 
-let finalOpened = false;
+function stopOtherVideos(current){
 
-let finalTimer = null;
+videos.forEach(video=>{
+
+if(video!==current){
+video.pause();
+}
+
+});
+
+}
+
+
+/* =========================================
+   PLAY CURRENT VIDEO
+========================================= */
+
+function playCurrentVideo(){
+
+const page=
+getCurrentPage();
+
+if(!page){
+return;
+}
+
+const video=
+page.querySelector("video");
+
+if(!video){
+
+stopOtherVideos(null);
+
+activeVideo=null;
+
+return;
+
+}
+
+stopOtherVideos(video);
+
+activeVideo=video;
 
 
 /*
-   Watch the final page without controlling
-   scrolling.
+  ORIGINAL FISSHHFILET BEHAVIOR:
+
+  Every swipe onto a video
+  starts that video from the beginning.
 */
 
-function checkFinalPage(){
-
-  const page =
-    currentPage();
-
-
-  if(page !== finalPage){
-
-    return;
-
-  }
+try{
+video.currentTime=0;
+}catch(e){}
 
 
-  if(finalOpened){
-
-    return;
-
-  }
-
-
-  finalOpened = true;
-
-
-  /*
-    Show private access immediately.
-  */
-
-  finalPage
-    .querySelector(".private-access")
-    .classList.add("show");
-
-
-  /*
-    Hold the black/private-access moment
-    for approximately 3.5 seconds.
-  */
-
-  finalTimer =
-    setTimeout(() => {
-
-      finalPage.classList.add(
-        "open"
-      );
-
-
-      /*
-        Give the door time to open.
-      */
-
-      setTimeout(() => {
-
-        const access =
-          finalPage.querySelector(
-            ".private-access"
-          );
-
-        if(access){
-
-          access.classList.remove(
-            "show"
-          );
-
-        }
-
-      },1100);
-
-    },3500);
+video.play().catch(()=>{});
 
 }
 
 
-/* =====================================================
-   FINAL PAGE CHECK
-===================================================== */
+/* =========================================
+   SCROLL SETTLE
+========================================= */
 
 viewport.addEventListener(
-  "scroll",
-  () => {
+"scroll",
+()=>{
 
-    clearTimeout(
-      viewport._finalTimer
-    );
+clearTimeout(scrollTimer);
 
+scrollTimer=
+setTimeout(()=>{
 
-    viewport._finalTimer =
-      setTimeout(
-        checkFinalPage,
-        260
-      );
+playCurrentVideo();
 
-  },
-  {
-    passive:true
-  }
+checkFinalPage();
+
+},220);
+
+},
+{
+passive:true
+}
 );
 
 
-/* =====================================================
+/* =========================================
+   START FIRST PAGE
+========================================= */
+
+setTimeout(()=>{
+
+playCurrentVideo();
+
+},350);
+
+
+/* =========================================
+   FINAL PRIVATE ACCESS SEQUENCE
+========================================= */
+
+let finalSequenceStarted=false;
+
+
+/* =========================================
+   CHECK FINAL PAGE
+========================================= */
+
+function checkFinalPage(){
+
+const page=
+getCurrentPage();
+
+if(page!==finalPage){
+
+return;
+
+}
+
+if(finalSequenceStarted){
+
+return;
+
+}
+
+finalSequenceStarted=true;
+
+
+/*
+  IMPORTANT:
+
+  The FINAL VIDEO is underneath.
+
+  The black private-access layer
+  is simply hiding it temporarily.
+*/
+
+
+const screen=
+finalPage.querySelector(
+".private-screen"
+);
+
+
+/*
+  Fade in the private access.
+*/
+
+requestAnimationFrame(()=>{
+
+screen.classList.add(
+"visible"
+);
+
+});
+
+
+/*
+  3.5 SECOND PRIVATE ACCESS MOMENT.
+*/
+
+setTimeout(()=>{
+
+/*
+  First fade the text away.
+*/
+
+screen.classList.remove(
+"visible"
+);
+
+
+/*
+  Then open the doors.
+*/
+
+setTimeout(()=>{
+
+finalPage.classList.add(
+"doors-open"
+);
+
+
+/*
+  Start/reveal the final video.
+*/
+
+const video=
+finalPage.querySelector(
+"video"
+);
+
+if(video){
+
+try{
+video.currentTime=0;
+}catch(e){}
+
+video.play().catch(()=>{});
+
+}
+
+},1000);
+
+},3500);
+
+}
+
+
+/* =========================================
+   RESET FINAL ACCESS IF USER LEAVES
+========================================= */
+
+function resetFinalAccess(){
+
+if(
+getCurrentPage()!==finalPage
+){
+
+finalSequenceStarted=false;
+
+finalPage.classList.remove(
+"doors-open"
+);
+
+const screen=
+finalPage.querySelector(
+".private-screen"
+);
+
+screen.classList.remove(
+"visible"
+);
+
+}
+
+}
+
+
+/* =========================================
    VISIBILITY
-===================================================== */
+========================================= */
 
 document.addEventListener(
-  "visibilitychange",
-  () => {
+"visibilitychange",
+()=>{
 
-    if(document.hidden){
+if(document.hidden){
 
-      videos.forEach(video => {
+videos.forEach(video=>{
+video.pause();
+});
 
-        video.pause();
+return;
 
-      });
-
-      return;
-
-    }
+}
 
 
-    /*
-      When returning to the site,
-      start the current page again.
+/*
+  Returning to the site:
 
-      This intentionally returns video
-      pages to their beginning.
-    */
+  Start the current video
+  from the beginning,
+  matching the original behavior.
+*/
 
-    setTimeout(() => {
+setTimeout(()=>{
 
-      startCurrentVideo();
+playCurrentVideo();
 
-    },150);
+},150);
 
-  }
+}
 );
 
 
-/* =====================================================
-   EXTERNAL WHOLE-PAGE LINKS
-===================================================== */
+/* =========================================
+   TOUCH / LINK HANDLING
+========================================= */
 
-let tapX = 0;
-let tapY = 0;
-let tapTime = 0;
+let startX=0;
+let startY=0;
+let startTime=0;
 
 
 viewport.addEventListener(
-  "touchstart",
-  event => {
+"touchstart",
+event=>{
 
-    const t =
-      event.touches[0];
+const touch=
+event.touches[0];
 
-    tapX =
-      t.clientX;
+startX=
+touch.clientX;
 
-    tapY =
-      t.clientY;
+startY=
+touch.clientY;
 
-    tapTime =
-      Date.now();
+startTime=
+Date.now();
 
-  },
-  {
-    passive:true
-  }
+},
+{
+passive:true
+}
 );
 
 
 viewport.addEventListener(
-  "touchend",
-  event => {
+"touchend",
+event=>{
 
-    const t =
-      event.changedTouches[0];
+const touch=
+event.changedTouches[0];
 
+const dx=
+Math.abs(
+touch.clientX-startX
+);
 
-    const dx =
-      Math.abs(
-        t.clientX - tapX
-      );
+const dy=
+Math.abs(
+touch.clientY-startY
+);
 
-
-    const dy =
-      Math.abs(
-        t.clientY - tapY
-      );
-
-
-    const duration =
-      Date.now() - tapTime;
+const duration=
+Date.now()-startTime;
 
 
-    /*
-      Moving finger = swipe.
+/*
+  Swipe = do absolutely nothing.
+*/
 
-      NEVER open a link.
-    */
+if(
+dx>15 ||
+dy>15
+){
 
-    if(
-      dx > 15 ||
-      dy > 15
-    ){
+return;
 
-      return;
-
-    }
+}
 
 
-    /*
-      Long press = not tap.
-    */
+/*
+  Long press = do nothing.
+*/
 
-    if(duration > 400){
+if(duration>400){
 
-      return;
+return;
 
-    }
-
-
-    /*
-      Real anchor handles itself.
-    */
-
-    if(
-      event.target.closest("a")
-    ){
-
-      return;
-
-    }
+}
 
 
-    const page =
-      event.target.closest(".page");
+/*
+  Existing anchor.
+*/
+
+if(
+event.target.closest("a")
+){
+
+return;
+
+}
 
 
-    if(!page){
-      return;
-    }
+const page=
+event.target.closest(".page");
+
+if(!page){
+return;
+}
 
 
-    const link =
-      page.dataset.link;
+const link=
+page.dataset.link;
 
+if(link){
 
-    if(link){
+window.open(
+link,
+"_blank",
+"noopener,noreferrer"
+);
 
-      window.open(
-        link,
-        "_blank",
-        "noopener,noreferrer"
-      );
+}
 
-    }
-
-  },
-  {
-    passive:true
-  }
+},
+{
+passive:true
+}
 );
 
 
-/* =====================================================
-   IMAGE DRAG
-===================================================== */
+/* =========================================
+   IMAGE DRAG PROTECTION
+========================================= */
 
 document
-  .querySelectorAll("img")
-  .forEach(img => {
+.querySelectorAll("img")
+.forEach(img=>{
 
-    img.addEventListener(
-      "dragstart",
-      event => {
+img.addEventListener(
+"dragstart",
+event=>{
+event.preventDefault();
+}
+);
 
-        event.preventDefault();
-
-      }
-    );
-
-  });
+});
 
 
-/* =====================================================
-   VIDEO SETTINGS
-===================================================== */
+/* =========================================
+   VIDEO CONTROLS OFF
+========================================= */
 
-videos.forEach(video => {
+videos.forEach(video=>{
 
-  video.controls = false;
+video.controls=false;
 
-
-  video.addEventListener(
-    "contextmenu",
-    event => {
-
-      event.preventDefault();
-
-    }
-  );
+video.addEventListener(
+"contextmenu",
+event=>{
+event.preventDefault();
+}
+);
 
 });
 
