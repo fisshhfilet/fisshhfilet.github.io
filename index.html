@@ -10,22 +10,22 @@ html,body{width:100%;height:100%;background:#000;overscroll-behavior:none}
 body{font-family:"Courier New",Courier,monospace;overflow:hidden;-webkit-font-smoothing:antialiased;touch-action:pan-y}
 #feed{width:100vw;height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;background:#000;overscroll-behavior:contain}
 .page{position:relative;width:100vw;height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden;transform:translateZ(0)}
-.page img,.page video{width:100%;height:100%;object-fit:contain;background:#000;display:block;pointer-events:none}
+.page img,.page video{width:100%;height:100%;object-fit:contain;background:#000;display:block}
 .shop-page{background:#fff;padding:0;overflow:hidden}
 #shopFrame{width:100%;height:100%;border:0;display:block;background:#fff}
 #opening{position:fixed;inset:0;z-index:9999;background:#000;display:flex;align-items:center;justify-content:center;pointer-events:none}
 #opening span{color:#d6d6d6;font-size:11px;letter-spacing:0.22em;opacity:0;text-transform:lowercase}
 #opening.go span{animation:oi 0.6s ease forwards 0.15s,oo 0.5s ease forwards 1.25s}
 @keyframes oi{from{opacity:0}to{opacity:0.9}}@keyframes oo{from{opacity:0.9}to{opacity:0}}
-.tap-btn{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:6;background:rgba(0,0,0,0.85);color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:999px;padding:10px 18px;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;opacity:0;pointer-events:none;transition:opacity 0.3s}
-.page.settled.tap-btn{opacity:1;pointer-events:auto}
+.tap{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);z-index:6;background:rgba(0,0,0,0.9);color:#fff;border:1px solid rgba(255,255,255,0.18);border-radius:999px;padding:10px 18px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;opacity:0;pointer-events:none;transition:opacity 0.28s ease}
+.page.settled.tap{opacity:1;pointer-events:auto}
 #finalPage video#gomfVideo{position:absolute;inset:0;z-index:1}
 #doors{position:absolute;inset:0;z-index:2;display:flex;pointer-events:none}
 .door{width:50.1%;height:100%;background:#000;transition:transform 1.55s cubic-bezier(0.77,0,0.175,1)}
 #doors.open.door-left{transform:translateX(-100%)}
 #doors.open.door-right{transform:translateX(100%)}
 #privateOverlay{position:absolute;inset:0;z-index:3;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.7s}
-#privateOverlay.hide{opacity:0}
+#privateOverlay.hide{opacity:0;pointer-events:none}
 .pa-line{opacity:0;transition:opacity 0.9s;text-align:center;line-height:1}
 .pa-line.show{opacity:1}
 #pa-fisshh{color:#d6d6d6;font-size:11px;letter-spacing:0.22em;margin-bottom:18px}
@@ -36,17 +36,17 @@ body{font-family:"Courier New",Courier,monospace;overflow:hidden;-webkit-font-sm
 <body>
 <div id="opening"><span>@fisshhfilet</span></div>
 <div id="feed">
-<section class="page"><img src="betty.jpg" loading="eager"><a class="tap-btn" href="https://www.instagram.com/club52vogue.shop/" target="_blank">shop @ club52vogue.shop →</a></section>
-<section class="page"><img src="waista.jpg" loading="eager"><a class="tap-btn" href="https://www.instagram.com/club52vogue.shop/" target="_blank">shop @ club52vogue.shop →</a></section>
-<section class="page"><img src="restocking-fisshhfilet.jpg" loading="eager"><a class="tap-btn" href="https://www.instagram.com/club52vogue.shop/" target="_blank">DM waitlist →</a></section>
-<section class="page" data-video><video src="Sephora.mp4" playsinline muted loop preload="metadata"></video><a class="tap-btn" href="https://www.instagram.com/club52vogue.shop/" target="_blank">shop @ club52vogue.shop →</a></section>
-<section class="page"><img src="HAKRs.jpg" loading="lazy" alt="HAKRs QR"><a class="tap-btn" href="https://www.instagram.com/club52vogue.shop/" target="_blank">scan → club52vogue.shop</a></section>
-<section class="page"><img src="hakrs-pier-flip-clean.jpg" loading="lazy" alt="HAKRs Pier Flip"><a class="tap-btn" href="https://www.instagram.com/club52vogue.shop/" target="_blank">shop the flip $312 →</a></section>
-<section class="page shop-page" id="shopPage"><iframe id="shopFrame" src="shop.html?v=5" loading="lazy"></iframe></section>
-<section class="page"><img src="adults-only.jpg" loading="lazy"><a class="tap-btn" href="https://www.instagram.com/club52vogue.shop/" target="_blank">adults only →</a></section>
-<section class="page"><img src="mc.jpg" loading="lazy"><a class="tap-btn" href="https://www.instagram.com/club52vogue.shop/" target="_blank">club52vogue.shop →</a></section>
-<section class="page"><img src="kalshi.jpg" loading="lazy"><a class="tap-btn" href="https://kalshi.com" target="_blank">kalshi.com →</a></section>
-<section class="page"><img src="boatbear.jpg" loading="lazy"><a class="tap-btn" href="https://naturalcatchtuna.com/" target="_blank">shop boatbear →</a></section>
+<section class="page"><img src="betty.jpg" loading="eager"><a class="tap" href="https://www.instagram.com/club52vogue.shop/" target="_blank">shop → club52vogue.shop</a></section>
+<section class="page"><img src="waista.jpg" loading="eager"><a class="tap" href="https://www.instagram.com/club52vogue.shop/" target="_blank">shop → club52vogue.shop</a></section>
+<section class="page"><img src="restocking-fisshhfilet.jpg" loading="eager"><a class="tap" href="https://www.instagram.com/club52vogue.shop/" target="_blank">DM waitlist →</a></section>
+<section class="page" data-video><video src="Sephora.mp4" playsinline muted loop preload="metadata"></video><a class="tap" href="https://www.instagram.com/club52vogue.shop/" target="_blank">shop → club52vogue.shop</a></section>
+<section class="page"><img src="HAKRs.jpg" loading="lazy"><a class="tap" href="https://www.instagram.com/club52vogue.shop/" target="_blank">scan → club52vogue.shop</a></section>
+<section class="page"><img src="hakrs-pier-flip-clean.jpg" loading="lazy"><a class="tap" href="https://www.instagram.com/club52vogue.shop/" target="_blank">shop flip $312 →</a></section>
+<section class="page shop-page"><iframe id="shopFrame" src="shop.html?v=7" loading="lazy"></iframe></section>
+<section class="page"><img src="adults-only.jpg" loading="lazy"><a class="tap" href="https://www.instagram.com/club52vogue.shop/" target="_blank">adults only →</a></section>
+<section class="page"><img src="mc.jpg" loading="lazy"><a class="tap" href="https://www.instagram.com/club52vogue.shop/" target="_blank">club52vogue.shop →</a></section>
+<section class="page"><img src="kalshi.jpg" loading="lazy"><a class="tap" href="https://kalshi.com" target="_blank">kalshi.com →</a></section>
+<section class="page"><img src="boatbear.jpg" loading="lazy"><a class="tap" href="https://naturalcatchtuna.com/" target="_blank">boatbear →</a></section>
 <section class="page" id="finalPage" data-video>
 <video id="gomfVideo" src="GOMF.mp4" playsinline muted loop preload="metadata"></video>
 <div id="doors"><div class="door door-left"></div><div class="door door-right"></div></div>
@@ -55,13 +55,16 @@ body{font-family:"Courier New",Courier,monospace;overflow:hidden;-webkit-font-sm
 </div>
 <script>
 (function(){
-const feed=document.getElementById('feed'),pages=[...document.querySelectorAll('.page')],opening=document.getElementById('opening'),allVideos=[...document.querySelectorAll('video')];
-requestAnimationFrame(()=>{opening.classList.add('go');setTimeout(()=>opening.style.display='none',2000)});
+const feed=document.getElementById('feed');
+const pages=[...document.querySelectorAll('.page')];
+const opening=document.getElementById('opening');
+const allVideos=[...document.querySelectorAll('video')];
+requestAnimationFrame(()=>{opening.classList.add('go');setTimeout(()=>{opening.style.display='none'},2100)});
 let finalTimers=[],finalState='idle';
 const privateOverlay=document.getElementById('privateOverlay'),doors=document.getElementById('doors'),paFisshh=document.getElementById('pa-fisshh'),paPrivate=document.getElementById('pa-private'),paMembers=document.getElementById('pa-members'),gomfVideo=document.getElementById('gomfVideo');
 function clearFinal(){finalTimers.forEach(t=>clearTimeout(t));finalTimers=[]}
 function resetFinal(){clearFinal();finalState='idle';privateOverlay.classList.remove('hide');doors.classList.remove('open');paFisshh.classList.remove('show');paPrivate.classList.remove('show');paMembers.classList.remove('show');doors.style.transition='none';void doors.offsetWidth;doors.style.transition='';try{gomfVideo.pause();gomfVideo.currentTime=0}catch(e){}}
-function startFinal(){if(finalState!=='idle')return;resetFinal();finalState='running';finalTimers.push(setTimeout(()=>paFisshh.classList.add('show'),500));finalTimers.push(setTimeout(()=>paPrivate.classList.add('show'),1000));finalTimers.push(setTimeout(()=>paMembers.classList.add('show'),1500));finalTimers.push(setTimeout(()=>{paFisshh.style.transition=paPrivate.style.transition=paMembers.style.transition='opacity 0.6s ease';paFisshh.classList.remove('show');paPrivate.classList.remove('show');paMembers.classList.remove('show');finalTimers.push(setTimeout(()=>{privateOverlay.classList.add('hide');finalState='doorsOpening';finalTimers.push(setTimeout(()=>{doors.classList.add('open');finalTimers.push(setTimeout(()=>{finalState='revealed';try{gomfVideo.currentTime=0;gomfVideo.muted=true;gomfVideo.play().catch(()=>{})}catch(e){}},1550))},200))},650))},5000))}
+function startFinal(){if(finalState!=='idle')return;resetFinal();finalState='running';finalTimers.push(setTimeout(()=>paFisshh.classList.add('show'),400));finalTimers.push(setTimeout(()=>paPrivate.classList.add('show'),900));finalTimers.push(setTimeout(()=>paMembers.classList.add('show'),1400));finalTimers.push(setTimeout(()=>{paFisshh.style.transition=paPrivate.style.transition=paMembers.style.transition='opacity 0.6s ease';paFisshh.classList.remove('show');paPrivate.classList.remove('show');paMembers.classList.remove('show');finalTimers.push(setTimeout(()=>{privateOverlay.classList.add('hide');finalState='doorsOpening';finalTimers.push(setTimeout(()=>{doors.classList.add('open');finalTimers.push(setTimeout(()=>{finalState='revealed';try{gomfVideo.currentTime=0;gomfVideo.muted=true;gomfVideo.play().catch(()=>{})}catch(e){}},1550))},200))},650))},4800))}
 function pauseAll(){allVideos.forEach(v=>{try{v.pause()}catch(e){}})}
 function playFrom0(v){if(!v)return;try{v.pause();v.currentTime=0;v.muted=true;v.play().catch(()=>{})}catch(e){}}
 function settledIdx(){return Math.max(0,Math.min(Math.round(feed.scrollTop/(window.innerHeight||800)),pages.length-1))}
@@ -77,7 +80,7 @@ function onSettled(i){
  const pg=pages[i];
  if(pg&&pg.hasAttribute('data-video')){
   const vid=pg.querySelector('video');
-  setTimeout(()=>{if(settledIdx()!==i)return;playFrom0(vid)},120)
+  setTimeout(()=>{if(settledIdx()!==i)return;playFrom0(vid)},100)
  }
 }
 feed.addEventListener('scroll',()=>{
@@ -85,8 +88,8 @@ feed.addEventListener('scroll',()=>{
  pages.forEach(p=>p.classList.remove('settled'));
  scrollTimer=setTimeout(()=>onSettled(settledIdx()),150);
 },{passive:true});
-setTimeout(()=>onSettled(settledIdx()),2200);
-allVideos.forEach(v=>{v.muted=true;v.playsInline=true;v.preload='metadata'});
+setTimeout(()=>onSettled(settledIdx()),2400);
+allVideos.forEach(v=>{v.muted=true;v.playsInline=true;});
 })();
 </script>
 </body>
