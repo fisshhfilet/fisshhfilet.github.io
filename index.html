@@ -2,73 +2,79 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
-<meta name="theme-color" content="#000000">
+<meta name="viewport" content="width=device-width, initial-scale=1,viewport-fit=cover">
 <title>@fisshhfilet</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--app-height:100dvh}
-@supports not (height:100dvh){:root{--app-height:100vh}}
 html,body{width:100%;height:100%;background:#000;overscroll-behavior:none}
-body{min-height:var(--app-height);font-family:"Courier New",Courier,monospace;overflow:hidden;-webkit-font-smoothing:antialiased}
-#feed{width:100vw;height:var(--app-height);overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;background:#000}
-.page{position:relative;width:100vw;height:var(--app-height);scroll-snap-align:start;scroll-snap-stop:always;background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden}
+body{font-family:"Courier New",Courier,monospace;overflow:hidden;-webkit-font-smoothing:antialiased}
+#feed{width:100vw;height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;background:#000}
+.page{position:relative;width:100vw;height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .page img,.page video{width:100%;height:100%;object-fit:contain;background:#000;display:block}
 .hotlink{position:absolute;inset:0;z-index:5;display:block}
-#opening{position:fixed;inset:0;z-index:9999;background:#000;display:flex;align-items:center;justify-content:center;pointer-events:none}
-#opening span{color:#d6d6d6;font-size:11px;letter-spacing:0.22em;opacity:0;text-transform:lowercase}
-#opening.go span{animation:oi 0.6s ease forwards 0.15s,oo 0.5s ease forwards 1.25s}
+#shopPage{background:#fff;padding:0;overflow:hidden}
+#shopFrame{width:100%;height:100%;border:0;display:block;background:#fff}
+#original-opening{position:fixed;inset:0;z-index:9999;background:#000;display:flex;align-items:center;justify-content:center;pointer-events:none}
+#original-opening span{color:#d6d6d6;font-size:11px;letter-spacing:0.22em;opacity:0;text-transform:lowercase}
+#original-opening.go span{animation:oi 0.6s ease forwards 0.15s,oo 0.5s ease forwards 1.25s}
 @keyframes oi{from{opacity:0}to{opacity:0.9}}@keyframes oo{from{opacity:0.9}to{opacity:0}}
-#finalPage{background:#000}
-#finalPage video#gomfVideo{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:contain}
+#finalPage video#gomfVideo{position:absolute;inset:0;z-index:1}
 #doors{position:absolute;inset:0;z-index:2;display:flex;pointer-events:none}
 .door{width:50.1%;height:100%;background:#000;will-change:transform;transition:transform 1.55s cubic-bezier(0.77,0,0.175,1)}
+.door-left{transform:translateX(0)}.door-right{transform:translateX(0)}
 #doors.open.door-left{transform:translateX(-100%)}
 #doors.open.door-right{transform:translateX(100%)}
-#overlay{position:absolute;inset:0;z-index:3;background:#000;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 0.7s;pointer-events:none}
-#overlay.hide{opacity:0}
-.line{opacity:0;transition:opacity 0.9s;text-align:center;line-height:1}
-.line.show{opacity:1}
-#l1{color:#d6d6d6;font-size:11px;letter-spacing:0.22em;margin-bottom:18px}
-#l2{color:#2d6a4f;font-size:12px;letter-spacing:0.32em;margin-bottom:22px}
-#l3{color:#3a3a3a;font-size:9px;letter-spacing:0.28em}
+#privateOverlay{position:absolute;inset:0;z-index:3;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.7s}
+#privateOverlay.hide{opacity:0}
+.pa-line{opacity:0;transition:opacity 0.9s;text-align:center;line-height:1}
+.pa-line.show{opacity:1}
+#pa-fisshh{color:#d6d6d6;font-size:11px;letter-spacing:0.22em;margin-bottom:18px}
+#pa-private{color:#2d6a4f;font-size:12px;letter-spacing:0.32em;margin-bottom:22px}
+#pa-members{color:#3a3a3a;font-size:9px;letter-spacing:0.28em}
 </style>
 </head>
 <body>
-<div id="opening"><span>@fisshhfilet</span></div>
+<div id="original-opening"><span>@fisshhfilet</span></div>
 <div id="feed">
-<section class="page"><img src="betty.jpg" alt=""><a class="hotlink" href="https://www.instagram.com/club52vogue.shop/" target="_blank"></a></section>
-<section class="page"><img src="waista.jpg" alt=""><a class="hotlink" href="https://www.instagram.com/club52vogue.shop/" target="_blank"></a></section>
-<section class="page"><img src="restocking-fisshhfilet.jpg" alt=""><a class="hotlink" href="https://www.instagram.com/club52vogue.shop/" target="_blank"></a></section>
-<section class="page" data-video><video src="Sephora.mp4" playsinline muted loop preload="auto"></video><a class="hotlink" href="https://www.instagram.com/club52vogue.shop/" target="_blank"></a></section>
-<section class="page"><img src="adults-only.jpg" alt=""><a class="hotlink" href="https://www.instagram.com/club52vogue.shop/" target="_blank"></a></section>
-<section class="page" data-video><video src="RHUDE.mp4" playsinline muted loop preload="auto"></video><a class="hotlink" href="https://www.instagram.com/club52vogue.shop/" target="_blank"></a></section>
-<section class="page"><img src="mc.jpg" alt=""><a class="hotlink" href="https://www.instagram.com/club52vogue.shop/" target="_blank"></a></section>
-<section class="page" data-video><video src="liquid.mp4" playsinline muted loop preload="auto"></video><a class="hotlink" href="https://www.liquid-iv.com" target="_blank"></a></section>
-<section class="page"><img src="kalshi.jpg" alt=""><a class="hotlink" href="https://kalshi.com" target="_blank"></a></section>
-<section class="page"><img src="boatbear.jpg" alt=""><a class="hotlink" href="https://naturalcatchtuna.com/" target="_blank"></a></section>
+<section class="page"><img src="HAKRs.jpg" loading="eager" alt="HAKRs QR"><a class="hotlink" data-ig="1" href="#"></a></section>
+<section class="page"><img src="hakrs-pier-flip-clean.jpg" loading="eager" alt="HAKRs Pier Flip $312"><a class="hotlink" data-ig="1" href="#"></a></section>
+<section class="page"><img src="betty.jpg"><a class="hotlink" data-ig="1" href="#" target="_blank"></a></section>
+<section class="page"><img src="waista.jpg"><a class="hotlink" data-ig="1" href="#" target="_blank"></a></section>
+<section class="page"><img src="restocking-fisshhfilet.jpg"><a class="hotlink" data-ig="1" href="#" target="_blank"></a></section>
+<section class="page" data-video><video src="Sephora.mp4" playsinline muted loop preload="auto" disablepictureinpicture controlslist="nodownload"></video><a class="hotlink" data-ig="1" href="#" target="_blank"></a></section>
+<section class="page" id="shopPage"><iframe id="shopFrame" src="shop.html" loading="lazy"></iframe></section>
+<section class="page"><img src="adults-only.jpg"><a class="hotlink" data-ig="1" href="#" target="_blank"></a></section>
+<section class="page"><img src="mc.jpg"><a class="hotlink" data-ig="1" href="#" target="_blank"></a></section>
+<section class="page"><img src="kalshi.jpg"><a class="hotlink" data-kal="1" href="#" target="_blank"></a></section>
+<section class="page"><img src="boatbear.jpg"><a class="hotlink" data-tuna="1" href="#" target="_blank"></a></section>
 <section class="page" id="finalPage" data-video>
-<video id="gomfVideo" src="GOMF.mp4" playsinline muted loop preload="auto"></video>
+<video id="gomfVideo" src="GOMF.mp4" playsinline muted loop preload="auto" disablepictureinpicture></video>
 <div id="doors"><div class="door door-left"></div><div class="door door-right"></div></div>
-<div id="overlay"><div id="l1" class="line">@fisshhfilet</div><div id="l2" class="line">PRIVATE ACCESS</div><div id="l3" class="line">MEMBERS ONLY</div></div>
-<a class="hotlink" id="finalLink" href="https://www.instagram.com/club52vogue.shop/" target="_blank" style="z-index:4;pointer-events:none"></a>
+<div id="privateOverlay"><div id="pa-fisshh" class="pa-line">@fisshhfilet</div><div id="pa-private" class="pa-line">PRIVATE ACCESS</div><div id="pa-members" class="pa-line">MEMBERS ONLY</div></div>
+<a class="hotlink" id="finalHotlink" data-ig="1" href="#" style="pointer-events:none"></a>
 </section>
 </div>
 <script>
 (function(){
-const feed=document.getElementById('feed'),pages=[...document.querySelectorAll('.page')],opening=document.getElementById('opening'),allVideos=[...document.querySelectorAll('video')];
+const IG="https://www.instagram.com/club52vogue.shop/";
+const KAL="https://kalshi.com";
+const TUNA="https://naturalcatchtuna.com/";
+document.querySelectorAll('[data-ig]').forEach(a=>a.href=IG);
+document.querySelectorAll('[data-kal]').forEach(a=>a.href=KAL);
+document.querySelectorAll('[data-tuna]').forEach(a=>a.href=TUNA);
+const feed=document.getElementById('feed'),pages=[...document.querySelectorAll('.page')],opening=document.getElementById('original-opening'),allVideos=[...document.querySelectorAll('video')];
 requestAnimationFrame(()=>{opening.classList.add('go');setTimeout(()=>opening.style.display='none',2000)});
-let timers=[],state='idle';
-const overlay=document.getElementById('overlay'),doors=document.getElementById('doors'),l1=document.getElementById('l1'),l2=document.getElementById('l2'),l3=document.getElementById('l3'),finalLink=document.getElementById('finalLink'),gomf=document.getElementById('gomfVideo');
-function clear(){timers.forEach(t=>clearTimeout(t));timers=[]}
-function reset(){clear();state='idle';overlay.classList.remove('hide');doors.classList.remove('open');l1.classList.remove('show');l2.classList.remove('show');l3.classList.remove('show');doors.style.transition='none';void doors.offsetWidth;doors.style.transition='';try{gomf.pause();gomf.currentTime=0}catch(e){}finalLink.style.pointerEvents='none'}
-function start(){if(state!='idle')return;reset();state='running';timers.push(setTimeout(()=>l1.classList.add('show'),200));timers.push(setTimeout(()=>l2.classList.add('show'),600));timers.push(setTimeout(()=>l3.classList.add('show'),950));timers.push(setTimeout(()=>{l1.style.transition=l2.style.transition=l3.style.transition='opacity 0.6s ease';l1.classList.remove('show');l2.classList.remove('show');l3.classList.remove('show');timers.push(setTimeout(()=>{overlay.classList.add('hide');state='doorsOpening';timers.push(setTimeout(()=>{doors.classList.add('open');timers.push(setTimeout(()=>{state='revealed';try{gomf.currentTime=0;gomf.muted=true;gomf.play().catch(()=>{})}catch(e){}finalLink.style.pointerEvents='auto'},1550))},200))},650))},2800))}
+let finalTimers=[],finalState='idle';
+const privateOverlay=document.getElementById('privateOverlay'),doors=document.getElementById('doors'),paFisshh=document.getElementById('pa-fisshh'),paPrivate=document.getElementById('pa-private'),paMembers=document.getElementById('pa-members'),finalHotlink=document.getElementById('finalHotlink'),gomfVideo=document.getElementById('gomfVideo');
+function clearFinal(){finalTimers.forEach(t=>clearTimeout(t));finalTimers=[]}
+function resetFinal(){clearFinal();finalState='idle';privateOverlay.classList.remove('hide');doors.classList.remove('open');paFisshh.classList.remove('show');paPrivate.classList.remove('show');paMembers.classList.remove('show');doors.style.transition='none';void doors.offsetWidth;doors.style.transition='';try{gomfVideo.pause();gomfVideo.currentTime=0}catch(e){}finalHotlink.style.pointerEvents='none';paFisshh.style.transition=paPrivate.style.transition=paMembers.style.transition=''}
+function startFinal(){if(finalState!=='idle')return;resetFinal();finalState='running';finalTimers.push(setTimeout(()=>paFisshh.classList.add('show'),500));finalTimers.push(setTimeout(()=>paPrivate.classList.add('show'),1000));finalTimers.push(setTimeout(()=>paMembers.classList.add('show'),1500));finalTimers.push(setTimeout(()=>{paFisshh.style.transition=paPrivate.style.transition=paMembers.style.transition='opacity 0.6s ease';paFisshh.classList.remove('show');paPrivate.classList.remove('show');paMembers.classList.remove('show');finalTimers.push(setTimeout(()=>{privateOverlay.classList.add('hide');finalState='doorsOpening';finalTimers.push(setTimeout(()=>{doors.classList.add('open');finalTimers.push(setTimeout(()=>{finalState='revealed';try{gomfVideo.currentTime=0;gomfVideo.muted=true;gomfVideo.play().catch(()=>{})}catch(e){}finalHotlink.style.pointerEvents='auto'},1550))},200))},650))},5000))}
 function pauseAll(){allVideos.forEach(v=>{try{v.pause()}catch(e){}})}
-function play0(v){if(!v)return;try{v.pause();v.currentTime=0;v.muted=true;v.play().catch(()=>{})}catch(e){}}
-function idx(){const h=window.innerHeight||800;return Math.max(0,Math.min(Math.round(feed.scrollTop/h),pages.length-1))}
-let last=-1;function settled(i){if(i===last)return;const prev=last;last=i;if(prev===10&&i!==10)reset();pauseAll();if(i===10){start();return}const p=pages[i];if(p&&p.hasAttribute('data-video')){const v=p.querySelector('video');setTimeout(()=>{if(idx()!==i)return;play0(v)},60)}}
-let t=null;feed.addEventListener('scroll',()=>{clearTimeout(t);t=setTimeout(()=>settled(idx()),120)},{passive:true});
-setTimeout(()=>settled(idx()),2100);
+function playFrom0(v){if(!v)return;try{v.pause();v.currentTime=0;v.muted=true;v.play().catch(()=>{})}catch(e){}}
+function settledIdx(){return Math.max(0,Math.min(Math.round(feed.scrollTop/(window.innerHeight||800)),pages.length-1))}
+let last=-1;function onSettled(i){if(i===last)return;const prev=last;last=i;if(prev===11&&i!==11)resetFinal();pauseAll();if(i===11){startFinal();return}const pg=pages[i];if(pg&&pg.hasAttribute('data-video')){const vid=pg.querySelector('video');setTimeout(()=>{if(settledIdx()!==i)return;playFrom0(vid)},60)}}
+let t=null;feed.addEventListener('scroll',()=>{clearTimeout(t);t=setTimeout(()=>onSettled(settledIdx()),120)},{passive:true});
+setTimeout(()=>onSettled(settledIdx()),2100);
 allVideos.forEach(v=>{v.muted=true;v.playsInline=true});
 })();
 </script>
