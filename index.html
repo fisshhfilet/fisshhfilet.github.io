@@ -24,1494 +24,209 @@
 </style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no">
-<title>CLUB52VOGUE.SHOP — Vibe Worlds Lookbook</title>
-
+<title>@fisshhfilet — fisshhfilet.github.io</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html{background:#0a0a0a}
-body{
-  background:#0a0a0a;
-  color:#fff;
-  font-family:Arial,Helvetica,sans-serif;
-  -webkit-font-smoothing:antialiased;
-}
-button,a{font:inherit}
-button{cursor:pointer}
+html,body{background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif;overscroll-behavior:none}
+body{-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-
-:root{
-  --black:#0a0a0a;
-  --white:#fff;
-  --green:#39e66f;
-  --pink:#ff58c8;
-  --blue:#4b8cff;
-  --red:#ff3131;
-  --yellow:#ffe900;
-  --olive:#394126;
-  --cream:#f3ead8;
-  --purple:#c7a4ff;
-}
-
-.app{
-  width:100%;
-  max-width:430px;
-  min-height:100vh;
-  margin:0 auto;
-  background:#0a0a0a;
-  overflow:hidden;
-}
-
-header{
-  padding:18px 16px 8px;
-  border-bottom:2px solid #fff;
-}
-
-.topline{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-}
-
-.brand{
-  font-weight:900;
-  font-size:14px;
-  letter-spacing:-.04em;
-}
-
-.live{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:.12em;
-}
-
-.dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:var(--green);
-  box-shadow:0 0 9px rgba(57,230,111,.7);
-}
-
-.profile{
-  margin-top:10px;
-  display:flex;
-  gap:9px;
-  align-items:center;
-  font-size:9px;
-  font-weight:800;
-  line-height:1.25;
-  text-transform:uppercase;
-}
-
-.profile span{opacity:.58}
-
-.nav{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:5px;
-  margin-top:15px;
-}
-
-.nav a{
-  text-align:center;
-  padding:8px 3px;
-  border:2px solid #fff;
-  border-radius:12px;
-  font-size:8px;
-  font-weight:900;
-}
-
-.nav a:first-child{
-  background:#fff;
-  color:#000;
-}
-
-section{
-  padding:20px 14px 0;
-}
-
-.eyebrow{
-  font-size:9px;
-  font-weight:900;
-  letter-spacing:.18em;
-  opacity:.55;
-  text-transform:uppercase;
-  margin-bottom:6px;
-}
-
-.vibe-title{
-  font-size:38px;
-  line-height:.88;
-  font-weight:1000;
-  letter-spacing:-.07em;
-  text-transform:uppercase;
-}
-
-.vibe-title span{
-  display:inline-block;
-  color:#fff;
-  background:#000;
-  padding:3px 8px 7px;
-  border-radius:4px;
-}
-
-.vibe-sub{
-  margin-top:12px;
-  font-size:10px;
-  line-height:1.4;
-  font-weight:700;
-  max-width:370px;
-}
-
-.pill{
-  display:inline-block;
-  margin-top:12px;
-  padding:7px 11px;
-  border:2px solid #fff;
-  border-radius:999px;
-  font-size:9px;
-  font-weight:900;
-}
-
-.hero-profile{
-  margin-top:13px;
-  border:2px solid #fff;
-  border-radius:24px;
-  padding:12px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  background:#111;
-}
-
-.avatar{
-  width:62px;
-  height:62px;
-  flex:none;
-  border-radius:50%;
-  background:
-    radial-gradient(circle at 35% 30%,#ff5bba 0 13%,transparent 14%),
-    radial-gradient(circle at 70% 65%,#ffe900 0 15%,transparent 16%),
-    linear-gradient(135deg,#633cff,#ff6f91 50%,#32d5b1);
-  border:2px solid #fff;
-}
-
-.hero-profile strong{
-  display:block;
-  font-size:12px;
-  line-height:1.1;
-  margin-bottom:5px;
-}
-
-.hero-profile p{
-  font-size:9px;
-  line-height:1.4;
-  color:#ddd;
-}
-
-.toggle{
-  margin-top:20px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  border:2px solid #fff;
-  border-radius:18px;
-  overflow:hidden;
-}
-
-.toggle button{
-  border:0;
-  background:#111;
-  color:#fff;
-  min-height:55px;
-  font-size:9px;
-  font-weight:1000;
-  letter-spacing:.04em;
-}
-
-.toggle button.active{
-  background:#fff;
-  color:#000;
-}
-
-.toggle small{
-  display:block;
-  margin-top:4px;
-  font-size:7px;
-  opacity:.55;
-}
-
-.world-meta{
-  margin:11px 1px 0;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:8px;
-}
-
-.world-meta .green{
-  color:var(--green);
-  font-size:8px;
-  font-weight:900;
-  letter-spacing:.08em;
-}
-
-.counter{
-  font-size:9px;
-  font-weight:900;
-}
-
-.logo52{
-  margin:18px 0 2px;
-  text-align:center;
-  font-size:25px;
-  font-weight:1000;
-  letter-spacing:-.1em;
-}
-
-.logo52 span{
-  font-size:8px;
-  letter-spacing:.18em;
-  display:block;
-  margin-top:-1px;
-  opacity:.55;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:13px;
-}
-
-.card{
-  position:relative;
-  min-width:0;
-  perspective:900px;
-}
-
-.card-inner{
-  position:relative;
-  width:100%;
-  min-height:265px;
-  transform-style:preserve-3d;
-  transition:transform .55s cubic-bezier(.2,.8,.2,1);
-}
-
-.card.flipped .card-inner{
-  transform:rotateY(180deg);
-}
-
-.face{
-  position:absolute;
-  inset:0;
-  backface-visibility:hidden;
-  -webkit-backface-visibility:hidden;
-  border:2px solid #000;
-  border-radius:24px;
-  overflow:hidden;
-  color:#000;
-  display:flex;
-  flex-direction:column;
-}
-
-.back{
-  transform:rotateY(180deg);
-  padding:14px;
-  justify-content:space-between;
-  background:#fff;
-}
-
-.front{
-  padding:12px;
-  justify-content:space-between;
-}
-
-.black{background:#111;color:#fff;border-color:#000}
-.pink{background:var(--pink)}
-.blue{background:var(--blue)}
-.red{background:var(--red)}
-.yellow{background:var(--yellow)}
-.white{background:#fff}
-.cream{background:var(--cream)}
-.olive{background:var(--olive);color:#fff}
-.neon{background:#67ff00}
-
-.art{
-  flex:1;
-  min-height:120px;
-  border-radius:17px;
-  margin-bottom:8px;
-  position:relative;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:42px;
-  font-weight:1000;
-  letter-spacing:-.12em;
-}
-
-.pier-art{
-  background:
-    radial-gradient(circle at 75% 22%,#fff 0 2%,transparent 3%),
-    radial-gradient(circle at 32% 15%,#ff68bd 0 2%,transparent 3%),
-    linear-gradient(180deg,#090909 0 48%,#242c39 49% 100%);
-}
-
-.shark-art{
-  background:linear-gradient(135deg,#0b214b,#4b8cff);
-  color:#fff;
-}
-
-.shark-art:after{
-  content:"◢";
-  font-size:105px;
-  transform:rotate(-20deg);
-  opacity:.92;
-}
-
-.red-art{
-  background:#d51f1f;
-  color:#000;
-}
-
-.red-art:after{
-  content:"JAWS";
-  font-size:30px;
-  font-weight:1000;
-  transform:rotate(-8deg);
-}
-
-.white-art{
-  background:#fff;
-  border:1px solid #ddd;
-}
-
-.white-art:after{
-  content:"• • •";
-  color:#ffd900;
-  font-size:45px;
-  letter-spacing:10px;
-}
-
-.bird-art{
-  background:#f1e7d3;
-}
-
-.bird-art:after{
-  content:"HAKRs";
-  font-size:30px;
-  color:#111;
-  transform:rotate(-10deg);
-}
-
-.velour-art{
-  background:
-    radial-gradient(circle at 30% 20%,#333,transparent 28%),
-    linear-gradient(135deg,#050505,#252525,#070707);
-  color:#fff;
-}
-
-.velour-art:after{
-  content:"HK";
-  font-size:70px;
-  text-shadow:4px 4px 0 #fff;
-}
-
-.pink-art{
-  background:linear-gradient(135deg,#ff70c8,#ffb5e8);
-}
-
-.pink-art:after{
-  content:"HK";
-  font-size:70px;
-  color:#000;
-  transform:rotate(-8deg);
-}
-
-.card h3{
-  font-size:12px;
-  font-weight:1000;
-  line-height:1;
-  letter-spacing:-.03em;
-}
-
-.price{
-  font-size:11px;
-  font-weight:1000;
-  margin-top:5px;
-}
-
-.tags{
-  font-size:7px;
-  font-weight:900;
-  margin-top:7px;
-  line-height:1.4;
-}
-
-.card-note{
-  font-size:8px;
-  font-weight:800;
-  margin-top:5px;
-}
-
-.flip{
-  align-self:flex-end;
-  margin-top:9px;
-  border:2px solid currentColor;
-  background:transparent;
-  border-radius:999px;
-  padding:6px 8px;
-  font-size:7px;
-  font-weight:1000;
-}
-
-.cta{
-  margin-top:10px;
-  width:100%;
-  border:2px solid #000;
-  border-radius:999px;
-  background:#fff;
-  color:#000;
-  padding:9px;
-  font-size:8px;
-  font-weight:1000;
-  text-align:center;
-}
-
-.black .cta{
-  border-color:#fff;
-}
-
-.kalshi{
-  background:#06120b;
-  color:#fff;
-}
-
-.market{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:6px;
-  margin-top:13px;
-}
-
-.market div{
-  padding:8px;
-  border:1px solid #333;
-  border-radius:10px;
-  text-align:center;
-}
-
-.market strong{
-  display:block;
-  font-size:17px;
-  color:var(--green);
-}
-
-.market span{
-  font-size:7px;
-  opacity:.6;
-}
-
-.world-title{
-  margin-top:26px;
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-}
-
-.world-title h2{
-  font-size:19px;
-  font-weight:1000;
-  letter-spacing:-.05em;
-}
-
-.world-title small{
-  font-size:8px;
-  opacity:.5;
-  font-weight:900;
-}
-
-.shop-row{
-  display:flex;
-  gap:10px;
-  overflow-x:auto;
-  padding:13px 1px 4px;
-  scrollbar-width:none;
-}
-
-.shop-row::-webkit-scrollbar{display:none}
-
-.shop-card{
-  flex:0 0 145px;
-  border:2px solid #000;
-  border-radius:20px;
-  padding:12px;
-  background:#ddd;
-  color:#000;
-  min-height:180px;
-}
-
-.shop-card:nth-child(1){background:#77876b}
-.shop-card:nth-child(2){background:#c7a4ff}
-.shop-card:nth-child(3){background:#eadfca}
-
-.shop-card .mini{
-  height:82px;
-  border-radius:13px;
-  background:rgba(255,255,255,.35);
-  margin-bottom:9px;
-}
-
-.shop-card h3{
-  font-size:12px;
-  font-weight:1000;
-}
-
-.shop-card p{
-  font-size:8px;
-  font-weight:800;
-  margin-top:5px;
-}
-
-.pick-grid .card-inner{
-  min-height:225px;
-}
-
-.pick-grid .art{
-  min-height:105px;
-}
-
-.fishy{
-  background:#d92626;
-  color:#fff;
-}
-
-.fishy:after{
-  content:"FISHY";
-  font-size:34px;
-  transform:rotate(-12deg);
-}
-
-.kiss{
-  background:#394126;
-  color:#fff;
-}
-
-.kiss:after{
-  content:"KISS";
-  font-size:38px;
-  color:#f5ead7;
-}
-
-.sea{
-  background:#58bde8;
-  color:#06253a;
-}
-
-.sea:after{
-  content:"SEA";
-  font-size:40px;
-}
-
-.viral{
-  background:#67ff00;
-}
-
-.viral:after{
-  content:"★ ★ ★ ★ ★";
-  font-size:16px;
-  transform:rotate(-7deg);
-}
-
-footer{
-  margin-top:30px;
-  padding:25px 15px 35px;
-  border-top:2px solid #fff;
-}
-
-.footer-title{
-  font-size:12px;
-  font-weight:1000;
-}
-
-.footer-copy{
-  margin-top:9px;
-  font-size:8px;
-  line-height:1.55;
-  color:#aaa;
-}
-
-.footer-links{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  margin-top:15px;
-}
-
-.footer-links a{
-  border:1px solid #555;
-  border-radius:999px;
-  padding:6px 8px;
-  font-size:7px;
-  font-weight:900;
-}
-
-.copyright{
-  margin-top:18px;
-  font-size:7px;
-  letter-spacing:.12em;
-  color:#666;
-}
-
-.hidden{
-  display:none;
-}
-
-@media(max-width:360px){
-  .grid{gap:7px}
-  .card-inner{min-height:245px}
-  .vibe-title{font-size:34px}
-}
-
+.app{max-width:430px;margin:0 auto;min-height:100vh;background:#000;position:relative;overflow:hidden}
+.screen{min-height:100vh;width:100%;position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:18px 14px;border-bottom:1px solid #111}
+.splash{height:100vh;background:#000}
+.splash span{font-size:10px;letter-spacing:.28em;opacity:.55;text-transform:lowercase}
+.top10{background:#f6d9c0;color:#000;padding:22px 14px 0;justify-content:flex-start;align-items:stretch}
+.top10 .small{font-size:22px;line-height:1;font-weight:900;letter-spacing:-.04em}
+.top10 .small i{font-style:normal;background:#000;color:#fff;padding:1px 6px;border-radius:999px;font-size:14px}
+.top10 h2{font-size:42px;line-height:.9;margin-top:6px;font-weight:1000;letter-spacing:-.06em}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.tag{font-size:9px;font-weight:900;padding:6px 9px;border-radius:999px;background:#000;color:#fff;border:1px solid #000}
+.tag.light{background:#fff;color:#000;border-color:#000}
+.tag.blue{background:#dbe8ff}
+.betty{margin-top:14px;position:relative;background:#f6d9c0;display:flex;justify-content:space-between;align-items:end;gap:8px}
+.betty .left{width:56%}
+.betty .right{width:44%;text-align:right;font-size:64px}
+.shelf{background:#ece6db;color:#000;padding:0;justify-content:flex-start}
+.shelf img{width:100%;height:auto;display:block;object-fit:cover}
+.shelf .row{display:flex;gap:8px;padding:10px;background:#fff;border-top:2px solid #000;border-bottom:2px solid #000}
+.shelf .row span{font-size:8px;font-weight:900}
+.bar{width:100%;background:#000;color:#fff;text-align:center;padding:18px 14px}
+.bar h3{font-size:22px;font-weight:1000;letter-spacing:-.04em}
+.bar p{font-size:9px;letter-spacing:.18em;margin-top:6px;opacity:.6}
+.qr{background:#000;color:#fff}
+.qr .box{width:180px;height:180px;background:#fff;padding:8px}
+.qr .box div{width:100%;height:100%;background:repeating-linear-gradient(0deg,#000 0 2px,#fff 2px 4px)}
+.qr p{margin-top:12px;font-size:8px;letter-spacing:.18em;opacity:.5}
+.hakrs{background:#0a0a0a;color:#fff;padding:0;justify-content:flex-start;align-items:stretch}
+.hakrs .hero{position:relative;width:100%;aspect-ratio:0.72;background:linear-gradient(180deg,#1a2a4a,#0a0a0a);display:flex;flex-direction:column;justify-content:space-between;padding:10px;border:3px solid #ff4a00}
+.hakrs .label{font-size:12px;font-weight:1000;color:#ff7a00;letter-spacing:.08em}
+.hakrs .price{font-size:10px;line-height:1.4}
+.hakrs .price i{font-style:normal;display:inline-block;background:#fff;color:#000;padding:2px 6px;border-radius:999px;margin:2px;font-size:8px;font-weight:900}
+.hakrs .bottom{background:#000;color:#fff;text-align:center;padding:10px;font-size:12px;font-weight:1000;letter-spacing:.04em}
+.notfound{background:#fff;color:#000;justify-content:center}
+.notfound h1{font-size:72px;font-weight:1000;line-height:.9}
+.notfound p{font-size:12px;margin-top:12px;line-height:1.4;max-width:320px;text-align:center}
+.notfound a{color:#0366d6;text-decoration:underline}
+.beach{background:#0a1630;color:#fff;justify-content:flex-start;padding:0}
+.beach .img{width:100%;aspect-ratio:1.2;background:linear-gradient(180deg,#0a2a5a,#06122a);display:grid;place-items:center;font-size:32px;font-weight:1000}
+.beach .cta{padding:16px;text-align:center}
+.beach h2{font-size:34px;font-weight:1000;color:#4ba3ff}
+.beach p{font-size:9px;letter-spacing:.18em;margin-top:8px;opacity:.7}
+.beach .btn{margin-top:10px;display:inline-block;border:1px solid #fff;border-radius:999px;padding:8px 14px;font-size:9px;font-weight:900}
+.mcd{background:#fff;color:#000}
+.mcd .top{width:100%;background:#000;color:#fff;padding:12px;text-align:center;font-size:28px;font-weight:1000}
+.mcd .img{width:100%;aspect-ratio:0.9;background:#f0f0f0;display:grid;place-items:center;font-size:18px}
+.kalshi{background:#000;color:#fff;text-align:center}
+.kalshi h2{font-size:18px;color:#39e66f;font-weight:1000}
+.kalshi h1{font-size:54px;line-height:.9;font-weight:1000;margin-top:8px}
+.kalshi .fish{margin-top:14px;width:220px;aspect-ratio:0.8;background:radial-gradient(circle,#333,#000);border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;display:grid;place-items:center;font-size:42px}
+.hoodie{background:#0a2a1a;color:#fff}
+.hoodie .swatch{width:100%;aspect-ratio:0.85;background:radial-gradient(circle at 40% 30%,#1a4a3a,#061a12);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px}
+.hoodie .stitch{font-size:42px;font-weight:1000;letter-spacing:-.06em;color:#e8f5e9;text-shadow:0 2px 0 #000}
+.private{height:100vh;background:#000;color:#fff;justify-content:center;animation:fade 6s forwards}
+.private span{font-size:10px;letter-spacing:.28em;opacity:.6}
+.private b{display:block;margin-top:8px;font-size:10px;letter-spacing:.32em;opacity:.3;font-weight:400}
+@keyframes fade{0%{opacity:1}80%{opacity:1}100%{opacity:0}}
+.snap{scroll-snap-type:y mandatory;height:100vh;overflow-y:scroll;scrollbar-width:none}
+.snap::-webkit-scrollbar{display:none}
+.snap .screen{scroll-snap-align:start}
+.nav{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(0,0,0,.7);backdrop-filter:blur(10px);font-size:9px;letter-spacing:.14em}
+.nav b{font-weight:900}
+.hint{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:50;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:6px 12px;font-size:8px;letter-spacing:.14em;backdrop-filter:blur(8px)}
 </style>
 </head>
-
 <body>
-
 <div class="app">
+<div class="nav"><b>@fisshhfilet</b><span>fisshhfilet.github.io</span></div>
+<div class="hint">SWIPE UP / DOWN • TAP 404 → SHOP</div>
+<div class="snap" id="snap">
 
-<header>
+<!-- 1 SPLASH -->
+<div class="screen splash"><span>@fisshhfilet</span></div>
 
-<div class="topline">
-<div class="brand">@fisshhfilet • PROFILE</div>
-<div class="live"><i class="dot"></i> LIVE</div>
+<!-- 2 TOP 10 -->
+<div class="screen top10">
+<div class="small"><i>(BOTS)</i> Only Enjoy bAR</div>
+<h2>Top 10</h2>
+<div style="margin-top:10px;font-size:9px;font-weight:900;letter-spacing:.04em">• Searching beverage trends</div>
+<div class="tags">
+<span class="tag">buisinesswire.com</span><span class="tag">people.com</span><span class="tag light">tastingtable.com</span><span class="tag light">bennet.com</span><span class="tag light">specialtyfood.com</span><span class="tag light">foodnavigator-usa.com</span>
+</div>
+<div style="margin-top:10px;font-size:9px;font-weight:900">• Searching Trader Joe's drinks</div>
+<div class="tags">
+<span class="tag">supermarketnews.com</span><span class="tag">shelflife.com</span><span class="tag light">foodandwine.com</span><span class="tag light">bonappetit.com</span>
+</div>
+<div class="betty">
+<div class="left" style="font-size:9px;line-height:1.3">Betty Boop archive — soft girl but fishy</div>
+<div class="right">💋</div>
+</div>
 </div>
 
-<div class="profile">
-<span>CAPTAIN BEAR</span>
-<span>• EST 2024 • CLEAN • ETHICAL • FEMALE-FOUNDED •</span>
-<span>fishy kiss in the sea • Los Angeles, CA</span>
+<!-- 3 SHELF -->
+<div class="screen shelf">
+<div style="padding:10px;background:#e8ddd0;width:100%;text-align:center;font-size:10px;font-weight:900;letter-spacing:.12em">SAN PELLEGRINO • OLIPOP • TOPO CHICO • POPPI</div>
+<div style="width:100%;flex:1;background:linear-gradient(180deg,#f5efe6,#ddd);display:grid;place-items:center;font-size:14px;font-weight:900;color:#333">BOTTLE SHELF PLACEHOLDER<br><span style="font-size:9px;font-weight:400">Your original bottles here</span></div>
+<div class="row"><span>🍎 Apple</span><span>🎧 Spotify</span><span>7-ELEVEN x FIS x pampelmousse</span></div>
 </div>
 
-<nav class="nav">
-<a href="#shop">SHOP</a>
-<a href="#looks">LOOKS</a>
-<a href="#about">ABOUT</a>
-<a href="#picks">my top picks</a>
-</nav>
-
-</header>
-
-
-<section id="looks">
-
-<div class="eyebrow">THE VIBE</div>
-
-<div class="vibe-title">
-THE <span>VIBE</span>
+<!-- 4 RESTOCKING -->
+<div class="screen bar">
+<h3>Restocking<br>Soon</h3>
+<p>📷 DM "WAITLIST"<br>@CLUB52VOGUE.SHOP</p>
 </div>
 
-<div class="vibe-sub">
-They all got their own.
-</div>
-
-<div class="pill">
-Fisshhfilet 🦈 Flipped 🪽
-</div>
-
-<div class="hero-profile">
-
-<div class="avatar"></div>
-
+<!-- 5 SEPHORA -->
+<div class="screen" style="background:#fff;color:#000">
+<div style="width:100%;background:#000;color:#fff;padding:12px;text-align:center;font-weight:1000;font-size:18px">SEPHORA</div>
+<div style="padding:14px;width:100%;flex:1;display:grid;place-items:center;background:#f5f5f5;color:#000;text-align:center">
 <div>
-<strong>Her closet = 9 personalities.</strong>
-<p>
-No quiet luxury. Just loud thrift flip + shark teeth.
-Own your world.
-</p>
+<div style="font-size:12px;font-weight:900">Sephora<br>Let's Find Your Match</div>
+<div style="margin-top:10px;font-size:8px;opacity:.6">Sponsored • Armani • Tarte • etc</div>
 </div>
-
-</div>
-
-
-<div class="toggle">
-
-<button id="sharkBtn" class="active" onclick="showWorld('shark')">
-SHARK • ARCHIVE
-<small>5 WORLDS</small>
-</button>
-
-<button id="flipBtn" onclick="showWorld('flip')">
-FLIPPED • HAKRs
-<small>4 WORLDS</small>
-</button>
-
-</div>
-
-<div class="world-meta">
-<div class="green">
-<span class="dot"></span>
-LIVE FLIP
-</div>
-
-<div id="counter" class="counter">
-5 / 9
-</div>
-</div>
-
-<div class="logo52">
-52
-<span>CLUB52VOGUE.SHOP</span>
-</div>
-
-
-<!-- ================= SHARK ================= -->
-
-<div id="sharkWorld">
-
-<div class="eyebrow">
-SHARK ARCHIVE
-</div>
-
-<div class="vibe-sub">
-Black pier at night • ADULTS ONLY • JAWS • LOLO'S ON THE WATER • prediction energy
-</div>
-
-<div class="grid">
-
-
-<!-- 1 -->
-
-<div class="card" onclick="flipCard(this)">
-<div class="card-inner">
-
-<div class="face front pink">
-
-<div class="art pier-art">☠</div>
-
-<h3>ADULTS ONLY PIER</h3>
-<div class="price">$42</div>
-<div class="tags">#ARCHIVE #PIER #OVERSIZED</div>
-<div class="card-note">Frankenstein / late night pier — Etsy pink</div>
-
-<button class="flip" onclick="event.stopPropagation();flipCard(this.closest('.card'))">
-TAP TO FLIP ↔
-</button>
-
-</div>
-
-<div class="face back">
-
-<h3>ADULTS ONLY PIER</h3>
-<p class="card-note">
-Late-night pier energy. Oversized archive mood.
-</p>
-
-<a class="cta"
-href="https://www.etsy.com/"
-target="_blank"
-rel="noopener">
-VIEW VIBE →
-</a>
-
-</div>
-
-</div>
-</div>
-
-
-<!-- 2 -->
-
-<div class="card" onclick="flipCard(this)">
-<div class="card-inner">
-
-<div class="face front blue">
-
-<div class="art shark-art"></div>
-
-<h3>JAWS SHARK</h3>
-<div class="price">$38</div>
-<div class="tags">#SHARK #FISSHHFILET #VINTAGE</div>
-<div class="card-note">Shark attack energy — Etsy blue</div>
-
-<button class="flip" onclick="event.stopPropagation();flipCard(this.closest('.card'))">
-TAP TO FLIP ↔
-</button>
-
-</div>
-
-<div class="face back">
-
-<h3>JAWS SHARK</h3>
-<p class="card-note">
-Vintage shark attack energy. Loud, graphic, aquatic.
-</p>
-
-<a class="cta"
-href="https://www.etsy.com/"
-target="_blank"
-rel="noopener">
-VIEW VIBE →
-</a>
-
-</div>
-
-</div>
-</div>
-
-
-<!-- 3 -->
-
-<div class="card" onclick="flipCard(this)">
-<div class="card-inner">
-
-<div class="face front black">
-
-<div class="art pier-art">✦</div>
-
-<h3>LOLO'S ON THE WATER</h3>
-<div class="tags">#PIER #NIGHT #WATER</div>
-<div class="card-note">Pier lights / placeholder image</div>
-
-<button class="flip" onclick="event.stopPropagation();flipCard(this.closest('.card'))">
-TAP TO FLIP ↔
-</button>
-
-</div>
-
-<div class="face back">
-
-<h3>LOLO'S ON THE WATER</h3>
-<p class="card-note">
-Placeholder world for the night-water drop.
-</p>
-
-<a class="cta"
-href="https://www.etsy.com/"
-target="_blank"
-rel="noopener">
-VIEW VIBE →
-</a>
-
-</div>
-
-</div>
-</div>
-
-
-<!-- 4 -->
-
-<div class="card" onclick="flipCard(this)">
-<div class="card-inner">
-
-<div class="face front red">
-
-<div class="art red-art"></div>
-
-<h3>ADULTS ONLY × JAWS</h3>
-<div class="tags">#LOUD #RED #SHARK</div>
-<div class="card-note">Pinterest-loud archive style</div>
-
-<button class="flip" onclick="event.stopPropagation();flipCard(this.closest('.card'))">
-TAP TO FLIP ↔
-</button>
-
-</div>
-
-<div class="face back">
-
-<h3>ADULTS ONLY × JAWS</h3>
-<p class="card-note">
-Red shark energy. Loud Pinterest archive.
-</p>
-
-<a class="cta"
-href="https://www.etsy.com/"
-target="_blank"
-rel="noopener">
-VIEW VIBE →
-</a>
-
-</div>
-
-</div>
-</div>
-
-
-<!-- 5 -->
-
-<div class="card" onclick="flipCard(this)">
-<div class="card-inner">
-
-<div class="face front kalshi">
-
-<div class="art">
-$$$
-</div>
-
-<h3>KALSHI STRIPED BASS</h3>
-
-<div class="market">
-<div>
-<strong>87¢</strong>
-<span>YES</span>
-</div>
-
-<div>
-<strong>13¢</strong>
-<span>NO</span>
-</div>
-</div>
-
-<div class="tags">PREDICTION • DROP OUTCOME</div>
-
-<button class="flip" onclick="event.stopPropagation();flipCard(this.closest('.card'))">
-TAP TO FLIP ↔
-</button>
-
-</div>
-
-<div class="face back">
-
-<h3>KALSHI STRIPED BASS $$$</h3>
-
-<p class="card-note">
-Kalshi side: bet if her drop sells out.
-“They gonna go in on her.”
-</p>
-
-<a class="cta"
-href="https://kalshi.com/"
-target="_blank"
-rel="noopener">
-VIEW VIBE →
-</a>
-
-</div>
-
-</div>
-</div>
-
-</div>
-</div>
-
-
-<!-- ================= FLIPPED ================= -->
-
-<div id="flipWorld" class="hidden">
-
-<div class="eyebrow">
-FLIPPED HAKRs
-</div>
-
-<div class="vibe-sub">
-White • velour • Hardknokffs • pink • HAKRs bird + chevron
-</div>
-
-<div class="grid">
-
-
-<!-- 1 -->
-
-<div class="card" onclick="flipCard(this)">
-<div class="card-inner">
-
-<div class="face front black">
-
-<div class="art velour-art"></div>
-
-<h3>HARDKNOKFFS BLACK</h3>
-<div class="price">$88</div>
-<div class="tags">#VELOUR #HAKRS</div>
-<div class="card-note">Black velour knockout — Etsy black</div>
-
-<button class="flip" onclick="event.stopPropagation();flipCard(this.closest('.card'))">
-TAP TO FLIP ↔
-</button>
-
-</div>
-
-<div class="face back">
-
-<h3>HARDKNOKFFS BLACK</h3>
-<p class="card-note">
-Black velour knockout.
-</p>
-
-<a class="cta"
-href="https://www.etsy.com/"
-target="_blank"
-rel="noopener">
-VIEW VIBE →
-</a>
-
-</div>
-
-</div>
-</div>
-
-
-<!-- 2 -->
-
-<div class="card" onclick="flipCard(this)">
-<div class="card-inner">
-
-<div class="face front pink">
-
-<div class="art pink-art"></div>
-
-<h3>HARDKNOKFFS PINK</h3>
-<div class="price">$88</div>
-<div class="tags">#PINK #BUBBLEGUM</div>
-<div class="card-note">Bubblegum knockout — Etsy pink</div>
-
-<button class="flip" onclick="event.stopPropagation();flipCard(this.closest('.card'))">
-TAP TO FLIP ↔
-</button>
-
-</div>
-
-<div class="face back">
-
-<h3>HARDKNOKFFS PINK</h3>
-<p class="card-note">
-Bubblegum knockout. Loud pink energy.
-</p>
-
-<a class="cta"
-href="https://www.etsy.com/"
-target="_blank"
-rel="noopener">
-VIEW VIBE →
-</a>
-
-</div>
-
-</div>
-</div>
-
-
-<!-- 3 -->
-
-<div class="card" onclick="flipCard(this)">
-<div class="card-inner">
-
-<div class="face front white">
-
-<div class="art white-art"></div>
-
-<h3>WHITE HAKRs</h3>
-<div class="tags">#WHITE #YELLOWDOTS #HAKRS</div>
-<div class="card-note">White with yellow dots — Etsy physical</div>
-
-<button class="flip" onclick="event.stopPropagation();flipCard(this.closest('.card'))">
-TAP TO FLIP ↔
-</button>
-
-</div>
-
-<div class="face back">
-
-<h3>WHITE HAKRs</h3>
-<p class="card-note">
-White base with yellow-dot graphic language.
-</p>
-
-<a class="cta"
-href="https://www.etsy.com/"
-target="_blank"
-rel="noopener">
-VIEW VIBE →
-</a>
-
-</div>
-
-</div>
-</div>
-
-
-<!-- 4 -->
-
-<div class="card" onclick="flipCard(this)">
-<div class="card-inner">
-
-<div class="face front cream">
-
-<div class="art bird-art"></div>
-
-<h3>HAKRs BIRD + CHEVRON</h3>
-<div class="tags">#CREAM #BIRD #CHEVRON</div>
-<div class="card-note">Cream triangles — Etsy physical</div>
-
-<button class="flip" onclick="event.stopPropagation();flipCard(this.closest('.card'))">
-TAP TO FLIP ↔
-</button>
-
-</div>
-
-<div class="face back">
-
-<h3>HAKRs BIRD + CHEVRON</h3>
-<p class="card-note">
-Cream triangle geometry with HAKRs bird energy.
-</p>
-
-<a class="cta"
-href="https://www.etsy.com/"
-target="_blank"
-rel="noopener">
-VIEW VIBE →
-</a>
-
-</div>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</section>
-
-
-<!-- ================= SHOP ================= -->
-
-<section id="shop">
-
-<div class="world-title">
-<h2>HER EDIT</h2>
-<small>SWIPE →</small>
-</div>
-
-<div class="shop-row">
-
-<div class="shop-card">
-<div class="mini"></div>
-<h3>Varsity 46</h3>
-<p>MOSS • $142</p>
-<p>WOOL BLEND 46</p>
-</div>
-
-<div class="shop-card">
-<div class="mini"></div>
-<h3>Varsity 47</h3>
-<p>LILAC • $138</p>
-<p>CHENILLE 47</p>
-</div>
-
-<div class="shop-card">
-<div class="mini"></div>
-<h3>No. 08</h3>
-<p>OATMEAL • $165</p>
-<p>08 CREAM</p>
-</div>
-
 </div>
-
-</section>
-
-
-<!-- ================= TOP PICKS ================= -->
-
-<section id="picks">
-
-<div class="world-title">
-<h2>PINTEREST VIRAL PICKS</h2>
-<small>LOUD ↓</small>
-</div>
-
-<div class="grid pick-grid">
-
-
-<div class="card">
-<div class="card-inner">
-
-<div class="face front fishy">
-
-<div class="art fishy"></div>
-
-<h3>FISHY FISHY</h3>
-<div class="tags">PATTERN</div>
-
-<a class="cta"
-href="https://www.etsy.com/"
-target="_blank"
-rel="noopener">
-SHOP NOW →
-</a>
-
-</div>
-
-</div>
-</div>
-
-
-<div class="card">
-<div class="card-inner">
-
-<div class="face front kiss">
-
-<div class="art kiss"></div>
-
-<h3>KISS ME QUICK</h3>
-<div class="tags">NEW VIRAL • 2.3M SAVES</div>
-
-<a class="cta"
-href="https://www.etsy.com/"
-target="_blank"
-rel="noopener">
-SHOP NOW →
-</a>
-
-</div>
-
-</div>
-</div>
-
-
-<div class="card">
-<div class="card-inner">
-
-<div class="face front sea">
-
-<div class="art sea"></div>
-
-<h3>SEA FOAM CLUB</h3>
-<div class="tags">CLEAN GIRL BUT FISHY</div>
-
-<a class="cta"
-href="https://www.etsy.com/"
-target="_blank"
-rel="noopener">
-SHOP NOW →
-</a>
-
-</div>
-
-</div>
 </div>
-
-
-<div class="card">
-<div class="card-inner">
-
-<div class="face front viral">
-
-<div class="art viral"></div>
-
-<h3>VIRAL</h3>
-<div class="tags">★★★★★ PINTEREST AD • SHOP NOW</div>
 
-<a class="cta"
-href="https://www.etsy.com/"
-target="_blank"
-rel="noopener">
-SHOP NOW →
-</a>
-
+<!-- 6 QR -->
+<div class="screen qr">
+<div class="box"><div></div></div>
+<p>PRIVATE ACCESS QR</p>
 </div>
 
+<!-- 7 HAKRs -->
+<div class="screen hakrs">
+<div class="hero">
+<div class="label">HAKRs</div>
+<div style="flex:1;display:grid;place-items:center;font-size:52px">⚡️🦈</div>
+<div class="price">
+<i>Grey Crystal Hoodie $18</i><i>Gold Shades $18</i><i>Jeweled Corset $42</i><i>Tulle Cowboy $32</i><i>Rose Denim $52</i><i>Sequin Pump $56</i><i>Barrel Bag $20</i><i>Lace Wigs $32</i><i>Lace Wraps $12</i><i>Red Platforms $38</i>
 </div>
+<div class="bottom">+ $312 FLIP / $2,535 RETAIL +</div>
 </div>
-
 </div>
 
-<div style="margin-top:15px;text-align:center;font-size:9px;font-weight:1000;letter-spacing:.12em">
-HIGH CONTRAST • BOLD • NOT QUIET LUXURY
+<!-- 8 404 -->
+<div class="screen notfound" id="shopTrigger">
+<h1>404</h1>
+<p><b>File not found</b><br>The site configured at this address does not contain the requested file.<br><br>If this is your site, make sure that the filename case matches the URL.<br>For root URLs (like http://example.com/) you must provide an index.html file.<br><br><a href="#shop">Read the full documentation</a> for more information about using GitHub Pages.<br><br>GitHub Status — @githubstatus</p>
+<p style="margin-top:18px"><a href="#beach" style="background:#000;color:#fff;padding:8px 14px;border-radius:999px;text-decoration:none">→ OPEN SHOP (club52vogue.shop)</a></p>
 </div>
-
-</section>
-
 
-<!-- ================= ABOUT ================= -->
-
-<section id="about">
-
-<div class="world-title">
-<h2>ABOUT HER WORLD</h2>
+<!-- 9 BEACH SHOP = 404 LINK -->
+<div class="screen beach" id="beach">
+<div class="img">ADULTS ONLY<br>Beach Section</div>
+<div class="cta">
+<h2>ADULTS ONLY</h2>
+<p>Enjoy — Beach Section</p>
+<div class="btn">Shop now →</div>
+<div style="margin-top:12px;font-size:9px">club52vogue.shop • "Wellness/Sea"</div>
 </div>
-
-<div class="hero-profile">
-
-<div class="avatar"></div>
-
-<div>
-<strong>@fisshhfilet</strong>
-<p>
-A personal curated shop built around loud thrift flips,
-shark teeth, archive finds, physical pieces and the worlds
-she wants to live in.
-</p>
 </div>
 
+<!-- 10 WAISTA -->
+<div class="screen mcd">
+<div class="top">WAISTA?</div>
+<div class="img">McDONALD'S x FIS<br>McCafé • Fries</div>
+<div style="padding:12px;text-align:center;font-size:9px;letter-spacing:.14em">club52vogue.shop</div>
 </div>
 
-</section>
-
-
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
-<div class="footer-title">
-fisshhfilet x $tripe · her affiliate shop · personal page
+<!-- 11 KALSHI -->
+<div class="screen kalshi">
+<h2>Kalshi</h2>
+<h1>TRADE ON<br>ANYTHING</h1>
+<div class="fish">🐟</div>
 </div>
 
-<div class="footer-copy">
-This is @fisshhfilet's personal curated shop.
-Affiliate links earn commission. Prices subject to change.
-Bear logo = her page.
+<!-- 12 HOODIE -->
+<div class="screen hoodie">
+<div class="swatch">
+<div style="font-size:28px">🧸⛵</div>
+<div class="stitch">FISHFILET</div>
+<div style="margin-top:8px;font-size:9px;letter-spacing:.18em;opacity:.6">CAPTAIN BEAR BOAT EMBROIDERY</div>
 </div>
-
-<div class="footer-links">
-
-<a href="https://www.etsy.com/" target="_blank" rel="noopener">
-ETSY
-</a>
-
-<a href="https://kalshi.com/" target="_blank" rel="noopener">
-KALSHI
-</a>
-
-<a href="https://www.nike.com/" target="_blank" rel="noopener">
-NIKE VOMERO 5
-</a>
-
-<a href="https://www.revolve.com/" target="_blank" rel="noopener">
-REVOLVE
-</a>
-
-<a href="https://www.farfetch.com/" target="_blank" rel="noopener">
-FARFETCH
-</a>
-
-<a href="https://editorialist.com/" target="_blank" rel="noopener">
-EDITORIALIST
-</a>
-
 </div>
-
-<div class="footer-copy">
 
-Fisshhfilet x $tripe — Captain Bear Letterman $158.00 her studio limited<br>
-FISHY KISS IN THE SEA knit set $2,300.00 inspiration — her moodboard<br>
-Nike Vomero 5 Cream/Brown $145<br>
-REVOLVE The Letterman Pullover — PAID LINK<br>
-Farfetch — Polo Ralph Lauren Letterman<br>
-Editorialist — Forest Green Tops curated by her
-
+<!-- 13 PRIVATE ACCESS FADE -->
+<div class="screen private" id="private">
+<span>@fisshhfilet</span>
+<b>PRIVATE ACCESS<br>MEMBERS ONLY</b>
 </div>
 
-<div class="copyright">
-© 2024 • PRIVACY • TERMS
 </div>
-
-</footer>
-
 </div>
-
-
 <script>
-
-/* =========================================
-   WORLD TOGGLE
-========================================= */
-
-function showWorld(world){
-
-const shark=
-document.getElementById("sharkWorld");
-
-const flipped=
-document.getElementById("flipWorld");
-
-const sharkBtn=
-document.getElementById("sharkBtn");
-
-const flipBtn=
-document.getElementById("flipBtn");
-
-const counter=
-document.getElementById("counter");
-
-
-if(world==="shark"){
-
-shark.classList.remove("hidden");
-flipped.classList.add("hidden");
-
-sharkBtn.classList.add("active");
-flipBtn.classList.remove("active");
-
-counter.textContent="5 / 9";
-
-}else{
-
-shark.classList.add("hidden");
-flipped.classList.remove("hidden");
-
-sharkBtn.classList.remove("active");
-flipBtn.classList.add("active");
-
-counter.textContent="4 / 9";
-
-}
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
+const snap=document.getElementById('snap');
+document.getElementById('shopTrigger').addEventListener('click',()=>{
+  document.getElementById('beach').scrollIntoView({behavior:'smooth'});
 });
-
-}
-
-
-/* =========================================
-   CARD FLIP
-========================================= */
-
-function flipCard(card){
-
-if(!card)return;
-
-card.classList.toggle("flipped");
-
-}
-
-
-/* =========================================
-   PREVENT BUTTON TAP FROM DOUBLE FLIPPING
-========================================= */
-
-document.querySelectorAll(".flip").forEach(btn=>{
-
-btn.addEventListener("click",function(e){
-
-e.stopPropagation();
-
+// loop back to top when reaching private access
+let lastScroll=0;
+snap.addEventListener('scroll',()=>{
+  const atBottom = snap.scrollTop + snap.clientHeight >= snap.scrollHeight - 10;
+  if(atBottom){
+    setTimeout(()=>{
+      snap.scrollTo({top:0,behavior:'smooth'});
+    },2200);
+  }
 });
-
-});
-
-
-/* =========================================
-   ANDROID SAFETY
-========================================= */
-
-document.querySelectorAll("a").forEach(a=>{
-
-a.addEventListener("click",function(){
-
-});
-
-});
-
 </script>
-
 <script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
 </html>
-
