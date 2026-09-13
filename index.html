@@ -1,96 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1,viewport-fit=cover">
-<title>@fisshhfilet</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FISSHHFILET / CLUB52VOGUE.SHOP</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%;background:#000;overscroll-behavior:none}
-body{font-family:"Courier New",Courier,monospace;overflow:hidden;-webkit-font-smoothing:antialiased;touch-action:pan-y}
-#feed{width:100vw;height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;background:#000;overscroll-behavior:contain}
-.page{position:relative;width:100vw;height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden;transform:translateZ(0)}
-.page img,.page video{width:100%;height:100%;object-fit:contain;background:#000;display:block}
-.shop-page{background:#fff;padding:0;overflow:hidden}
-#shopFrame{width:100%;height:100%;border:0;display:block;background:#fff}
-#opening{position:fixed;inset:0;z-index:9999;background:#000;display:flex;align-items:center;justify-content:center;pointer-events:none}
-#opening span{color:#d6d6d6;font-size:11px;letter-spacing:0.22em;opacity:0;text-transform:lowercase}
-#opening.go span{animation:oi 0.6s ease forwards 0.15s,oo 0.5s ease forwards 1.25s}
-@keyframes oi{from{opacity:0}to{opacity:0.9}}@keyframes oo{from{opacity:0.9}to{opacity:0}}
-.tap{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);z-index:6;background:rgba(0,0,0,0.9);color:#fff;border:1px solid rgba(255,255,255,0.18);border-radius:999px;padding:10px 18px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;opacity:0;pointer-events:none;transition:opacity 0.28s ease}
-.page.settled.tap{opacity:1;pointer-events:auto}
-#finalPage video#gomfVideo{position:absolute;inset:0;z-index:1}
-#doors{position:absolute;inset:0;z-index:2;display:flex;pointer-events:none}
-.door{width:50.1%;height:100%;background:#000;transition:transform 1.55s cubic-bezier(0.77,0,0.175,1)}
-#doors.open.door-left{transform:translateX(-100%)}
-#doors.open.door-right{transform:translateX(100%)}
-#privateOverlay{position:absolute;inset:0;z-index:3;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.7s}
-#privateOverlay.hide{opacity:0;pointer-events:none}
-.pa-line{opacity:0;transition:opacity 0.9s;text-align:center;line-height:1}
-.pa-line.show{opacity:1}
-#pa-fisshh{color:#d6d6d6;font-size:11px;letter-spacing:0.22em;margin-bottom:18px}
-#pa-private{color:#2d6a4f;font-size:12px;letter-spacing:0.32em;margin-bottom:22px}
-#pa-members{color:#3a3a3a;font-size:9px;letter-spacing:0.28em}
+:root{--black:#050505;--paper:#f7f4ef;--lime:#c8ff00;--pink:#ff5db1;--shark:#a8f000;--flipped:#ff3b82;--line:#1c1c1c;--card:#111}
+html{background:#000}
+body{background:var(--black);color:var(--paper);font-family:ui-sans-system,-apple-system,BlinkMacSystemFont,"SF Pro Display",Inter,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+button{border:0;background:none;color:inherit;font:inherit}
+.wrap{max-width:430px;margin:0 auto;background:#000;min-height:100vh;border-left:1px solid #111;border-right:1px solid #111;position:relative;overflow:hidden}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 8px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8a8a8a;border-bottom:1px solid var(--line)}
+.live{display:flex;align-items:center;gap:6px;color:#e9e9e9}
+.dot{width:7px;height:7px;border-radius:50%;background:#24ff71;box-shadow:0 0 0 4px rgba(36,255,113,.18);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(36,255,113,.5)}70%{box-shadow:0 0 0 7px rgba(36,255,113,0)}100%{box-shadow:0 0 0 0 rgba(36,255,113,0)}}
+.brand{padding:18px 14px 12px;border-bottom:1px solid var(--line)}
+.brand h1{font-size:42px;line-height:.9;letter-spacing:-.04em;font-weight:900;text-transform:uppercase}
+.brand h1 span{color:var(--lime)}
+.handle{display:flex;justify-content:space-between;align-items:end;margin-top:14px}
+.handle .h{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#9e9e9e}
+.handle .h b{color:#fff;font-weight:800}
+.bear{font-size:11px;letter-spacing:.14em;text-transform:uppercase;border:1px dashed #2a2a2a;padding:6px 9px;border-radius:10px}
+.tabs{display:flex;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;background:rgba(0,0,0,.88);backdrop-filter:blur(12px)}
+.tabs button{flex:1;height:36px;border-radius:999px;border:1px solid #222;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#9a9a9a}
+.tabs button.active{background:#fff;color:#000;border-color:#fff}
+.vibe{margin:12px 14px;border:1px solid #222;background:linear-gradient(180deg,#0d0d0d,#080808);border-radius:18px;padding:14px;position:relative;overflow:hidden}
+.vibe:before{content:"";position:absolute;inset:-1px;background:radial-gradient(300px 120px at 20% 0%, rgba(200,255,0,.22), transparent 70%),radial-gradient(260px 140px at 90% 10%, rgba(255,93,177,.22), transparent 70%);pointer-events:none}
+.vibe-top{display:flex;justify-content:space-between;align-items:center;position:relative}
+.kicker{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#7a7a7a}
+.vibe h2{font-size:22px;line-height:1;letter-spacing:-.03em;margin-top:6px;font-weight:900;text-transform:uppercase}
+.desc{margin-top:10px;font-size:13px;line-height:1.45;color:#c9c9c9;position:relative}
+.desc b{color:#fff}
+.switch{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px;position:relative}
+.switch button{height:44px;border-radius:12px;border:1px solid #222;font-weight:900;letter-spacing:.14em;text-transform:uppercase;font-size:12px;display:flex;align-items:center;justify-content:center;gap:8px;transition:.2s}
+.switch button.on{background:#fff;color:#000;border-color:#fff}
+.switch button.shark.on{background:var(--shark)}
+.switch button.flipped.on{background:var(--flipped);color:#fff;border-color:var(--flipped)}
+.section{padding:18px 14px 6px}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.section-head h3{font-size:18px;letter-spacing:-.02em;text-transform:uppercase;font-weight:900}
+.section-head p{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#777}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{perspective:900px;cursor:pointer}
+.card-inner{position:relative;width:100%;aspect-ratio:.86;transform-style:preserve-3d;transition:transform .62s cubic-bezier(.2,.8,.2,1);border-radius:18px}
+.card.flipped .card-inner{transform:rotateY(180deg)}
+.card-face{position:absolute;inset:0;border-radius:18px;overflow:hidden;backface-visibility:hidden;border:1px solid #1e1e1e}
+.face-front{background:var(--card);display:flex;flex-direction:column}
+.face-back{background:#f7f4ef;color:#000;transform:rotateY(180deg);display:flex;flex-direction:column;padding:12px}
+.thumb{flex:1;position:relative;overflow:hidden;background:#151515}
+.thumb .ph{width:100%;height:100%;display:grid;place-items:center;font-size:28px;font-weight:900;letter-spacing:-.04em;text-transform:uppercase}
+.thumb .ph.sh{background:linear-gradient(135deg,#d8ff36,#a8f000);color:#000}
+.thumb .ph.fl{background:linear-gradient(135deg,#ff5db1,#ff2a6d);color:#fff}
+.thumb .ph.lux{background:linear-gradient(135deg,#fff,#d9d9d9);color:#000}
+.thumb .num{position:absolute;left:8px;top:8px;background:#000;color:#fff;font-size:10px;letter-spacing:.12em;padding:4px 7px;border-radius:999px;border:1px solid #222}
+.face-front .info{padding:9px 10px 10px;background:#0e0e0e;border-top:1px solid #1e1e1e}
+.info .name{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.info .sub{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8e8e8e;margin-top:2px}
+.face-back .back-top{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#6e6e6e;display:flex;justify-content:space-between}
+.face-back h4{margin-top:10px;font-size:16px;line-height:.95;font-weight:900;text-transform:uppercase;letter-spacing:-.03em}
+.face-back .price{margin-top:6px;font-size:12px;font-weight:800}
+.face-back .cta{margin-top:auto;height:34px;border-radius:999px;background:#000;color:#fff;display:grid;place-items:center;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800}
+.reel{margin:14px;border-radius:20px;border:1px solid #1c1c1c;background:linear-gradient(180deg,#0f0f0f,#070707);padding:12px}
+.reel .reel-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:10px}
+.reel h3{font-size:18px;font-weight:900;text-transform:uppercase;letter-spacing:-.02em}
+.reel h3 span{color:var(--pink)}
+.top10{margin:14px;border-radius:20px;border:1px solid #1e1e1e;overflow:hidden;background:#0a0a0a}
+.top10-head{padding:14px;display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid #1e1e1e;background:radial-gradient(420px 180px at 0% 0%, rgba(200,255,0,.22), transparent 60%),radial-gradient(380px 160px at 100% 0%, rgba(255,93,177,.22), transparent 60%)}
+.top10-head h3{font-size:26px;line-height:.9;font-weight:900;text-transform:uppercase;letter-spacing:-.04em}
+.top10-head small{display:block;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#8a8a8a;margin-top:6px}
+.top10-list{display:grid}
+.t10{display:grid;grid-template-columns:62px 1fr;border-bottom:1px solid #151515;min-height:84px;cursor:pointer}
+.t10:last-child{border-bottom:0}
+.t10-num{display:grid;place-items:center;font-size:22px;font-weight:900;letter-spacing:-.04em;background:#111;color:#fff;border-right:1px solid #151515}
+.t10:nth-child(odd) .t10-num{background:#f7f4ef;color:#000}
+.t10-body{padding:10px 12px;display:flex;flex-direction:column;justify-content:center;background:#0d0d0d}
+.t10-body b{font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.t10-body i{font-style:normal;font-size:11px;color:#8e8e8e;margin-top:2px;display:block}
+.t10-body .go{margin-top:7px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px;border:1px solid #222;border-radius:999px;padding:4px 8px;width:fit-content;color:#d0d0d0}
+.looks-grid{display:grid;grid-template-columns:1fr;gap:10px}
+.look{border-radius:18px;overflow:hidden;border:1px solid #1e1e1e;background:#111;aspect-ratio:1.2;display:grid;place-items:center;text-transform:uppercase;font-weight:900;letter-spacing:-.03em;font-size:20px}
+.look.l1{background:linear-gradient(135deg,#c8ff00,#fff59d);color:#000}
+.look.l2{background:linear-gradient(135deg,#ff5db1,#7a00ff);color:#fff}
+.look.l3{background:linear-gradient(135deg,#000,#2a2a2a);color:#fff;border:1px dashed #333}
+.footer{padding:18px 14px 26px;border-top:1px solid #151515;color:#6a6a6a;font-size:10px;letter-spacing:.08em;line-height:1.5;text-align:center}
+.hidden{display:none !important}
 </style>
 </head>
 <body>
-<div id="opening"><span>@fisshhfilet</span></div>
-<div id="feed">
-<section class="page"><img src="betty.jpg" loading="eager"><a class="tap" href="https://www.instagram.com/club52vogue.shop/" target="_blank">shop → club52vogue.shop</a></section>
-<section class="page"><img src="waista.jpg" loading="eager"><a class="tap" href="https://www.instagram.com/club52vogue.shop/" target="_blank">shop → club52vogue.shop</a></section>
-<section class="page"><img src="restocking-fisshhfilet.jpg" loading="eager"><a class="tap" href="https://www.instagram.com/club52vogue.shop/" target="_blank">DM waitlist →</a></section>
-<section class="page" data-video><video src="Sephora.mp4" playsinline muted loop preload="metadata"></video><a class="tap" href="https://www.instagram.com/club52vogue.shop/" target="_blank">shop → club52vogue.shop</a></section>
-<section class="page"><img src="HAKRs.jpg" loading="lazy"><a class="tap" href="https://www.instagram.com/club52vogue.shop/" target="_blank">scan → club52vogue.shop</a></section>
-<section class="page"><img src="hakrs-pier-flip-clean.jpg" loading="lazy"><a class="tap" href="https://www.instagram.com/club52vogue.shop/" target="_blank">shop flip $312 →</a></section>
-<section class="page shop-page"><iframe id="shopFrame" src="shop.html?v=7" loading="lazy"></iframe></section>
-<section class="page"><img src="adults-only.jpg" loading="lazy"><a class="tap" href="https://www.instagram.com/club52vogue.shop/" target="_blank">adults only →</a></section>
-<section class="page"><img src="mc.jpg" loading="lazy"><a class="tap" href="https://www.instagram.com/club52vogue.shop/" target="_blank">club52vogue.shop →</a></section>
-<section class="page"><img src="kalshi.jpg" loading="lazy"><a class="tap" href="https://kalshi.com" target="_blank">kalshi.com →</a></section>
-<section class="page"><img src="boatbear.jpg" loading="lazy"><a class="tap" href="https://naturalcatchtuna.com/" target="_blank">boatbear →</a></section>
-<section class="page" id="finalPage" data-video>
-<video id="gomfVideo" src="GOMF.mp4" playsinline muted loop preload="metadata"></video>
-<div id="doors"><div class="door door-left"></div><div class="door door-right"></div></div>
-<div id="privateOverlay"><div id="pa-fisshh" class="pa-line">@fisshhfilet</div><div id="pa-private" class="pa-line">PRIVATE ACCESS</div><div id="pa-members" class="pa-line">MEMBERS ONLY</div></div>
-</section>
+<div class="wrap" id="app">
+<div class="topbar">
+<div class="live"><div class="dot"></div> LIVE • WUNDRSPRIVTZL, NY</div>
+</div>
+<div class="brand">
+<h1>FISSHHFILET<br><span>CLUB52VOGUE</span>.SHOP</h1>
+</div>
+<div class="tabs">
+<button class="active" data-tab="shop">SHOP</button>
+<button data-tab="looks">LOOKS</button>
+<button data-tab="about">ABOUT</button>
+<button data-tab="picks">MY TOP PICKS</button>
+</div>
+<div class="vibe">
+<div class="vibe-top">
+<div class="kicker">THE VIBE</div>
+<div class="kicker">VIBE inside the black box</div>
+</div>
+<h2>Fisshhfilet 🪽 / Flipped 🦈</h2>
+<div class="desc">Own your world.</div>
+<div class="switch">
+<button class="shark on" id="btnShark">🦈 SHARK <span>5 / 9</span></button>
+<button class="flipped" id="btnFlipped">🪽 FLIPPED <span>4 / 9</span></button>
+</div>
+</div>
+<div data-panel="shop">
+<div class="section" id="secShark">
+<div class="section-head"><h3>SHARK ARCHIVE</h3><p>5 / 9</p></div>
+<div class="grid" id="gridShark">
+<div class="card"><div class="card-inner"><div class="card-face face-front"><div class="thumb"><div class="ph sh">SHARK 01<br>VELVET</div><div class="num">SHARK • 01</div></div><div class="info"><div class="name">CAPTAIN BEAR VELVET</div><div class="sub">Archive / Black</div></div></div><div class="card-face face-back"><div class="back-top"><span>52</span><span>ARCHIVE</span></div><h4>CAPTAIN BEAR<br>VELVET</h4><div class="price">$128 — Archive soft armor</div><div class="cta">VIEW VIBE →</div></div></div></div>
+<div class="card"><div class="card-inner"><div class="card-face face-front"><div class="thumb"><div class="ph sh">PINK<br>PILE</div><div class="num">SHARK • 02</div></div><div class="info"><div class="name">ADULTS ONLY PIER</div><div class="sub">Pink archive world</div></div></div><div class="card-face face-back"><div class="back-top"><span>52</span><span>ARCHIVE</span></div><h4>ADULTS ONLY<br>PIER</h4><div class="price">$42 — Candy archive</div><div class="cta">VIEW VIBE →</div></div></div></div>
+<div class="card"><div class="card-inner"><div class="card-face face-front"><div class="thumb"><div class="ph lux">FISHY KISS<br>$2,300</div><div class="num">SHARK • 03</div></div><div class="info"><div class="name">FISHY KISS IN THE SEA</div><div class="sub">Moodboard / inspiration</div></div></div><div class="card-face face-back"><div class="back-top"><span>52</span><span>ARCHIVE</span></div><h4>FISHY KISS<br>IN THE SEA</h4><div class="price">$2,300 — World / Installation</div><div class="cta">VIEW VIBE →</div></div></div></div>
+<div class="card"><div class="card-inner"><div class="card-face face-front"><div class="thumb"><div class="ph sh">LETTERMAN<br>POLO</div><div class="num">SHARK • 04</div></div><div class="info"><div class="name">POLO RALPH LAUREN LETTERMAN</div><div class="sub">Classic varsity layer</div></div></div><div class="card-face face-back"><div class="back-top"><span>ARCHIVE</span><span>LAYER</span></div><h4>POLO VARSITY<br>LETTERMAN</h4><div class="price">Classic — Heavy layer</div><div class="cta">VIEW VIBE →</div></div></div></div>
+<div class="card"><div class="card-inner"><div class="card-face face-front"><div class="thumb"><div class="ph sh">HAKRs<br>BLACK</div><div class="num">SHARK • 05</div></div><div class="info"><div class="name">HARDKNOKFFS BLACK</div><div class="sub">Black velour / HAKRs</div></div></div><div class="card-face face-back"><div class="back-top"><span>HARDKNOKFFS</span><span>52</span></div><h4>HARDKNOKFFS<br>BLACK</h4><div class="price">$88 — Velour set</div><div class="cta">VIEW VIBE →</div></div></div></div>
+</div>
+</div>
+<div class="section" id="secFlipped">
+<div class="section-head"><h3>FLIPPED HAKRs</h3><p>4 / 9</p></div>
+<div class="grid" id="gridFlipped">
+<div class="card"><div class="card-inner"><div class="card-face face-front"><div class="thumb"><div class="ph fl">CAPTAIN<br>BEAR</div><div class="num">FLIPPED • 01</div></div><div class="info"><div class="name">CAPTAIN BEAR LETTERMAN</div><div class="sub">Fisshhfilet x $tripe • $158</div></div></div><div class="card-face face-back"><div class="back-top"><span>HER STUDIO LIMITED</span><span>🦈</span></div><h4>CAPTAIN BEAR<br>LETTERMAN</h4><div class="price">$158 — Studio limited</div><div class="cta">VIEW VIBE →</div></div></div></div>
+<div class="card"><div class="card-inner"><div class="card-face face-front"><div class="thumb"><div class="ph fl">FLIPPED<br>PINK</div><div class="num">FLIPPED • 02</div></div><div class="info"><div class="name">FLIPPED VELVET PIER</div><div class="sub">Thrift flip / one-of-one</div></div></div><div class="card-face face-back"><div class="back-top"><span>ONE OF ONE</span><span>FLIPPED</span></div><h4>FLIPPED VELVET<br>PIER</h4><div class="price">Thrift flip — Soft savage</div><div class="cta">VIEW VIBE →</div></div></div></div>
+<div class="card"><div class="card-inner"><div class="card-face face-front"><div class="thumb"><div class="ph fl">SHARK TEETH<br>STUD</div><div class="num">FLIPPED • 03</div></div><div class="info"><div class="name">SHARK TEETH LAYER</div><div class="sub">Loud archive stitch</div></div></div><div class="card-face face-back"><div class="back-top"><span>LOUD</span><span>NOT QUIET</span></div><h4>SHARK TEETH<br>LAYER</h4><div class="price">Archive stitch — Own your world</div><div class="cta">VIEW VIBE →</div></div></div></div>
+<div class="card"><div class="card-inner"><div class="card-face face-front"><div class="thumb"><div class="ph fl">GLOW<br>EDIT</div><div class="num">FLIPPED • 04</div></div><div class="info"><div class="name">GLOW EDIT ARCHIVE</div><div class="sub">Skin-first / soft</div></div></div><div class="card-face face-back"><div class="back-top"><span>SKIN-FIRST</span><span>52</span></div><h4>GLOW EDIT<br>ARCHIVE</h4><div class="price">Soft focus — Fantasy skin</div><div class="cta">VIEW VIBE →</div></div></div></div>
+</div>
+</div>
+<div class="reel" id="reelPicks">
+<div class="reel-head">
+<h3>REEL PICKS <span>•</span></h3>
+<p style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#777">FROM HER FEED</p>
+</div>
+<div class="grid">
+<div class="card"><div class="card-inner"><div class="card-face face-front"><div class="thumb"><div class="ph lux">NIKE<br>VOMERO 5</div><div class="num">REEL • NIKE</div></div><div class="info"><div class="name">Nike / Vomero 5</div><div class="sub">Cream / Brown • $145</div></div></div><div class="card-face face-back"><div class="back-top"><span>NIKE</span><span>REEL PICK</span></div><h4>NIKE VOMERO 5<br>CREAM / BROWN</h4><div class="price">$145 — Everyday rotation</div><a class="cta" href="https://www.nike.com/" target="_blank" rel="noopener">OPEN SHOP →</a></div></div></div>
+<div class="card"><div class="card-inner"><div class="card-face face-front"><div class="thumb"><div class="ph sh">SEPHORA<br>EDIT</div><div class="num">REEL • SEPHORA</div></div><div class="info"><div class="name">Sephora / Beauty Edit</div><div class="sub">Skincare / fragrance</div></div></div><div class="card-face face-back"><div class="back-top"><span>SEPHORA</span><span>REEL PICK</span></div><h4>SEPHORA<br>BEAUTY EDIT</h4><div class="price">Her current beauty rotation</div><a class="cta" href="https://www.sephora.com/" target="_blank" rel="noopener">OPEN SHOP →</a></div></div></div>
+<div class="card"><div class="card-inner"><div class="card-face face-front"><div class="thumb"><div class="ph fl">POLO<br>LETTERMAN</div><div class="num">REEL • POLO</div></div><div class="info"><div class="name">Polo / Varsity</div><div class="sub">Classic layer</div></div></div><div class="card-face face-back"><div class="back-top"><span>RALPH LAUREN</span><span>REEL PICK</span></div><h4>POLO VARSITY<br>LAYER</h4><div class="price">Archive varsity</div><a class="cta" href="https://www.ralphlauren.com/" target="_blank" rel="noopener">OPEN SHOP →</a></div></div></div>
+<div class="card"><div class="card-inner"><div class="card-face face-front"><div class="thumb"><div class="ph lux">GLOW<br>FRAGRANCE</div><div class="num">REEL • BEAUTY</div></div><div class="info"><div class="name">Glow / Fragrance</div><div class="sub">After-dark edit</div></div></div><div class="card-face face-back"><div class="back-top"><span>BEAUTY</span><span>REEL PICK</span></div><h4>GLOW / FRAGRANCE<br>EDIT</h4><div class="price">Skin-first + scent</div><a class="cta" href="https://www.sephora.com/" target="_blank" rel="noopener">OPEN SHOP →</a></div></div></div>
+</div>
+</div>
+<div class="top10" id="top10">
+<div class="top10-head">
+<h3>TOP 10<br><span style="background:#fff;color:#000;padding:0 6px;border-radius:6px">HER CURRENT EDIT</span></h3>
+<small>PERSONAL SELECTION</small>
+</div>
+<div class="top10-list">
+<a class="t10" href="https://www.sephora.com/" target="_blank" rel="noopener"><div class="t10-num">01</div><div class="t10-body"><b>SEPHORA BEAUTY EDIT</b><i>Beauty / skincare / fragrance</i><span class="go">OPEN SHOP →</span></div></a>
+<a class="t10" href="https://www.nike.com/t/vomero-5-shoes-qZG4Xq" target="_blank" rel="noopener"><div class="t10-num">02</div><div class="t10-body"><b>NIKE VOMERO 5</b><i>Cream / Brown • $145</i><span class="go">OPEN SHOP →</span></div></a>
+<div class="t10" onclick="document.getElementById('gridFlipped').scrollIntoView({behavior:'smooth'})"><div class="t10-num">03</div><div class="t10-body"><b>CAPTAIN BEAR LETTERMAN</b><i>Fisshhfilet x $tripe • $158 — Her studio limited</i><span class="go">VIEW VIBE →</span></div></div>
+<a class="t10" href="https://www.ralphlauren.com/" target="_blank" rel="noopener"><div class="t10-num">04</div><div class="t10-body"><b>POLO RALPH LAUREN LETTERMAN</b><i>Classic varsity layer</i><span class="go">OPEN SHOP →</span></div></a>
+<a class="t10" href="https://www.sephora.com/shop/skincare" target="_blank" rel="noopener"><div class="t10-num">05</div><div class="t10-body"><b>GLOW EDIT</b><i>Skin-first beauty</i><span class="go">OPEN SHOP →</span></div></a>
+<a class="t10" href="https://www.sephora.com/shop/fragrance" target="_blank" rel="noopener"><div class="t10-num">06</div><div class="t10-body"><b>FRAGRANCE EDIT</b><i>After-dark fragrance</i><span class="go">OPEN SHOP →</span></div></a>
+<a class="t10" href="https://www.nike.com/" target="_blank" rel="noopener"><div class="t10-num">07</div><div class="t10-body"><b>EVERYDAY SNEAKER</b><i>Cream / neutral rotation</i><span class="go">OPEN SHOP →</span></div></a>
+<div class="t10" onclick="document.getElementById('gridShark').scrollIntoView({behavior:'smooth'})"><div class="t10-num">08</div><div class="t10-body"><b>FISHY KISS IN THE SEA</b><i>$2,300 — Moodboard / inspiration</i><span class="go">VIEW VIBE →</span></div></div>
+<div class="t10" onclick="document.getElementById('gridShark').scrollIntoView({behavior:'smooth'})"><div class="t10-num">09</div><div class="t10-body"><b>ADULTS ONLY PIER</b><i>$42 — Pink archive world</i><span class="go">VIEW VIBE →</span></div></div>
+<div class="t10" onclick="document.getElementById('gridShark').scrollIntoView({behavior:'smooth'})"><div class="t10-num">10</div><div class="t10-body"><b>HARDKNOKFFS BLACK</b><i>$88 — Black velour / HAKRs</i><span class="go">VIEW VIBE →</span></div></div>
+</div>
+</div>
+</div>
+<div data-panel="looks" class="hidden">
+<div class="section">
+<div class="section-head"><h3>LOOKS</h3><p>ARCHIVE</p></div>
+<div class="looks-grid">
+<div class="look l1">LOOK 01 — PINK SHARK</div>
+<div class="look l2">LOOK 02 — FLIPPED VELVET 🪽</div>
+<div class="look l3">LOOK 03 — CAPTAIN BEAR STUDIO</div>
+</div>
+</div>
+</div>
+<div data-panel="about" class="hidden">
+<div class="section">
+<div class="section-head"><h3>ABOUT</h3><p></p></div>
+<div class="reel">
+<h3 style="font-size:22px;line-height:1.1">Fisshhfilet 🪽 / Flipped 🦈<br>OWN YOUR WORLD</h3>
+<div style="margin-top:12px;font-size:13px;line-height:1.5;color:#c7c7c7">
+No quiet luxury. Just loud thrift flip + shark teeth.<br><br>
+SHARK ARCHIVE is the world she found.<br>
+FLIPPED HAKRs is the world she made.
+</div>
+</div>
+</div>
+</div>
+<div data-panel="picks" class="hidden">
+<div class="section">
+<div class="section-head"><h3>MY TOP PICKS</h3><p>REEL PICKS • TOP 10</p></div>
+</div>
+<div class="reel"><div class="reel-head"><h3>REEL PICKS <span>•</span></h3><p style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#777">FROM HER FEED</p></div><div class="grid" id="gridPicksClone"></div></div>
+<div class="top10" id="top10Clone"></div>
+</div>
+<div class="footer">
+Some links may earn commission.<br>
+© @fisshhfilet — Fisshhfilet 🪽 / Flipped 🦈
+</div>
 </div>
 <script>
-(function(){
-const feed=document.getElementById('feed');
-const pages=[...document.querySelectorAll('.page')];
-const opening=document.getElementById('opening');
-const allVideos=[...document.querySelectorAll('video')];
-requestAnimationFrame(()=>{opening.classList.add('go');setTimeout(()=>{opening.style.display='none'},2100)});
-let finalTimers=[],finalState='idle';
-const privateOverlay=document.getElementById('privateOverlay'),doors=document.getElementById('doors'),paFisshh=document.getElementById('pa-fisshh'),paPrivate=document.getElementById('pa-private'),paMembers=document.getElementById('pa-members'),gomfVideo=document.getElementById('gomfVideo');
-function clearFinal(){finalTimers.forEach(t=>clearTimeout(t));finalTimers=[]}
-function resetFinal(){clearFinal();finalState='idle';privateOverlay.classList.remove('hide');doors.classList.remove('open');paFisshh.classList.remove('show');paPrivate.classList.remove('show');paMembers.classList.remove('show');doors.style.transition='none';void doors.offsetWidth;doors.style.transition='';try{gomfVideo.pause();gomfVideo.currentTime=0}catch(e){}}
-function startFinal(){if(finalState!=='idle')return;resetFinal();finalState='running';finalTimers.push(setTimeout(()=>paFisshh.classList.add('show'),400));finalTimers.push(setTimeout(()=>paPrivate.classList.add('show'),900));finalTimers.push(setTimeout(()=>paMembers.classList.add('show'),1400));finalTimers.push(setTimeout(()=>{paFisshh.style.transition=paPrivate.style.transition=paMembers.style.transition='opacity 0.6s ease';paFisshh.classList.remove('show');paPrivate.classList.remove('show');paMembers.classList.remove('show');finalTimers.push(setTimeout(()=>{privateOverlay.classList.add('hide');finalState='doorsOpening';finalTimers.push(setTimeout(()=>{doors.classList.add('open');finalTimers.push(setTimeout(()=>{finalState='revealed';try{gomfVideo.currentTime=0;gomfVideo.muted=true;gomfVideo.play().catch(()=>{})}catch(e){}},1550))},200))},650))},4800))}
-function pauseAll(){allVideos.forEach(v=>{try{v.pause()}catch(e){}})}
-function playFrom0(v){if(!v)return;try{v.pause();v.currentTime=0;v.muted=true;v.play().catch(()=>{})}catch(e){}}
-function settledIdx(){return Math.max(0,Math.min(Math.round(feed.scrollTop/(window.innerHeight||800)),pages.length-1))}
-let last=-1,scrollTimer=null;
-function onSettled(i){
- if(i===last)return;
- const prev=last;last=i;
- pages.forEach(p=>p.classList.remove('settled'));
- if(pages[i])pages[i].classList.add('settled');
- if(prev===11&&i!==11)resetFinal();
- pauseAll();
- if(i===11){startFinal();return}
- const pg=pages[i];
- if(pg&&pg.hasAttribute('data-video')){
-  const vid=pg.querySelector('video');
-  setTimeout(()=>{if(settledIdx()!==i)return;playFrom0(vid)},100)
- }
+const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
+$$('.tabs button').forEach(btn=>{
+ btn.addEventListener('click',()=>{
+  $$('.tabs button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const tab=btn.dataset.tab;
+  $$('[data-panel]').forEach(p=>p.classList.toggle('hidden',p.dataset.panel!==tab));
+  if(tab==='picks'){
+    $('#gridPicksClone').innerHTML=$('#reelPicks .grid').innerHTML;
+    $('#top10Clone').innerHTML=$('#top10').innerHTML;
+    bindFlips($('#gridPicksClone'));
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+ });
+});
+function bindFlips(root=document){
+ (root.querySelectorAll?root.querySelectorAll('.card'):$$('.card')).forEach(card=>{
+  card.addEventListener('click',e=>{
+    if(e.target.closest('a')) return;
+    card.classList.toggle('flipped');
+  });
+ });
 }
-feed.addEventListener('scroll',()=>{
- clearTimeout(scrollTimer);
- pages.forEach(p=>p.classList.remove('settled'));
- scrollTimer=setTimeout(()=>onSettled(settledIdx()),150);
-},{passive:true});
-setTimeout(()=>onSettled(settledIdx()),2400);
-allVideos.forEach(v=>{v.muted=true;v.playsInline=true;});
-})();
+bindFlips();
+const btnShark=$('#btnShark'),btnFlipped=$('#btnFlipped');
+const secShark=$('#secShark'),secFlipped=$('#secFlipped');
+let mode='all';
+function applyMode(){
+ if(mode==='all'){secShark.classList.remove('hidden');secFlipped.classList.remove('hidden');btnShark.classList.add('on');btnFlipped.classList.add('on')}
+ else if(mode==='shark'){secShark.classList.remove('hidden');secFlipped.classList.add('hidden');btnShark.classList.add('on');btnFlipped.classList.remove('on')}
+ else{secFlipped.classList.remove('hidden');secShark.classList.add('hidden');btnFlipped.classList.add('on');btnShark.classList.remove('on')}
+}
+btnShark.addEventListener('click',()=>{mode=mode==='shark'?'all':'shark';applyMode()});
+btnFlipped.addEventListener('click',()=>{mode=mode==='flipped'?'all':'flipped';applyMode()});
 </script>
 </body>
-</html>
+ </html>
