@@ -1,232 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><style>
-@font-face {
-  font-family: "Optimistic";
-  font-style: normal;
-  font-weight: 400 600;
-  font-display: swap;
-  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Optimistic Mono";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
-}
-:where(html) {
-  font-family: "Optimistic", system-ui, sans-serif;
-}
-:where(code, pre, kbd, samp) {
-  font-family: "Optimistic Mono", ui-monospace, monospace;
-}
-</style>
+<head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no">
-<title>@fisshhfilet — fisshhfilet.github.io</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>fisshhfilet.github.io</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif;overscroll-behavior:none}
-body{-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
-.app{max-width:430px;margin:0 auto;min-height:100vh;background:#000;position:relative;overflow:hidden}
-.screen{min-height:100vh;width:100%;position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:18px 14px;border-bottom:1px solid #111}
-.splash{height:100vh;background:#000}
-.splash span{font-size:10px;letter-spacing:.28em;opacity:.55;text-transform:lowercase}
-.top10{background:#f6d9c0;color:#000;padding:22px 14px 0;justify-content:flex-start;align-items:stretch}
-.top10 .small{font-size:22px;line-height:1;font-weight:900;letter-spacing:-.04em}
-.top10 .small i{font-style:normal;background:#000;color:#fff;padding:1px 6px;border-radius:999px;font-size:14px}
-.top10 h2{font-size:42px;line-height:.9;margin-top:6px;font-weight:1000;letter-spacing:-.06em}
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
-.tag{font-size:9px;font-weight:900;padding:6px 9px;border-radius:999px;background:#000;color:#fff;border:1px solid #000}
-.tag.light{background:#fff;color:#000;border-color:#000}
-.tag.blue{background:#dbe8ff}
-.betty{margin-top:14px;position:relative;background:#f6d9c0;display:flex;justify-content:space-between;align-items:end;gap:8px}
-.betty .left{width:56%}
-.betty .right{width:44%;text-align:right;font-size:64px}
-.shelf{background:#ece6db;color:#000;padding:0;justify-content:flex-start}
-.shelf img{width:100%;height:auto;display:block;object-fit:cover}
-.shelf .row{display:flex;gap:8px;padding:10px;background:#fff;border-top:2px solid #000;border-bottom:2px solid #000}
-.shelf .row span{font-size:8px;font-weight:900}
-.bar{width:100%;background:#000;color:#fff;text-align:center;padding:18px 14px}
-.bar h3{font-size:22px;font-weight:1000;letter-spacing:-.04em}
-.bar p{font-size:9px;letter-spacing:.18em;margin-top:6px;opacity:.6}
-.qr{background:#000;color:#fff}
-.qr .box{width:180px;height:180px;background:#fff;padding:8px}
-.qr .box div{width:100%;height:100%;background:repeating-linear-gradient(0deg,#000 0 2px,#fff 2px 4px)}
-.qr p{margin-top:12px;font-size:8px;letter-spacing:.18em;opacity:.5}
-.hakrs{background:#0a0a0a;color:#fff;padding:0;justify-content:flex-start;align-items:stretch}
-.hakrs .hero{position:relative;width:100%;aspect-ratio:0.72;background:linear-gradient(180deg,#1a2a4a,#0a0a0a);display:flex;flex-direction:column;justify-content:space-between;padding:10px;border:3px solid #ff4a00}
-.hakrs .label{font-size:12px;font-weight:1000;color:#ff7a00;letter-spacing:.08em}
-.hakrs .price{font-size:10px;line-height:1.4}
-.hakrs .price i{font-style:normal;display:inline-block;background:#fff;color:#000;padding:2px 6px;border-radius:999px;margin:2px;font-size:8px;font-weight:900}
-.hakrs .bottom{background:#000;color:#fff;text-align:center;padding:10px;font-size:12px;font-weight:1000;letter-spacing:.04em}
-.notfound{background:#fff;color:#000;justify-content:center}
-.notfound h1{font-size:72px;font-weight:1000;line-height:.9}
-.notfound p{font-size:12px;margin-top:12px;line-height:1.4;max-width:320px;text-align:center}
-.notfound a{color:#0366d6;text-decoration:underline}
-.beach{background:#0a1630;color:#fff;justify-content:flex-start;padding:0}
-.beach .img{width:100%;aspect-ratio:1.2;background:linear-gradient(180deg,#0a2a5a,#06122a);display:grid;place-items:center;font-size:32px;font-weight:1000}
-.beach .cta{padding:16px;text-align:center}
-.beach h2{font-size:34px;font-weight:1000;color:#4ba3ff}
-.beach p{font-size:9px;letter-spacing:.18em;margin-top:8px;opacity:.7}
-.beach .btn{margin-top:10px;display:inline-block;border:1px solid #fff;border-radius:999px;padding:8px 14px;font-size:9px;font-weight:900}
-.mcd{background:#fff;color:#000}
-.mcd .top{width:100%;background:#000;color:#fff;padding:12px;text-align:center;font-size:28px;font-weight:1000}
-.mcd .img{width:100%;aspect-ratio:0.9;background:#f0f0f0;display:grid;place-items:center;font-size:18px}
-.kalshi{background:#000;color:#fff;text-align:center}
-.kalshi h2{font-size:18px;color:#39e66f;font-weight:1000}
-.kalshi h1{font-size:54px;line-height:.9;font-weight:1000;margin-top:8px}
-.kalshi .fish{margin-top:14px;width:220px;aspect-ratio:0.8;background:radial-gradient(circle,#333,#000);border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;display:grid;place-items:center;font-size:42px}
-.hoodie{background:#0a2a1a;color:#fff}
-.hoodie .swatch{width:100%;aspect-ratio:0.85;background:radial-gradient(circle at 40% 30%,#1a4a3a,#061a12);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px}
-.hoodie .stitch{font-size:42px;font-weight:1000;letter-spacing:-.06em;color:#e8f5e9;text-shadow:0 2px 0 #000}
-.private{height:100vh;background:#000;color:#fff;justify-content:center;animation:fade 6s forwards}
-.private span{font-size:10px;letter-spacing:.28em;opacity:.6}
-.private b{display:block;margin-top:8px;font-size:10px;letter-spacing:.32em;opacity:.3;font-weight:400}
-@keyframes fade{0%{opacity:1}80%{opacity:1}100%{opacity:0}}
-.snap{scroll-snap-type:y mandatory;height:100vh;overflow-y:scroll;scrollbar-width:none}
-.snap::-webkit-scrollbar{display:none}
-.snap .screen{scroll-snap-align:start}
-.nav{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(0,0,0,.7);backdrop-filter:blur(10px);font-size:9px;letter-spacing:.14em}
-.nav b{font-weight:900}
-.hint{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:50;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:6px 12px;font-size:8px;letter-spacing:.14em;backdrop-filter:blur(8px)}
+html,body{background:#000;height:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Inter",Arial,sans-serif;background:#000;color:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.app{max-width:430px;margin:0 auto;background:#000;min-height:100vh}
+.s{width:100%;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#000;border-bottom:1px solid #0a0a0a;position:relative}
+#splash{position:fixed;inset:0;max-width:430px;left:50%;transform:translateX(-50%);background:#000;display:flex;justify-content:center;align-items:center;z-index:99;transition:opacity 1.2s ease}
+#splash.hide{opacity:0;pointer-events:none}
+#splash span{font-size:11px;letter-spacing:.36em;color:#fff;opacity:.7}
+.label{font-size:9px;letter-spacing:.32em;opacity:.35;text-transform:uppercase}
+.title{margin-top:12px;font-size:28px;font-weight:600;letter-spacing:-.04em;line-height:.9;text-align:center}
+.title.green{color:#39e66f}
+.divider{width:24px;height:1px;background:#222;margin:18px 0}
+.mono{font-family:ui-monospace,Menlo,monospace;font-size:9px;letter-spacing:.18em;opacity:.4}
+.end span{font-size:10px;letter-spacing:.36em;opacity:.6}
+.end .mid{margin:16px 0;display:flex;gap:10px;align-items:center}
+.end .mid b{font-size:10px;letter-spacing:.14em;color:#39e66f;font-weight:700}
+.end .small{font-size:9px;letter-spacing:.36em;opacity:.22}
 </style>
 </head>
 <body>
 <div class="app">
-<div class="nav"><b>@fisshhfilet</b><span>fisshhfilet.github.io</span></div>
-<div class="hint">SWIPE UP / DOWN • TAP 404 → SHOP</div>
-<div class="snap" id="snap">
-
-<!-- 1 SPLASH -->
-<div class="screen splash"><span>@fisshhfilet</span></div>
-
-<!-- 2 TOP 10 -->
-<div class="screen top10">
-<div class="small"><i>(BOTS)</i> Only Enjoy bAR</div>
-<h2>Top 10</h2>
-<div style="margin-top:10px;font-size:9px;font-weight:900;letter-spacing:.04em">• Searching beverage trends</div>
-<div class="tags">
-<span class="tag">buisinesswire.com</span><span class="tag">people.com</span><span class="tag light">tastingtable.com</span><span class="tag light">bennet.com</span><span class="tag light">specialtyfood.com</span><span class="tag light">foodnavigator-usa.com</span>
-</div>
-<div style="margin-top:10px;font-size:9px;font-weight:900">• Searching Trader Joe's drinks</div>
-<div class="tags">
-<span class="tag">supermarketnews.com</span><span class="tag">shelflife.com</span><span class="tag light">foodandwine.com</span><span class="tag light">bonappetit.com</span>
-</div>
-<div class="betty">
-<div class="left" style="font-size:9px;line-height:1.3">Betty Boop archive — soft girl but fishy</div>
-<div class="right">💋</div>
-</div>
-</div>
-
-<!-- 3 SHELF -->
-<div class="screen shelf">
-<div style="padding:10px;background:#e8ddd0;width:100%;text-align:center;font-size:10px;font-weight:900;letter-spacing:.12em">SAN PELLEGRINO • OLIPOP • TOPO CHICO • POPPI</div>
-<div style="width:100%;flex:1;background:linear-gradient(180deg,#f5efe6,#ddd);display:grid;place-items:center;font-size:14px;font-weight:900;color:#333">BOTTLE SHELF PLACEHOLDER<br><span style="font-size:9px;font-weight:400">Your original bottles here</span></div>
-<div class="row"><span>🍎 Apple</span><span>🎧 Spotify</span><span>7-ELEVEN x FIS x pampelmousse</span></div>
-</div>
-
-<!-- 4 RESTOCKING -->
-<div class="screen bar">
-<h3>Restocking<br>Soon</h3>
-<p>📷 DM "WAITLIST"<br>@CLUB52VOGUE.SHOP</p>
-</div>
-
-<!-- 5 SEPHORA -->
-<div class="screen" style="background:#fff;color:#000">
-<div style="width:100%;background:#000;color:#fff;padding:12px;text-align:center;font-weight:1000;font-size:18px">SEPHORA</div>
-<div style="padding:14px;width:100%;flex:1;display:grid;place-items:center;background:#f5f5f5;color:#000;text-align:center">
-<div>
-<div style="font-size:12px;font-weight:900">Sephora<br>Let's Find Your Match</div>
-<div style="margin-top:10px;font-size:8px;opacity:.6">Sponsored • Armani • Tarte • etc</div>
-</div>
-</div>
-</div>
-
-<!-- 6 QR -->
-<div class="screen qr">
-<div class="box"><div></div></div>
-<p>PRIVATE ACCESS QR</p>
-</div>
-
-<!-- 7 HAKRs -->
-<div class="screen hakrs">
-<div class="hero">
-<div class="label">HAKRs</div>
-<div style="flex:1;display:grid;place-items:center;font-size:52px">⚡️🦈</div>
-<div class="price">
-<i>Grey Crystal Hoodie $18</i><i>Gold Shades $18</i><i>Jeweled Corset $42</i><i>Tulle Cowboy $32</i><i>Rose Denim $52</i><i>Sequin Pump $56</i><i>Barrel Bag $20</i><i>Lace Wigs $32</i><i>Lace Wraps $12</i><i>Red Platforms $38</i>
-</div>
-<div class="bottom">+ $312 FLIP / $2,535 RETAIL +</div>
-</div>
-</div>
-
-<!-- 8 404 -->
-<div class="screen notfound" id="shopTrigger">
-<h1>404</h1>
-<p><b>File not found</b><br>The site configured at this address does not contain the requested file.<br><br>If this is your site, make sure that the filename case matches the URL.<br>For root URLs (like http://example.com/) you must provide an index.html file.<br><br><a href="#shop">Read the full documentation</a> for more information about using GitHub Pages.<br><br>GitHub Status — @githubstatus</p>
-<p style="margin-top:18px"><a href="#beach" style="background:#000;color:#fff;padding:8px 14px;border-radius:999px;text-decoration:none">→ OPEN SHOP (club52vogue.shop)</a></p>
-</div>
-
-<!-- 9 BEACH SHOP = 404 LINK -->
-<div class="screen beach" id="beach">
-<div class="img">ADULTS ONLY<br>Beach Section</div>
-<div class="cta">
-<h2>ADULTS ONLY</h2>
-<p>Enjoy — Beach Section</p>
-<div class="btn">Shop now →</div>
-<div style="margin-top:12px;font-size:9px">club52vogue.shop • "Wellness/Sea"</div>
-</div>
-</div>
-
-<!-- 10 WAISTA -->
-<div class="screen mcd">
-<div class="top">WAISTA?</div>
-<div class="img">McDONALD'S x FIS<br>McCafé • Fries</div>
-<div style="padding:12px;text-align:center;font-size:9px;letter-spacing:.14em">club52vogue.shop</div>
-</div>
-
-<!-- 11 KALSHI -->
-<div class="screen kalshi">
-<h2>Kalshi</h2>
-<h1>TRADE ON<br>ANYTHING</h1>
-<div class="fish">🐟</div>
-</div>
-
-<!-- 12 HOODIE -->
-<div class="screen hoodie">
-<div class="swatch">
-<div style="font-size:28px">🧸⛵</div>
-<div class="stitch">FISHFILET</div>
-<div style="margin-top:8px;font-size:9px;letter-spacing:.18em;opacity:.6">CAPTAIN BEAR BOAT EMBROIDERY</div>
-</div>
-</div>
-
-<!-- 13 PRIVATE ACCESS FADE -->
-<div class="screen private" id="private">
+<div id="splash"><span>@fisshhfilet</span></div>
+<div class="s"><span class="label">@fisshhfilet</span></div>
+<div class="s"><span class="label">Top 10 — (BOTS) Only Enjoy bAR</span><div class="title">Betty Boop Archive</div><div class="divider"></div><span class="mono">fisshhfilet.github.io / 01</span></div>
+<div class="s"><span class="label">San Pellegrino Collection</span><div class="title">Vintage<br>Pamplemousse</div><div class="divider"></div><span class="mono">7-ELEVEN x FIS x pampelmousse</span></div>
+<div class="s"><span class="label">Status</span><div class="title">Restocking<br>Soon</div><div class="divider"></div><span class="mono">@CLUB52VOGUE.SHOP</span></div>
+<div class="s"><span class="label">Sephora</span><div class="title">Let's Find<br>Your Match</div></div>
+<div class="s"><span class="label">Private</span><div style="width:140px;height:140px;background:#fff;margin-top:14px"></div><div class="divider"></div><span class="mono">QR — MEMBERS ONLY</span></div>
+<div class="s"><span class="label">HAKRs</span><div class="title">Pier Night<br>Lightning</div><div class="divider"></div><span class="mono">$312 FLIP / $2,535 RETAIL</span></div>
+<div class="s" id="shop"><span class="label">Shop</span><div class="title">Adults Only<br>Beach Section</div><div class="divider"></div><span class="mono">club52vogue.shop</span></div>
+<div class="s"><span class="label">Waista?</span><div class="title">McDonald's<br>x FIS</div></div>
+<div class="s"><span class="label" style="color:#39e66f;opacity:1">Kalshi</span><div class="title green">Trade On<br>Anything</div><div class="divider"></div><span class="mono">▲ +2.84% • LIVE</span></div>
+<div class="s"><span class="label">Archive</span><div class="title">FishhFilet<br>Hoodie</div></div>
+<div class="s end" id="end">
 <span>@fisshhfilet</span>
-<b>PRIVATE ACCESS<br>MEMBERS ONLY</b>
+<div style="margin-top:18px;text-align:center">
+<div class="label" style="opacity:.6">Private Access</div>
+<div class="mid"><b>KALSHI</b><b style="color:#39e66f">▲ +2.84% $4,212.18</b></div>
+<div class="small">MEMBERS ONLY</div>
 </div>
-
 </div>
 </div>
 <script>
-const snap=document.getElementById('snap');
-document.getElementById('shopTrigger').addEventListener('click',()=>{
-  document.getElementById('beach').scrollIntoView({behavior:'smooth'});
-});
-// loop back to top when reaching private access
-let lastScroll=0;
-snap.addEventListener('scroll',()=>{
-  const atBottom = snap.scrollTop + snap.clientHeight >= snap.scrollHeight - 10;
-  if(atBottom){
-    setTimeout(()=>{
-      snap.scrollTo({top:0,behavior:'smooth'});
-    },2200);
+setTimeout(()=>{document.getElementById('splash').classList.add('hide')},900);
+const end=document.getElementById('end');
+new IntersectionObserver(es=>{
+ es.forEach(e=>{
+  if(e.isIntersecting){
+   setTimeout(()=>{e.target.style.transition='opacity 1.8s ease';e.target.style.opacity='0';},1000);
   }
-});
+ });
+},{threshold:0.7}).observe(end);
 </script>
-<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
+</body>
 </html>
