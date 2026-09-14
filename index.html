@@ -12,7 +12,6 @@ body{overflow:hidden;font-family:monospace;background:#000;overscroll-behavior:n
 .page{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;background:#000;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;overflow:hidden}
 .page img,.page video{width:100%;height:100%;object-fit:contain;background:#000;display:block}
 .tap{position:absolute;inset:0;z-index:5;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.tap.locked{pointer-events:auto;touch-action:none}
 .opening{position:absolute;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:10;pointer-events:none;animation:openingOut .8s ease 2.3s forwards}
 .opening span{color:#a8a8a8;font-size:10px;letter-spacing:.32em;opacity:0;animation:txtIn .8s ease .3s forwards, txtOut .6s ease 1.8s forwards}
 .betty{position:absolute;inset:0;opacity:0;animation:bettyIn 1.2s ease 2.4s forwards}
@@ -23,10 +22,10 @@ body{overflow:hidden;font-family:monospace;background:#000;overscroll-behavior:n
 .bar{display:flex;justify-content:space-between;padding:0 12px 10px;font-size:9px;color:#8a8a8a;border-bottom:1px solid #111}.bar b{color:#fff}
 .code{margin:8px 12px;background:#111;border:1px solid #1e1e1e;border-radius:999px;display:flex;justify-content:space-between;padding:10px 12px 10px 14px;align-items:center}
 .copy{border:0;background:#1e1e1e;color:#fff;border-radius:999px;padding:6px 14px;font-size:9px;font-weight:900}
-.avatars{display:flex;gap:10px;overflow-x:auto;padding:12px 12px;border-bottom:1px solid #111}.av{flex:0 0 56px;text-align:center;text-decoration:none;opacity:.4;cursor:pointer;-webkit-tap-highlight-color:transparent}.av.active{opacity:1}.av.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff}
+.avatars{display:flex;gap:10px;overflow-x:auto;padding:12px 12px;border-bottom:1px solid #111}.av{flex:0 0 56px;text-align:center;text-decoration:none;opacity:.35}.av.active{opacity:1}.av.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff}
 .av .c{width:48px;height:48px;border-radius:50%;overflow:hidden;background:#111;margin:0 auto;border:2px solid #1a1a1a}.av .c img{width:100%;height:100%;object-fit:cover}
 .av i{font-style:normal;font-size:7px;color:#666;margin-top:5px;display:block}
-.av.seph{opacity:1}.av.seph.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff, 0 0 12px rgba(255,255,255,.6)}.av.seph i{color:#fff;font-weight:900}
+.av.seph{opacity:1;cursor:pointer}.av.seph.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff, 0 0 12px rgba(255,255,255,.6)}.av.seph i{color:#fff;font-weight:900}
 .toggle{margin:10px 12px;background:#111;border:1px solid #1e1e1e;border-radius:999px;display:grid;grid-template-columns:1fr 1fr;padding:3px;gap:3px}.toggle button{height:36px;border-radius:999px;border:0;font-size:9px;font-weight:800;letter-spacing:.14em;background:transparent;color:#666}.toggle button.on{background:#ff2a6d;color:#fff}
 .img{margin:0 12px;border-radius:18px;overflow:hidden;border:2px solid #ff5a1f;background:#0a0a0a;aspect-ratio:4/5}.img img{width:100%;height:100%;object-fit:cover}
 .swipe{text-align:center;padding:10px 12px 6px;font-size:8px;letter-spacing:.18em;color:#555}.live{text-align:center;padding:0 12px 12px;font-size:9px;color:#ff2a6d}
@@ -36,12 +35,12 @@ body{overflow:hidden;font-family:monospace;background:#000;overscroll-behavior:n
 </head>
 <body>
 <div id="feed">
-<section class="page"><div class="betty"><img src="betty.jpg"><div class="tap locked"></div></div><div class="opening"><span>@fisshhfilet</span></div></section>
-<section class="page"><img src="waista.jpg"><div class="tap locked"></div></section>
+<section class="page"><div class="betty"><img src="betty.jpg"></div><div class="opening"><span>@fisshhfilet</span></div></section>
+<section class="page"><img src="waista.jpg"></section>
 <section class="page"><img src="bear-boat-hoodie.jpg"><div class="tap open-link" data-href="https://naturalcatchtuna.com/"></div></section>
-<section class="page"><video src="Sephora.mp4" muted loop playsinline preload="metadata"></video><div class="tap locked"></div></section>
-<section class="page"><img src="qr-ware.jpg"><div class="tap locked"></div></section>
-<section class="page"><video src="hakrs-flip.mp4" muted loop playsinline preload="auto"></video><div class="tap locked"></div></section>
+<section class="page"><video src="Sephora.mp4" muted loop playsinline preload="metadata"></video></section>
+<section class="page"><img src="qr-ware.jpg"></section>
+<section class="page"><video src="hakrs-flip.mp4" muted loop playsinline preload="auto"></video></section>
 <section class="page" style="background:#000">
 <div class="shop">
 <div class="x"><div>x fi§ x</div></div>
@@ -69,10 +68,10 @@ body{overflow:hidden;font-family:monospace;background:#000;overscroll-behavior:n
 <div class="add"><span>ADD → $32</span><div style="width:34px;height:34px;border-radius:50%;background:#ff7a00;display:flex;align-items:center;justify-content:center">♥</div></div>
 </div>
 </section>
-<section class="page"><img src="restocking-soon-fix.jpg"><div class="tap locked"></div></section>
-<section class="page"><img src="waista-question.jpg"><div class="tap locked"></div></section>
+<section class="page"><img src="restocking-soon-fix.jpg"></section>
+<section class="page"><img src="waista-question.jpg"></section>
 <section class="page"><img src="kalshi-trade.jpg"><div class="tap open-link" data-href="https://kalshi.com"></div></section>
-<section class="page"><img src="adults-only-beach.jpg"><div class="tap locked"></div></section>
+<section class="page"><img src="adults-only-beach.jpg"></section>
 <section class="page final" style="background:#000">
 <div style="color:#a8a8a8;font-size:10px;letter-spacing:.32em">@fisshhfilet</div>
 <div style="color:#fff;font-size:11px;letter-spacing:.36em">PRIVATE ACCESS</div>
@@ -90,18 +89,12 @@ if(e.isIntersecting){try{v.currentTime=0; v.play().catch(function(){})}catch(er)
 });
 },{root:feed,threshold:0.65});
 document.querySelectorAll('.page').forEach(function(p){io.observe(p);});
-
-// FIX: clean open, no 3-image flash
 document.querySelectorAll('.open-link').forEach(function(el){
 el.addEventListener('click', function(e){
-e.preventDefault(); e.stopPropagation();
+e.stopPropagation();
 var href = el.getAttribute('data-href');
-if(!href) return;
-window.open(href, '_blank', 'noopener');
-}, {passive:false});
-el.addEventListener('touchend', function(e){
-e.preventDefault();
-}, {passive:false});
+if(href) window.open(href, '_blank', 'noopener');
+});
 });
 })();
 </script>
