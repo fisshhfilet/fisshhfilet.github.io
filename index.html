@@ -1,117 +1,89 @@
 <!doctype html>
 <html lang="en">
-<head><style>
-@font-face {
-  font-family: "Optimistic";
-  font-style: normal;
-  font-weight: 400 600;
-  font-display: swap;
-  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Optimistic Mono";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
-}
-:where(html) {
-  font-family: "Optimistic", system-ui, sans-serif;
-}
-:where(code, pre, kbd, samp) {
-  font-family: "Optimistic Mono", ui-monospace, monospace;
-}
-</style>
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no">
 <title>fisshhfilet</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%;background:#000;color:#fff;font-family:ui-monospace,Menlo,monospace;overflow:hidden}
-#opening{position:fixed;inset:0;background:#000;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity .9s ease}
+html,body{width:100%;height:100%;background:#000;color:#fff;font-family:ui-monospace,Menlo,Monaco,Arial,sans-serif;overflow:hidden;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+#opening{position:fixed;inset:0;background:#000;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity.8s ease}
 #opening.hide{opacity:0;pointer-events:none}
-#opening span{font-size:11px;letter-spacing:.32em;opacity:.7}
-#feed{width:100vw;height:100dvh;height:100vh;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth;background:#000}
-.page{width:100vw;height:100dvh;height:100vh;scroll-snap-align:start;position:relative;overflow:hidden;background:#000;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.page img,.page video{width:100%;height:100%;object-fit:contain;background:#000;display:block}
+#opening span{font-size:11px;letter-spacing:.28em;opacity:.9}
+#feed{width:100vw;height:100dvh;height:100vh;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;overscroll-behavior:none;background:#000}
+.page{width:100vw;height:100dvh;height:100vh;scroll-snap-align:start;position:relative;overflow:hidden;background:#000;display:flex;align-items:center;justify-content:center}
+.page img,.page video{width:100%;height:100%;object-fit:cover}
+.page video.contain{object-fit:contain;background:#000}
 .ad{background:#0A3D9C!important}
-.ad-pill{position:absolute;top:14px;left:14px;font-size:8px;letter-spacing:.22em;background:rgba(0,0,0,.35);padding:5px 9px;border-radius:9999px;border:1px solid rgba(255,255,255,.2);z-index:5}
-.lime{color:#D9FF00}
+.ad.label{position:absolute;top:calc(12px + env(safe-area-inset-top));left:12px;font-size:9px;letter-spacing:.2em;background:rgba(0,0,0,.35);padding:6px 10px;border-radius:9999px;border:1px solid rgba(255,255,255,.18);z-index:2}
+.pill{background:#0F1F16;border:1px solid #1A3A25;border-radius:9999px;padding:10px 22px;font-size:14px;letter-spacing:.05em}
+.bar{width:100%;max-width:480px;background:#111;border:1px solid #222;border-radius:9999px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.05em}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:480px;margin:0 auto;width:100%}
+.card{background:#111;border:1px solid #222;border-radius:16px;padding:12px;min-height:86px}
 .dots{position:fixed;right:10px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:7px;z-index:50}
-.dots i{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.25);display:block;transition:.25s}
-.dots i.active{background:#fff;transform:scale(1.4)}
-@keyframes kalshiPulse{0%{box-shadow:0 0 0 0 rgba(57,230,111,.6),0 0 8px #39E66F}70%{box-shadow:0 0 0 6px rgba(57,230,111,0),0 0 8px #39E66F}100%{box-shadow:0 0 0 0 rgba(57,230,111,0),0 0 8px #39E66F}}
-.live-dot{width:8px;height:8px;background:#39E66F;border-radius:50%;display:inline-block;animation:kalshiPulse 2s infinite}
+.dots i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.25);display:block;transition:.2s}
+.dots i.active{background:#fff;transform:scale(1.45);box-shadow:0 0 10px #0070F0}
+.nav{position:fixed;top:calc(12px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:50}
+.nav button{background:rgba(0,0,0,.58);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:10px;letter-spacing:.2em;padding:9px 14px;border-radius:9999px}
+.tap{position:absolute;inset:0;background:transparent;border:0;z-index:1}
 </style>
 </head>
 <body>
-<div id="opening"><span>@fisshhfilet</span></div>
+<div id="opening"><span>fisshhfilet</span></div>
+<div class="nav"><button id="back">BACK</button><button id="next">NEXT</button></div>
 <div class="dots" id="dots"></div>
 <div id="feed">
+<section class="page" style="background:#000"><div style="font-size:clamp(48px,14vw,92px);font-weight:900;line-height:.85;text-align:center;letter-spacing:-.03em">FISSHH<br>FILET</div></section>
 
-<!-- AD - ad.jpg / ad.mp4 -->
 <section class="page ad">
-<div class="ad-pill">AD</div>
-<video id="adVideo" src="ad.mp4" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;z-index:2"></video>
-<img id="adImg" src="ad.jpg" alt="ad" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;z-index:2">
-<div id="adFallback" style="text-align:center;max-width:420px;padding:22px;z-index:1">
-<div style="font-size:10px;letter-spacing:.32em">♦ LIQUID I.V.</div>
-<h2 style="font-size:44px;font-weight:900;line-height:.88;margin-top:14px"><span class="lime">HYDRATION</span><br>MULTIPLIER<br><span style="font-size:20px;color:#fff">SUGAR-FREE</span></h2>
-<div style="margin:16px 0;background:#D9FF00;color:#000;font-size:9px;padding:8px 10px;font-weight:700">5 ESSENTIAL VITAMINS — 0 ARTIFICIAL SWEETENERS</div>
-<div style="background:#fff;color:#000;border-radius:9999px;padding:10px 22px;display:inline-block;font-size:12px;font-weight:800">SHOP NOW</div>
+<div class="label">AD</div>
+<div style="text-align:center;max-width:380px;padding:24px;z-index:1">
+<div style="font-size:10px;letter-spacing:.3em;opacity:.9">♦ LIQUID I.V.</div>
+<h2 style="font-size:42px;font-weight:900;line-height:.9;margin-top:14px"><span style="color:#D9FF00">HYDRATION</span><br>MULTIPLIER<br><span style="font-size:24px;color:#fff">SUGAR-FREE</span></h2>
+<div style="margin:20px 0;background:#D9FF00;color:#000;font-size:10px;letter-spacing:.05em;padding:9px;white-space:nowrap;overflow:hidden">5 ESSENTIAL VITAMINS — 0 ARTIFICIAL SWEETENERS — 5 ESSENTIAL VITAMINS</div>
+<div style="background:#fff;color:#000;border-radius:9999px;padding:11px 22px;display:inline-block;font-size:12px;font-weight:800;letter-spacing:.08em">SHOP NOW</div>
+</div>
+<button class="tap" onclick="window.open('https://www.liquid-iv.com','_blank')"></button>
+</section>
+
+<section class="page"><img src="https://fisshhfilet.github.io/betty.jpg" alt="betty"><button class="tap" onclick="window.open('https://instagram.com/fisshhfilet','_blank')"></button></section>
+<section class="page"><img src="https://fisshhfilet.github.io/waista.jpg" alt="waista"><button class="tap" onclick="window.open('https://naturalcatchtuna.com','_blank')"></button></section>
+<section class="page"><img src="https://fisshhfilet.github.io/boatbear.jpg" alt="boatbear"><button class="tap" onclick="window.open('https://instagram.com/fisshhfilet','_blank')"></button></section>
+
+<section class="page" style="background:#000">
+<video id="sharkVideo" class="contain" muted loop playsinline autoplay preload="auto" poster="https://fisshhfilet.github.io/adults-only.jpg"><source src="Sephora.mp4" type="video/mp4"></video>
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;pointer-events:none;z-index:2">
+<div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:calc(12px + env(safe-area-inset-top)) 12px 0;pointer-events:auto">
+<div class="pill">x fi§ x</div>
+<div class="bar"><span><b style="color:#fff">$312 FLIP</b> / $2,535 RETAIL +</span><span style="opacity:.4">—</span></div>
+<div class="bar"><span><b>FISSHH50</b> SEPHORA $50 OFF</span><span style="background:#1E1E1E;padding:6px 12px;border-radius:9999px">COPY</span></div>
+</div>
+<div style="margin-top:auto;background:linear-gradient(transparent,rgba(0,0,0,.92));padding:12px;padding-bottom:calc(12px + env(safe-area-inset-bottom));pointer-events:auto">
+<div style="font-size:10px;letter-spacing:.15em;opacity:.7;text-align:center;margin-bottom:8px">SHARK IS LIVE — TAP TO FLIP CARDS 4/4 04 / 09</div>
+<div class="grid">
+<div class="card"><div style="font-size:9px;opacity:.5;letter-spacing:.12em">FABRIC?</div><div style="font-size:11px;margin-top:16px;line-height:1.2">HEAVY 14oz FLEECE CRYSTAL WASHED</div></div>
+<div class="card"><div style="font-size:9px;opacity:.5;letter-spacing:.12em">FIT?</div><div style="font-size:11px;margin-top:16px;line-height:1.2">OVERSIZED BOXY CROPPED AT WAIST</div></div>
+<div class="card"><div style="font-size:9px;opacity:.5;letter-spacing:.12em">WHY FLIP?</div><div style="font-size:11px;margin-top:16px;line-height:1.2">RETAIL $285 → FLIP $32<br>DEADSTOCK ARCHIVE</div></div>
+<div class="card"><div style="font-size:9px;opacity:.5;letter-spacing:.12em">SHIP?</div><div style="font-size:11px;margin-top:16px;line-height:1.2">NYC NEXT DAY<br>WORLDWIDE 3-5 DAYS</div></div>
+</div>
+<div style="margin-top:8px;background:#111;border:1px solid #222;border-radius:9999px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center"><span style="padding-left:6px;font-size:12px;letter-spacing:.08em">ADD — $32</span><span style="width:40px;height:40px;background:#FF7A00;border-radius:50%;display:flex;align-items:center;justify-content:center">♥</span></div>
+</div>
 </div>
 </section>
 
-<section class="page"><img src="02_betty.jpg" alt="Betty"></section>
-<section class="page"><img src="03_drinks.jpg" alt="Drinks"></section>
-<section class="page"><img src="04_boatbear_filet.jpg" alt="Boat bear"></section>
-<section class="page"><video class="vid" muted loop playsinline autoplay preload="auto"><source src="sephora.mp4" type="video/mp4"></video></section>
-<section class="page"><img src="06_qr.jpg" alt="qr" style="max-width:300px;width:70%;height:auto"></section>
-
-<!-- #1 GREEN PATINA - x fi§ x 《 live 》 - WHITE CIRCLE REMOVED - KALSHI FRESH -->
-<section class="page" style="flex-direction:column;background:#000">
-<div style="width:100%;background:#1e3a2e;display:flex;justify-content:center;align-items:center;padding:18px 0;border-bottom:1px solid #2f5a44">
-<div style="background:#0e1a14;color:#a8d5b5;border:2px solid #2f5a44;border-radius:9999px;padding:12px 28px;font-weight:700;font-size:14px;letter-spacing:.06em;display:flex;align-items:center;gap:18px;box-shadow:inset 0 0 0 1px rgba(168,213,181,.12), 0 4px 16px rgba(0,0,0,.4)">
-<span style="letter-spacing:.04em">x fi§ x</span>
-<span class="live-dot"></span>
-<span style="letter-spacing:.16em;font-weight:400">《 live 》</span>
-</div>
-</div>
-<video class="vid" muted loop playsinline autoplay controls preload="auto" style="flex:1;width:100%;object-fit:contain;background:#000"><source src="original-xfix-live.mp4" type="video/mp4"></video>
-</section>
-
-<!-- #2 x fi§ x shop -->
-<section class="page" style="flex-direction:column;background:#000">
-<div style="width:100%;background:#FF4D00;display:flex;justify-content:center;padding:14px 0"><div style="background:#0E3A52;color:#FF4D00;border:3px solid #FF4D00;outline:2px solid #123A5A;border-radius:9999px;padding:12px 34px;font-weight:900;font-size:20px;box-shadow:0 0 0 2px #FF4D00 inset">x fi§ x</div></div>
-<img src="07_hakrs_2.jpg" alt="shop" style="flex:1">
-</section>
-
-<section class="page"><img src="08_restock.jpg" alt="Restock"></section>
-<section class="page"><img src="09_waista.jpg" alt="Waista"></section>
-<section class="page"><img src="10_kalshi.jpg" alt="Kalshi"></section>
-<section class="page"><img src="11_adults.jpg" alt="club52vogue.shop"><div style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.2em;background:rgba(0,0,0,.6);padding:6px 12px;border-radius:9999px">club52vogue.shop</div></section>
-<section class="page" style="background:#000;flex-direction:column;gap:14px">
-<div style="font-size:11px;letter-spacing:.32em;opacity:.8">fisshhfilet</div>
-<div style="font-size:11px;letter-spacing:.32em">Private access</div>
-<div style="font-size:11px;letter-spacing:.32em;color:#39E66F">Members only</div>
-</section>
-
+<section class="page"><img src="https://fisshhfilet.github.io/kalshi.jpg" alt="kalshi" style="object-fit:contain"><button class="tap" onclick="window.open('https://kalshi.com','_blank')"></button></section>
+<section class="page"><img src="https://fisshhfilet.github.io/adults-only.jpg" alt="adults only" style="object-fit:contain"><button class="tap" onclick="window.open('https://club52vogue.shop','_blank')"></button></section>
+<section class="page" style="flex-direction:column;gap:12px;background:#000"><div style="font-size:12px;letter-spacing:.32em">FISSHHFILET PRIVATE ACCESS</div><div style="font-size:9px;color:#39E66F;letter-spacing:.3em">MEMBERS ONLY</div></section>
 </div>
 <script>
-const opening=document.getElementById('opening');
-setTimeout(()=>{opening.classList.add('hide'); setTimeout(()=>opening.remove(),950);},1700);
-const adImg=document.getElementById('adImg'),adVideo=document.getElementById('adVideo'),adFallback=document.getElementById('adFallback');
-function showAd(t){if(t==='video'){adVideo.style.display='block';adImg.style.display='none';adFallback.style.display='none';}if(t==='image'){adImg.style.display='block';adVideo.style.display='none';adFallback.style.display='none';}}
-adVideo.addEventListener('loadeddata',()=>showAd('video'));
-adVideo.addEventListener('error',()=>{fetch('ad.jpg',{method:'HEAD'}).then(r=>{if(r.ok){adImg.src='ad.jpg';adImg.style.display='block';adFallback.style.display='none';}}).catch(()=>{});});
-adImg.addEventListener('load',()=>showAd('image'));
-fetch('ad.jpg',{method:'HEAD'}).then(r=>{if(r.ok && adVideo.style.display!=='block'){adImg.src='ad.jpg';}});
+const o=document.getElementById('opening');setTimeout(()=>o.classList.add('hide'),1800);
 const feed=document.getElementById('feed'),pages=[...document.querySelectorAll('.page')],dotsEl=document.getElementById('dots');
-pages.forEach((_,i)=>{const d=document.createElement('i');if(i==0)d.classList.add('active');d.onclick=()=>pages[i].scrollIntoView({behavior:'smooth'});dotsEl.appendChild(d);});
+pages.forEach((_,i)=>{const d=document.createElement('i');if(i===0)d.classList.add('active');d.onclick=()=>pages[i].scrollIntoView({behavior:'smooth'});dotsEl.appendChild(d);});
 const dots=[...dotsEl.children];
-function upd(){let idx=0,m=Infinity;pages.forEach((p,i)=>{const r=Math.abs(p.getBoundingClientRect().top);if(r<m){m=r;idx=i;}});dots.forEach((d,i)=>d.classList.toggle('active',i===idx));}
-feed.addEventListener('scroll',upd,{passive:true});
-document.querySelectorAll('.vid').forEach(v=>{const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)v.play().catch(()=>{});else v.pause();});},{threshold:.5});io.observe(v);});
+feed.addEventListener('scroll',()=>{let idx=0,m=Infinity;pages.forEach((p,i)=>{const r=Math.abs(p.getBoundingClientRect().top);if(r<m){m=r;idx=i;}});dots.forEach((d,i)=>d.classList.toggle('active',i===idx));});
+document.getElementById('back').onclick=()=>{let i=dots.findIndex(d=>d.classList.contains('active'));if(i>0)pages[i-1].scrollIntoView({behavior:'smooth'});};
+document.getElementById('next').onclick=()=>{let i=dots.findIndex(d=>d.classList.contains('active'));if(i<pages.length-1)pages[i+1].scrollIntoView({behavior:'smooth'});};
+const v=document.getElementById('sharkVideo');const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)v.play().catch(()=>{});else v.pause();});},{threshold:.5});if(v)io.observe(v);
 </script>
-<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
+</body>
 </html>
