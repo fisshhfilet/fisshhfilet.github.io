@@ -5,15 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#000000">
-
 <title>fisshhfilet.github.io</title>
-
 <link rel="preload" as="image" href="betty.jpg">
 <link rel="preload" as="image" href="waista.jpg">
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-
 html,body{
   width:100%;
   height:100%;
@@ -22,13 +18,11 @@ html,body{
   inset:0;
   overflow:hidden;
 }
-
 body{
   font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
   overscroll-behavior:none;
   -webkit-font-smoothing:antialiased;
 }
-
 #feed{
   position:absolute;
   inset:0;
@@ -40,7 +34,6 @@ body{
   overscroll-behavior:none;
   -webkit-overflow-scrolling:touch;
 }
-
 .page{
   width:100%;
   height:100%;
@@ -54,7 +47,6 @@ body{
   scroll-snap-stop:always;
   flex-shrink:0;
 }
-
 .page img,
 .page video{
   width:100%;
@@ -64,13 +56,6 @@ body{
   background:#000;
   display:block;
 }
-
-.page video{
-  transform:translateZ(0);
-  backface-visibility:hidden;
-  -webkit-backface-visibility:hidden;
-}
-
 .tap{
   position:absolute;
   inset:0;
@@ -78,7 +63,6 @@ body{
   cursor:pointer;
   -webkit-tap-highlight-color:transparent;
 }
-
 .opening{
   position:absolute;
   inset:0;
@@ -90,47 +74,19 @@ body{
   pointer-events:none;
   animation:openingOut .8s ease 2.3s forwards;
 }
-
 .opening span{
   color:#a8a8a8;
   font-size:10px;
   letter-spacing:.32em;
   opacity:0;
-  animation:txtIn .8s ease .3s forwards,txtOut .6s ease 1.8s forwards;
+  animation:txtIn .8s ease .3s forwards, txtOut .6s ease 1.8s forwards;
 }
-
-.betty{
-  position:absolute;
-  inset:0;
-}
-
-.betty img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-}
-
-@keyframes txtIn{
-  to{opacity:1}
-}
-
-@keyframes txtOut{
-  to{opacity:0}
-}
-
-@keyframes openingOut{
-  to{
-    opacity:0;
-    visibility:hidden;
-  }
-}
-
-.final{
-  flex-direction:column;
-  gap:38px;
-  text-align:center;
-}
-
+.betty{position:absolute;inset:0}
+.betty img{width:100%;height:100%;object-fit:contain}
+@keyframes txtIn{to{opacity:1}}
+@keyframes txtOut{to{opacity:0}}
+@keyframes openingOut{to{opacity:0;visibility:hidden}}
+.final{flex-direction:column;gap:38px;text-align:center}
 .shop{
   width:100%;
   max-width:430px;
@@ -139,405 +95,171 @@ body{
   display:flex;
   flex-direction:column;
   overflow-y:auto;
-  overflow-x:hidden;
   color:#e8e8e8;
   padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
   -webkit-overflow-scrolling:touch;
-  overscroll-behavior:contain;
-  touch-action:pan-y;
+  overscroll-behavior-y:auto;
 }
-
-.avatars{
-  display:flex;
-  gap:10px;
-  overflow-x:auto;
-  padding:10px 12px 10px;
-  -webkit-overflow-scrolling:touch;
-  flex-shrink:0;
-  touch-action:pan-x;
-}
-
-.av{
-  flex:0 0 56px;
-  text-align:center;
-  text-decoration:none;
-  opacity:.35;
-  color:inherit;
-}
-
-.av.active{
-  opacity:1;
-}
-
-.av .c{
-  width:52px;
-  height:52px;
-  border-radius:50%;
-  overflow:hidden;
-  background:#111;
-  margin:0 auto;
-  border:2px solid #2a2a2a;
-}
-
-.av.active .c{
-  border-color:#fff;
-  box-shadow:0 0 0 2px #fff;
-}
-
-.av .c img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.av i{
-  font-style:normal;
-  font-size:7px;
-  color:#666;
-  margin-top:5px;
-  display:block;
-  letter-spacing:.08em;
-}
-
-.av.seph{
-  opacity:1;
-  cursor:pointer;
-}
-
-.av.seph.active .c{
-  border-color:#fff;
-  box-shadow:0 0 0 2px #fff;
-}
-
-.av.seph i{
-  color:#fff;
-  font-weight:900;
-}
-
-.toggle{
-  margin:4px 12px 10px;
-  background:#111;
-  border-radius:999px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  padding:3px;
-  gap:3px;
-  flex-shrink:0;
-}
-
-.toggle button{
-  height:36px;
-  border-radius:999px;
-  border:0;
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:.08em;
-  background:#1a1a1a;
-  color:#8a8a8a;
-}
-
-.toggle button.on{
-  background:#ff2a6d;
-  color:#fff;
-}
-
-.img{
-  margin:0 12px;
-  border-radius:18px;
-  overflow:hidden;
-  border:3px solid #ff5a1f;
-  background:#000;
-  aspect-ratio:16/10;
-  flex-shrink:0;
-}
-
-.img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
-.swipe{
-  text-align:center;
-  padding:8px 12px 2px;
-  font-size:8px;
-  letter-spacing:.28em;
-  color:#555;
-  flex-shrink:0;
-}
-
-.live{
-  text-align:center;
-  padding:0 12px 10px;
-  font-size:9px;
-  color:#ff2a6d;
-  letter-spacing:.06em;
-  font-weight:700;
-  flex-shrink:0;
-}
-
-.grid{
-  padding:0 12px 10px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  flex-shrink:0;
-}
-
-.card{
-  background:#111;
-  border:1px solid #1a1a1a;
-  border-radius:10px;
-  padding:12px 10px;
-}
-
-.card b{
-  font-size:8px;
-  color:#555;
-  display:block;
-  margin-bottom:8px;
-  letter-spacing:.08em;
-  font-weight:700;
-}
-
-.card p{
-  font-size:10px;
-  line-height:1.35;
-  color:#ddd;
-  font-weight:700;
-}
-
-.cta{
-  margin:0 12px 8px;
-  background:#fff;
-  color:#000;
-  border:0;
-  height:40px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:11px;
-  font-weight:900;
-  letter-spacing:.18em;
-  flex-shrink:0;
-}
-
-.cta.ghost{
-  background:#000;
-  color:#fff;
-  border:1px solid #333;
-  letter-spacing:.46em;
-  font-size:11px;
-}
-
-.add{
-  margin:0 12px 16px;
-  background:#111;
-  border:1px solid #1a1a1a;
-  border-radius:4px;
-  display:flex;
-  justify-content:space-between;
-  padding:14px 14px 14px 16px;
-  align-items:center;
-  flex-shrink:0;
-}
+.avatars{display:flex;gap:10px;overflow-x:auto;padding:10px 12px 10px;-webkit-overflow-scrolling:touch;flex-shrink:0}
+.av{flex:0 0 56px;text-align:center;text-decoration:none;opacity:.35;color:inherit}
+.av.active{opacity:1}
+.av .c{width:52px;height:52px;border-radius:50%;overflow:hidden;background:#111;margin:0 auto;border:2px solid #2a2a2a}
+.av.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff}
+.av .c img{width:100%;height:100%;object-fit:cover}
+.av i{font-style:normal;font-size:7px;color:#666;margin-top:5px;display:block;letter-spacing:.08em}
+.av.seph{opacity:1;cursor:pointer}
+.av.seph.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff}
+.av.seph i{color:#fff;font-weight:900}
+.toggle{margin:4px 12px 10px;background:#111;border-radius:999px;display:grid;grid-template-columns:1fr 1fr;padding:3px;gap:3px;flex-shrink:0}
+.toggle button{height:36px;border-radius:999px;border:0;font-size:9px;font-weight:800;letter-spacing:.08em;background:#1a1a1a;color:#8a8a8a}
+.toggle button.on{background:#ff2a6d;color:#fff}
+.img{margin:0 12px;border-radius:18px;overflow:hidden;border:3px solid #ff5a1f;background:#000;aspect-ratio:16/10;flex-shrink:0}
+.img img{width:100%;height:100%;object-fit:cover;display:block}
+.swipe{text-align:center;padding:8px 12px 2px;font-size:8px;letter-spacing:.28em;color:#555;flex-shrink:0}
+.live{text-align:center;padding:0 12px 10px;font-size:9px;color:#ff2a6d;letter-spacing:.06em;font-weight:700;flex-shrink:0}
+.grid{padding:0 12px 10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;flex-shrink:0}
+.card{background:#111;border:1px solid #1a1a1a;border-radius:10px;padding:12px 10px}
+.card b{font-size:8px;color:#555;display:block;margin-bottom:8px;letter-spacing:.08em;font-weight:700}
+.card p{font-size:10px;line-height:1.35;color:#ddd;font-weight:700}
+.cta{margin:0 12px 8px;background:#fff;color:#000;border:0;height:40px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;letter-spacing:.18em;flex-shrink:0}
+.cta.ghost{background:#000;color:#fff;border:1px solid #333;letter-spacing:.46em;font-size:11px}
+.add{margin:0 12px 16px;background:#111;border:1px solid #1a1a1a;border-radius:4px;display:flex;justify-content:space-between;padding:14px 14px 14px 16px;align-items:center;flex-shrink:0}
+.add span{font-size:12px;font-weight:900;letter-spacing:.1em}
 </style>
 </head>
-
 <body>
-
 <div id="feed">
-
 <section class="page">
-  <div class="betty">
-    <img src="betty.jpg" width="1080" height="1920" alt="">
-  </div>
-
-  <div class="opening">
-    <span>@fisshhfilet</span>
-  </div>
+  <div class="betty"><img src="betty.jpg" width="1080" height="1920" alt=""></div>
+  <div class="opening"><span>@fisshhfilet</span></div>
 </section>
-
 <section class="page">
   <img src="waista.jpg" width="1080" height="1920" alt="" fetchpriority="high">
 </section>
-
-<!-- LIQUID IV AD -->
-<section class="page video-page">
-  <video
-    muted
-    loop
-    playsinline
-    webkit-playsinline
-    preload="metadata"
-    class="feed-video ad-video">
+<section class="page">
+  <video muted loop playsinline webkit-playsinline preload="auto">
     <source src="Liquid.mp4" type="video/mp4">
     <source src="ad.mp4" type="video/mp4">
   </video>
 </section>
-
 <section class="page">
   <img src="bear-boat-hoodie.jpg" width="1080" height="1920" alt="">
   <div class="tap open-link" data-href="https://naturalcatchtuna.com/"></div>
 </section>
-
-<!-- SEPHORA -->
-<section class="page video-page">
-  <video
-    muted
-    loop
-    playsinline
-    webkit-playsinline
-    preload="metadata"
-    class="feed-video sephora-video">
+<section class="page">
+  <video muted loop playsinline webkit-playsinline preload="auto">
     <source src="Sephora.mp4" type="video/mp4">
   </video>
 </section>
-
 <section class="page">
   <img src="qr-ware.jpg" width="1080" height="1920" alt="">
 </section>
-
 <section class="page">
-  <video
-    muted
-    loop
-    playsinline
-    webkit-playsinline
-    preload="metadata"
-    class="feed-video">
+  <video muted loop playsinline webkit-playsinline preload="auto">
     <source src="hakrs-flip-live.mp4" type="video/mp4">
   </video>
 </section>
-
 <section class="page" style="background:#000">
-
 <div class="shop">
-
 <div class="avatars">
-
-<a
-  class="av seph active open-link"
-  href="https://www.sephora.com/"
-  target="_blank"
-  rel="noopener"
-  data-href="https://www.sephora.com/">
-  <div class="c">
-    <img src="sephora.jpg" width="104" height="104" alt="">
-  </div>
-  <i>SEPHORA</i>
-</a>
-
-<div class="av">
-  <div class="c">
-    <img src="betty.jpg" width="104" height="104" alt="">
-  </div>
-  <i>HOST</i>
+<a class="av seph active open-link" href="https://www.sephora.com/" target="_blank" rel="noopener" data-href="https://www.sephora.com/"><div class="c"><img src="sephora.jpg" width="104" height="104" alt=""></div><i>SEPHORA</i></a>
+<div class="av"><div class="c"><img src="betty.jpg" width="104" height="104" alt=""></div><i>HOST</i></div>
+<div class="av"><div class="c"><img src="waista.jpg" width="104" height="104" alt=""></div><i>HOME</i></div>
+<div class="av"><div class="c"><img src="qr-ware.jpg" width="104" height="104" alt=""></div><i>PM</i></div>
+<div class="av"><div class="c"><img src="bear-boat-hoodie.jpg" width="104" height="104" alt=""></div><i>FD</i></div>
+<div class="av"><div class="c"><img src="hakrs-pier-flip-clean.jpg" width="104" height="104" alt=""></div><i>GD</i></div>
+<div class="av"><div class="c"><img src="adults-only-beach.jpg" width="104" height="104" alt=""></div><i>ED</i></div>
 </div>
-
-<div class="av">
-  <div class="c">
-    <img src="waista.jpg" width="104" height="104" alt="">
-  </div>
-  <i>HOME</i>
-</div>
-
-<div class="av">
-  <div class="c">
-    <img src="qr-ware.jpg" width="104" height="104" alt="">
-  </div>
-  <i>PM</i>
-</div>
-
-<div class="av">
-  <div class="c">
-    <img src="bear-boat-hoodie.jpg" width="104" height="104" alt="">
-  </div>
-  <i>FD</i>
-</div>
-
-<div class="av">
-  <div class="c">
-    <img src="hakrs-pier-flip-clean.jpg" width="104" height="104" alt="">
-  </div>
-  <i>GD</i>
-</div>
-
-<div class="av">
-  <div class="c">
-    <img src="adults-only-beach.jpg" width="104" height="104" alt="">
-  </div>
-  <i>ED</i>
-</div>
-
-</div>
-
-<div class="toggle">
-  <button>SHARK • ARCHIVE 5/9</button>
-  <button class="on">FLIPPED • HAKRs 4/9</button>
-</div>
-
-<div class="img">
-  <img src="hakrs-pier-flip-clean.jpg" width="800" height="500" alt="">
-</div>
-
+<div class="toggle"><button>SHARK • ARCHIVE 5/9</button><button class="on">FLIPPED • HAKRs 4/9</button></div>
+<div class="img"><img src="hakrs-pier-flip-clean.jpg" width="800" height="500" alt=""></div>
 <div class="swipe">SWIPE UP</div>
-
-<div class="live">
-  SHARK IS LIVE — TAP TO FLIP CARDS 4/4 04/09
-</div>
-
+<div class="live">SHARK IS LIVE — TAP TO FLIP CARDS 4/4 04/09</div>
 <div class="grid">
-
-<div class="card">
-  <b>FABRIC?</b>
-  <p>HEAVY 14oz FLEECE CRYSTAL WASHED</p>
+<div class="card"><b>FABRIC?</b><p>HEAVY 14oz FLEECE CRYSTAL WASHED</p></div>
+<div class="card"><b>FIT?</b><p>OVERSIZED BOXY CROPPED AT WAIST</p></div>
+<div class="card"><b>WHY FLIP?</b><p>RETAIL $285 → FLIP $32 DEADSTOCK ARCHIVE</p></div>
+<div class="card"><b>SHIP?</b><p>NYC NEXT_DAY WORLDWIDE 3-5 DAYS</p></div>
 </div>
-
-<div class="card">
-  <b>FIT?</b>
-  <p>OVERSIZED BOXY CROPPED AT WAIST</p>
-</div>
-
-<div class="card">
-  <b>WHY FLIP?</b>
-  <p>RETAIL $285 → FLIP $32 DEADSTOCK ARCHIVE</p>
-</div>
-
-<div class="card">
-  <b>SHIP?</b>
-  <p>NYC NEXT_DAY WORLDWIDE 3-5 DAYS</p>
-</div>
-
-</div>
-
-<div class="cta">
-  FLIP → $32
-</div>
-
-<div class="cta ghost">
-  • § h o p •
-</div>
-
-<div class="add">
-  <span>ADD → $32</span>
-  <div style="width:34px;height:34px;border-radius:50%;background:#ff7a00;display:flex;align-items:center;justify-content:center;color:#fff">
-    ♥
-  </div>
-</div>
-
+<div class="cta">FLIP → $32</div>
+<div class="cta ghost">• § h o p •</div>
+<div class="add"><span>ADD → $32</span><div style="width:34px;height:34px;border-radius:50%;background:#ff7a00;display:flex;align-items:center;justify-content:center;color:#fff">♥</div></div>
 </div>
 </section>
-
-<section class="page">
-  <img src="restocking-soon-fix.jpg" width="1080" height="1920" alt="">
-</section>
-
-<section class="page">
-  <img src="waista-question.jpg" width="1080" height="1920" alt="">
-</section>
-
+<section class="page"><img src="restocking-soon-fix.jpg" width="1080" height="1920" alt=""></section>
+<section class="page"><img src="waista-question.jpg" width="1080" height="1920" alt=""></section>
 <section class="page">
   <img src="kalshi-trade.jpg" width="1080" height="1920" alt="">
-  <div class="tap open-link" data-href="https://kalshi
+  <div class="tap open-link" data-href="https://kalshi.com"></div>
+</section>
+<section class="page"><img src="adults-only-beach.jpg" width="1080" height="1920" alt=""></section>
+<section class="page final" style="background:#000">
+<div style="color:#a8a8a8;font-size:10px;letter-spacing:.32em">@fisshhfilet</div>
+<div style="color:#fff;font-size:11px;letter-spacing:.36em">PRIVATE ACCESS</div>
+<div style="color:#39e66f;font-size:10px;letter-spacing:.32em;font-weight:800">MEMBERS ONLY</div>
+</section>
+</div>
+<script>
+(function(){
+  var feed = document.getElementById('feed');
+  var pages = [].slice.call(document.querySelectorAll('.page'));
+
+  function lock(){
+    var h = feed.clientHeight;
+    if(h < 100) h = window.innerHeight;
+    pages.forEach(function(p){ p.style.height = h + 'px'; });
+  }
+  lock();
+
+  var vids = [].slice.call(document.querySelectorAll('video'));
+  var want = {};
+
+  vids.forEach(function(v, n){
+    v.muted = true;
+    v.loop = true;
+    v.playsInline = true;
+    v.preload = 'auto';
+    v.setAttribute('playsinline','');
+    v.setAttribute('webkit-playsinline','');
+    v.disableRemotePlayback = true;
+    want[n] = false;
+    v._i = n;
+  });
+
+  function goPlay(v){
+    if(want[v._i]) return;
+    want[v._i] = true;
+    if(v.paused) v.play().catch(function(){ want[v._i] = false; });
+  }
+
+  function goPause(v){
+    if(!want[v._i] && v.paused) return;
+    want[v._i] = false;
+    if(!v.paused) v.pause();
+  }
+
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        var v = en.target;
+        if(en.intersectionRatio >= 0.85) goPlay(v);
+        else if(en.intersectionRatio <= 0.15) goPause(v);
+      });
+    }, {root:feed, threshold:[0, 0.15, 0.85, 1]});
+    vids.forEach(function(v){ io.observe(v); });
+  }
+
+  document.querySelectorAll('.open-link').forEach(function(el){
+    el.addEventListener('click', function(e){
+      e.stopPropagation();
+      var href = el.getAttribute('data-href') || el.getAttribute('href');
+      if(href) window.open(href, '_blank', 'noopener');
+    });
+  });
+
+  window.addEventListener('orientationchange', function(){
+    setTimeout(lock, 300);
+  });
+})();
+</script>
+</body>
+</html>
