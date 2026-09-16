@@ -12,11 +12,7 @@
 <link rel="preload" as="image" href="waista.jpg">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
 html,body{
   width:100%;
@@ -36,8 +32,6 @@ body{
 #feed{
   position:absolute;
   inset:0;
-  width:100%;
-  height:100%;
   overflow-x:hidden;
   overflow-y:auto;
   background:#000;
@@ -49,8 +43,7 @@ body{
 
 .page{
   width:100%;
-  height:100vh;
-  min-height:100vh;
+  height:100%;
   background:#000;
   display:flex;
   align-items:center;
@@ -73,8 +66,9 @@ body{
 }
 
 .page video{
-  -webkit-transform:translateZ(0);
   transform:translateZ(0);
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
 }
 
 .tap{
@@ -102,9 +96,7 @@ body{
   font-size:10px;
   letter-spacing:.32em;
   opacity:0;
-  animation:
-    txtIn .8s ease .3s forwards,
-    txtOut .6s ease 1.8s forwards;
+  animation:txtIn .8s ease .3s forwards,txtOut .6s ease 1.8s forwards;
 }
 
 .betty{
@@ -149,12 +141,10 @@ body{
   overflow-y:auto;
   overflow-x:hidden;
   color:#e8e8e8;
-  padding:
-    env(safe-area-inset-top)
-    0
-    env(safe-area-inset-bottom);
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
   -webkit-overflow-scrolling:touch;
   overscroll-behavior:contain;
+  touch-action:pan-y;
 }
 
 .avatars{
@@ -164,6 +154,7 @@ body{
   padding:10px 12px 10px;
   -webkit-overflow-scrolling:touch;
   flex-shrink:0;
+  touch-action:pan-x;
 }
 
 .av{
@@ -369,68 +360,53 @@ body{
 </section>
 
 <section class="page">
-  <img
-    src="waista.jpg"
-    width="1080"
-    height="1920"
-    alt=""
-    fetchpriority="high">
+  <img src="waista.jpg" width="1080" height="1920" alt="" fetchpriority="high">
 </section>
 
+<!-- LIQUID IV AD -->
 <section class="page video-page">
   <video
-    class="feed-video"
     muted
     loop
     playsinline
     webkit-playsinline
-    preload="auto">
+    preload="metadata"
+    class="feed-video ad-video">
     <source src="Liquid.mp4" type="video/mp4">
     <source src="ad.mp4" type="video/mp4">
   </video>
 </section>
 
 <section class="page">
-  <img
-    src="bear-boat-hoodie.jpg"
-    width="1080"
-    height="1920"
-    alt="">
-
-  <div
-    class="tap open-link"
-    data-href="https://naturalcatchtuna.com/">
-  </div>
+  <img src="bear-boat-hoodie.jpg" width="1080" height="1920" alt="">
+  <div class="tap open-link" data-href="https://naturalcatchtuna.com/"></div>
 </section>
 
+<!-- SEPHORA -->
 <section class="page video-page">
   <video
-    class="feed-video"
     muted
     loop
     playsinline
     webkit-playsinline
-    preload="auto">
+    preload="metadata"
+    class="feed-video sephora-video">
     <source src="Sephora.mp4" type="video/mp4">
   </video>
 </section>
 
 <section class="page">
-  <img
-    src="qr-ware.jpg"
-    width="1080"
-    height="1920"
-    alt="">
+  <img src="qr-ware.jpg" width="1080" height="1920" alt="">
 </section>
 
-<section class="page video-page">
+<section class="page">
   <video
-    class="feed-video"
     muted
     loop
     playsinline
     webkit-playsinline
-    preload="auto">
+    preload="metadata"
+    class="feed-video">
     <source src="hakrs-flip-live.mp4" type="video/mp4">
   </video>
 </section>
@@ -447,15 +423,9 @@ body{
   target="_blank"
   rel="noopener"
   data-href="https://www.sephora.com/">
-
   <div class="c">
-    <img
-      src="sephora.jpg"
-      width="104"
-      height="104"
-      alt="">
+    <img src="sephora.jpg" width="104" height="104" alt="">
   </div>
-
   <i>SEPHORA</i>
 </a>
 
@@ -509,16 +479,10 @@ body{
 </div>
 
 <div class="img">
-  <img
-    src="hakrs-pier-flip-clean.jpg"
-    width="800"
-    height="500"
-    alt="">
+  <img src="hakrs-pier-flip-clean.jpg" width="800" height="500" alt="">
 </div>
 
-<div class="swipe">
-  SWIPE UP
-</div>
+<div class="swipe">SWIPE UP</div>
 
 <div class="live">
   SHARK IS LIVE — TAP TO FLIP CARDS 4/4 04/09
@@ -558,18 +522,7 @@ body{
 
 <div class="add">
   <span>ADD → $32</span>
-
-  <div
-    style="
-      width:34px;
-      height:34px;
-      border-radius:50%;
-      background:#ff7a00;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#fff
-    ">
+  <div style="width:34px;height:34px;border-radius:50%;background:#ff7a00;display:flex;align-items:center;justify-content:center;color:#fff">
     ♥
   </div>
 </div>
@@ -578,679 +531,13 @@ body{
 </section>
 
 <section class="page">
-  <img
-    src="restocking-soon-fix.jpg"
-    width="1080"
-    height="1920"
-    alt="">
+  <img src="restocking-soon-fix.jpg" width="1080" height="1920" alt="">
 </section>
 
 <section class="page">
-  <img
-    src="waista-question.jpg"
-    width="1080"
-    height="1920"
-    alt="">
+  <img src="waista-question.jpg" width="1080" height="1920" alt="">
 </section>
 
 <section class="page">
-  <img
-    src="kalshi-trade.jpg"
-    width="1080"
-    height="1920"
-    alt="">
-
-  <div
-    class="tap open-link"
-    data-href="https://kalshi.com">
-  </div>
-</section>
-
-<section class="page">
-  <img
-    src="adults-only-beach.jpg"
-    width="1080"
-    height="1920"
-    alt="">
-</section>
-
-<section
-  class="page final"
-  style="background:#000">
-
-  <div
-    style="
-      color:#a8a8a8;
-      font-size:10px;
-      letter-spacing:.32em
-    ">
-    @fisshhfilet
-  </div>
-
-  <div
-    style="
-      color:#fff;
-      font-size:11px;
-      letter-spacing:.36em
-    ">
-    PRIVATE ACCESS
-  </div>
-
-  <div
-    style="
-      color:#39e66f;
-      font-size:10px;
-      letter-spacing:.32em;
-      font-weight:800
-    ">
-    MEMBERS ONLY
-  </div>
-
-</section>
-
-</div>
-
-<script>
-(function(){
-
-  var feed = document.getElementById('feed');
-  var pages = Array.prototype.slice.call(
-    document.querySelectorAll('.page')
-  );
-
-  var videos = Array.prototype.slice.call(
-    document.querySelectorAll('.feed-video')
-  );
-
-  /*
-   * Keep every page exactly one screen tall.
-   */
-  function setPageHeights(){
-    var h = window.innerHeight;
-
-    if(feed && feed.clientHeight > 100){
-      h = feed.clientHeight;
-    }
-
-    pages.forEach(function(page){
-      page.style.height = h + 'px';
-      page.style.minHeight = h + 'px';
-    });
-  }
-
-  setPageHeights();
-
-  /*
-   * Prepare videos once.
-   * Do not reload them.
-   */
-  videos.forEach(function(video){
-
-    video.muted = true;
-    video.loop = true;
-    video.playsInline = true;
-
-    video.setAttribute('muted','');
-    video.setAttribute('playsinline','');
-    video.setAttribute('webkit-playsinline','');
-
-    video.preload = 'auto';
-
-    try{
-      video.disableRemotePlayback = true;
-    }catch(e){}
-
-  });
-
-  /*
-   * Only one observer controls the videos.
-   *
-   * Important:
-   * We never set currentTime = 0.
-   * We never call load().
-   * Therefore returning to a video resumes
-   * from the position where it was paused.
-   */
-  if('IntersectionObserver' in window){
-
-    var observer = new IntersectionObserver(
-      function(entries){
-
-        entries.forEach(function(entry){
-
-          var video = entry.target;
-
-          if(entry.isIntersecting &&
-             entry.intersectionRatio >= 0.75){
-
-            if(video.paused){
-
-              var promise = video.play();
-
-              if(promise &&
-                 typeof promise.catch === 'function'){
-                promise.catch(function(){});
-              }
-
-            }
-
-          }else if(
-            entry.intersectionRatio <= 0.25
-          ){
-
-            if(!video.paused){
-              video.pause();
-            }
-
-          }
-
-        });
-
-      },
-      {
-        root:feed,
-        threshold:[
-          0,
-          0.25,
-          0.75,
-          1
-        ]
-      }
-    );
-
-    videos.forEach(function(video){
-      observer.observe(video);
-    });
-
-  }else{
-
-    /*
-     * Fallback for browsers without
-     * IntersectionObserver.
-     */
-    function fallbackVideo(){
-
-      var center = window.innerHeight / 2;
-
-      videos.forEach(function(video){
-
-        var rect = video.getBoundingClientRect();
-
-        var visible =
-          rect.top < center &&
-          rect.bottom > center;
-
-        if(visible){
-
-          var promise = video.play();
-
-          if(promise &&
-             typeof promise.catch === 'function'){
-            promise.catch(function(){});
-          }
-
-        }else{
-
-          video.pause();
-
-        }
-
-      });
-
-    }
-
-    feed.addEventListener(
-      'scroll',
-      fallbackVideo,
-      {passive:true}
-    );
-
-    fallbackVideo();
-
-  }
-
-  /*
-   * IMPORTANT:
-   * No touchstart/touchmove/touchend
-   * handlers on the Shop.
-   *
-   * The browser controls the Shop's
-   * internal scrolling naturally.
-   */
-  var shop = document.querySelector('.shop');
-
-  if(shop){
-
-    shop.style.overflowY = 'auto';
-    shop.style.overflowX = 'hidden';
-
-  }
-
-  /*
-   * External links.
-   */
-  document.querySelectorAll('.open-link').forEach(
-    function(el){
-
-      el.addEventListener(
-        'click',
-        function(e){
-
-          e.stopPropagation();
-
-          var href =
-            el.getAttribute('data-href') ||
-            el.getAttribute('href');
-
-          if(href){
-            window.open(
-              href,
-              '_blank',
-              'noopener'
-            );
-          }
-
-        }
-      );
-
-    }
-  );
-
-  /*
-   * Keep the feed positioned cleanly after
-   * browser viewport changes.
-   */
-  window.addEventListener(
-    'resize',
-    function(){
-      setPageHeights();
-    },
-    {passive:true}
-  );
-
-  window.addEventListener(
-    'orientationchange',
-    function(){
-
-      setTimeout(
-        setPageHeights,
-        300
-      );
-
-    },
-    {passive:true}
-  );
-
-})();
-</script>
-
-</body>
-</html>
-<script>
-(function(){
-
-  var feed = document.getElementById('feed');
-  var pages = Array.prototype.slice.call(
-    document.querySelectorAll('.page')
-  );
-
-  var videos = Array.prototype.slice.call(
-    document.querySelectorAll('.feed-video')
-  );
-
-  function setPageHeights(){
-    var h = window.innerHeight;
-
-    if(feed && feed.clientHeight > 100){
-      h = feed.clientHeight;
-    }
-
-    pages.forEach(function(page){
-      page.style.height = h + 'px';
-      page.style.minHeight = h + 'px';
-    });
-  }
-
-  setPageHeights();
-
-  /*
-   * Prepare EVERY video for mobile autoplay.
-   */
-  videos.forEach(function(video){
-
-    video.muted = true;
-    video.defaultMuted = true;
-    video.loop = true;
-    video.playsInline = true;
-    video.preload = 'auto';
-
-    video.setAttribute('muted','');
-    video.setAttribute('autoplay','');
-    video.setAttribute('loop','');
-    video.setAttribute('playsinline','');
-    video.setAttribute('webkit-playsinline','');
-
-    try{
-      video.disableRemotePlayback = true;
-    }catch(e){}
-
-  });
-
-  /*
-   * Play a video safely.
-   * Never reset currentTime.
-   * Never call load().
-   */
-  function playVideo(video){
-
-    if(!video) return;
-
-    video.muted = true;
-    video.defaultMuted = true;
-
-    if(video.paused){
-
-      var promise = video.play();
-
-      if(promise &&
-         typeof promise.catch === 'function'){
-
-        promise.catch(function(){
-
-          /*
-           * Mobile browsers sometimes reject the first
-           * autoplay attempt. Try again on the next frame.
-           */
-          requestAnimationFrame(function(){
-
-            if(video.paused){
-
-              video.play().catch(function(){});
-
-            }
-
-          });
-
-        });
-
-      }
-
-    }
-
-  }
-
-  function pauseOtherVideos(activeVideo){
-
-    videos.forEach(function(video){
-
-      if(video !== activeVideo &&
-         !video.paused){
-
-        video.pause();
-
-      }
-
-    });
-
-  }
-
-  /*
-   * Determine which full-screen page is currently
-   * closest to the center of the viewport.
-   */
-  function getActivePage(){
-
-    if(!feed) return null;
-
-    var center =
-      feed.scrollTop +
-      (feed.clientHeight / 2);
-
-    var closest = null;
-    var distance = Infinity;
-
-    pages.forEach(function(page){
-
-      var pageCenter =
-        page.offsetTop +
-        (page.offsetHeight / 2);
-
-      var d =
-        Math.abs(pageCenter - center);
-
-      if(d < distance){
-
-        distance = d;
-        closest = page;
-
-      }
-
-    });
-
-    return closest;
-  }
-
-  function activateCurrentVideo(){
-
-    var page = getActivePage();
-
-    if(!page) return;
-
-    var video =
-      page.querySelector('.feed-video');
-
-    if(!video) return;
-
-    pauseOtherVideos(video);
-    playVideo(video);
-  }
-
-  /*
-   * IntersectionObserver provides the first
-   * autoplay trigger.
-   */
-  if('IntersectionObserver' in window){
-
-    var observer =
-      new IntersectionObserver(
-        function(entries){
-
-          entries.forEach(function(entry){
-
-            var video = entry.target;
-
-            if(
-              entry.isIntersecting &&
-              entry.intersectionRatio >= 0.65
-            ){
-
-              pauseOtherVideos(video);
-              playVideo(video);
-
-            }
-
-          });
-
-        },
-        {
-          root:feed,
-          threshold:[
-            0.25,
-            0.5,
-            0.65,
-            0.8,
-            1
-          ]
-        }
-      );
-
-    videos.forEach(function(video){
-
-      observer.observe(video);
-
-    });
-
-  }
-
-  /*
-   * Scroll fallback.
-   *
-   * When the user finishes a swipe, identify the
-   * snapped page and explicitly start its video.
-   */
-  var scrollTimer = null;
-
-  feed.addEventListener(
-    'scroll',
-    function(){
-
-      clearTimeout(scrollTimer);
-
-      scrollTimer = setTimeout(
-        function(){
-
-          activateCurrentVideo();
-
-        },
-        100
-      );
-
-    },
-    {passive:true}
-  );
-
-  /*
-   * Also catch browsers that support scrollend.
-   */
-  if('onscrollend' in window){
-
-    feed.addEventListener(
-      'scrollend',
-      function(){
-
-        activateCurrentVideo();
-
-      },
-      {passive:true}
-    );
-
-  }
-
-  /*
-   * First page/video activation.
-   */
-  setTimeout(
-    activateCurrentVideo,
-    250
-  );
-
-  /*
-   * Extra autoplay attempt after the page is
-   * fully loaded.
-   */
-  window.addEventListener(
-    'load',
-    function(){
-
-      setTimeout(
-        activateCurrentVideo,
-        150
-      );
-
-    },
-    {once:true}
-  );
-
-  /*
-   * Recalculate mobile viewport dimensions.
-   */
-  window.addEventListener(
-    'resize',
-    function(){
-
-      setPageHeights();
-
-      setTimeout(
-        activateCurrentVideo,
-        100
-      );
-
-    },
-    {passive:true}
-  );
-
-  window.addEventListener(
-    'orientationchange',
-    function(){
-
-      setTimeout(
-        function(){
-
-          setPageHeights();
-          activateCurrentVideo();
-
-        },
-        300
-      );
-
-    },
-    {passive:true}
-  );
-
-  /*
-   * External links.
-   */
-  document.querySelectorAll('.open-link').forEach(
-    function(el){
-
-      el.addEventListener(
-        'click',
-        function(e){
-
-          e.stopPropagation();
-
-          var href =
-            el.getAttribute('data-href') ||
-            el.getAttribute('href');
-
-          if(href){
-
-            window.open(
-              href,
-              '_blank',
-              'noopener'
-            );
-
-          }
-
-        }
-      );
-
-    }
-  );
-
-})();
-</script>
-
-Also make sure each video tag has "autoplay". For example:
-
-<video
-  class="feed-video"
-  autoplay
-  muted
-  loop
-  playsinline
-  webkit-playsinline
-  preload="auto">
-
-Do that for Liquid.mp4, Sephora.mp4, and hakrs-flip-live.mp4.
-
-The behavior will be:
-
-Swipe onto video → video automatically plays → swipe away → video pauses → swipe back → video resumes where it stopped.
-
-No Shop touch-lock code should be added back.
-
-is the version to paste into GitHub. The critical difference is that there is no Shop touch-lock JavaScript at all, and the MP4s are controlled by one simple visibility observer without resetting or reloading them.
-
-If the videos still freeze after this version, the next thing to check is the actual MP4 files/names in the GitHub repository rather than adding more JavaScript.
+  <img src="kalshi-trade.jpg" width="1080" height="1920" alt="">
+  <div class="tap open-link" data-href="https://kalshi
