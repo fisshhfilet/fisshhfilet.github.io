@@ -7,7 +7,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{width:100%;height:100%;background:#000}
-body{overflow:hidden;font-family:monospace;background:#000;overscroll-behavior:none}
+body{overflow:hidden;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;background:#000;overscroll-behavior:none;-webkit-font-smoothing:antialiased}
 #feed{width:100vw;height:100vh;overflow-y:auto;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;background:#000}
 .page{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;background:#000;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;overflow:hidden}
 .page img,.page video{width:100%;height:100%;object-fit:contain;background:#000;display:block}
@@ -17,35 +17,59 @@ body{overflow:hidden;font-family:monospace;background:#000;overscroll-behavior:n
 .betty{position:absolute;inset:0;opacity:0;animation:bettyIn 1.2s ease 2.4s forwards}
 @keyframes txtIn{to{opacity:1}}@keyframes txtOut{to{opacity:0}}@keyframes openingOut{to{opacity:0}}@keyframes bettyIn{to{opacity:1}}
 .final{flex-direction:column;gap:38px;text-align:center}
-.shop{width:100%;max-width:430px;height:100vh;background:#000;display:flex;flex-direction:column}
-.x{display:flex;justify-content:center;padding:18px 12px 10px}.x div{background:#0e1f1a;border:1px solid #1e3a2e;border-radius:999px;padding:10px 28px;font-weight:900;letter-spacing:.12em;color:#e8fff3;font-size:14px}
-.bar{display:flex;justify-content:space-between;padding:0 12px 10px;font-size:9px;color:#8a8a8a;border-bottom:1px solid #111}.bar b{color:#fff}
+.shop{width:100%;max-width:430px;height:100vh;background:#000;display:flex;flex-direction:column;overflow-y:auto;color:#e8e8e8}
+.x{display:flex;justify-content:center;padding:12px 12px 10px}
+.xwrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+.xmark{background:#0e1f1a;border:1px solid #1e3a2e;border-radius:999px;padding:9px 20px;font-weight:600;letter-spacing:.38em;color:#e8fff3;font-size:11px;display:inline-flex;align-items:center;justify-content:center;gap:.38em;text-transform:lowercase}
+.xmark .c,.xmark .s{font-size:11px;font-weight:600;letter-spacing:.38em;display:inline-block}
+.topline{display:flex;justify-content:space-between;align-items:center;padding:8px 14px 10px;font-size:9px;letter-spacing:.12em;color:#666}
+.topline b{color:#fff;font-weight:800}
 .code{margin:8px 12px;background:#111;border:1px solid #1e1e1e;border-radius:999px;display:flex;justify-content:space-between;padding:10px 12px 10px 14px;align-items:center}
 .copy{border:0;background:#1e1e1e;color:#fff;border-radius:999px;padding:6px 14px;font-size:9px;font-weight:900}
-.avatars{display:flex;gap:10px;overflow-x:auto;padding:12px 12px;border-bottom:1px solid #111}.av{flex:0 0 56px;text-align:center;text-decoration:none;opacity:.35}.av.active{opacity:1}.av.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff}
-.av .c{width:48px;height:48px;border-radius:50%;overflow:hidden;background:#111;margin:0 auto;border:2px solid #1a1a1a}.av .c img{width:100%;height:100%;object-fit:cover}
-.av i{font-style:normal;font-size:7px;color:#666;margin-top:5px;display:block}
-.av.seph{opacity:1;cursor:pointer}.av.seph.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff, 0 0 12px rgba(255,255,255,.6)}.av.seph i{color:#fff;font-weight:900}
-.toggle{margin:10px 12px;background:#111;border:1px solid #1e1e1e;border-radius:999px;display:grid;grid-template-columns:1fr 1fr;padding:3px;gap:3px}.toggle button{height:36px;border-radius:999px;border:0;font-size:9px;font-weight:800;letter-spacing:.14em;background:transparent;color:#666}.toggle button.on{background:#ff2a6d;color:#fff}
-.img{margin:0 12px;border-radius:18px;overflow:hidden;border:2px solid #ff5a1f;background:#0a0a0a;aspect-ratio:4/5}.img img{width:100%;height:100%;object-fit:cover}
-.swipe{text-align:center;padding:10px 12px 6px;font-size:8px;letter-spacing:.18em;color:#555}.live{text-align:center;padding:0 12px 12px;font-size:9px;color:#ff2a6d}
-.grid{padding:0 12px 12px;display:grid;grid-template-columns:1fr 1fr;gap:8px}.card{background:#111;border:1px solid #1a1a1a;border-radius:12px;padding:10px}.card b{font-size:7px;color:#555;display:block;margin-bottom:6px}.card p{font-size:9px;line-height:1.35;color:#ddd;font-weight:600}
-.add{margin:0 12px 18px;background:#111;border:1px solid #1a1a1a;border-radius:999px;display:flex;justify-content:space-between;padding:10px 12px 10px 16px;align-items:center}.add span{font-size:11px;font-weight:900}
+.avatars{display:flex;gap:10px;overflow-x:auto;padding:12px;border-bottom:1px solid #161616;-webkit-overflow-scrolling:touch}
+.av{flex:0 0 56px;text-align:center;opacity:.35}
+.av.active{opacity:1}
+.av .c{width:52px;height:52px;border-radius:50%;overflow:hidden;background:#111;margin:0 auto;border:2px solid #1a1a1a}
+.av .c img{width:100%;height:100%;object-fit:cover}
+.av i{font-style:normal;font-size:7px;color:#666;margin-top:5px;display:block;letter-spacing:.08em}
+.av.seph{opacity:1}
+.av.seph.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff,0 0 14px rgba(255,255,255,.85)}
+.av.seph.active i{color:#fff;font-weight:900}
+.toggle{margin:10px 12px;background:#111;border:1px solid #1e1e1e;border-radius:999px;display:grid;grid-template-columns:1fr 1fr;padding:3px;gap:3px}
+.toggle button{height:36px;border-radius:999px;border:0;font-size:9px;font-weight:800;letter-spacing:.14em;background:transparent;color:#666}
+.toggle button.on{background:#ff2a6d;color:#fff}
+.img{margin:10px 12px;border-radius:18px;overflow:hidden;border:2px solid #ff5a12;background:#000;aspect-ratio:4/5}
+.img img{width:100%;height:100%;object-fit:cover}
+.swipe{text-align:center;padding:10px 12px 4px;font-size:8px;letter-spacing:.18em;color:#555}
+.flipmeta{text-align:center;padding:0 12px 14px;font-size:8px;color:#ff2a6d;letter-spacing:.14em}
+.specs{margin:0 12px 8px;border-top:1px solid #222}
+.spec{display:grid;grid-template-columns:88px 1fr;gap:10px;padding:12px 0;border-bottom:1px solid #222;font-size:10px;line-height:1.45}
+.spec b{color:#666;font-weight:800;letter-spacing:.08em;font-size:8px;padding-top:2px}
+.spec p{color:#ddd;font-weight:600}
+.grid{padding:4px 12px 12px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.card{background:#121212;border:1px solid #1e1e1e;border-radius:16px;padding:12px}
+.card b{font-size:7px;color:#555;display:block;margin-bottom:6px;letter-spacing:.1em}
+.card p{font-size:9px;line-height:1.35;color:#ddd;font-weight:600}
+.add{margin:0 12px 18px;background:#111;border:1px solid #1e1e1e;border-radius:999px;display:flex;justify-content:space-between;padding:10px 12px 10px 16px;align-items:center}
+.add span{font-size:11px;font-weight:900;letter-spacing:.08em}
+.cta{margin:0 12px 14px;background:#fff;color:#000;border:0;height:44px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;letter-spacing:.16em;border-radius:999px}
+.markoverlay{position:absolute;left:0;right:0;top:18px;z-index:6;display:flex;justify-content:center;pointer-events:none}
+.filename{position:absolute;left:14px;bottom:22px;z-index:6;color:#666;font-size:8px;letter-spacing:.14em;pointer-events:none}
 </style>
 </head>
 <body>
 <div id="feed">
 <section class="page"><div class="betty"><img src="betty.jpg"></div><div class="opening"><span>@fisshhfilet</span></div></section>
 <section class="page"><img src="waista.jpg"></section>
-<section class="page"><video src="ad.mp4" muted loop playsinline preload="auto"></video></section>
+<section class="page"><video src="ad.mp4" autoplay muted loop playsinline preload="auto"></video></section>
 <section class="page"><img src="bear-boat-hoodie.jpg"><div class="tap open-link" data-href="https://naturalcatchtuna.com/"></div></section>
-<section class="page"><video src="Sephora.mp4" muted loop playsinline preload="metadata"></video></section>
+<section class="page"><video src="Sephora.mp4" autoplay muted loop playsinline preload="auto"></video></section>
 <section class="page"><img src="qr-ware.jpg"></section>
-<section class="page"><video src="hakrs-flip-live.mp4" muted loop playsinline preload="auto"></video></section>
+<section class="page"><video src="hakrs-flip-live.mp4" autoplay muted loop playsinline preload="auto"></video><div class="markoverlay"><div class="xmark"><span class="c">x</span><span class="c">f</span><span class="c">i</span><span class="s">§</span><span class="c">x</span></div></div></section>
 <section class="page" style="background:#000">
 <div class="shop">
-<div class="x"><div>x fi§ x</div></div>
-<div class="bar"><span><b>$312 FLIP</b> $2,535 RETAIL +</span><span>@fisshhfilet</span></div>
+<div class="x"><div class="xwrap"><div class="xmark"><span class="c">•</span><span class="s">§</span><span class="c">h</span><span class="c">o</span><span class="c">p</span><span class="c">•</span></div></div></div>
+<div class="topline"><span><b>$312 FLIP</b> $2,535 RETAIL +</span><span>@fisshhfilet</span></div>
 <div class="code"><span style="font-size:10px;color:#bbb">FISSHH50 SEPHORA $50 OFF</span><button class="copy" onclick="try{navigator.clipboard.writeText('FISSHH50');this.textContent='COPIED';setTimeout(()=>this.textContent='COPY',1200)}catch(e){}">COPY</button></div>
 <div class="avatars">
 <div class="av seph active open-link" data-href="https://www.sephora.com/"><div class="c"><img src="sephora.jpg"></div><i>SEPHORA</i></div>
@@ -59,13 +83,20 @@ body{overflow:hidden;font-family:monospace;background:#000;overscroll-behavior:n
 <div class="toggle"><button>SHARK • ARCHIVE 5/9</button><button class="on">FLIPPED • HAKRs 4/9</button></div>
 <div class="img"><img src="hakrs-pier-flip-clean.jpg"></div>
 <div class="swipe">SWIPE UP</div>
-<div class="live">SHARK IS LIVE — TAP TO FLIP CARDS 4/4 04/09</div>
+<div class="flipmeta">SHARK IS LIVE — TAP TO FLIP CARDS 4/4 04/09</div>
+<div class="specs">
+<div class="spec"><b>DROP</b><p>HAKRs PIER FLIP. DEADSTOCK ARCHIVE CUT. SAME ENERGY AS THE ROOM.</p></div>
+<div class="spec"><b>SOURCE</b><p>NYC FLOOR + ARCHIVE RACK. RETAIL $285 → FLIP $32.</p></div>
+<div class="spec"><b>FABRIC</b><p>HEAVY 14oz FLEECE. CRYSTAL WASHED. OVERSIZED BOXY. CROPPED AT WAIST.</p></div>
+<div class="spec"><b>SHIP</b><p>NYC NEXT_DAY. WORLDWIDE 3–5 DAYS.</p></div>
+</div>
 <div class="grid">
 <div class="card"><b>FABRIC?</b><p>HEAVY 14oz FLEECE CRYSTAL WASHED</p></div>
 <div class="card"><b>FIT?</b><p>OVERSIZED BOXY CROPPED AT WAIST</p></div>
 <div class="card"><b>WHY FLIP?</b><p>RETAIL $285 → FLIP $32 DEADSTOCK ARCHIVE</p></div>
 <div class="card"><b>SHIP?</b><p>NYC NEXT_DAY WORLDWIDE 3-5 DAYS</p></div>
 </div>
+<div class="cta">SHOP FLIP → $32</div>
 <div class="add"><span>ADD → $32</span><div style="width:34px;height:34px;border-radius:50%;background:#ff7a00;display:flex;align-items:center;justify-content:center">♥</div></div>
 </div>
 </section>
@@ -73,7 +104,7 @@ body{overflow:hidden;font-family:monospace;background:#000;overscroll-behavior:n
 <section class="page"><img src="waista-question.jpg"></section>
 <section class="page"><img src="kalshi-trade.jpg"><div class="tap open-link" data-href="https://kalshi.com"></div></section>
 <section class="page"><img src="adults-only-beach.jpg"></section>
-<section class="page final" style="background:#000">
+<section class="page final" id="end-page">
 <div style="color:#a8a8a8;font-size:10px;letter-spacing:.32em">@fisshhfilet</div>
 <div style="color:#fff;font-size:11px;letter-spacing:.36em">PRIVATE ACCESS</div>
 <div style="color:#39e66f;font-size:10px;letter-spacing:.32em;font-weight:800">MEMBERS ONLY</div>
@@ -81,22 +112,58 @@ body{overflow:hidden;font-family:monospace;background:#000;overscroll-behavior:n
 </div>
 <script>
 (function(){
-var feed=document.getElementById('feed');
+var feed=document.getElementById("feed");
+var endPage=document.getElementById("end-page");
+var SKIP={"index.html":1,"shop.html":1,".nojekyll":1,"readme":1,"readme.md":1,"betty.jpg":1,"waista.jpg":1,"ad.mp4":1,"bear-boat-hoodie.jpg":1,"sephora.mp4":1,"qr-ware.jpg":1,"hakrs-flip-live.mp4":1,"hakrs-pier-flip-clean.jpg":1,"restocking-soon-fix.jpg":1,"waista-question.jpg":1,"kalshi-trade.jpg":1,"adults-only-beach.jpg":1,"sephora.jpg":1};
+var IMG=/\.(jpe?g|png|gif|webp|avif|bmp)$/i;
+var VID=/\.(mp4|webm|mov|m4v)$/i;
+function bindVideos(){
 var io=new IntersectionObserver(function(es){
 es.forEach(function(e){
-var v=e.target.querySelector('video');
-if(!v) return;
-if(e.isIntersecting){try{v.currentTime=0; v.play().catch(function(){})}catch(er){}}else{try{v.pause(); v.currentTime=0;}catch(er){}}
+var v=e.target.querySelector("video");
+if(!v)return;
+if(e.isIntersecting){try{v.currentTime=0;v.play().catch(function(){})}catch(er){}}
+else{try{v.pause();v.currentTime=0}catch(er){}}
 });
 },{root:feed,threshold:0.65});
-document.querySelectorAll('.page').forEach(function(p){io.observe(p);});
-document.querySelectorAll('.open-link').forEach(function(el){
-el.addEventListener('click', function(e){
+document.querySelectorAll(".page").forEach(function(p){io.observe(p)});
+}
+function bindLinks(){
+document.querySelectorAll(".open-link").forEach(function(el){
+if(el._bound)return;
+el._bound=true;
+el.addEventListener("click",function(e){
 e.stopPropagation();
-var href = el.getAttribute('data-href');
-if(href) window.open(href, '_blank', 'noopener');
+var href=el.getAttribute("data-href");
+if(href)window.open(href,"_blank","noopener");
 });
 });
+}
+function addPage(name){
+var sec=document.createElement("section");
+sec.className="page";
+var src=encodeURI(name);
+if(VID.test(name))sec.innerHTML='<video src="'+src+'" autoplay muted loop playsinline preload="metadata"></video><div class="filename">'+name+"</div>";
+else sec.innerHTML='<img src="'+src+'" alt="'+name+'"><div class="filename">'+name+"</div>";
+feed.insertBefore(sec,endPage);
+}
+function loadRepoFiles(){
+fetch("https://api.github.com/repos/fisshhfilet/fisshhfilet.github.io/contents/?ref=main")
+.then(function(r){return r.json()})
+.then(function(list){
+if(!Array.isArray(list))return;
+list.forEach(function(item){
+if(!item||item.type!=="file"||!item.name)return;
+var key=item.name.toLowerCase();
+if(SKIP[key]||SKIP[item.name])return;
+if(IMG.test(item.name)||VID.test(item.name))addPage(item.name);
+});
+bindVideos();
+}).catch(function(){bindVideos()});
+}
+bindLinks();
+bindVideos();
+loadRepoFiles();
 })();
 </script>
 </body>
