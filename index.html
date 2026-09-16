@@ -10,77 +10,22 @@
 <link rel="preload" as="image" href="waista.jpg">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%;background:#000}
-html{height:100svh;height:100dvh}
-body{
-  overflow:hidden;
-  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
-  background:#000;
-  overscroll-behavior:none;
-  -webkit-font-smoothing:antialiased;
-  touch-action:pan-y;
-}
-#feed{
-  width:100vw;
-  height:100svh;
-  height:100dvh;
-  overflow-x:hidden;
-  overflow-y:auto;
-  scroll-snap-type:y mandatory;
-  -webkit-overflow-scrolling:touch;
-  background:#000;
-  overscroll-behavior-y:contain;
-}
-.page{
-  width:100vw;
-  height:100svh;
-  height:100dvh;
-  min-height:100svh;
-  min-height:100dvh;
-  scroll-snap-align:start;
-  scroll-snap-stop:always;
-  background:#000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-  flex-shrink:0;
-  overflow:hidden;
-  contain:strict;
-}
-.page img,.page video{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  object-position:center center;
-  background:#000;
-  display:block;
-  flex-shrink:0;
-}
+html,body{width:100%;height:100%;background:#000;position:fixed;inset:0;overflow:hidden}
+body{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;overscroll-behavior:none;-webkit-font-smoothing:antialiased;touch-action:pan-y}
+#feed{position:absolute;inset:0;width:100%;height:100%;overflow-x:hidden;overflow-y:auto;scroll-snap-type:y mandatory;scroll-padding:0;-webkit-overflow-scrolling:touch;background:#000;overscroll-behavior-y:none}
+.page{width:100%;height:100%;scroll-snap-align:start;scroll-snap-stop:always;background:#000;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;overflow:hidden}
+.page img,.page video{width:100%;height:100%;object-fit:cover;object-position:center center;background:#000;display:block}
 .tap{position:absolute;inset:0;z-index:5;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.opening{
-  position:absolute;inset:0;background:#000;
-  display:flex;align-items:center;justify-content:center;
-  z-index:10;pointer-events:none;
-  animation:openingOut .8s ease 2.3s forwards;
-}
-.opening span{
-  color:#a8a8a8;font-size:10px;letter-spacing:.32em;opacity:0;
-  animation:txtIn .8s ease .3s forwards, txtOut .6s ease 1.8s forwards;
-}
+.opening{position:absolute;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:10;pointer-events:none;animation:openingOut .8s ease 2.3s forwards}
+.opening span{color:#a8a8a8;font-size:10px;letter-spacing:.32em;opacity:0;animation:txtIn .8s ease .3s forwards, txtOut .6s ease 1.8s forwards}
 .betty{position:absolute;inset:0;opacity:0;animation:bettyIn 1.2s ease 2.4s forwards}
-.betty img{width:100%;height:100%;object-fit:contain}
+.betty img{width:100%;height:100%;object-fit:cover}
 @keyframes txtIn{to{opacity:1}}
 @keyframes txtOut{to{opacity:0}}
 @keyframes openingOut{to{opacity:0;visibility:hidden}}
 @keyframes bettyIn{to{opacity:1}}
 .final{flex-direction:column;gap:38px;text-align:center}
-.shop{
-  width:100%;max-width:430px;height:100%;background:#000;
-  display:flex;flex-direction:column;overflow-y:auto;color:#e8e8e8;
-  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
-  -webkit-overflow-scrolling:touch;
-}
+.shop{width:100%;max-width:430px;height:100%;background:#000;display:flex;flex-direction:column;overflow-y:auto;color:#e8e8e8;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);-webkit-overflow-scrolling:touch}
 .avatars{display:flex;gap:10px;overflow-x:auto;padding:10px 12px 10px;-webkit-overflow-scrolling:touch;flex-shrink:0}
 .av{flex:0 0 56px;text-align:center;text-decoration:none;opacity:.35;color:inherit}
 .av.active{opacity:1}
@@ -175,52 +120,29 @@ body{
 <script>
 (function(){
   var feed = document.getElementById('feed');
-  var locked = 0;
-
-  function viewportH(){
-    if(window.visualViewport && window.visualViewport.height){
-      return Math.round(window.visualViewport.height);
-    }
-    return Math.round(window.innerHeight);
+  var pages = [].slice.call(document.querySelectorAll('.page'));
+  var snapping = false;
+  function h(){ return feed.clientHeight || window.innerHeight; }
+  function lock(){
+    var px = h() + 'px';
+    pages.forEach(function(p){ p.style.height = px; p.style.minHeight = px; p.style.maxHeight = px; });
   }
-
-  function apply(h){
-    feed.style.height = h + 'px';
-    document.querySelectorAll('.page').forEach(function(p){
-      p.style.height = h + 'px';
-      p.style.minHeight = h + 'px';
-      p.style.maxHeight = h + 'px';
-    });
+  function pageIndex(){ var hh = h(); return hh ? Math.round(feed.scrollTop / hh) : 0; }
+  function snapTo(i){
+    var hh = h();
+    i = Math.max(0, Math.min(pages.length - 1, i));
+    snapping = true;
+    feed.scrollTo(0, i * hh);
+    requestAnimationFrame(function(){ snapping = false; });
   }
-
-  function lockOnce(){
-    var h = viewportH();
-    if(!h) return;
-    locked = h;
-    apply(h);
-  }
-
-  lockOnce();
-  window.addEventListener('load', lockOnce, {once:true});
-
-  function maybeRelock(){
-    var h = viewportH();
-    if(!locked){ lockOnce(); return; }
-    if(Math.abs(h - locked) < 80) return;
-    locked = h;
-    apply(h);
-  }
-
-  window.addEventListener('orientationchange', function(){
-    setTimeout(function(){ locked = 0; lockOnce(); }, 120);
-  });
-
-  var t;
-  window.addEventListener('resize', function(){
-    clearTimeout(t);
-    t = setTimeout(maybeRelock, 200);
-  }, {passive:true});
-
+  function correct(){ if(!snapping) snapTo(pageIndex()); }
+  lock();
+  window.addEventListener('load', lock);
+  var endTimer;
+  feed.addEventListener('scroll', function(){ clearTimeout(endTimer); endTimer = setTimeout(correct, 80); }, {passive:true});
+  feed.addEventListener('scrollend', correct);
+  feed.addEventListener('touchend', function(){ setTimeout(correct, 60); }, {passive:true});
+  window.addEventListener('orientationchange', function(){ setTimeout(function(){ lock(); snapTo(pageIndex()); }, 150); });
   var io = new IntersectionObserver(function(es){
     es.forEach(function(e){
       var v = e.target.querySelector('video');
@@ -228,9 +150,8 @@ body{
       if(e.isIntersecting){ try{ v.play().catch(function(){}); }catch(er){} }
       else { try{ v.pause(); }catch(er){} }
     });
-  }, {root:feed, threshold:0.65});
-  document.querySelectorAll('.page').forEach(function(p){ io.observe(p); });
-
+  }, {root:feed, threshold:0.6});
+  pages.forEach(function(p){ io.observe(p); });
   document.querySelectorAll('.open-link').forEach(function(el){
     el.addEventListener('click', function(e){
       e.stopPropagation();
@@ -238,7 +159,6 @@ body{
       if(href) window.open(href, '_blank', 'noopener');
     });
   });
-
   var warm = new Image();
   warm.src = 'waista.jpg';
 })();
