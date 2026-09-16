@@ -17,6 +17,7 @@ html,body{
   position:fixed;
   inset:0;
   overflow:hidden;
+  touch-action:none;
 }
 body{
   font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
@@ -26,13 +27,12 @@ body{
 #feed{
   position:absolute;
   inset:0;
-  overflow-x:hidden;
-  overflow-y:auto;
+  overflow:hidden;
   background:#000;
-  scroll-snap-type:y mandatory;
-  scroll-behavior:auto;
-  overscroll-behavior:none;
-  -webkit-overflow-scrolling:touch;
+}
+#track{
+  width:100%;
+  will-change:transform;
 }
 .page{
   width:100%;
@@ -43,18 +43,17 @@ body{
   justify-content:center;
   position:relative;
   overflow:hidden;
-  scroll-snap-align:start;
-  scroll-snap-stop:always;
   flex-shrink:0;
 }
 .page img,
 .page video{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
   object-position:center center;
   background:#000;
   display:block;
+  pointer-events:none;
 }
 .tap{
   position:absolute;
@@ -82,7 +81,7 @@ body{
   animation:txtIn .8s ease .3s forwards, txtOut .6s ease 1.8s forwards;
 }
 .betty{position:absolute;inset:0}
-.betty img{width:100%;height:100%;object-fit:cover}
+.betty img{width:100%;height:100%;object-fit:contain}
 @keyframes txtIn{to{opacity:1}}
 @keyframes txtOut{to{opacity:0}}
 @keyframes openingOut{to{opacity:0;visibility:hidden}}
@@ -98,14 +97,15 @@ body{
   color:#e8e8e8;
   padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
   -webkit-overflow-scrolling:touch;
-  overscroll-behavior-y:auto;
+  overscroll-behavior:none;
+  touch-action:pan-y;
 }
 .avatars{display:flex;gap:10px;overflow-x:auto;padding:10px 12px 10px;-webkit-overflow-scrolling:touch;flex-shrink:0}
 .av{flex:0 0 56px;text-align:center;text-decoration:none;opacity:.35;color:inherit}
 .av.active{opacity:1}
 .av .c{width:52px;height:52px;border-radius:50%;overflow:hidden;background:#111;margin:0 auto;border:2px solid #2a2a2a}
 .av.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff}
-.av .c img{width:100%;height:100%;object-fit:cover}
+.av .c img{width:100%;height:100%;object-fit:cover;pointer-events:auto}
 .av i{font-style:normal;font-size:7px;color:#666;margin-top:5px;display:block;letter-spacing:.08em}
 .av.seph{opacity:1;cursor:pointer}
 .av.seph.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff}
@@ -129,6 +129,7 @@ body{
 </head>
 <body>
 <div id="feed">
+<div id="track">
 <section class="page">
   <div class="betty"><img src="betty.jpg" width="1080" height="1920" alt=""></div>
   <div class="opening"><span>@fisshhfilet</span></div>
@@ -198,22 +199,45 @@ body{
 <div style="color:#39e66f;font-size:10px;letter-spacing:.32em;font-weight:800">MEMBERS ONLY</div>
 </section>
 </div>
+</div>
 <script>
 (function(){
   var feed = document.getElementById('feed');
+  var track = document.getElementById('track');
   var pages = [].slice.call(document.querySelectorAll('.page'));
-
-  function lock(){
-    var h = feed.clientHeight;
-    if(h < 100) h = window.innerHeight;
-    pages.forEach(function(p){ p.style.height = h + 'px'; });
-  }
-  lock();
-
+  var shop = document.querySelector('.shop');
+  var n = pages.length;
+  var i = 0;
+  var H = 0;
+  var y0 = 0, t0 = 0, dragging = false, startI = 0, shopLock = false;
   var vids = [].slice.call(document.querySelectorAll('video'));
-  var on = {};
 
-  vids.forEach(function(v, n){
+  function vh(){
+    var vv = window.visualViewport;
+    return Math.round((vv && vv.height) || feed.clientHeight || window.innerHeight);
+  }
+
+  function size(){
+    H = vh();
+    pages.forEach(function(p){ p.style.height = H + 'px'; });
+    track.style.height = (n * H) + 'px';
+    go(i, false);
+  }
+
+  function setY(y, animate){
+    track.style.transition = animate ? 'transform .28s cubic-bezier(.22,.9,.3,1)' : 'none';
+    track.style.transform = 'translate3d(0,' + (-y) + 'px,0)';
+  }
+
+  function go(idx, animate){
+    if(idx < 0) idx = 0;
+    if(idx > n - 1) idx = n - 1;
+    i = idx;
+    setY(i * H, animate !== false);
+    play();
+  }
+
+  vids.forEach(function(v){
     v.muted = true;
     v.loop = true;
     v.playsInline = true;
@@ -221,59 +245,94 @@ body{
     v.setAttribute('playsinline','');
     v.setAttribute('webkit-playsinline','');
     v.disableRemotePlayback = true;
-    on[n] = false;
-    v._i = n;
   });
 
-  function goPlay(v){
-    if(on[v._i]) return;
-    on[v._i] = true;
-    try { if(v.currentTime > 0.05) v.currentTime = 0; } catch(e){}
-    if(v.paused) v.play().catch(function(){ on[v._i] = false; });
+  function play(){
+    pages.forEach(function(p, idx){
+      var v = p.querySelector('video');
+      if(!v) return;
+      if(idx === i){
+        if(v.paused) v.play().catch(function(){});
+      } else {
+        if(!v.paused) v.pause();
+        try { v.currentTime = 0; } catch(e){}
+      }
+    });
   }
 
-  function goPause(v){
-    if(!on[v._i] && v.paused) return;
-    on[v._i] = false;
-    if(!v.paused) v.pause();
-    try { v.currentTime = 0; } catch(e){}
+  function inShop(el){
+    return shop && el && shop.contains(el);
   }
 
-  if('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        var v = en.target;
-        if(en.intersectionRatio >= 0.7) goPlay(v);
-        else if(en.intersectionRatio <= 0.05) goPause(v);
-      });
-    }, {root:feed, threshold:[0, 0.05, 0.7, 1]});
-    vids.forEach(function(v){ io.observe(v); });
+  function shopCan(dir){
+    if(!shop) return false;
+    var top = shop.scrollTop <= 1;
+    var bot = shop.scrollTop + shop.clientHeight >= shop.scrollHeight - 2;
+    if(dir < 0) return !top;
+    if(dir > 0) return !bot;
+    return true;
   }
 
-  var shop = document.querySelector('.shop');
+  feed.addEventListener('touchstart', function(e){
+    if(!e.touches[0]) return;
+    y0 = e.touches[0].clientY;
+    t0 = Date.now();
+    startI = i;
+    dragging = true;
+    shopLock = inShop(e.target);
+    track.style.transition = 'none';
+  }, {passive:true});
+
+  feed.addEventListener('touchmove', function(e){
+    if(!dragging || !e.touches[0]) return;
+    var dy = y0 - e.touches[0].clientY;
+    if(shopLock){
+      if(Math.abs(dy) < 10) return;
+      if(Math.abs(dy) < 72 && shopCan(dy)) return;
+      shopLock = false;
+      y0 = e.touches[0].clientY;
+      dy = 0;
+    }
+    var y = startI * H + dy;
+    if(y < 0) y = dy * 0.25;
+    if(y > (n-1)*H) y = (n-1)*H + (dy * 0.25);
+    setY(y, false);
+  }, {passive:true});
+
+  function settle(y1){
+    var dy = y0 - y1;
+    var dt = Math.max(Date.now() - t0, 1);
+    var vel = dy / dt;
+    var next = startI;
+    var strong = Math.abs(dy) > 56 || Math.abs(vel) > 0.35 || Math.abs(dy) > H * 0.12;
+    if(strong) next = dy > 0 ? startI + 1 : startI - 1;
+    go(next, true);
+  }
+
+  feed.addEventListener('touchend', function(e){
+    if(!dragging) return;
+    dragging = false;
+    var y1 = e.changedTouches[0] ? e.changedTouches[0].clientY : y0;
+    if(shopLock && Math.abs(y0 - y1) < 56){ go(startI, true); return; }
+    settle(y1);
+  }, {passive:true});
+
   if(shop){
-    var sy = 0, st = 0;
-    var shopPage = shop.closest('.page');
     shop.addEventListener('touchstart', function(e){
       if(!e.touches[0]) return;
-      sy = e.touches[0].clientY;
-      st = Date.now();
+      y0 = e.touches[0].clientY;
+      t0 = Date.now();
+      startI = i;
     }, {passive:true});
     shop.addEventListener('touchend', function(e){
-      if(!e.changedTouches[0] || !shopPage) return;
-      var dy = sy - e.changedTouches[0].clientY;
-      var dt = Math.max(Date.now() - st, 1);
-      var strong = Math.abs(dy) > 56 || Math.abs(dy / dt) > 0.45;
+      if(!e.changedTouches[0]) return;
+      var y1 = e.changedTouches[0].clientY;
+      var dy = y0 - y1;
+      var dt = Math.max(Date.now() - t0, 1);
+      var strong = Math.abs(dy) > 64 || Math.abs(dy / dt) > 0.4;
       if(!strong) return;
-      var atTop = shop.scrollTop <= 2;
-      var atBot = shop.scrollTop + shop.clientHeight >= shop.scrollHeight - 3;
-      var idx = pages.indexOf(shopPage);
-      var h = shopPage.offsetHeight || feed.clientHeight;
-      if(dy > 0 && atBot && idx < pages.length - 1){
-        feed.scrollTo({top: (idx + 1) * h, behavior: 'smooth'});
-      } else if(dy < 0 && atTop && idx > 0){
-        feed.scrollTo({top: (idx - 1) * h, behavior: 'smooth'});
-      }
+      if(dy > 0) go(i + 1, true);
+      else go(i - 1, true);
     }, {passive:true});
   }
 
@@ -285,9 +344,12 @@ body{
     });
   });
 
-  window.addEventListener('orientationchange', function(){
-    setTimeout(lock, 300);
-  });
+  size();
+  if(window.visualViewport){
+    window.visualViewport.addEventListener('resize', size);
+  }
+  window.addEventListener('resize', size);
+  window.addEventListener('orientationchange', function(){ setTimeout(size, 250); });
 })();
 </script>
 </body>
