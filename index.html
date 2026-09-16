@@ -30,21 +30,26 @@ body{
   background:#000;
   touch-action:none;
 }
-#track{
-  width:100%;
-  height:100%;
-  will-change:transform;
-  transition:transform .28s cubic-bezier(.22,.8,.24,1);
-}
 .page{
+  position:absolute;
+  inset:0;
   width:100%;
   height:100%;
   background:#000;
   display:flex;
   align-items:center;
   justify-content:center;
-  position:relative;
   overflow:hidden;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  z-index:0;
+}
+.page.on{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  z-index:2;
 }
 .page img,
 .page video{
@@ -54,6 +59,10 @@ body{
   object-position:center center;
   background:#000;
   display:block;
+}
+.page video{
+  transform:none;
+  -webkit-transform:none;
 }
 .tap{
   position:absolute;
@@ -83,14 +92,11 @@ body{
 .betty{
   position:absolute;
   inset:0;
-  opacity:0;
-  animation:bettyIn 1.2s ease 2.4s forwards;
 }
 .betty img{width:100%;height:100%;object-fit:contain}
 @keyframes txtIn{to{opacity:1}}
 @keyframes txtOut{to{opacity:0}}
 @keyframes openingOut{to{opacity:0;visibility:hidden}}
-@keyframes bettyIn{to{opacity:1}}
 .final{flex-direction:column;gap:38px;text-align:center}
 .shop{
   width:100%;
@@ -134,7 +140,6 @@ body{
 </head>
 <body>
 <div id="feed">
-<div id="track">
 <section class="page">
   <div class="betty"><img src="betty.jpg" width="1080" height="1920" alt=""></div>
   <div class="opening"><span>@fisshhfilet</span></div>
@@ -143,20 +148,27 @@ body{
   <img src="waista.jpg" width="1080" height="1920" alt="" fetchpriority="high">
 </section>
 <section class="page">
-  <video src="ad.mp4" muted loop playsinline preload="metadata"></video>
+  <video id="liquidVid" muted loop playsinline webkit-playsinline preload="auto">
+    <source src="Liquid.mp4" type="video/mp4">
+    <source src="ad.mp4" type="video/mp4">
+  </video>
 </section>
 <section class="page">
   <img src="bear-boat-hoodie.jpg" width="1080" height="1920" alt="">
   <div class="tap open-link" data-href="https://naturalcatchtuna.com/"></div>
 </section>
 <section class="page">
-  <video src="Sephora.mp4" muted loop playsinline preload="metadata"></video>
+  <video muted loop playsinline webkit-playsinline preload="auto">
+    <source src="Sephora.mp4" type="video/mp4">
+  </video>
 </section>
 <section class="page">
   <img src="qr-ware.jpg" width="1080" height="1920" alt="">
 </section>
 <section class="page">
-  <video src="hakrs-flip-live.mp4" muted loop playsinline preload="metadata"></video>
+  <video muted loop playsinline webkit-playsinline preload="auto">
+    <source src="hakrs-flip-live.mp4" type="video/mp4">
+  </video>
 </section>
 <section class="page" style="background:#000">
 <div class="shop">
@@ -197,11 +209,9 @@ body{
 <div style="color:#39e66f;font-size:10px;letter-spacing:.32em;font-weight:800">MEMBERS ONLY</div>
 </section>
 </div>
-</div>
 <script>
 (function(){
   var feed = document.getElementById('feed');
-  var track = document.getElementById('track');
   var pages = [].slice.call(document.querySelectorAll('.page'));
   var n = pages.length;
   var i = 0;
@@ -209,15 +219,33 @@ body{
   var startX = 0;
   var dragging = false;
 
-  function go(next){
-    i = Math.max(0, Math.min(n - 1, next));
-    track.style.transform = 'translate3d(0,' + (-i * 100) + '%,0)';
+  function playActive(){
     pages.forEach(function(p, idx){
       var v = p.querySelector('video');
       if(!v) return;
-      if(idx === i){ try{ v.play().catch(function(){}); }catch(e){} }
-      else { try{ v.pause(); }catch(e){} }
+      v.muted = true;
+      v.loop = true;
+      v.playsInline = true;
+      v.setAttribute('playsinline','');
+      v.setAttribute('webkit-playsinline','');
+      v.onpause = null;
+      v.onstalled = null;
+      v.onwaiting = null;
+      if(idx === i){
+        if(v.paused) v.play().catch(function(){});
+      } else if(!v.paused){
+        try{ v.pause(); }catch(e){}
+      }
     });
+  }
+
+  function go(next){
+    i = Math.max(0, Math.min(n - 1, next));
+    pages.forEach(function(p, idx){
+      if(idx === i) p.classList.add('on');
+      else p.classList.remove('on');
+    });
+    playActive();
   }
 
   function shopEl(){
