@@ -98,6 +98,7 @@ body{
   color:#e8e8e8;
   padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
   -webkit-overflow-scrolling:touch;
+  overscroll-behavior:auto;
 }
 .avatars{display:flex;gap:10px;overflow-x:auto;padding:10px 12px 10px;-webkit-overflow-scrolling:touch;flex-shrink:0}
 .av{flex:0 0 56px;text-align:center;text-decoration:none;opacity:.35;color:inherit}
@@ -214,23 +215,58 @@ body{
     v.muted = true;
     v.loop = true;
     v.playsInline = true;
+    v.preload = 'auto';
     v.setAttribute('playsinline','');
     v.setAttribute('webkit-playsinline','');
+    v.disableRemotePlayback = true;
   });
 
   if('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
         var v = en.target;
-        if(en.isIntersecting && en.intersectionRatio >= 0.6){
+        if(en.intersectionRatio >= 0.8){
           if(v.paused) v.play().catch(function(){});
-        } else if(!v.paused){
-          v.pause();
+        } else if(en.intersectionRatio <= 0.2){
+          if(!v.paused) v.pause();
         }
       });
-    }, {root:feed, threshold:[0.6]});
+    }, {root:feed, threshold:[0, 0.2, 0.8, 1]});
     vids.forEach(function(v){ io.observe(v); });
   }
+
+  var shop = document.querySelector('.shop');
+  if(shop){
+    var sy = 0;
+    shop.addEventListener('touchstart', function(e){
+      if(e.touches[0]) sy = e.touches[0].clientY;
+      shop.style.overflowY = 'auto';
+    }, {passive:true});
+    shop.addEventListener('touchmove', function(e){
+      if(!e.touches[0]) return;
+      var dy = e.touches[0].clientY - sy;
+      var atTop = shop.scrollTop <= 1;
+      var atBot = shop.scrollTop + shop.clientHeight >= shop.scrollHeight - 2;
+      if((atTop && dy > 8) || (atBot && dy < -8)){
+        shop.style.overflowY = 'hidden';
+      } else {
+        shop.style.overflowY = 'auto';
+      }
+    }, {passive:true});
+    shop.addEventListener('touchend', function(){
+      shop.style.overflowY = 'auto';
+    }, {passive:true});
+  }
+
+  feed.addEventListener('scrollend', function(){
+    var h = pages[0] ? pages[0].offsetHeight : feed.clientHeight;
+    if(!h) return;
+    var i = Math.round(feed.scrollTop / h);
+    var target = i * h;
+    if(Math.abs(feed.scrollTop - target) > 2){
+      feed.scrollTo(0, target);
+    }
+  });
 
   document.querySelectorAll('.open-link').forEach(function(el){
     el.addEventListener('click', function(e){
@@ -246,4 +282,4 @@ body{
 })();
 </script>
 </body>
-</html>
+  </html>
