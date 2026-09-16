@@ -3,21 +3,84 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#000000">
 <title>fisshhfilet.github.io</title>
+<link rel="preload" as="image" href="betty.jpg">
+<link rel="preload" as="image" href="waista.jpg">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%;height:100dvh;background:#000}
-body{overflow:hidden;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;background:#000;overscroll-behavior:none;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
-#feed{width:100vw;height:100%;height:100dvh;overflow-y:auto;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;background:#000}
-.page{width:100vw;height:100%;height:100dvh;min-height:100svh;scroll-snap-align:start;scroll-snap-stop:always;background:#000;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;overflow:hidden}
-.page img,.page video{width:100%;height:100%;object-fit:contain;object-position:center center;background:#000;display:block;image-rendering:-webkit-optimize-contrast}
+html,body{width:100%;height:100%;background:#000}
+html{height:100svh;height:100dvh}
+body{
+  overflow:hidden;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  background:#000;
+  overscroll-behavior:none;
+  -webkit-font-smoothing:antialiased;
+  touch-action:pan-y;
+}
+#feed{
+  width:100vw;
+  height:100svh;
+  height:100dvh;
+  overflow-x:hidden;
+  overflow-y:auto;
+  scroll-snap-type:y mandatory;
+  -webkit-overflow-scrolling:touch;
+  background:#000;
+  overscroll-behavior-y:contain;
+}
+.page{
+  width:100vw;
+  height:100svh;
+  height:100dvh;
+  min-height:100svh;
+  min-height:100dvh;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  flex-shrink:0;
+  overflow:hidden;
+  contain:strict;
+}
+.page img,.page video{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center center;
+  background:#000;
+  display:block;
+  flex-shrink:0;
+}
 .tap{position:absolute;inset:0;z-index:5;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.opening{position:absolute;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:10;pointer-events:none;animation:openingOut .8s ease 2.3s forwards}
-.opening span{color:#a8a8a8;font-size:10px;letter-spacing:.32em;opacity:0;animation:txtIn .8s ease .3s forwards, txtOut .6s ease 1.8s forwards}
+.opening{
+  position:absolute;inset:0;background:#000;
+  display:flex;align-items:center;justify-content:center;
+  z-index:10;pointer-events:none;
+  animation:openingOut .8s ease 2.3s forwards;
+}
+.opening span{
+  color:#a8a8a8;font-size:10px;letter-spacing:.32em;opacity:0;
+  animation:txtIn .8s ease .3s forwards, txtOut .6s ease 1.8s forwards;
+}
 .betty{position:absolute;inset:0;opacity:0;animation:bettyIn 1.2s ease 2.4s forwards}
-@keyframes txtIn{to{opacity:1}}@keyframes txtOut{to{opacity:0}}@keyframes openingOut{to{opacity:0}}@keyframes bettyIn{to{opacity:1}}
+.betty img{width:100%;height:100%;object-fit:contain}
+@keyframes txtIn{to{opacity:1}}
+@keyframes txtOut{to{opacity:0}}
+@keyframes openingOut{to{opacity:0;visibility:hidden}}
+@keyframes bettyIn{to{opacity:1}}
 .final{flex-direction:column;gap:38px;text-align:center}
-.shop{width:100%;max-width:430px;height:100%;height:100dvh;background:#000;display:flex;flex-direction:column;overflow-y:auto;color:#e8e8e8;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.shop{
+  width:100%;max-width:430px;height:100%;background:#000;
+  display:flex;flex-direction:column;overflow-y:auto;color:#e8e8e8;
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+  -webkit-overflow-scrolling:touch;
+}
 .avatars{display:flex;gap:10px;overflow-x:auto;padding:10px 12px 10px;-webkit-overflow-scrolling:touch;flex-shrink:0}
 .av{flex:0 0 56px;text-align:center;text-decoration:none;opacity:.35;color:inherit}
 .av.active{opacity:1}
@@ -47,26 +110,42 @@ body{overflow:hidden;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consol
 </head>
 <body>
 <div id="feed">
-<section class="page"><div class="betty"><img src="betty.jpg"></div><div class="opening"><span>@fisshhfilet</span></div></section>
-<section class="page"><img src="waista.jpg"></section>
-<section class="page"><video src="ad.mp4" muted loop playsinline preload="auto"></video></section>
-<section class="page"><img src="bear-boat-hoodie.jpg"><div class="tap open-link" data-href="https://naturalcatchtuna.com/"></div></section>
-<section class="page"><video src="Sephora.mp4" muted loop playsinline preload="metadata"></video></section>
-<section class="page"><img src="qr-ware.jpg"></section>
-<section class="page"><video src="hakrs-flip-live.mp4" muted loop playsinline preload="auto"></video></section>
+<section class="page">
+  <div class="betty"><img src="betty.jpg" width="1080" height="1920" alt=""></div>
+  <div class="opening"><span>@fisshhfilet</span></div>
+</section>
+<section class="page">
+  <img src="waista.jpg" width="1080" height="1920" alt="" fetchpriority="high">
+</section>
+<section class="page">
+  <video src="ad.mp4" muted loop playsinline preload="metadata"></video>
+</section>
+<section class="page">
+  <img src="bear-boat-hoodie.jpg" width="1080" height="1920" alt="">
+  <div class="tap open-link" data-href="https://naturalcatchtuna.com/"></div>
+</section>
+<section class="page">
+  <video src="Sephora.mp4" muted loop playsinline preload="metadata"></video>
+</section>
+<section class="page">
+  <img src="qr-ware.jpg" width="1080" height="1920" alt="">
+</section>
+<section class="page">
+  <video src="hakrs-flip-live.mp4" muted loop playsinline preload="metadata"></video>
+</section>
 <section class="page" style="background:#000">
 <div class="shop">
 <div class="avatars">
-<a class="av seph active open-link" href="https://www.sephora.com/" target="_blank" rel="noopener" data-href="https://www.sephora.com/"><div class="c"><img src="sephora.jpg"></div><i>SEPHORA</i></a>
-<div class="av"><div class="c"><img src="betty.jpg"></div><i>HOST</i></div>
-<div class="av"><div class="c"><img src="waista.jpg"></div><i>HOME</i></div>
-<div class="av"><div class="c"><img src="qr-ware.jpg"></div><i>PM</i></div>
-<div class="av"><div class="c"><img src="bear-boat-hoodie.jpg"></div><i>FD</i></div>
-<div class="av"><div class="c"><img src="hakrs-pier-flip-clean.jpg"></div><i>GD</i></div>
-<div class="av"><div class="c"><img src="adults-only-beach.jpg"></div><i>ED</i></div>
+<a class="av seph active open-link" href="https://www.sephora.com/" target="_blank" rel="noopener" data-href="https://www.sephora.com/"><div class="c"><img src="sephora.jpg" width="104" height="104" alt=""></div><i>SEPHORA</i></a>
+<div class="av"><div class="c"><img src="betty.jpg" width="104" height="104" alt=""></div><i>HOST</i></div>
+<div class="av"><div class="c"><img src="waista.jpg" width="104" height="104" alt=""></div><i>HOME</i></div>
+<div class="av"><div class="c"><img src="qr-ware.jpg" width="104" height="104" alt=""></div><i>PM</i></div>
+<div class="av"><div class="c"><img src="bear-boat-hoodie.jpg" width="104" height="104" alt=""></div><i>FD</i></div>
+<div class="av"><div class="c"><img src="hakrs-pier-flip-clean.jpg" width="104" height="104" alt=""></div><i>GD</i></div>
+<div class="av"><div class="c"><img src="adults-only-beach.jpg" width="104" height="104" alt=""></div><i>ED</i></div>
 </div>
 <div class="toggle"><button>SHARK • ARCHIVE 5/9</button><button class="on">FLIPPED • HAKRs 4/9</button></div>
-<div class="img"><img src="hakrs-pier-flip-clean.jpg"></div>
+<div class="img"><img src="hakrs-pier-flip-clean.jpg" width="800" height="500" alt=""></div>
 <div class="swipe">SWIPE UP</div>
 <div class="live">SHARK IS LIVE — TAP TO FLIP CARDS 4/4 04/09</div>
 <div class="grid">
@@ -80,10 +159,13 @@ body{overflow:hidden;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consol
 <div class="add"><span>ADD → $32</span><div style="width:34px;height:34px;border-radius:50%;background:#ff7a00;display:flex;align-items:center;justify-content:center;color:#fff">♥</div></div>
 </div>
 </section>
-<section class="page"><img src="restocking-soon-fix.jpg"></section>
-<section class="page"><img src="waista-question.jpg"></section>
-<section class="page"><img src="kalshi-trade.jpg"><div class="tap open-link" data-href="https://kalshi.com"></div></section>
-<section class="page"><img src="adults-only-beach.jpg"></section>
+<section class="page"><img src="restocking-soon-fix.jpg" width="1080" height="1920" alt=""></section>
+<section class="page"><img src="waista-question.jpg" width="1080" height="1920" alt=""></section>
+<section class="page">
+  <img src="kalshi-trade.jpg" width="1080" height="1920" alt="">
+  <div class="tap open-link" data-href="https://kalshi.com"></div>
+</section>
+<section class="page"><img src="adults-only-beach.jpg" width="1080" height="1920" alt=""></section>
 <section class="page final" style="background:#000">
 <div style="color:#a8a8a8;font-size:10px;letter-spacing:.32em">@fisshhfilet</div>
 <div style="color:#fff;font-size:11px;letter-spacing:.36em">PRIVATE ACCESS</div>
@@ -92,30 +174,73 @@ body{overflow:hidden;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consol
 </div>
 <script>
 (function(){
-function size(){
-var h = window.innerHeight;
-document.getElementById('feed').style.height = h + 'px';
-document.querySelectorAll('.page').forEach(function(p){p.style.height = h + 'px';});
-}
-size();
-window.addEventListener('resize', size);
-window.addEventListener('orientationchange', function(){setTimeout(size, 80);});
-var feed=document.getElementById('feed');
-var io=new IntersectionObserver(function(es){
-es.forEach(function(e){
-var v=e.target.querySelector('video');
-if(!v) return;
-if(e.isIntersecting){try{v.currentTime=0; v.play().catch(function(){})}catch(er){}}else{try{v.pause(); v.currentTime=0;}catch(er){}}
-});
-},{root:feed,threshold:0.65});
-document.querySelectorAll('.page').forEach(function(p){io.observe(p);});
-document.querySelectorAll('.open-link').forEach(function(el){
-el.addEventListener('click', function(e){
-e.stopPropagation();
-var href = el.getAttribute('data-href') || el.getAttribute('href');
-if(href) window.open(href, '_blank', 'noopener');
-});
-});
+  var feed = document.getElementById('feed');
+  var locked = 0;
+
+  function viewportH(){
+    if(window.visualViewport && window.visualViewport.height){
+      return Math.round(window.visualViewport.height);
+    }
+    return Math.round(window.innerHeight);
+  }
+
+  function apply(h){
+    feed.style.height = h + 'px';
+    document.querySelectorAll('.page').forEach(function(p){
+      p.style.height = h + 'px';
+      p.style.minHeight = h + 'px';
+      p.style.maxHeight = h + 'px';
+    });
+  }
+
+  function lockOnce(){
+    var h = viewportH();
+    if(!h) return;
+    locked = h;
+    apply(h);
+  }
+
+  lockOnce();
+  window.addEventListener('load', lockOnce, {once:true});
+
+  function maybeRelock(){
+    var h = viewportH();
+    if(!locked){ lockOnce(); return; }
+    if(Math.abs(h - locked) < 80) return;
+    locked = h;
+    apply(h);
+  }
+
+  window.addEventListener('orientationchange', function(){
+    setTimeout(function(){ locked = 0; lockOnce(); }, 120);
+  });
+
+  var t;
+  window.addEventListener('resize', function(){
+    clearTimeout(t);
+    t = setTimeout(maybeRelock, 200);
+  }, {passive:true});
+
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      var v = e.target.querySelector('video');
+      if(!v) return;
+      if(e.isIntersecting){ try{ v.play().catch(function(){}); }catch(er){} }
+      else { try{ v.pause(); }catch(er){} }
+    });
+  }, {root:feed, threshold:0.65});
+  document.querySelectorAll('.page').forEach(function(p){ io.observe(p); });
+
+  document.querySelectorAll('.open-link').forEach(function(el){
+    el.addEventListener('click', function(e){
+      e.stopPropagation();
+      var href = el.getAttribute('data-href') || el.getAttribute('href');
+      if(href) window.open(href, '_blank', 'noopener');
+    });
+  });
+
+  var warm = new Image();
+  warm.src = 'waista.jpg';
 })();
 </script>
 </body>
