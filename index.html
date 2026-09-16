@@ -886,7 +886,371 @@ body{
 
 </body>
 </html>
+<script>
+(function(){
 
-This is the version to paste into GitHub. The critical difference is that there is no Shop touch-lock JavaScript at all, and the MP4s are controlled by one simple visibility observer without resetting or reloading them.
+  var feed = document.getElementById('feed');
+  var pages = Array.prototype.slice.call(
+    document.querySelectorAll('.page')
+  );
+
+  var videos = Array.prototype.slice.call(
+    document.querySelectorAll('.feed-video')
+  );
+
+  function setPageHeights(){
+    var h = window.innerHeight;
+
+    if(feed && feed.clientHeight > 100){
+      h = feed.clientHeight;
+    }
+
+    pages.forEach(function(page){
+      page.style.height = h + 'px';
+      page.style.minHeight = h + 'px';
+    });
+  }
+
+  setPageHeights();
+
+  /*
+   * Prepare EVERY video for mobile autoplay.
+   */
+  videos.forEach(function(video){
+
+    video.muted = true;
+    video.defaultMuted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.preload = 'auto';
+
+    video.setAttribute('muted','');
+    video.setAttribute('autoplay','');
+    video.setAttribute('loop','');
+    video.setAttribute('playsinline','');
+    video.setAttribute('webkit-playsinline','');
+
+    try{
+      video.disableRemotePlayback = true;
+    }catch(e){}
+
+  });
+
+  /*
+   * Play a video safely.
+   * Never reset currentTime.
+   * Never call load().
+   */
+  function playVideo(video){
+
+    if(!video) return;
+
+    video.muted = true;
+    video.defaultMuted = true;
+
+    if(video.paused){
+
+      var promise = video.play();
+
+      if(promise &&
+         typeof promise.catch === 'function'){
+
+        promise.catch(function(){
+
+          /*
+           * Mobile browsers sometimes reject the first
+           * autoplay attempt. Try again on the next frame.
+           */
+          requestAnimationFrame(function(){
+
+            if(video.paused){
+
+              video.play().catch(function(){});
+
+            }
+
+          });
+
+        });
+
+      }
+
+    }
+
+  }
+
+  function pauseOtherVideos(activeVideo){
+
+    videos.forEach(function(video){
+
+      if(video !== activeVideo &&
+         !video.paused){
+
+        video.pause();
+
+      }
+
+    });
+
+  }
+
+  /*
+   * Determine which full-screen page is currently
+   * closest to the center of the viewport.
+   */
+  function getActivePage(){
+
+    if(!feed) return null;
+
+    var center =
+      feed.scrollTop +
+      (feed.clientHeight / 2);
+
+    var closest = null;
+    var distance = Infinity;
+
+    pages.forEach(function(page){
+
+      var pageCenter =
+        page.offsetTop +
+        (page.offsetHeight / 2);
+
+      var d =
+        Math.abs(pageCenter - center);
+
+      if(d < distance){
+
+        distance = d;
+        closest = page;
+
+      }
+
+    });
+
+    return closest;
+  }
+
+  function activateCurrentVideo(){
+
+    var page = getActivePage();
+
+    if(!page) return;
+
+    var video =
+      page.querySelector('.feed-video');
+
+    if(!video) return;
+
+    pauseOtherVideos(video);
+    playVideo(video);
+  }
+
+  /*
+   * IntersectionObserver provides the first
+   * autoplay trigger.
+   */
+  if('IntersectionObserver' in window){
+
+    var observer =
+      new IntersectionObserver(
+        function(entries){
+
+          entries.forEach(function(entry){
+
+            var video = entry.target;
+
+            if(
+              entry.isIntersecting &&
+              entry.intersectionRatio >= 0.65
+            ){
+
+              pauseOtherVideos(video);
+              playVideo(video);
+
+            }
+
+          });
+
+        },
+        {
+          root:feed,
+          threshold:[
+            0.25,
+            0.5,
+            0.65,
+            0.8,
+            1
+          ]
+        }
+      );
+
+    videos.forEach(function(video){
+
+      observer.observe(video);
+
+    });
+
+  }
+
+  /*
+   * Scroll fallback.
+   *
+   * When the user finishes a swipe, identify the
+   * snapped page and explicitly start its video.
+   */
+  var scrollTimer = null;
+
+  feed.addEventListener(
+    'scroll',
+    function(){
+
+      clearTimeout(scrollTimer);
+
+      scrollTimer = setTimeout(
+        function(){
+
+          activateCurrentVideo();
+
+        },
+        100
+      );
+
+    },
+    {passive:true}
+  );
+
+  /*
+   * Also catch browsers that support scrollend.
+   */
+  if('onscrollend' in window){
+
+    feed.addEventListener(
+      'scrollend',
+      function(){
+
+        activateCurrentVideo();
+
+      },
+      {passive:true}
+    );
+
+  }
+
+  /*
+   * First page/video activation.
+   */
+  setTimeout(
+    activateCurrentVideo,
+    250
+  );
+
+  /*
+   * Extra autoplay attempt after the page is
+   * fully loaded.
+   */
+  window.addEventListener(
+    'load',
+    function(){
+
+      setTimeout(
+        activateCurrentVideo,
+        150
+      );
+
+    },
+    {once:true}
+  );
+
+  /*
+   * Recalculate mobile viewport dimensions.
+   */
+  window.addEventListener(
+    'resize',
+    function(){
+
+      setPageHeights();
+
+      setTimeout(
+        activateCurrentVideo,
+        100
+      );
+
+    },
+    {passive:true}
+  );
+
+  window.addEventListener(
+    'orientationchange',
+    function(){
+
+      setTimeout(
+        function(){
+
+          setPageHeights();
+          activateCurrentVideo();
+
+        },
+        300
+      );
+
+    },
+    {passive:true}
+  );
+
+  /*
+   * External links.
+   */
+  document.querySelectorAll('.open-link').forEach(
+    function(el){
+
+      el.addEventListener(
+        'click',
+        function(e){
+
+          e.stopPropagation();
+
+          var href =
+            el.getAttribute('data-href') ||
+            el.getAttribute('href');
+
+          if(href){
+
+            window.open(
+              href,
+              '_blank',
+              'noopener'
+            );
+
+          }
+
+        }
+      );
+
+    }
+  );
+
+})();
+</script>
+
+Also make sure each video tag has "autoplay". For example:
+
+<video
+  class="feed-video"
+  autoplay
+  muted
+  loop
+  playsinline
+  webkit-playsinline
+  preload="auto">
+
+Do that for Liquid.mp4, Sephora.mp4, and hakrs-flip-live.mp4.
+
+The behavior will be:
+
+Swipe onto video → video automatically plays → swipe away → video pauses → swipe back → video resumes where it stopped.
+
+No Shop touch-lock code should be added back.
+
+is the version to paste into GitHub. The critical difference is that there is no Shop touch-lock JavaScript at all, and the MP4s are controlled by one simple visibility observer without resetting or reloading them.
 
 If the videos still freeze after this version, the next thing to check is the actual MP4 files/names in the GitHub repository rather than adding more JavaScript.
