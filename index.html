@@ -10,22 +10,101 @@
 <link rel="preload" as="image" href="waista.jpg">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%;background:#000;position:fixed;inset:0;overflow:hidden}
-body{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;overscroll-behavior:none;-webkit-font-smoothing:antialiased;touch-action:pan-y}
-#feed{position:absolute;inset:0;width:100%;height:100%;overflow-x:hidden;overflow-y:auto;scroll-snap-type:y mandatory;scroll-padding:0;-webkit-overflow-scrolling:touch;background:#000;overscroll-behavior-y:none}
-.page{width:100%;height:100%;scroll-snap-align:start;scroll-snap-stop:always;background:#000;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;overflow:hidden}
-.page img,.page video{width:100%;height:100%;object-fit:cover;object-position:center center;background:#000;display:block}
-.tap{position:absolute;inset:0;z-index:5;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.opening{position:absolute;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:10;pointer-events:none;animation:openingOut .8s ease 2.3s forwards}
-.opening span{color:#a8a8a8;font-size:10px;letter-spacing:.32em;opacity:0;animation:txtIn .8s ease .3s forwards, txtOut .6s ease 1.8s forwards}
-.betty{position:absolute;inset:0;opacity:0;animation:bettyIn 1.2s ease 2.4s forwards}
-.betty img{width:100%;height:100%;object-fit:cover}
+html,body{
+  width:100%;
+  height:100%;
+  background:#000;
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+}
+body{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  overscroll-behavior:none;
+  -webkit-font-smoothing:antialiased;
+}
+#feed{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  background:#000;
+  touch-action:none;
+}
+#track{
+  width:100%;
+  height:100%;
+  will-change:transform;
+  transition:transform .28s cubic-bezier(.22,.8,.24,1);
+}
+.page{
+  width:100%;
+  height:100%;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+.page img,
+.page video{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center center;
+  background:#000;
+  display:block;
+}
+.tap{
+  position:absolute;
+  inset:0;
+  z-index:5;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.opening{
+  position:absolute;
+  inset:0;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:10;
+  pointer-events:none;
+  animation:openingOut .8s ease 2.3s forwards;
+}
+.opening span{
+  color:#a8a8a8;
+  font-size:10px;
+  letter-spacing:.32em;
+  opacity:0;
+  animation:txtIn .8s ease .3s forwards, txtOut .6s ease 1.8s forwards;
+}
+.betty{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  animation:bettyIn 1.2s ease 2.4s forwards;
+}
+.betty img{width:100%;height:100%;object-fit:contain}
 @keyframes txtIn{to{opacity:1}}
 @keyframes txtOut{to{opacity:0}}
 @keyframes openingOut{to{opacity:0;visibility:hidden}}
 @keyframes bettyIn{to{opacity:1}}
 .final{flex-direction:column;gap:38px;text-align:center}
-.shop{width:100%;max-width:430px;height:100%;background:#000;display:flex;flex-direction:column;overflow-y:auto;color:#e8e8e8;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);-webkit-overflow-scrolling:touch}
+.shop{
+  width:100%;
+  max-width:430px;
+  height:100%;
+  background:#000;
+  display:flex;
+  flex-direction:column;
+  overflow-y:auto;
+  color:#e8e8e8;
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-y;
+}
 .avatars{display:flex;gap:10px;overflow-x:auto;padding:10px 12px 10px;-webkit-overflow-scrolling:touch;flex-shrink:0}
 .av{flex:0 0 56px;text-align:center;text-decoration:none;opacity:.35;color:inherit}
 .av.active{opacity:1}
@@ -55,6 +134,7 @@ body{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;ove
 </head>
 <body>
 <div id="feed">
+<div id="track">
 <section class="page">
   <div class="betty"><img src="betty.jpg" width="1080" height="1920" alt=""></div>
   <div class="opening"><span>@fisshhfilet</span></div>
@@ -117,41 +197,61 @@ body{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;ove
 <div style="color:#39e66f;font-size:10px;letter-spacing:.32em;font-weight:800">MEMBERS ONLY</div>
 </section>
 </div>
+</div>
 <script>
 (function(){
   var feed = document.getElementById('feed');
+  var track = document.getElementById('track');
   var pages = [].slice.call(document.querySelectorAll('.page'));
-  var snapping = false;
-  function h(){ return feed.clientHeight || window.innerHeight; }
-  function lock(){
-    var px = h() + 'px';
-    pages.forEach(function(p){ p.style.height = px; p.style.minHeight = px; p.style.maxHeight = px; });
-  }
-  function pageIndex(){ var hh = h(); return hh ? Math.round(feed.scrollTop / hh) : 0; }
-  function snapTo(i){
-    var hh = h();
-    i = Math.max(0, Math.min(pages.length - 1, i));
-    snapping = true;
-    feed.scrollTo(0, i * hh);
-    requestAnimationFrame(function(){ snapping = false; });
-  }
-  function correct(){ if(!snapping) snapTo(pageIndex()); }
-  lock();
-  window.addEventListener('load', lock);
-  var endTimer;
-  feed.addEventListener('scroll', function(){ clearTimeout(endTimer); endTimer = setTimeout(correct, 80); }, {passive:true});
-  feed.addEventListener('scrollend', correct);
-  feed.addEventListener('touchend', function(){ setTimeout(correct, 60); }, {passive:true});
-  window.addEventListener('orientationchange', function(){ setTimeout(function(){ lock(); snapTo(pageIndex()); }, 150); });
-  var io = new IntersectionObserver(function(es){
-    es.forEach(function(e){
-      var v = e.target.querySelector('video');
+  var n = pages.length;
+  var i = 0;
+  var startY = 0;
+  var startX = 0;
+  var dragging = false;
+
+  function go(next){
+    i = Math.max(0, Math.min(n - 1, next));
+    track.style.transform = 'translate3d(0,' + (-i * 100) + '%,0)';
+    pages.forEach(function(p, idx){
+      var v = p.querySelector('video');
       if(!v) return;
-      if(e.isIntersecting){ try{ v.play().catch(function(){}); }catch(er){} }
-      else { try{ v.pause(); }catch(er){} }
+      if(idx === i){ try{ v.play().catch(function(){}); }catch(e){} }
+      else { try{ v.pause(); }catch(e){} }
     });
-  }, {root:feed, threshold:0.6});
-  pages.forEach(function(p){ io.observe(p); });
+  }
+
+  function shopEl(){
+    return pages[i] ? pages[i].querySelector('.shop') : null;
+  }
+
+  feed.addEventListener('touchstart', function(e){
+    if(!e.touches[0]) return;
+    dragging = true;
+    startY = e.touches[0].clientY;
+    startX = e.touches[0].clientX;
+  }, {passive:true});
+
+  feed.addEventListener('touchend', function(e){
+    if(!dragging) return;
+    dragging = false;
+    var t = e.changedTouches[0];
+    if(!t) return;
+    var dy = t.clientY - startY;
+    var dx = t.clientX - startX;
+    if(Math.abs(dy) < 48 || Math.abs(dy) < Math.abs(dx)) return;
+
+    var shop = shopEl();
+    if(shop){
+      var atTop = shop.scrollTop <= 2;
+      var atBot = shop.scrollTop + shop.clientHeight >= shop.scrollHeight - 2;
+      if(dy < 0 && !atBot) return;
+      if(dy > 0 && !atTop) return;
+    }
+
+    if(dy < 0) go(i + 1);
+    else go(i - 1);
+  }, {passive:true});
+
   document.querySelectorAll('.open-link').forEach(function(el){
     el.addEventListener('click', function(e){
       e.stopPropagation();
@@ -159,8 +259,10 @@ body{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;ove
       if(href) window.open(href, '_blank', 'noopener');
     });
   });
+
   var warm = new Image();
   warm.src = 'waista.jpg';
+  go(0);
 })();
 </script>
 </body>
