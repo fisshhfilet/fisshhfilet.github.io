@@ -26,30 +26,26 @@ body{
 #feed{
   position:absolute;
   inset:0;
-  overflow:hidden;
+  overflow-x:hidden;
+  overflow-y:auto;
   background:#000;
-  touch-action:none;
+  scroll-snap-type:y mandatory;
+  scroll-behavior:auto;
+  overscroll-behavior:none;
+  -webkit-overflow-scrolling:touch;
 }
 .page{
-  position:absolute;
-  inset:0;
   width:100%;
   height:100%;
   background:#000;
   display:flex;
   align-items:center;
   justify-content:center;
+  position:relative;
   overflow:hidden;
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-  z-index:0;
-}
-.page.on{
-  opacity:1;
-  visibility:visible;
-  pointer-events:auto;
-  z-index:2;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  flex-shrink:0;
 }
 .page img,
 .page video{
@@ -59,10 +55,6 @@ body{
   object-position:center center;
   background:#000;
   display:block;
-}
-.page video{
-  transform:none;
-  -webkit-transform:none;
 }
 .tap{
   position:absolute;
@@ -89,10 +81,7 @@ body{
   opacity:0;
   animation:txtIn .8s ease .3s forwards, txtOut .6s ease 1.8s forwards;
 }
-.betty{
-  position:absolute;
-  inset:0;
-}
+.betty{position:absolute;inset:0}
 .betty img{width:100%;height:100%;object-fit:contain}
 @keyframes txtIn{to{opacity:1}}
 @keyframes txtOut{to{opacity:0}}
@@ -109,7 +98,6 @@ body{
   color:#e8e8e8;
   padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
   -webkit-overflow-scrolling:touch;
-  touch-action:pan-y;
 }
 .avatars{display:flex;gap:10px;overflow-x:auto;padding:10px 12px 10px;-webkit-overflow-scrolling:touch;flex-shrink:0}
 .av{flex:0 0 56px;text-align:center;text-decoration:none;opacity:.35;color:inherit}
@@ -148,7 +136,7 @@ body{
   <img src="waista.jpg" width="1080" height="1920" alt="" fetchpriority="high">
 </section>
 <section class="page">
-  <video id="liquidVid" muted loop playsinline webkit-playsinline preload="auto">
+  <video muted loop playsinline webkit-playsinline preload="auto">
     <source src="Liquid.mp4" type="video/mp4">
     <source src="ad.mp4" type="video/mp4">
   </video>
@@ -213,72 +201,36 @@ body{
 (function(){
   var feed = document.getElementById('feed');
   var pages = [].slice.call(document.querySelectorAll('.page'));
-  var n = pages.length;
-  var i = 0;
-  var startY = 0;
-  var startX = 0;
-  var dragging = false;
 
-  function playActive(){
-    pages.forEach(function(p, idx){
-      var v = p.querySelector('video');
-      if(!v) return;
-      v.muted = true;
-      v.loop = true;
-      v.playsInline = true;
-      v.setAttribute('playsinline','');
-      v.setAttribute('webkit-playsinline','');
-      v.onpause = null;
-      v.onstalled = null;
-      v.onwaiting = null;
-      if(idx === i){
-        if(v.paused) v.play().catch(function(){});
-      } else if(!v.paused){
-        try{ v.pause(); }catch(e){}
-      }
-    });
+  function lock(){
+    var h = feed.clientHeight;
+    if(h < 100) h = window.innerHeight;
+    pages.forEach(function(p){ p.style.height = h + 'px'; });
   }
+  lock();
 
-  function go(next){
-    i = Math.max(0, Math.min(n - 1, next));
-    pages.forEach(function(p, idx){
-      if(idx === i) p.classList.add('on');
-      else p.classList.remove('on');
-    });
-    playActive();
+  var vids = [].slice.call(document.querySelectorAll('video'));
+  vids.forEach(function(v){
+    v.muted = true;
+    v.loop = true;
+    v.playsInline = true;
+    v.setAttribute('playsinline','');
+    v.setAttribute('webkit-playsinline','');
+  });
+
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        var v = en.target;
+        if(en.isIntersecting && en.intersectionRatio >= 0.6){
+          if(v.paused) v.play().catch(function(){});
+        } else if(!v.paused){
+          v.pause();
+        }
+      });
+    }, {root:feed, threshold:[0.6]});
+    vids.forEach(function(v){ io.observe(v); });
   }
-
-  function shopEl(){
-    return pages[i] ? pages[i].querySelector('.shop') : null;
-  }
-
-  feed.addEventListener('touchstart', function(e){
-    if(!e.touches[0]) return;
-    dragging = true;
-    startY = e.touches[0].clientY;
-    startX = e.touches[0].clientX;
-  }, {passive:true});
-
-  feed.addEventListener('touchend', function(e){
-    if(!dragging) return;
-    dragging = false;
-    var t = e.changedTouches[0];
-    if(!t) return;
-    var dy = t.clientY - startY;
-    var dx = t.clientX - startX;
-    if(Math.abs(dy) < 48 || Math.abs(dy) < Math.abs(dx)) return;
-
-    var shop = shopEl();
-    if(shop){
-      var atTop = shop.scrollTop <= 2;
-      var atBot = shop.scrollTop + shop.clientHeight >= shop.scrollHeight - 2;
-      if(dy < 0 && !atBot) return;
-      if(dy > 0 && !atTop) return;
-    }
-
-    if(dy < 0) go(i + 1);
-    else go(i - 1);
-  }, {passive:true});
 
   document.querySelectorAll('.open-link').forEach(function(el){
     el.addEventListener('click', function(e){
@@ -288,9 +240,9 @@ body{
     });
   });
 
-  var warm = new Image();
-  warm.src = 'waista.jpg';
-  go(0);
+  window.addEventListener('orientationchange', function(){
+    setTimeout(lock, 300);
+  });
 })();
 </script>
 </body>
