@@ -6,19 +6,19 @@
 <title>fisshhfilet.github.io</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%;background:#000}
+html,body{width:100%;height:100%;height:100dvh;background:#000}
 body{overflow:hidden;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;background:#000;overscroll-behavior:none;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
-#feed{width:100vw;height:100vh;overflow-y:auto;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;background:#000}
-.page{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;background:#000;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;overflow:hidden}
-.page img,.page video{width:100%;height:100%;object-fit:contain;background:#000;display:block;image-rendering:-webkit-optimize-contrast;image-rendering:crisp-edges}
+#feed{width:100vw;height:100%;height:100dvh;overflow-y:auto;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;background:#000}
+.page{width:100vw;height:100%;height:100dvh;min-height:100svh;scroll-snap-align:start;scroll-snap-stop:always;background:#000;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;overflow:hidden}
+.page img,.page video{width:100%;height:100%;object-fit:cover;background:#000;display:block;image-rendering:-webkit-optimize-contrast}
 .tap{position:absolute;inset:0;z-index:5;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .opening{position:absolute;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:10;pointer-events:none;animation:openingOut .8s ease 2.3s forwards}
 .opening span{color:#a8a8a8;font-size:10px;letter-spacing:.32em;opacity:0;animation:txtIn .8s ease .3s forwards, txtOut .6s ease 1.8s forwards}
 .betty{position:absolute;inset:0;opacity:0;animation:bettyIn 1.2s ease 2.4s forwards}
 @keyframes txtIn{to{opacity:1}}@keyframes txtOut{to{opacity:0}}@keyframes openingOut{to{opacity:0}}@keyframes bettyIn{to{opacity:1}}
 .final{flex-direction:column;gap:38px;text-align:center}
-.shop{width:100%;max-width:430px;height:100vh;background:#000;display:flex;flex-direction:column;overflow-y:auto;color:#e8e8e8}
-.avatars{display:flex;gap:10px;overflow-x:auto;padding:16px 12px 12px;-webkit-overflow-scrolling:touch}
+.shop{width:100%;max-width:430px;height:100%;height:100dvh;background:#000;display:flex;flex-direction:column;overflow-y:auto;color:#e8e8e8;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.avatars{display:flex;gap:10px;overflow-x:auto;padding:10px 12px 10px;-webkit-overflow-scrolling:touch;flex-shrink:0}
 .av{flex:0 0 56px;text-align:center;text-decoration:none;opacity:.35;color:inherit}
 .av.active{opacity:1}
 .av .c{width:52px;height:52px;border-radius:50%;overflow:hidden;background:#111;margin:0 auto;border:2px solid #2a2a2a}
@@ -28,20 +28,20 @@ body{overflow:hidden;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consol
 .av.seph{opacity:1;cursor:pointer}
 .av.seph.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff}
 .av.seph i{color:#fff;font-weight:900}
-.toggle{margin:6px 12px 12px;background:#111;border-radius:999px;display:grid;grid-template-columns:1fr 1fr;padding:3px;gap:3px}
-.toggle button{height:38px;border-radius:999px;border:0;font-size:9px;font-weight:800;letter-spacing:.08em;background:#1a1a1a;color:#8a8a8a}
+.toggle{margin:4px 12px 10px;background:#111;border-radius:999px;display:grid;grid-template-columns:1fr 1fr;padding:3px;gap:3px;flex-shrink:0}
+.toggle button{height:36px;border-radius:999px;border:0;font-size:9px;font-weight:800;letter-spacing:.08em;background:#1a1a1a;color:#8a8a8a}
 .toggle button.on{background:#ff2a6d;color:#fff}
-.img{margin:0 12px;border-radius:18px;overflow:hidden;border:3px solid #ff5a1f;background:#000;aspect-ratio:16/11}
+.img{margin:0 12px;border-radius:18px;overflow:hidden;border:3px solid #ff5a1f;background:#000;aspect-ratio:16/10;flex-shrink:0}
 .img img{width:100%;height:100%;object-fit:cover;display:block}
-.swipe{text-align:center;padding:12px 12px 4px;font-size:8px;letter-spacing:.28em;color:#555}
-.live{text-align:center;padding:0 12px 14px;font-size:9px;color:#ff2a6d;letter-spacing:.06em;font-weight:700}
-.grid{padding:0 12px 12px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.swipe{text-align:center;padding:8px 12px 2px;font-size:8px;letter-spacing:.28em;color:#555;flex-shrink:0}
+.live{text-align:center;padding:0 12px 10px;font-size:9px;color:#ff2a6d;letter-spacing:.06em;font-weight:700;flex-shrink:0}
+.grid{padding:0 12px 10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;flex-shrink:0}
 .card{background:#111;border:1px solid #1a1a1a;border-radius:10px;padding:12px 10px}
 .card b{font-size:8px;color:#555;display:block;margin-bottom:8px;letter-spacing:.08em;font-weight:700}
 .card p{font-size:10px;line-height:1.35;color:#ddd;font-weight:700}
-.cta{margin:0 12px 8px;background:#fff;color:#000;border:0;height:40px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;letter-spacing:.18em}
-.cta.ghost{background:#000;color:#fff;border:1px solid #333;margin:0 12px 8px;letter-spacing:.46em;font-size:11px}
-.add{margin:0 12px 20px;background:#111;border:1px solid #1a1a1a;border-radius:4px;display:flex;justify-content:space-between;padding:14px 14px 14px 16px;align-items:center}
+.cta{margin:0 12px 8px;background:#fff;color:#000;border:0;height:40px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;letter-spacing:.18em;flex-shrink:0}
+.cta.ghost{background:#000;color:#fff;border:1px solid #333;letter-spacing:.46em;font-size:11px}
+.add{margin:0 12px 16px;background:#111;border:1px solid #1a1a1a;border-radius:4px;display:flex;justify-content:space-between;padding:14px 14px 14px 16px;align-items:center;flex-shrink:0}
 .add span{font-size:12px;font-weight:900;letter-spacing:.1em}
 </style>
 </head>
@@ -92,6 +92,14 @@ body{overflow:hidden;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consol
 </div>
 <script>
 (function(){
+function size(){
+var h = window.innerHeight;
+document.getElementById('feed').style.height = h + 'px';
+document.querySelectorAll('.page').forEach(function(p){p.style.height = h + 'px';});
+}
+size();
+window.addEventListener('resize', size);
+window.addEventListener('orientationchange', function(){setTimeout(size, 80);});
 var feed=document.getElementById('feed');
 var io=new IntersectionObserver(function(es){
 es.forEach(function(e){
