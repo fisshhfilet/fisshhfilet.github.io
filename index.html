@@ -17,28 +17,32 @@ body{overflow:hidden;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consol
 .betty{position:absolute;inset:0;opacity:0;animation:bettyIn 1.2s ease 2.4s forwards}
 @keyframes txtIn{to{opacity:1}}@keyframes txtOut{to{opacity:0}}@keyframes openingOut{to{opacity:0}}@keyframes bettyIn{to{opacity:1}}
 .final{flex-direction:column;gap:38px;text-align:center}
-.shop{width:100%;max-width:430px;height:100vh;background:#0a0a0a;display:flex;flex-direction:column;overflow-y:auto;color:#e8e8e8}
-.x{display:flex;justify-content:center;padding:16px 12px 8px}
-.xwrap{display:flex;flex-direction:column;align-items:center;gap:8px}
-.xmark{background:#0e1f1a;border:1px solid #1e3a2e;border-radius:999px;padding:10px 22px;font-weight:900;letter-spacing:.42em;color:#e8fff3;font-size:13px}
-.code{margin:8px 12px;background:#111;border:1px solid #1e1e1e;border-radius:999px;display:flex;justify-content:space-between;padding:10px 12px 10px 14px;align-items:center}
-.copy{border:0;background:#1e1e1e;color:#fff;border-radius:999px;padding:6px 14px;font-size:9px;font-weight:900}
-.avatars{display:flex;gap:10px;overflow-x:auto;padding:12px 12px;border-bottom:1px solid #161616;-webkit-overflow-scrolling:touch}.av{flex:0 0 56px;text-align:center;text-decoration:none;opacity:.35}.av.active{opacity:1}.av.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff}
-.av .c{width:48px;height:48px;border-radius:50%;overflow:hidden;background:#111;margin:0 auto;border:2px solid #1a1a1a}.av .c img{width:100%;height:100%;object-fit:cover;image-rendering:crisp-edges}
+.shop{width:100%;max-width:430px;height:100vh;background:#000;display:flex;flex-direction:column;overflow-y:auto;color:#e8e8e8}
+.avatars{display:flex;gap:10px;overflow-x:auto;padding:16px 12px 12px;-webkit-overflow-scrolling:touch}
+.av{flex:0 0 56px;text-align:center;text-decoration:none;opacity:.35;color:inherit}
+.av.active{opacity:1}
+.av .c{width:52px;height:52px;border-radius:50%;overflow:hidden;background:#111;margin:0 auto;border:2px solid #2a2a2a}
+.av.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff}
+.av .c img{width:100%;height:100%;object-fit:cover}
 .av i{font-style:normal;font-size:7px;color:#666;margin-top:5px;display:block;letter-spacing:.08em}
-.av.seph{opacity:1;cursor:pointer}.av.seph.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff, 0 0 12px rgba(255,255,255,.6)}.av.seph i{color:#fff;font-weight:900}
-.toggle{margin:10px 12px;background:#111;border:1px solid #1e1e1e;border-radius:999px;display:grid;grid-template-columns:1fr 1fr;padding:3px;gap:3px}.toggle button{height:36px;border-radius:999px;border:0;font-size:9px;font-weight:800;letter-spacing:.14em;background:transparent;color:#666}.toggle button.on{background:#ff2a6d;color:#fff}
-.img{margin:0 12px;border-radius:0;overflow:hidden;border:1px solid #222;background:#000;aspect-ratio:4/5}.img img{width:100%;height:100%;object-fit:contain;background:#000;image-rendering:-webkit-optimize-contrast}
-.swipe{text-align:center;padding:10px 12px 4px;font-size:8px;letter-spacing:.18em;color:#555}
-.live{text-align:center;padding:0 12px 14px;font-size:9px;color:#ff2a6d;letter-spacing:.12em}
-.specs{margin:0 12px 8px;border-top:1px solid #222}
-.spec{display:grid;grid-template-columns:88px 1fr;gap:10px;padding:12px 0;border-bottom:1px solid #222;font-size:10px;line-height:1.45}
-.spec b{color:#666;font-weight:800;letter-spacing:.08em;font-size:8px;padding-top:2px}
-.spec p{color:#ddd;font-weight:600}
-.grid{padding:4px 12px 12px;display:grid;grid-template-columns:1fr 1fr;gap:8px}.card{background:#111;border:1px solid #1a1a1a;border-radius:0;padding:12px}.card b{font-size:7px;color:#555;display:block;margin-bottom:6px;letter-spacing:.1em}.card p{font-size:9px;line-height:1.35;color:#ddd;font-weight:600}
-.add{margin:0 12px 18px;background:#111;border:1px solid #1a1a1a;border-radius:0;display:flex;justify-content:space-between;padding:12px 12px 12px 16px;align-items:center}.add span{font-size:11px;font-weight:900;letter-spacing:.08em}
-.cta{margin:0 12px 14px;background:#fff;color:#000;border:0;height:44px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;letter-spacing:.16em}
-.cta.ghost{background:#000;color:#fff;border:1px solid #333;margin-top:-8px;margin-bottom:18px}
+.av.seph{opacity:1;cursor:pointer}
+.av.seph.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff}
+.av.seph i{color:#fff;font-weight:900}
+.toggle{margin:6px 12px 12px;background:#111;border-radius:999px;display:grid;grid-template-columns:1fr 1fr;padding:3px;gap:3px}
+.toggle button{height:38px;border-radius:999px;border:0;font-size:9px;font-weight:800;letter-spacing:.08em;background:#1a1a1a;color:#8a8a8a}
+.toggle button.on{background:#ff2a6d;color:#fff}
+.img{margin:0 12px;border-radius:18px;overflow:hidden;border:3px solid #ff5a1f;background:#000;aspect-ratio:16/11}
+.img img{width:100%;height:100%;object-fit:cover;display:block}
+.swipe{text-align:center;padding:12px 12px 4px;font-size:8px;letter-spacing:.28em;color:#555}
+.live{text-align:center;padding:0 12px 14px;font-size:9px;color:#ff2a6d;letter-spacing:.06em;font-weight:700}
+.grid{padding:0 12px 12px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.card{background:#111;border:1px solid #1a1a1a;border-radius:10px;padding:12px 10px}
+.card b{font-size:8px;color:#555;display:block;margin-bottom:8px;letter-spacing:.08em;font-weight:700}
+.card p{font-size:10px;line-height:1.35;color:#ddd;font-weight:700}
+.cta{margin:0 12px 8px;background:#fff;color:#000;border:0;height:40px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;letter-spacing:.18em}
+.cta.ghost{background:#000;color:#fff;border:1px solid #333;margin:0 12px 8px;letter-spacing:.46em;font-size:11px}
+.add{margin:0 12px 20px;background:#111;border:1px solid #1a1a1a;border-radius:4px;display:flex;justify-content:space-between;padding:14px 14px 14px 16px;align-items:center}
+.add span{font-size:12px;font-weight:900;letter-spacing:.1em}
 </style>
 </head>
 <body>
@@ -52,14 +56,8 @@ body{overflow:hidden;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consol
 <section class="page"><video src="hakrs-flip-live.mp4" muted loop playsinline preload="auto"></video></section>
 <section class="page" style="background:#000">
 <div class="shop">
-<div class="x">
-<div class="xwrap">
-<div class="xmark">• § h o p •</div>
-</div>
-</div>
-<div class="code"><span style="font-size:10px;color:#bbb">FISSHH50 SEPHORA $50 OFF</span><button class="copy" onclick="try{navigator.clipboard.writeText('FISSHH50');this.textContent='COPIED';setTimeout(()=>this.textContent='COPY',1200)}catch(e){}">COPY</button></div>
 <div class="avatars">
-<div class="av seph active open-link" data-href="https://www.sephora.com/"><div class="c"><img src="sephora.jpg"></div><i>SEPHORA</i></div>
+<a class="av seph active open-link" href="https://www.sephora.com/" target="_blank" rel="noopener" data-href="https://www.sephora.com/"><div class="c"><img src="sephora.jpg"></div><i>SEPHORA</i></a>
 <div class="av"><div class="c"><img src="betty.jpg"></div><i>HOST</i></div>
 <div class="av"><div class="c"><img src="waista.jpg"></div><i>HOME</i></div>
 <div class="av"><div class="c"><img src="qr-ware.jpg"></div><i>PM</i></div>
@@ -70,13 +68,7 @@ body{overflow:hidden;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consol
 <div class="toggle"><button>SHARK • ARCHIVE 5/9</button><button class="on">FLIPPED • HAKRs 4/9</button></div>
 <div class="img"><img src="hakrs-pier-flip-clean.jpg"></div>
 <div class="swipe">SWIPE UP</div>
-<div class="live">TAP TO FLIP CARDS 4/4 04/09</div>
-<div class="specs">
-<div class="spec"><b>DROP</b><p>HAKRs PIER FLIP. DEADSTOCK ARCHIVE CUT. SAME ENERGY AS THE ROOM.</p></div>
-<div class="spec"><b>SOURCE</b><p>NYC FLOOR + ARCHIVE RACK. RETAIL $285 → FLIP $32.</p></div>
-<div class="spec"><b>FABRIC</b><p>HEAVY 14oz FLEECE. CRYSTAL WASHED. OVERSIZED BOXY. CROPPED AT WAIST.</p></div>
-<div class="spec"><b>SHIP</b><p>NYC NEXT_DAY. WORLDWIDE 3–5 DAYS.</p></div>
-</div>
+<div class="live">SHARK IS LIVE — TAP TO FLIP CARDS 4/4 04/09</div>
 <div class="grid">
 <div class="card"><b>FABRIC?</b><p>HEAVY 14oz FLEECE CRYSTAL WASHED</p></div>
 <div class="card"><b>FIT?</b><p>OVERSIZED BOXY CROPPED AT WAIST</p></div>
@@ -85,7 +77,7 @@ body{overflow:hidden;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consol
 </div>
 <div class="cta">SHOP FLIP → $32</div>
 <div class="cta ghost">• § h o p •</div>
-<div class="add"><span>ADD → $32</span><div style="width:34px;height:34px;border-radius:50%;background:#ff7a00;display:flex;align-items:center;justify-content:center">♥</div></div>
+<div class="add"><span>ADD → $32</span><div style="width:34px;height:34px;border-radius:50%;background:#ff7a00;display:flex;align-items:center;justify-content:center;color:#fff">♥</div></div>
 </div>
 </section>
 <section class="page"><img src="restocking-soon-fix.jpg"></section>
@@ -112,7 +104,7 @@ document.querySelectorAll('.page').forEach(function(p){io.observe(p);});
 document.querySelectorAll('.open-link').forEach(function(el){
 el.addEventListener('click', function(e){
 e.stopPropagation();
-var href = el.getAttribute('data-href');
+var href = el.getAttribute('data-href') || el.getAttribute('href');
 if(href) window.open(href, '_blank', 'noopener');
 });
 });
