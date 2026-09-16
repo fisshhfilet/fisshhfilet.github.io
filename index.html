@@ -211,7 +211,7 @@ body{
   lock();
 
   var vids = [].slice.call(document.querySelectorAll('video'));
-  var want = {};
+  var on = {};
 
   vids.forEach(function(v, n){
     v.muted = true;
@@ -221,31 +221,60 @@ body{
     v.setAttribute('playsinline','');
     v.setAttribute('webkit-playsinline','');
     v.disableRemotePlayback = true;
-    want[n] = false;
+    on[n] = false;
     v._i = n;
   });
 
   function goPlay(v){
-    if(want[v._i]) return;
-    want[v._i] = true;
-    if(v.paused) v.play().catch(function(){ want[v._i] = false; });
+    if(on[v._i]) return;
+    on[v._i] = true;
+    try { if(v.currentTime > 0.05) v.currentTime = 0; } catch(e){}
+    if(v.paused) v.play().catch(function(){ on[v._i] = false; });
   }
 
   function goPause(v){
-    if(!want[v._i] && v.paused) return;
-    want[v._i] = false;
+    if(!on[v._i] && v.paused) return;
+    on[v._i] = false;
     if(!v.paused) v.pause();
+    try { v.currentTime = 0; } catch(e){}
   }
 
   if('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
         var v = en.target;
-        if(en.intersectionRatio >= 0.85) goPlay(v);
-        else if(en.intersectionRatio <= 0.15) goPause(v);
+        if(en.intersectionRatio >= 0.7) goPlay(v);
+        else if(en.intersectionRatio <= 0.05) goPause(v);
       });
-    }, {root:feed, threshold:[0, 0.15, 0.85, 1]});
+    }, {root:feed, threshold:[0, 0.05, 0.7, 1]});
     vids.forEach(function(v){ io.observe(v); });
+  }
+
+  var shop = document.querySelector('.shop');
+  if(shop){
+    var sy = 0, st = 0;
+    var shopPage = shop.closest('.page');
+    shop.addEventListener('touchstart', function(e){
+      if(!e.touches[0]) return;
+      sy = e.touches[0].clientY;
+      st = Date.now();
+    }, {passive:true});
+    shop.addEventListener('touchend', function(e){
+      if(!e.changedTouches[0] || !shopPage) return;
+      var dy = sy - e.changedTouches[0].clientY;
+      var dt = Math.max(Date.now() - st, 1);
+      var strong = Math.abs(dy) > 56 || Math.abs(dy / dt) > 0.45;
+      if(!strong) return;
+      var atTop = shop.scrollTop <= 2;
+      var atBot = shop.scrollTop + shop.clientHeight >= shop.scrollHeight - 3;
+      var idx = pages.indexOf(shopPage);
+      var h = shopPage.offsetHeight || feed.clientHeight;
+      if(dy > 0 && atBot && idx < pages.length - 1){
+        feed.scrollTo({top: (idx + 1) * h, behavior: 'smooth'});
+      } else if(dy < 0 && atTop && idx > 0){
+        feed.scrollTo({top: (idx - 1) * h, behavior: 'smooth'});
+      }
+    }, {passive:true});
   }
 
   document.querySelectorAll('.open-link').forEach(function(el){
