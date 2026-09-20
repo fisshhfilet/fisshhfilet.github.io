@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><style>
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+</style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="mobile-web-app-capable" content="yes">
@@ -86,8 +107,6 @@ body{
 @keyframes txtOut{to{opacity:0}}
 @keyframes openingOut{to{opacity:0;visibility:hidden}}
 .final{flex-direction:column;gap:38px;text-align:center}
-
-/* --- SHOP RESTORED --- */
 .shop{
   width:100%;
   max-width:430px;
@@ -105,14 +124,13 @@ body{
 .avatars{display:flex;gap:10px;overflow-x:auto;padding:10px 12px 10px;-webkit-overflow-scrolling:touch;flex-shrink:0}
 .av{flex:0 0 56px;text-align:center;text-decoration:none;opacity:.35;color:inherit}
 .av.active{opacity:1}
-.av.c{width:52px;height:52px;border-radius:50%;overflow:hidden;background:#111;margin:0 auto;border:2px solid #2a2a2a}
-.av.active.c{border-color:#fff;box-shadow:0 0 0 2px #fff}
-.av.c img{width:100%;height:100%;object-fit:cover;pointer-events:auto}
+.av .c{width:52px;height:52px;border-radius:50%;overflow:hidden;background:#111;margin:0 auto;border:2px solid #2a2a2a}
+.av.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff}
+.av .c img{width:100%;height:100%;object-fit:cover;pointer-events:auto;display:block}
 .av i{font-style:normal;font-size:7px;color:#666;margin-top:5px;display:block;letter-spacing:.08em}
 .av.seph{opacity:1;cursor:pointer}
-.av.seph.active.c{border-color:#fff;box-shadow:0 0 0 2px #fff}
+.av.seph.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff}
 .av.seph i{color:#fff;font-weight:900}
-
 .toggle{margin:4px 12px 10px;background:#111;border-radius:999px;display:grid;grid-template-columns:1fr 1fr;padding:3px;gap:3px;flex-shrink:0}
 .toggle button{height:36px;border-radius:999px;border:0;font-size:9px;font-weight:800;letter-spacing:.08em;background:#1a1a1a;color:#8a8a8a}
 .toggle button.on{background:#ff2a6d;color:#fff}
@@ -166,7 +184,7 @@ body{
 <section class="page" style="background:#000">
 <div class="shop">
 <div class="avatars">
-<a class="av seph active open-link" href="https://www.sephora.com/" target="_blank" rel="noopener" data-href="https://www.sephora.com/"><div class="c"><img src="sephora.jpg" width="104" height="104" alt=""></div><i>SEPHORA</i></a>
+<a class="av seph active" id="seph-link" data-href="https://www.sephora.com/"><div class="c"><img src="sephora.jpg" width="104" height="104" alt=""></div><i>SEPHORA</i></a>
 <div class="av"><div class="c"><img src="betty.jpg" width="104" height="104" alt=""></div><i>HOST</i></div>
 <div class="av"><div class="c"><img src="waista.jpg" width="104" height="104" alt=""></div><i>HOME</i></div>
 <div class="av"><div class="c"><img src="qr-ware.jpg" width="104" height="104" alt=""></div><i>PM</i></div>
@@ -191,14 +209,11 @@ body{
 </section>
 <section class="page"><img src="restocking-soon-fix.jpg" width="1080" height="1920" alt=""></section>
 <section class="page"><img src="waista-question.jpg" width="1080" height="1920" alt=""></section>
-
-<!-- HERSHEY BEFORE KALSHI -->
 <section class="page">
   <video muted loop playsinline webkit-playsinline preload="auto">
     <source src="Hershey.mp4" type="video/mp4">
   </video>
 </section>
-
 <section class="page">
   <img src="kalshi-trade.jpg" width="1080" height="1920" alt="">
   <div class="tap open-link" data-href="https://kalshi.com"></div>
@@ -227,23 +242,29 @@ body{
     var vv = window.visualViewport;
     return Math.round((vv && vv.height) || feed.clientHeight || window.innerHeight);
   }
+
   function size(){
     H = vh();
-    pages.forEach(function(p){ p.style.height = H + 'px'; });
+    pages.forEach(function(p){
+      p.style.height = H + 'px';
+    });
     track.style.height = (n * H) + 'px';
     go(i, false);
   }
+
   function setY(y, animate){
-    track.style.transition = animate? 'transform.28s cubic-bezier(.22,.9,.3,1)' : 'none';
+    track.style.transition = animate ? 'transform.28s cubic-bezier(.22,.9,.3,1)' : 'none';
     track.style.transform = 'translate3d(0,' + (-y) + 'px,0)';
   }
+
   function go(idx, animate){
     if(idx < 0) idx = 0;
     if(idx > n - 1) idx = n - 1;
     i = idx;
-    setY(i * H, animate!== false);
+    setY(i * H, animate !== false);
     play();
   }
+
   vids.forEach(function(v){
     v.muted = true;
     v.loop = true;
@@ -253,32 +274,49 @@ body{
     v.setAttribute('webkit-playsinline','');
     v.disableRemotePlayback = true;
   });
+
   function play(){
     pages.forEach(function(p, idx){
       var v = p.querySelector('video');
       if(!v) return;
       if(idx === i){
-        if(v.paused) v.play().catch(function(){});
+        if(v.paused){
+          v.play().catch(function(){});
+        }
       } else {
-        if(!v.paused) v.pause();
-        try { v.currentTime = 0; } catch(e){}
+        if(!v.paused){
+          v.pause();
+        }
+        try{
+          v.currentTime = 0;
+        } catch(e){}
       }
     });
   }
+
   function isInShop(el){
     return shop && el && shop.contains(el);
   }
+
   function shopCanScroll(dir){
-    if(!shop) return false;
+    if(!shop){
+      return false;
+    }
     var atTop = shop.scrollTop <= 2;
     var atBot = shop.scrollTop + shop.clientHeight >= shop.scrollHeight - 3;
-    if(dir < 0) return!atTop; // swipe down = scroll up
-    if(dir > 0) return!atBot; // swipe up = scroll down
+    if(dir < 0){
+      return !atTop;
+    }
+    if(dir > 0){
+      return !atBot;
+    }
     return true;
   }
 
   feed.addEventListener('touchstart', function(e){
-    if(!e.touches[0]) return;
+    if(!e.touches[0]){
+      return;
+    }
     y0 = e.touches[0].clientY;
     t0 = Date.now();
     startI = i;
@@ -288,20 +326,24 @@ body{
   }, {passive:true});
 
   feed.addEventListener('touchmove', function(e){
-    if(!dragging ||!e.touches[0]) return;
+    if(!dragging || !e.touches[0]){
+      return;
+    }
     var dy = y0 - e.touches[0].clientY;
-    // If touch started inside shop and shop can still scroll that direction, let shop handle it
-    if(insideShop && Math.abs(dy) > 5){
-      if(shopCanScroll(dy)){
-        return; // don't move track, let native shop scroll
-      }
-      // else shop is at edge, we will take over and flip page
+    if(insideShop && Math.abs(dy) > 5 && shopCanScroll(dy)){
+      return;
     }
     var y = startI * H + dy;
-    if(y < 0) y = dy * 0.25;
-    if(y > (n-1)*H) y = (n-1)*H + (dy * 0.25);
+    if(y < 0){
+      y = dy * 0.25;
+    }
+    if(y > (n-1)*H){
+      y = (n-1)*H + (dy * 0.25);
+    }
     setY(y, false);
-    if(Math.abs(dy) > 10) e.preventDefault();
+    if(Math.abs(dy) > 10){
+      e.preventDefault();
+    }
   }, {passive:false});
 
   function settle(y1){
@@ -310,14 +352,18 @@ body{
     var vel = dy / dt;
     var next = startI;
     var strong = Math.abs(dy) > 56 || Math.abs(vel) > 0.35 || Math.abs(dy) > H * 0.12;
-    if(strong) next = dy > 0? startI + 1 : startI - 1;
+    if(strong){
+      next = dy > 0 ? startI + 1 : startI - 1;
+    }
     go(next, true);
   }
 
   feed.addEventListener('touchend', function(e){
-    if(!dragging) return;
+    if(!dragging){
+      return;
+    }
     dragging = false;
-    var y1 = e.changedTouches[0]? e.changedTouches[0].clientY : y0;
+    var y1 = e.changedTouches[0] ? e.changedTouches[0].clientY : y0;
     var dy = y0 - y1;
     if(insideShop && shopCanScroll(dy) && Math.abs(dy) < 120){
       go(startI, true);
@@ -326,11 +372,28 @@ body{
     settle(y1);
   }, {passive:true});
 
-  document.querySelectorAll('.open-link').forEach(function(el){
+  var seph = document.getElementById('seph-link');
+  if(seph){
+    seph.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      var c = seph.querySelector('.c');
+      c.style.transition = 'transform.12s ease';
+      c.style.transform = 'scale(0.92)';
+      setTimeout(function(){
+        c.style.transform = 'scale(1)';
+        window.open(seph.getAttribute('data-href'), '_blank', 'noopener');
+      }, 120);
+    });
+  }
+
+  document.querySelectorAll('.open-link:not(#seph-link)').forEach(function(el){
     el.addEventListener('click', function(e){
       e.stopPropagation();
       var href = el.getAttribute('data-href') || el.getAttribute('href');
-      if(href) window.open(href, '_blank', 'noopener');
+      if(href){
+        window.open(href, '_blank', 'noopener');
+      }
     });
   });
 
@@ -339,8 +402,10 @@ body{
     window.visualViewport.addEventListener('resize', size);
   }
   window.addEventListener('resize', size);
-  window.addEventListener('orientationchange', function(){ setTimeout(size, 250); });
+  window.addEventListener('orientationchange', function(){
+    setTimeout(size, 250);
+  });
 })();
 </script>
-</body>
+<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
 </html>
