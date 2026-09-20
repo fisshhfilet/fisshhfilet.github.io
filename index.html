@@ -71,14 +71,14 @@ body{
   justify-content:center;
   z-index:10;
   pointer-events:none;
-  animation:openingOut .8s ease 2.3s forwards;
+  animation:openingOut.8s ease 2.3s forwards;
 }
 .opening span{
   color:#a8a8a8;
   font-size:10px;
   letter-spacing:.32em;
   opacity:0;
-  animation:txtIn .8s ease .3s forwards, txtOut .6s ease 1.8s forwards;
+  animation:txtIn.8s ease.3s forwards, txtOut.6s ease 1.8s forwards;
 }
 .betty{position:absolute;inset:0}
 .betty img{width:100%;height:100%;object-fit:contain}
@@ -103,12 +103,12 @@ body{
 .avatars{display:flex;gap:10px;overflow-x:auto;padding:10px 12px 10px;-webkit-overflow-scrolling:touch;flex-shrink:0}
 .av{flex:0 0 56px;text-align:center;text-decoration:none;opacity:.35;color:inherit}
 .av.active{opacity:1}
-.av .c{width:52px;height:52px;border-radius:50%;overflow:hidden;background:#111;margin:0 auto;border:2px solid #2a2a2a}
-.av.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff}
-.av .c img{width:100%;height:100%;object-fit:cover;pointer-events:auto}
+.av.c{width:52px;height:52px;border-radius:50%;overflow:hidden;background:#111;margin:0 auto;border:2px solid #2a2a2a}
+.av.active.c{border-color:#fff;box-shadow:0 0 0 2px #fff}
+.av.c img{width:100%;height:100%;object-fit:cover;pointer-events:auto}
 .av i{font-style:normal;font-size:7px;color:#666;margin-top:5px;display:block;letter-spacing:.08em}
 .av.seph{opacity:1;cursor:pointer}
-.av.seph.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff}
+.av.seph.active.c{border-color:#fff;box-shadow:0 0 0 2px #fff}
 .av.seph i{color:#fff;font-weight:900}
 .toggle{margin:4px 12px 10px;background:#111;border-radius:999px;display:grid;grid-template-columns:1fr 1fr;padding:3px;gap:3px;flex-shrink:0}
 .toggle button{height:36px;border-radius:999px;border:0;font-size:9px;font-weight:800;letter-spacing:.08em;background:#1a1a1a;color:#8a8a8a}
@@ -188,6 +188,14 @@ body{
 </section>
 <section class="page"><img src="restocking-soon-fix.jpg" width="1080" height="1920" alt=""></section>
 <section class="page"><img src="waista-question.jpg" width="1080" height="1920" alt=""></section>
+
+<!-- NEW HERSHEY'S AD - RIGHT BEFORE KALSHI -->
+<section class="page">
+  <video muted loop playsinline webkit-playsinline preload="auto">
+    <source src="Hershey.mp4" type="video/mp4">
+  </video>
+</section>
+
 <section class="page">
   <img src="kalshi-trade.jpg" width="1080" height="1920" alt="">
   <div class="tap open-link" data-href="https://kalshi.com"></div>
@@ -225,7 +233,7 @@ body{
   }
 
   function setY(y, animate){
-    track.style.transition = animate ? 'transform .28s cubic-bezier(.22,.9,.3,1)' : 'none';
+    track.style.transition = animate? 'transform.28s cubic-bezier(.22,.9,.3,1)' : 'none';
     track.style.transform = 'translate3d(0,' + (-y) + 'px,0)';
   }
 
@@ -233,7 +241,7 @@ body{
     if(idx < 0) idx = 0;
     if(idx > n - 1) idx = n - 1;
     i = idx;
-    setY(i * H, animate !== false);
+    setY(i * H, animate!== false);
     play();
   }
 
@@ -268,8 +276,8 @@ body{
     if(!shop) return false;
     var top = shop.scrollTop <= 1;
     var bot = shop.scrollTop + shop.clientHeight >= shop.scrollHeight - 2;
-    if(dir < 0) return !top;
-    if(dir > 0) return !bot;
+    if(dir < 0) return!top;
+    if(dir > 0) return!bot;
     return true;
   }
 
@@ -284,7 +292,7 @@ body{
   }, {passive:true});
 
   feed.addEventListener('touchmove', function(e){
-    if(!dragging || !e.touches[0]) return;
+    if(!dragging ||!e.touches[0]) return;
     var dy = y0 - e.touches[0].clientY;
     if(shopLock){
       if(Math.abs(dy) < 10) return;
@@ -305,14 +313,14 @@ body{
     var vel = dy / dt;
     var next = startI;
     var strong = Math.abs(dy) > 56 || Math.abs(vel) > 0.35 || Math.abs(dy) > H * 0.12;
-    if(strong) next = dy > 0 ? startI + 1 : startI - 1;
+    if(strong) next = dy > 0? startI + 1 : startI - 1;
     go(next, true);
   }
 
   feed.addEventListener('touchend', function(e){
     if(!dragging) return;
     dragging = false;
-    var y1 = e.changedTouches[0] ? e.changedTouches[0].clientY : y0;
+    var y1 = e.changedTouches[0]? e.changedTouches[0].clientY : y0;
     if(shopLock && Math.abs(y0 - y1) < 56){ go(startI, true); return; }
     settle(y1);
   }, {passive:true});
