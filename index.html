@@ -86,6 +86,8 @@ body{
 @keyframes txtOut{to{opacity:0}}
 @keyframes openingOut{to{opacity:0;visibility:hidden}}
 .final{flex-direction:column;gap:38px;text-align:center}
+
+/* --- SHOP RESTORED --- */
 .shop{
   width:100%;
   max-width:430px;
@@ -97,7 +99,7 @@ body{
   color:#e8e8e8;
   padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
   -webkit-overflow-scrolling:touch;
-  overscroll-behavior:none;
+  overscroll-behavior:contain;
   touch-action:pan-y;
 }
 .avatars{display:flex;gap:10px;overflow-x:auto;padding:10px 12px 10px;-webkit-overflow-scrolling:touch;flex-shrink:0}
@@ -110,6 +112,7 @@ body{
 .av.seph{opacity:1;cursor:pointer}
 .av.seph.active.c{border-color:#fff;box-shadow:0 0 0 2px #fff}
 .av.seph i{color:#fff;font-weight:900}
+
 .toggle{margin:4px 12px 10px;background:#111;border-radius:999px;display:grid;grid-template-columns:1fr 1fr;padding:3px;gap:3px;flex-shrink:0}
 .toggle button{height:36px;border-radius:999px;border:0;font-size:9px;font-weight:800;letter-spacing:.08em;background:#1a1a1a;color:#8a8a8a}
 .toggle button.on{background:#ff2a6d;color:#fff}
@@ -189,7 +192,7 @@ body{
 <section class="page"><img src="restocking-soon-fix.jpg" width="1080" height="1920" alt=""></section>
 <section class="page"><img src="waista-question.jpg" width="1080" height="1920" alt=""></section>
 
-<!-- NEW HERSHEY'S AD - RIGHT BEFORE KALSHI -->
+<!-- HERSHEY BEFORE KALSHI -->
 <section class="page">
   <video muted loop playsinline webkit-playsinline preload="auto">
     <source src="Hershey.mp4" type="video/mp4">
@@ -217,26 +220,23 @@ body{
   var n = pages.length;
   var i = 0;
   var H = 0;
-  var y0 = 0, t0 = 0, dragging = false, startI = 0, shopLock = false;
+  var y0 = 0, t0 = 0, dragging = false, startI = 0, insideShop = false;
   var vids = [].slice.call(document.querySelectorAll('video'));
 
   function vh(){
     var vv = window.visualViewport;
     return Math.round((vv && vv.height) || feed.clientHeight || window.innerHeight);
   }
-
   function size(){
     H = vh();
     pages.forEach(function(p){ p.style.height = H + 'px'; });
     track.style.height = (n * H) + 'px';
     go(i, false);
   }
-
   function setY(y, animate){
     track.style.transition = animate? 'transform.28s cubic-bezier(.22,.9,.3,1)' : 'none';
     track.style.transform = 'translate3d(0,' + (-y) + 'px,0)';
   }
-
   function go(idx, animate){
     if(idx < 0) idx = 0;
     if(idx > n - 1) idx = n - 1;
@@ -244,7 +244,6 @@ body{
     setY(i * H, animate!== false);
     play();
   }
-
   vids.forEach(function(v){
     v.muted = true;
     v.loop = true;
@@ -254,7 +253,6 @@ body{
     v.setAttribute('webkit-playsinline','');
     v.disableRemotePlayback = true;
   });
-
   function play(){
     pages.forEach(function(p, idx){
       var v = p.querySelector('video');
@@ -267,17 +265,15 @@ body{
       }
     });
   }
-
-  function inShop(el){
+  function isInShop(el){
     return shop && el && shop.contains(el);
   }
-
-  function shopCan(dir){
+  function shopCanScroll(dir){
     if(!shop) return false;
-    var top = shop.scrollTop <= 1;
-    var bot = shop.scrollTop + shop.clientHeight >= shop.scrollHeight - 2;
-    if(dir < 0) return!top;
-    if(dir > 0) return!bot;
+    var atTop = shop.scrollTop <= 2;
+    var atBot = shop.scrollTop + shop.clientHeight >= shop.scrollHeight - 3;
+    if(dir < 0) return!atTop; // swipe down = scroll up
+    if(dir > 0) return!atBot; // swipe up = scroll down
     return true;
   }
 
@@ -287,25 +283,26 @@ body{
     t0 = Date.now();
     startI = i;
     dragging = true;
-    shopLock = inShop(e.target);
+    insideShop = isInShop(e.target);
     track.style.transition = 'none';
   }, {passive:true});
 
   feed.addEventListener('touchmove', function(e){
     if(!dragging ||!e.touches[0]) return;
     var dy = y0 - e.touches[0].clientY;
-    if(shopLock){
-      if(Math.abs(dy) < 10) return;
-      if(Math.abs(dy) < 72 && shopCan(dy)) return;
-      shopLock = false;
-      y0 = e.touches[0].clientY;
-      dy = 0;
+    // If touch started inside shop and shop can still scroll that direction, let shop handle it
+    if(insideShop && Math.abs(dy) > 5){
+      if(shopCanScroll(dy)){
+        return; // don't move track, let native shop scroll
+      }
+      // else shop is at edge, we will take over and flip page
     }
     var y = startI * H + dy;
     if(y < 0) y = dy * 0.25;
     if(y > (n-1)*H) y = (n-1)*H + (dy * 0.25);
     setY(y, false);
-  }, {passive:true});
+    if(Math.abs(dy) > 10) e.preventDefault();
+  }, {passive:false});
 
   function settle(y1){
     var dy = y0 - y1;
@@ -321,28 +318,13 @@ body{
     if(!dragging) return;
     dragging = false;
     var y1 = e.changedTouches[0]? e.changedTouches[0].clientY : y0;
-    if(shopLock && Math.abs(y0 - y1) < 56){ go(startI, true); return; }
+    var dy = y0 - y1;
+    if(insideShop && shopCanScroll(dy) && Math.abs(dy) < 120){
+      go(startI, true);
+      return;
+    }
     settle(y1);
   }, {passive:true});
-
-  if(shop){
-    shop.addEventListener('touchstart', function(e){
-      if(!e.touches[0]) return;
-      y0 = e.touches[0].clientY;
-      t0 = Date.now();
-      startI = i;
-    }, {passive:true});
-    shop.addEventListener('touchend', function(e){
-      if(!e.changedTouches[0]) return;
-      var y1 = e.changedTouches[0].clientY;
-      var dy = y0 - y1;
-      var dt = Math.max(Date.now() - t0, 1);
-      var strong = Math.abs(dy) > 64 || Math.abs(dy / dt) > 0.4;
-      if(!strong) return;
-      if(dy > 0) go(i + 1, true);
-      else go(i - 1, true);
-    }, {passive:true});
-  }
 
   document.querySelectorAll('.open-link').forEach(function(el){
     el.addEventListener('click', function(e){
