@@ -25,9 +25,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#ffffff">
 <title>fisshhfilet.github.io</title>
 <link rel="preload" as="image" href="betty.jpg">
+<link rel="preload" as="image" href="restocking-soon-white.jpg">
 <link rel="preload" as="image" href="waista.jpg">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -75,6 +76,12 @@ body{
   background:#000;
   display:block;
   pointer-events:none;
+}
+.page.white-bg{
+  background:#ffffff;
+}
+.page.white-bg img{
+  background:#ffffff;
 }
 .tap{
   position:absolute;
@@ -124,12 +131,12 @@ body{
 .avatars{display:flex;gap:10px;overflow-x:auto;padding:10px 12px 10px;-webkit-overflow-scrolling:touch;flex-shrink:0}
 .av{flex:0 0 56px;text-align:center;text-decoration:none;opacity:.35;color:inherit}
 .av.active{opacity:1}
-.av .c{width:52px;height:52px;border-radius:50%;overflow:hidden;background:#111;margin:0 auto;border:2px solid #2a2a2a}
-.av.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff}
-.av .c img{width:100%;height:100%;object-fit:cover;pointer-events:auto;display:block}
+.av.c{width:52px;height:52px;border-radius:50%;overflow:hidden;background:#111;margin:0 auto;border:2px solid #2a2a2a}
+.av.active.c{border-color:#fff;box-shadow:0 0 0 2px #fff}
+.av.c img{width:100%;height:100%;object-fit:cover;pointer-events:auto;display:block}
 .av i{font-style:normal;font-size:7px;color:#666;margin-top:5px;display:block;letter-spacing:.08em}
 .av.seph{opacity:1;cursor:pointer}
-.av.seph.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff}
+.av.seph.active.c{border-color:#fff;box-shadow:0 0 0 2px #fff}
 .av.seph i{color:#fff;font-weight:900}
 .toggle{margin:4px 12px 10px;background:#111;border-radius:999px;display:grid;grid-template-columns:1fr 1fr;padding:3px;gap:3px;flex-shrink:0}
 .toggle button{height:36px;border-radius:999px;border:0;font-size:9px;font-weight:800;letter-spacing:.08em;background:#1a1a1a;color:#8a8a8a}
@@ -155,8 +162,14 @@ body{
   <div class="betty"><img src="betty.jpg" width="1080" height="1920" alt=""></div>
   <div class="opening"><span>@fisshhfilet</span></div>
 </section>
+
+<!-- NEW WHITE RESTOCKING PAGE - RIGHT AFTER OPENING FADES -->
+<section class="page white-bg">
+  <img src="restocking-soon-white.jpg" width="1080" height="1920" alt="Restocking Soon" fetchpriority="high">
+</section>
+
 <section class="page">
-  <img src="waista.jpg" width="1080" height="1920" alt="" fetchpriority="high">
+  <img src="waista.jpg" width="1080" height="1920" alt="">
 </section>
 <section class="page">
   <video muted loop playsinline webkit-playsinline preload="auto">
@@ -253,7 +266,7 @@ body{
   }
 
   function setY(y, animate){
-    track.style.transition = animate ? 'transform.28s cubic-bezier(.22,.9,.3,1)' : 'none';
+    track.style.transition = animate? 'transform.28s cubic-bezier(.22,.9,.3,1)' : 'none';
     track.style.transform = 'translate3d(0,' + (-y) + 'px,0)';
   }
 
@@ -261,7 +274,7 @@ body{
     if(idx < 0) idx = 0;
     if(idx > n - 1) idx = n - 1;
     i = idx;
-    setY(i * H, animate !== false);
+    setY(i * H, animate!== false);
     play();
   }
 
@@ -305,10 +318,10 @@ body{
     var atTop = shop.scrollTop <= 2;
     var atBot = shop.scrollTop + shop.clientHeight >= shop.scrollHeight - 3;
     if(dir < 0){
-      return !atTop;
+      return!atTop;
     }
     if(dir > 0){
-      return !atBot;
+      return!atBot;
     }
     return true;
   }
@@ -326,7 +339,7 @@ body{
   }, {passive:true});
 
   feed.addEventListener('touchmove', function(e){
-    if(!dragging || !e.touches[0]){
+    if(!dragging ||!e.touches[0]){
       return;
     }
     var dy = y0 - e.touches[0].clientY;
@@ -353,7 +366,7 @@ body{
     var next = startI;
     var strong = Math.abs(dy) > 56 || Math.abs(vel) > 0.35 || Math.abs(dy) > H * 0.12;
     if(strong){
-      next = dy > 0 ? startI + 1 : startI - 1;
+      next = dy > 0? startI + 1 : startI - 1;
     }
     go(next, true);
   }
@@ -363,7 +376,7 @@ body{
       return;
     }
     dragging = false;
-    var y1 = e.changedTouches[0] ? e.changedTouches[0].clientY : y0;
+    var y1 = e.changedTouches[0]? e.changedTouches[0].clientY : y0;
     var dy = y0 - y1;
     if(insideShop && shopCanScroll(dy) && Math.abs(dy) < 120){
       go(startI, true);
@@ -407,5 +420,5 @@ body{
   });
 })();
 </script>
-<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
-</html>
+</body>
+    </html>
