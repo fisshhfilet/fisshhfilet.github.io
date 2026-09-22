@@ -1,34 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><style>
-@font-face {
-  font-family: "Optimistic";
-  font-style: normal;
-  font-weight: 400 600;
-  font-display: swap;
-  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Optimistic Mono";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
-}
-:where(html) {
-  font-family: "Optimistic", system-ui, sans-serif;
-}
-:where(code, pre, kbd, samp) {
-  font-family: "Optimistic Mono", ui-monospace, monospace;
-}
-</style>
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#ffffff">
 <title>fisshhfilet.github.io</title>
 <link rel="preload" as="image" href="betty.jpg">
-<link rel="preload" as="image" href="restocking-soon-white.jpg">
 <link rel="preload" as="image" href="waista.jpg">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -97,22 +75,73 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  z-index:10;
+  z-index:20;
   pointer-events:none;
-  animation:openingOut.8s ease 2.3s forwards;
+  animation:openingOut .8s ease 2.3s forwards;
 }
 .opening span{
   color:#a8a8a8;
   font-size:10px;
   letter-spacing:.32em;
   opacity:0;
-  animation:txtIn.8s ease.3s forwards, txtOut.6s ease 1.8s forwards;
+  animation:txtIn .8s ease .3s forwards, txtOut .6s ease 1.8s forwards;
 }
-.betty{position:absolute;inset:0}
-.betty img{width:100%;height:100%;object-fit:contain}
 @keyframes txtIn{to{opacity:1}}
 @keyframes txtOut{to{opacity:0}}
 @keyframes openingOut{to{opacity:0;visibility:hidden}}
+.restock{
+  width:100%;
+  height:100%;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:24px;
+  animation:restockIn .7s ease 2.4s both;
+}
+@keyframes restockIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+.restock-title{
+  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
+  font-weight:800;
+  font-size:clamp(42px,11vw,64px);
+  line-height:.95;
+  letter-spacing:-.03em;
+  color:#00b3c6;
+}
+.restock-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin-top:6px;
+}
+.ig{
+  width:52px;
+  height:52px;
+  flex:0 0 52px;
+  border-radius:14px;
+  background:#111;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.ig svg{width:30px;height:30px;display:block}
+.restock-sub{
+  margin-top:22px;
+  color:#9a9a9a;
+  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
+  font-size:11px;
+  letter-spacing:.18em;
+  font-weight:600;
+  line-height:1.7;
+}
+.betty{position:absolute;inset:0}
+.betty img{width:100%;height:100%;object-fit:contain}
 .final{flex-direction:column;gap:38px;text-align:center}
 .shop{
   width:100%;
@@ -128,15 +157,55 @@ body{
   overscroll-behavior:contain;
   touch-action:pan-y;
 }
-.avatars{display:flex;gap:10px;overflow-x:auto;padding:10px 12px 10px;-webkit-overflow-scrolling:touch;flex-shrink:0}
-.av{flex:0 0 56px;text-align:center;text-decoration:none;opacity:.35;color:inherit}
+.avatars{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding:10px 12px 10px;
+  -webkit-overflow-scrolling:touch;
+  flex-shrink:0;
+}
+.av{
+  flex:0 0 56px;
+  text-align:center;
+  text-decoration:none;
+  opacity:.35;
+  color:inherit;
+}
 .av.active{opacity:1}
-.av.c{width:52px;height:52px;border-radius:50%;overflow:hidden;background:#111;margin:0 auto;border:2px solid #2a2a2a}
-.av.active.c{border-color:#fff;box-shadow:0 0 0 2px #fff}
-.av.c img{width:100%;height:100%;object-fit:cover;pointer-events:auto;display:block}
-.av i{font-style:normal;font-size:7px;color:#666;margin-top:5px;display:block;letter-spacing:.08em}
+.av .c{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  overflow:hidden;
+  background:#111;
+  margin:0 auto;
+  border:2px solid #2a2a2a;
+  flex-shrink:0;
+}
+.av.active .c{
+  border-color:#fff;
+  box-shadow:0 0 0 2px #fff;
+}
+.av .c img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+  pointer-events:auto;
+  display:block;
+  border-radius:50%;
+}
+.av i{
+  font-style:normal;
+  font-size:7px;
+  color:#666;
+  margin-top:5px;
+  display:block;
+  letter-spacing:.08em;
+}
 .av.seph{opacity:1;cursor:pointer}
-.av.seph.active.c{border-color:#fff;box-shadow:0 0 0 2px #fff}
+.av.seph.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff}
 .av.seph i{color:#fff;font-weight:900}
 .toggle{margin:4px 12px 10px;background:#111;border-radius:999px;display:grid;grid-template-columns:1fr 1fr;padding:3px;gap:3px;flex-shrink:0}
 .toggle button{height:36px;border-radius:999px;border:0;font-size:9px;font-weight:800;letter-spacing:.08em;background:#1a1a1a;color:#8a8a8a}
@@ -157,87 +226,97 @@ body{
 </head>
 <body>
 <div id="feed">
-<div id="track">
-<section class="page">
-  <div class="betty"><img src="betty.jpg" width="1080" height="1920" alt=""></div>
   <div class="opening"><span>@fisshhfilet</span></div>
-</section>
-
-<!-- NEW WHITE RESTOCKING PAGE - RIGHT AFTER OPENING FADES -->
-<section class="page white-bg">
-  <img src="restocking-soon-white.jpg" width="1080" height="1920" alt="Restocking Soon" fetchpriority="high">
-</section>
-
-<section class="page">
-  <img src="waista.jpg" width="1080" height="1920" alt="">
-</section>
-<section class="page">
-  <video muted loop playsinline webkit-playsinline preload="auto">
-    <source src="Liquid.mp4" type="video/mp4">
-    <source src="ad.mp4" type="video/mp4">
-  </video>
-</section>
-<section class="page">
-  <img src="Sharkbait.jpg" width="1080" height="1920" alt="">
-  <div class="tap open-link" data-href="https://naturalcatchtuna.com/"></div>
-</section>
-<section class="page">
-  <video muted loop playsinline webkit-playsinline preload="auto">
-    <source src="Sephora.mp4" type="video/mp4">
-  </video>
-</section>
-<section class="page">
-  <img src="qr-ware.jpg" width="1080" height="1920" alt="">
-</section>
-<section class="page">
-  <video muted loop playsinline webkit-playsinline preload="auto">
-    <source src="hakrs-flip-live.mp4" type="video/mp4">
-  </video>
-</section>
-<section class="page" style="background:#000">
-<div class="shop">
-<div class="avatars">
-<a class="av seph active" id="seph-link" data-href="https://www.sephora.com/"><div class="c"><img src="sephora.jpg" width="104" height="104" alt=""></div><i>SEPHORA</i></a>
-<div class="av"><div class="c"><img src="betty.jpg" width="104" height="104" alt=""></div><i>HOST</i></div>
-<div class="av"><div class="c"><img src="waista.jpg" width="104" height="104" alt=""></div><i>HOME</i></div>
-<div class="av"><div class="c"><img src="qr-ware.jpg" width="104" height="104" alt=""></div><i>PM</i></div>
-<div class="av"><div class="c"><img src="Sharkbait.jpg" width="104" height="104" alt=""></div><i>FD</i></div>
-<div class="av"><div class="c"><img src="hakrs-pier-flip-clean.jpg" width="104" height="104" alt=""></div><i>GD</i></div>
-<div class="av"><div class="c"><img src="adults-only-beach.jpg" width="104" height="104" alt=""></div><i>ED</i></div>
-</div>
-<div class="toggle"><button>SHARK • ARCHIVE 5/9</button><button class="on">FLIPPED • HAKRs 4/9</button></div>
-<div class="img"><img src="hakrs-pier-flip-clean.jpg" width="800" height="500" alt=""></div>
-<div class="swipe">SWIPE UP</div>
-<div class="live">SHARK IS LIVE — TAP TO FLIP CARDS 4/4 04/09</div>
-<div class="grid">
-<div class="card"><b>FABRIC?</b><p>HEAVY 14oz FLEECE CRYSTAL WASHED</p></div>
-<div class="card"><b>FIT?</b><p>OVERSIZED BOXY CROPPED AT WAIST</p></div>
-<div class="card"><b>WHY FLIP?</b><p>RETAIL $285 → FLIP $32 DEADSTOCK ARCHIVE</p></div>
-<div class="card"><b>SHIP?</b><p>NYC NEXT_DAY WORLDWIDE 3-5 DAYS</p></div>
-</div>
-<div class="cta">FLIP → $32</div>
-<div class="cta ghost">• § h o p •</div>
-<div class="add"><span>ADD → $32</span><div style="width:34px;height:34px;border-radius:50%;background:#ff7a00;display:flex;align-items:center;justify-content:center;color:#fff">♥</div></div>
-</div>
-</section>
-<section class="page"><img src="restocking-soon-fix.jpg" width="1080" height="1920" alt=""></section>
-<section class="page"><img src="waista-question.jpg" width="1080" height="1920" alt=""></section>
-<section class="page">
-  <video muted loop playsinline webkit-playsinline preload="auto">
-    <source src="Hershey.mp4" type="video/mp4">
-  </video>
-</section>
-<section class="page">
-  <img src="kalshi-trade.jpg" width="1080" height="1920" alt="">
-  <div class="tap open-link" data-href="https://kalshi.com"></div>
-</section>
-<section class="page"><img src="adults-only-beach.jpg" width="1080" height="1920" alt=""></section>
-<section class="page final" style="background:#000">
-<div style="color:#a8a8a8;font-size:10px;letter-spacing:.32em">@fisshhfilet</div>
-<div style="color:#fff;font-size:11px;letter-spacing:.36em">PRIVATE ACCESS</div>
-<div style="color:#39e66f;font-size:10px;letter-spacing:.32em;font-weight:800">MEMBERS ONLY</div>
-</section>
-</div>
+  <div id="track">
+    <section class="page white-bg">
+      <div class="restock">
+        <div class="restock-title">Restocking</div>
+        <div class="restock-row">
+          <div class="ig" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="3" width="18" height="18" rx="5" stroke="#fff" stroke-width="2"/>
+              <circle cx="12" cy="12" r="4.2" stroke="#fff" stroke-width="2"/>
+              <circle cx="17.2" cy="6.8" r="1.1" fill="#fff"/>
+            </svg>
+          </div>
+          <div class="restock-title">Soon</div>
+        </div>
+        <div class="restock-sub">DM &quot;WAITLIST&quot;<br>@CLUB52VOGUE.SHOP</div>
+      </div>
+    </section>
+    <section class="page">
+      <div class="betty"><img src="betty.jpg" width="1080" height="1920" alt="Betty Top 10"></div>
+    </section>
+    <section class="page">
+      <img src="waista.jpg" width="1080" height="1920" alt="">
+    </section>
+    <section class="page">
+      <video muted loop playsinline webkit-playsinline preload="auto">
+        <source src="Liquid.mp4" type="video/mp4">
+        <source src="ad.mp4" type="video/mp4">
+      </video>
+    </section>
+    <section class="page">
+      <img src="Sharkbait.jpg" width="1080" height="1920" alt="">
+      <div class="tap open-link" data-href="https://naturalcatchtuna.com/"></div>
+    </section>
+    <section class="page">
+      <video muted loop playsinline webkit-playsinline preload="auto">
+        <source src="Sephora.mp4" type="video/mp4">
+      </video>
+    </section>
+    <section class="page">
+      <img src="qr-ware.jpg" width="1080" height="1920" alt="">
+    </section>
+    <section class="page">
+      <video muted loop playsinline webkit-playsinline preload="auto">
+        <source src="hakrs-flip-live.mp4" type="video/mp4">
+      </video>
+    </section>
+    <section class="page" style="background:#000">
+      <div class="shop">
+        <div class="avatars">
+          <a class="av seph active" id="seph-link" data-href="https://www.sephora.com/"><div class="c"><img src="sephora.jpg" width="104" height="104" alt=""></div><i>SEPHORA</i></a>
+          <div class="av"><div class="c"><img src="betty.jpg" width="104" height="104" alt=""></div><i>HOST</i></div>
+          <div class="av"><div class="c"><img src="waista.jpg" width="104" height="104" alt=""></div><i>HOME</i></div>
+          <div class="av"><div class="c"><img src="qr-ware.jpg" width="104" height="104" alt=""></div><i>PM</i></div>
+          <div class="av"><div class="c"><img src="Sharkbait.jpg" width="104" height="104" alt=""></div><i>FD</i></div>
+          <div class="av"><div class="c"><img src="hakrs-pier-flip-clean.jpg" width="104" height="104" alt=""></div><i>GD</i></div>
+          <div class="av"><div class="c"><img src="adults-only-beach.jpg" width="104" height="104" alt=""></div><i>ED</i></div>
+        </div>
+        <div class="toggle"><button>SHARK • ARCHIVE 5/9</button><button class="on">FLIPPED • HAKRs 4/9</button></div>
+        <div class="img"><img src="hakrs-pier-flip-clean.jpg" width="800" height="500" alt=""></div>
+        <div class="swipe">SWIPE UP</div>
+        <div class="live">SHARK IS LIVE — TAP TO FLIP CARDS 4/4 04/09</div>
+        <div class="grid">
+          <div class="card"><b>FABRIC?</b><p>HEAVY 14oz FLEECE CRYSTAL WASHED</p></div>
+          <div class="card"><b>FIT?</b><p>OVERSIZED BOXY CROPPED AT WAIST</p></div>
+          <div class="card"><b>WHY FLIP?</b><p>RETAIL $285 → FLIP $32 DEADSTOCK ARCHIVE</p></div>
+          <div class="card"><b>SHIP?</b><p>NYC NEXT_DAY WORLDWIDE 3-5 DAYS</p></div>
+        </div>
+        <div class="cta">FLIP → $32</div>
+        <div class="cta ghost">• § h o p •</div>
+        <div class="add"><span>ADD → $32</span><div style="width:34px;height:34px;border-radius:50%;background:#ff7a00;display:flex;align-items:center;justify-content:center;color:#fff">♥</div></div>
+      </div>
+    </section>
+    <section class="page"><img src="restocking-soon-fix.jpg" width="1080" height="1920" alt=""></section>
+    <section class="page"><img src="waista-question.jpg" width="1080" height="1920" alt=""></section>
+    <section class="page">
+      <video muted loop playsinline webkit-playsinline preload="auto">
+        <source src="Hershey.mp4" type="video/mp4">
+      </video>
+    </section>
+    <section class="page">
+      <img src="kalshi-trade.jpg" width="1080" height="1920" alt="">
+      <div class="tap open-link" data-href="https://kalshi.com"></div>
+    </section>
+    <section class="page"><img src="adults-only-beach.jpg" width="1080" height="1920" alt=""></section>
+    <section class="page final" style="background:#000">
+      <div style="color:#a8a8a8;font-size:10px;letter-spacing:.32em">@fisshhfilet</div>
+      <div style="color:#fff;font-size:11px;letter-spacing:.36em">PRIVATE ACCESS</div>
+      <div style="color:#39e66f;font-size:10px;letter-spacing:.32em;font-weight:800">MEMBERS ONLY</div>
+    </section>
+  </div>
 </div>
 <script>
 (function(){
@@ -266,7 +345,7 @@ body{
   }
 
   function setY(y, animate){
-    track.style.transition = animate? 'transform.28s cubic-bezier(.22,.9,.3,1)' : 'none';
+    track.style.transition = animate ? 'transform .28s cubic-bezier(.22,.9,.3,1)' : 'none';
     track.style.transform = 'translate3d(0,' + (-y) + 'px,0)';
   }
 
@@ -274,7 +353,7 @@ body{
     if(idx < 0) idx = 0;
     if(idx > n - 1) idx = n - 1;
     i = idx;
-    setY(i * H, animate!== false);
+    setY(i * H, animate !== false);
     play();
   }
 
@@ -318,10 +397,10 @@ body{
     var atTop = shop.scrollTop <= 2;
     var atBot = shop.scrollTop + shop.clientHeight >= shop.scrollHeight - 3;
     if(dir < 0){
-      return!atTop;
+      return !atTop;
     }
     if(dir > 0){
-      return!atBot;
+      return !atBot;
     }
     return true;
   }
@@ -339,7 +418,7 @@ body{
   }, {passive:true});
 
   feed.addEventListener('touchmove', function(e){
-    if(!dragging ||!e.touches[0]){
+    if(!dragging || !e.touches[0]){
       return;
     }
     var dy = y0 - e.touches[0].clientY;
@@ -366,7 +445,7 @@ body{
     var next = startI;
     var strong = Math.abs(dy) > 56 || Math.abs(vel) > 0.35 || Math.abs(dy) > H * 0.12;
     if(strong){
-      next = dy > 0? startI + 1 : startI - 1;
+      next = dy > 0 ? startI + 1 : startI - 1;
     }
     go(next, true);
   }
@@ -376,7 +455,7 @@ body{
       return;
     }
     dragging = false;
-    var y1 = e.changedTouches[0]? e.changedTouches[0].clientY : y0;
+    var y1 = e.changedTouches[0] ? e.changedTouches[0].clientY : y0;
     var dy = y0 - y1;
     if(insideShop && shopCanScroll(dy) && Math.abs(dy) < 120){
       go(startI, true);
@@ -391,7 +470,7 @@ body{
       e.preventDefault();
       e.stopPropagation();
       var c = seph.querySelector('.c');
-      c.style.transition = 'transform.12s ease';
+      c.style.transition = 'transform .12s ease';
       c.style.transform = 'scale(0.92)';
       setTimeout(function(){
         c.style.transform = 'scale(1)';
@@ -421,4 +500,4 @@ body{
 })();
 </script>
 </body>
-    </html>
+  </html>
