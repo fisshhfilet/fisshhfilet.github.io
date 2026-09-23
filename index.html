@@ -6,10 +6,13 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#ffffff">
 <title>fisshhfilet.github.io</title>
+
 <link rel="preload" as="image" href="betty.jpg">
 <link rel="preload" as="image" href="waista.jpg">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+
 html,body{
   width:100%;
   height:100%;
@@ -19,21 +22,25 @@ html,body{
   overflow:hidden;
   touch-action:none;
 }
+
 body{
   font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
   overscroll-behavior:none;
   -webkit-font-smoothing:antialiased;
 }
+
 #feed{
   position:absolute;
   inset:0;
   overflow:hidden;
   background:#000;
 }
+
 #track{
   width:100%;
   will-change:transform;
 }
+
 .page{
   width:100%;
   height:100%;
@@ -45,6 +52,7 @@ body{
   overflow:hidden;
   flex-shrink:0;
 }
+
 .page > img,
 .page > video,
 .betty img{
@@ -56,12 +64,16 @@ body{
   display:block;
   pointer-events:none;
 }
+
 .page.white-bg{
   background:#ffffff;
 }
+
 .page.white-bg img{
   background:#ffffff;
 }
+
+/* Generic full-page links remain available for the other pages */
 .tap{
   position:absolute;
   inset:0;
@@ -69,6 +81,8 @@ body{
   cursor:pointer;
   -webkit-tap-highlight-color:transparent;
 }
+
+/* OPENING */
 .opening{
   position:absolute;
   inset:0;
@@ -80,16 +94,33 @@ body{
   pointer-events:none;
   animation:openingOut .8s ease 2.3s forwards;
 }
+
 .opening span{
   color:#a8a8a8;
   font-size:10px;
   letter-spacing:.32em;
   opacity:0;
-  animation:txtIn .8s ease .3s forwards, txtOut .6s ease 1.8s forwards;
+  animation:
+    txtIn .8s ease .3s forwards,
+    txtOut .6s ease 1.8s forwards;
 }
-@keyframes txtIn{to{opacity:1}}
-@keyframes txtOut{to{opacity:0}}
-@keyframes openingOut{to{opacity:0;visibility:hidden}}
+
+@keyframes txtIn{
+  to{opacity:1}
+}
+
+@keyframes txtOut{
+  to{opacity:0}
+}
+
+@keyframes openingOut{
+  to{
+    opacity:0;
+    visibility:hidden;
+  }
+}
+
+/* RESTOCKING */
 .restock{
   width:100%;
   height:100%;
@@ -102,10 +133,12 @@ body{
   padding:24px;
   animation:restockIn .7s ease 2.4s both;
 }
+
 @keyframes restockIn{
   from{opacity:0}
   to{opacity:1}
 }
+
 .restock-title{
   font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
   font-weight:800;
@@ -114,6 +147,7 @@ body{
   letter-spacing:-.03em;
   color:#00b3c6;
 }
+
 .restock-row{
   display:flex;
   align-items:center;
@@ -121,6 +155,18 @@ body{
   gap:10px;
   margin-top:6px;
 }
+
+/* ONLY THIS SMALL AREA IS CLICKABLE */
+.restock-link{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  text-decoration:none;
+  -webkit-tap-highlight-color:transparent;
+  cursor:pointer;
+}
+
 .ig{
   width:52px;
   height:52px;
@@ -132,9 +178,15 @@ body{
   justify-content:center;
   text-decoration:none;
   cursor:pointer;
-  pointer-events:none;
+  pointer-events:auto;
 }
-.ig svg{width:30px;height:30px;display:block}
+
+.ig svg{
+  width:30px;
+  height:30px;
+  display:block;
+}
+
 .restock-sub{
   margin-top:22px;
   color:#9a9a9a;
@@ -147,9 +199,25 @@ body{
   display:block;
   pointer-events:none;
 }
-.betty{position:absolute;inset:0}
-.betty img{width:100%;height:100%;object-fit:contain}
-.final{flex-direction:column;gap:38px;text-align:center}
+
+.betty{
+  position:absolute;
+  inset:0;
+}
+
+.betty img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.final{
+  flex-direction:column;
+  gap:38px;
+  text-align:center;
+}
+
+/* SHOP */
 .shop{
   width:100%;
   max-width:430px;
@@ -164,6 +232,7 @@ body{
   overscroll-behavior:contain;
   touch-action:pan-y;
 }
+
 .avatars{
   display:flex;
   gap:10px;
@@ -172,6 +241,7 @@ body{
   -webkit-overflow-scrolling:touch;
   flex-shrink:0;
 }
+
 .av{
   flex:0 0 56px;
   text-align:center;
@@ -180,8 +250,13 @@ body{
   color:inherit;
   cursor:pointer;
   -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
 }
-.av.active{opacity:1}
+
+.av.active{
+  opacity:1;
+}
+
 .av .c{
   width:52px;
   height:52px;
@@ -192,10 +267,12 @@ body{
   border:2px solid #2a2a2a;
   flex-shrink:0;
 }
+
 .av.active .c{
   border-color:#fff;
   box-shadow:0 0 0 2px #fff;
 }
+
 .av .c img{
   width:100%;
   height:100%;
@@ -205,6 +282,7 @@ body{
   display:block;
   border-radius:50%;
 }
+
 .av i{
   font-style:normal;
   font-size:7px;
@@ -213,315 +291,1346 @@ body{
   display:block;
   letter-spacing:.08em;
 }
-.av.seph{opacity:1}
-.av.seph i{color:#fff;font-weight:900}
-.toggle{margin:4px 12px 10px;background:#111;border-radius:999px;display:grid;grid-template-columns:1fr 1fr;padding:3px;gap:3px;flex-shrink:0}
-.toggle button{height:36px;border-radius:999px;border:0;font-size:9px;font-weight:800;letter-spacing:.08em;background:#1a1a1a;color:#8a8a8a}
-.toggle button.on{background:#ff2a6d;color:#fff}
-.img{margin:0 12px;border-radius:18px;overflow:hidden;border:3px solid #ff5a1f;background:#000;aspect-ratio:16/10;flex-shrink:0}
-.img img{width:100%;height:100%;object-fit:cover;display:block}
-.swipe{text-align:center;padding:8px 12px 2px;font-size:8px;letter-spacing:.28em;color:#555;flex-shrink:0}
-.live{text-align:center;padding:0 12px 10px;font-size:9px;color:#ff2a6d;letter-spacing:.06em;font-weight:700;flex-shrink:0}
-.grid{padding:0 12px 10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;flex-shrink:0}
-.card{background:#111;border:1px solid #1a1a1a;border-radius:10px;padding:12px 10px}
-.card b{font-size:8px;color:#555;display:block;margin-bottom:8px;letter-spacing:.08em;font-weight:700}
-.card p{font-size:10px;line-height:1.35;color:#ddd;font-weight:700}
-.cta{margin:0 12px 8px;background:#fff;color:#000;border:0;height:40px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;letter-spacing:.18em;flex-shrink:0}
-.cta.ghost{background:#000;color:#fff;border:1px solid #333;letter-spacing:.46em;font-size:11px}
-.add{margin:0 12px 16px;background:#111;border:1px solid #1a1a1a;border-radius:4px;display:flex;justify-content:space-between;padding:14px 14px 14px 16px;align-items:center;flex-shrink:0}
-.add span{font-size:12px;font-weight:900;letter-spacing:.1em}
+
+.av.seph{
+  opacity:1;
+}
+
+.av.seph i{
+  color:#fff;
+  font-weight:900;
+}
+
+.toggle{
+  margin:4px 12px 10px;
+  background:#111;
+  border-radius:999px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  padding:3px;
+  gap:3px;
+  flex-shrink:0;
+}
+
+.toggle button{
+  height:36px;
+  border-radius:999px;
+  border:0;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.08em;
+  background:#1a1a1a;
+  color:#8a8a8a;
+}
+
+.toggle button.on{
+  background:#ff2a6d;
+  color:#fff;
+}
+
+.img{
+  margin:0 12px;
+  border-radius:18px;
+  overflow:hidden;
+  border:3px solid #ff5a1f;
+  background:#000;
+  aspect-ratio:16/10;
+  flex-shrink:0;
+}
+
+.img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.swipe{
+  text-align:center;
+  padding:8px 12px 2px;
+  font-size:8px;
+  letter-spacing:.28em;
+  color:#555;
+  flex-shrink:0;
+}
+
+.live{
+  text-align:center;
+  padding:0 12px 10px;
+  font-size:9px;
+  color:#ff2a6d;
+  letter-spacing:.06em;
+  font-weight:700;
+  flex-shrink:0;
+}
+
+.grid{
+  padding:0 12px 10px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  flex-shrink:0;
+}
+
+.card{
+  background:#111;
+  border:1px solid #1a1a1a;
+  border-radius:10px;
+  padding:12px 10px;
+}
+
+.card b{
+  font-size:8px;
+  color:#555;
+  display:block;
+  margin-bottom:8px;
+  letter-spacing:.08em;
+  font-weight:700;
+}
+
+.card p{
+  font-size:10px;
+  line-height:1.35;
+  color:#ddd;
+  font-weight:700;
+}
+
+.cta{
+  margin:0 12px 8px;
+  background:#fff;
+  color:#000;
+  border:0;
+  height:40px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.18em;
+  flex-shrink:0;
+}
+
+.cta.ghost{
+  background:#000;
+  color:#fff;
+  border:1px solid #333;
+  letter-spacing:.46em;
+  font-size:11px;
+}
+
+.add{
+  margin:0 12px 16px;
+  background:#111;
+  border:1px solid #1a1a1a;
+  border-radius:4px;
+  display:flex;
+  justify-content:space-between;
+  padding:14px 14px 14px 16px;
+  align-items:center;
+  flex-shrink:0;
+}
+
+.add span{
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.1em;
+}
 </style>
 </head>
+
 <body>
+
 <div id="feed">
-  <div class="opening"><span>@fisshhfilet</span></div>
+
+  <div class="opening">
+    <span>@fisshhfilet</span>
+  </div>
+
   <div id="track">
+
+    <!-- 1. RESTOCKING / FIRST PAGE -->
     <section class="page white-bg">
+
       <div class="restock">
+
         <div class="restock-title">Restocking</div>
-        <div class="restock-row">
+
+        <!-- ONLY THIS AREA OPENS INSTAGRAM -->
+        <a
+          class="restock-link"
+          href="https://www.instagram.com/club52vogue.shop?stkn=MWhxYjhwaDAzamp5aw=="
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open Club52Vogue Shop Instagram"
+        >
           <span class="ig" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none">
-              <rect x="3" y="3" width="18" height="18" rx="5" stroke="#fff" stroke-width="2"/>
-              <circle cx="12" cy="12" r="4.2" stroke="#fff" stroke-width="2"/>
-              <circle cx="17.2" cy="6.8" r="1.1" fill="#fff"/>
+              <rect
+                x="3"
+                y="3"
+                width="18"
+                height="18"
+                rx="5"
+                stroke="#fff"
+                stroke-width="2"
+              />
+              <circle
+                cx="12"
+                cy="12"
+                r="4.2"
+                stroke="#fff"
+                stroke-width="2"
+              />
+              <circle
+                cx="17.2"
+                cy="6.8"
+                r="1.1"
+                fill="#fff"
+              />
             </svg>
           </span>
+
           <div class="restock-title">Soon</div>
+        </a>
+
+        <div class="restock-sub">
+          DM &quot;WAITLIST&quot;<br>
+          @CLUB52VOGUE.SHOP
         </div>
-        <div class="restock-sub">DM &quot;WAITLIST&quot;<br>@CLUB52VOGUE.SHOP</div>
+
       </div>
-      <div class="tap open-link" data-href="https://www.instagram.com/club52vogue.shop?stkn=MWhxYjhwaDAzamp5aw==" aria-label="Open Instagram"></div>
+
     </section>
+
+
+    <!-- 2. BETTY -->
     <section class="page">
-      <div class="betty"><img src="betty.jpg" width="1080" height="1920" alt="Betty Top 10"></div>
+      <div class="betty">
+        <img
+          src="betty.jpg"
+          width="1080"
+          height="1920"
+          alt="Betty Top 10"
+        >
+      </div>
     </section>
+
+
+    <!-- 3. WAISTA -->
     <section class="page">
-      <img src="waista.jpg" width="1080" height="1920" alt="">
+      <img
+        src="waista.jpg"
+        width="1080"
+        height="1920"
+        alt=""
+      >
     </section>
+
+
+    <!-- 4. LIQUID -->
     <section class="page">
-      <video muted loop playsinline webkit-playsinline preload="auto">
+      <video
+        muted
+        loop
+        playsinline
+        webkit-playsinline
+        preload="auto"
+      >
         <source src="Liquid.mp4" type="video/mp4">
         <source src="ad.mp4" type="video/mp4">
       </video>
     </section>
+
+
+    <!-- 5. SHARKBAIT -->
     <section class="page">
-      <img src="Sharkbait.jpg" width="1080" height="1920" alt="">
-      <div class="tap open-link" data-href="https://naturalcatchtuna.com/"></div>
+      <img
+        src="Sharkbait.jpg"
+        width="1080"
+        height="1920"
+        alt=""
+      >
+
+      <div
+        class="tap open-link"
+        data-href="https://naturalcatchtuna.com/"
+      ></div>
     </section>
+
+
+    <!-- 6. SEPHORA VIDEO -->
     <section class="page">
-      <video muted loop playsinline webkit-playsinline preload="auto">
+      <video
+        muted
+        loop
+        playsinline
+        webkit-playsinline
+        preload="auto"
+      >
         <source src="Sephora.mp4" type="video/mp4">
       </video>
     </section>
+
+
+    <!-- 7. QR -->
     <section class="page">
-      <img src="qr-ware.jpg" width="1080" height="1920" alt="">
+      <img
+        src="qr-ware.jpg"
+        width="1080"
+        height="1920"
+        alt=""
+      >
     </section>
+
+
+    <!-- 8. HAKRS -->
     <section class="page">
-      <video muted loop playsinline webkit-playsinline preload="auto">
+      <video
+        muted
+        loop
+        playsinline
+        webkit-playsinline
+        preload="auto"
+      >
         <source src="hakrs-flip-live.mp4" type="video/mp4">
       </video>
     </section>
+
+
+    <!-- 9. SHOP -->
     <section class="page" style="background:#000">
+
       <div class="shop">
+
         <div class="avatars">
-          <a class="av seph active" data-href="https://www.sephora.com/"><div class="c"><img src="sephora.jpg" width="104" height="104" alt=""></div><i>SEPHORA</i></a>
-          <a class="av" data-href="https://www.sephora.com/"><div class="c"><img src="betty.jpg" width="104" height="104" alt=""></div><i>HOST</i></a>
-          <a class="av" data-href="https://www.sephora.com/"><div class="c"><img src="waista.jpg" width="104" height="104" alt=""></div><i>HOME</i></a>
-          <a class="av" data-href="https://www.sephora.com/"><div class="c"><img src="qr-ware.jpg" width="104" height="104" alt=""></div><i>PM</i></a>
-          <a class="av" data-href="https://www.sephora.com/"><div class="c"><img src="Sharkbait.jpg" width="104" height="104" alt=""></div><i>FD</i></a>
-          <a class="av" data-href="https://www.sephora.com/"><div class="c"><img src="hakrs-pier-flip-clean.jpg" width="104" height="104" alt=""></div><i>GD</i></a>
-          <a class="av" data-href="https://www.sephora.com/"><div class="c"><img src="adults-only-beach.jpg" width="104" height="104" alt=""></div><i>ED</i></a>
+
+          <!-- SEPHORA -->
+          <a
+            class="av seph active"
+            href="https://www.sephora.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open Sephora"
+          >
+            <div class="c">
+              <img
+                src="sephora.jpg"
+                width="104"
+                height="104"
+                alt=""
+              >
+            </div>
+            <i>SEPHORA</i>
+          </a>
+
+          <a
+            class="av"
+            href="https://www.sephora.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="c">
+              <img
+                src="betty.jpg"
+                width="104"
+                height="104"
+                alt=""
+              >
+            </div>
+            <i>HOST</i>
+          </a>
+
+          <a
+            class="av"
+            href="https://www.sephora.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="c">
+              <img
+                src="waista.jpg"
+                width="104"
+                height="104"
+                alt=""
+              >
+            </div>
+            <i>HOME</i>
+          </a>
+
+          <a
+            class="av"
+            href="https://www.sephora.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="c">
+              <img
+                src="qr-ware.jpg"
+                width="104"
+                height="104"
+                alt=""
+              >
+            </div>
+            <i>PM</i>
+          </a>
+
+          <a
+            class="av"
+            href="https://www.sephora.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="c">
+              <img
+                src="Sharkbait.jpg"
+                width="104"
+                height="104"
+                alt=""
+              >
+            </div>
+            <i>FD</i>
+          </a>
+
+          <a
+            class="av"
+            href="https://www.sephora.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="c">
+              <img
+                src="hakrs-pier-flip-clean.jpg"
+                width="104"
+                height="104"
+                alt=""
+              >
+            </div>
+            <i>GD</i>
+          </a>
+
+          <a
+            class="av"
+            href="https://www.sephora.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="c">
+              <img
+                src="adults-only-beach.jpg"
+                width="104"
+                height="104"
+                alt=""
+              >
+            </div>
+            <i>ED</i>
+          </a>
+
         </div>
-        <div class="toggle"><button>SHARK • ARCHIVE 5/9</button><button class="on">FLIPPED • HAKRs 4/9</button></div>
-        <div class="img"><img src="hakrs-pier-flip-clean.jpg" width="800" height="500" alt=""></div>
-        <div class="swipe">SWIPE UP</div>
-        <div class="live">SHARK IS LIVE — TAP TO FLIP CARDS 4/4 04/09</div>
+
+        <div class="toggle">
+          <button>SHARK • ARCHIVE 5/9</button>
+          <button class="on">FLIPPED • HAKRs 4/9</button>
+        </div>
+
+        <div class="img">
+          <img
+            src="hakrs-pier-flip-clean.jpg"
+            width="800"
+            height="500"
+            alt=""
+          >
+        </div>
+
+        <div class="swipe">
+          SWIPE UP
+        </div>
+
+        <div class="live">
+          SHARK IS LIVE — TAP TO FLIP CARDS 4/4 04/09
+        </div>
+
         <div class="grid">
-          <div class="card"><b>FABRIC?</b><p>HEAVY 14oz FLEECE CRYSTAL WASHED</p></div>
-          <div class="card"><b>FIT?</b><p>OVERSIZED BOXY CROPPED AT WAIST</p></div>
-          <div class="card"><b>WHY FLIP?</b><p>RETAIL $285 → FLIP $32 DEADSTOCK ARCHIVE</p></div>
-          <div class="card"><b>SHIP?</b><p>NYC NEXT_DAY WORLDWIDE 3-5 DAYS</p></div>
+
+          <div class="card">
+            <b>FABRIC?</b>
+            <p>HEAVY 14oz FLEECE CRYSTAL WASHED</p>
+          </div>
+
+          <div class="card">
+            <b>FIT?</b>
+            <p>OVERSIZED BOXY CROPPED AT WAIST</p>
+          </div>
+
+          <div class="card">
+            <b>WHY FLIP?</b>
+            <p>RETAIL $285 → FLIP $32 DEADSTOCK ARCHIVE</p>
+          </div>
+
+          <div class="card">
+            <b>SHIP?</b>
+            <p>NYC NEXT_DAY WORLDWIDE 3-5 DAYS</p>
+          </div>
+
         </div>
-        <div class="cta">FLIP → $32</div>
-        <div class="cta ghost">• § h o p •</div>
-        <div class="add"><span>ADD → $32</span><div style="width:34px;height:34px;border-radius:50%;background:#ff7a00;display:flex;align-items:center;justify-content:center;color:#fff">♥</div></div>
+
+        <div class="cta">
+          FLIP → $32
+        </div>
+
+        <div class="cta ghost">
+          • § h o p •
+        </div>
+
+        <div class="add">
+          <span>ADD → $32</span>
+
+          <div
+            style="
+              width:34px;
+              height:34px;
+              border-radius:50%;
+              background:#ff7a00;
+              display:flex;
+              align-items:center;
+              justify-content:center;
+              color:#fff
+            "
+          >
+            ♥
+          </div>
+        </div>
+
       </div>
+
     </section>
-    <section class="page"><img src="restocking-soon-fix.jpg" width="1080" height="1920" alt=""></section>
-    <section class="page"><img src="waista-question.jpg" width="1080" height="1920" alt=""></section>
+
+
+    <!-- 10. RESTOCKING -->
     <section class="page">
-      <video muted loop playsinline webkit-playsinline preload="auto">
+      <img
+        src="restocking-soon-fix.jpg"
+        width="1080"
+        height="1920"
+        alt=""
+      >
+    </section>
+
+
+    <!-- 11. WAISTA QUESTION -->
+    <section class="page">
+      <img
+        src="waista-question.jpg"
+        width="1080"
+        height="1920"
+        alt=""
+      >
+    </section>
+
+
+    <!-- 12. HERSHEY -->
+    <section class="page">
+      <video
+        muted
+        loop
+        playsinline
+        webkit-playsinline
+        preload="auto"
+      >
         <source src="Hershey.mp4" type="video/mp4">
       </video>
     </section>
+
+
+    <!-- 13. KALSHI -->
     <section class="page">
-      <img src="kalshi-trade.jpg" width="1080" height="1920" alt="">
-      <div class="tap open-link" data-href="https://kalshi.com"></div>
+
+      <img
+        src="kalshi-trade.jpg"
+        width="1080"
+        height="1920"
+        alt=""
+      >
+
+      <div
+        class="tap open-link"
+        data-href="https://kalshi.com"
+      ></div>
+
     </section>
-    <section class="page"><img src="adults-only-beach.jpg" width="1080" height="1920" alt=""></section>
-    <section class="page final" style="background:#000">
-      <div style="color:#a8a8a8;font-size:10px;letter-spacing:.32em">@fisshhfilet</div>
-      <div style="color:#fff;font-size:11px;letter-spacing:.36em">PRIVATE ACCESS</div>
-      <div style="color:#39e66f;font-size:10px;letter-spacing:.32em;font-weight:800">MEMBERS ONLY</div>
+
+
+    <!-- 14. BEACH -->
+    <section class="page">
+      <img
+        src="adults-only-beach.jpg"
+        width="1080"
+        height="1920"
+        alt=""
+      >
     </section>
+
+
+    <!-- 15. FINAL -->
+    <section
+      class="page final"
+      style="background:#000"
+    >
+
+      <div
+        style="
+          color:#a8a8a8;
+          font-size:10px;
+          letter-spacing:.32em
+        "
+      >
+        @fisshhfilet
+      </div>
+
+      <div
+        style="
+          color:#fff;
+          font-size:11px;
+          letter-spacing:.36em
+        "
+      >
+        PRIVATE ACCESS
+      </div>
+
+      <div
+        style="
+          color:#39e66f;
+          font-size:10px;
+          letter-spacing:.32em;
+          font-weight:800
+        "
+      >
+        MEMBERS ONLY
+      </div>
+
+    </section>
+
   </div>
 </div>
+
+
 <script>
 (function(){
+
   var feed = document.getElementById('feed');
   var track = document.getElementById('track');
-  var pages = [].slice.call(document.querySelectorAll('.page'));
+  var pages = [].slice.call(
+    document.querySelectorAll('.page')
+  );
+
   var shop = document.querySelector('.shop');
+
   var n = pages.length;
   var i = 0;
   var H = 0;
-  var y0 = 0, t0 = 0, dragging = false, startI = 0, insideShop = false;
-  var vids = [].slice.call(document.querySelectorAll('video'));
+
+  var y0 = 0;
+  var t0 = 0;
+  var dragging = false;
+  var startI = 0;
+  var insideShop = false;
+
+  var vids = [].slice.call(
+    document.querySelectorAll('video')
+  );
+
   var tapMoved = false;
 
-  function vh(){
-    var vv = window.visualViewport;
-    return Math.round((vv && vv.height) || feed.clientHeight || window.innerHeight);
+
+  /*
+    ------------------------------------------------
+    APP RESET
+    ------------------------------------------------
+    Every fresh visit starts at the FISSHHFILET
+    opening screen.
+    ------------------------------------------------
+  */
+
+  function resetApp(){
+
+    i = 0;
+
+    track.style.transition = 'none';
+    track.style.transform =
+      'translate3d(0,0,0)';
+
+    setTimeout(function(){
+
+      track.style.transition = 'none';
+
+      if(
+        document.querySelector('.opening')
+      ){
+        document.querySelector('.opening').style.display =
+          'flex';
+
+        document.querySelector('.opening').style.opacity =
+          '1';
+
+        document.querySelector('.opening').style.visibility =
+          'visible';
+
+        setTimeout(function(){
+
+          document.querySelector('.opening').style.animation =
+            'openingOut .8s ease 0s forwards';
+
+        },50);
+
+      }
+
+    },20);
+
   }
+
+
+  function vh(){
+
+    var vv = window.visualViewport;
+
+    return Math.round(
+      (vv && vv.height) ||
+      feed.clientHeight ||
+      window.innerHeight
+    );
+
+  }
+
 
   function size(){
+
     H = vh();
+
     pages.forEach(function(p){
-      p.style.height = H + 'px';
+
+      p.style.height =
+        H + 'px';
+
     });
-    track.style.height = (n * H) + 'px';
-    go(i, false);
+
+    track.style.height =
+      (n * H) + 'px';
+
+    go(i,false);
+
   }
 
-  function setY(y, animate){
-    track.style.transition = animate? 'transform .28s cubic-bezier(.22,.9,.3,1)' : 'none';
-    track.style.transform = 'translate3d(0,' + (-y) + 'px,0)';
+
+  function setY(y,animate){
+
+    track.style.transition =
+      animate
+      ? 'transform .28s cubic-bezier(.22,.9,.3,1)'
+      : 'none';
+
+    track.style.transform =
+      'translate3d(0,' +
+      (-y) +
+      'px,0)';
+
   }
 
-  function go(idx, animate){
-    if(idx < 0) idx = 0;
-    if(idx > n - 1) idx = n - 1;
+
+  function go(idx,animate){
+
+    if(idx < 0){
+      idx = 0;
+    }
+
+    if(idx > n - 1){
+      idx = n - 1;
+    }
+
     i = idx;
-    setY(i * H, animate!== false);
+
+    setY(
+      i * H,
+      animate !== false
+    );
+
     play();
+
   }
+
+
+  /*
+    ------------------------------------------------
+    VIDEO CONTROL
+    ------------------------------------------------
+  */
 
   vids.forEach(function(v){
+
     v.muted = true;
     v.loop = true;
     v.playsInline = true;
     v.preload = 'auto';
-    v.setAttribute('playsinline','');
-    v.setAttribute('webkit-playsinline','');
+
+    v.setAttribute(
+      'playsinline',
+      ''
+    );
+
+    v.setAttribute(
+      'webkit-playsinline',
+      ''
+    );
+
     v.disableRemotePlayback = true;
+
   });
 
+
   function play(){
-    pages.forEach(function(p, idx){
-      var v = p.querySelector('video');
-      if(!v) return;
-      if(idx === i){
-        if(v.paused){
-          v.play().catch(function(){});
-        }
-      } else {
-        if(!v.paused){
-          v.pause();
-        }
-        try{
-          v.currentTime = 0;
-        } catch(e){}
+
+    pages.forEach(function(p,idx){
+
+      var v =
+        p.querySelector('video');
+
+      if(!v){
+        return;
       }
+
+      if(idx === i){
+
+        if(v.paused){
+
+          v.play().catch(function(){});
+
+        }
+
+      }else{
+
+        if(!v.paused){
+
+          v.pause();
+
+        }
+
+        try{
+
+          v.currentTime = 0;
+
+        }catch(e){}
+
+      }
+
     });
+
   }
+
+
+  /*
+    ------------------------------------------------
+    SHOP SCROLL
+    ------------------------------------------------
+  */
 
   function isInShop(el){
-    return shop && el && shop.contains(el);
+
+    return shop &&
+           el &&
+           shop.contains(el);
+
   }
 
+
   function shopCanScroll(dir){
+
     if(!shop){
       return false;
     }
-    var atTop = shop.scrollTop <= 2;
-    var atBot = shop.scrollTop + shop.clientHeight >= shop.scrollHeight - 3;
+
+    var atTop =
+      shop.scrollTop <= 2;
+
+    var atBot =
+      shop.scrollTop +
+      shop.clientHeight >=
+      shop.scrollHeight - 3;
+
     if(dir < 0){
+
       return !atTop;
+
     }
+
     if(dir > 0){
+
       return !atBot;
+
     }
+
     return true;
+
   }
+
+
+  /*
+    ------------------------------------------------
+    EXTERNAL LINKS
+    ------------------------------------------------
+    Use direct browser navigation.
+    No artificial animation.
+    No delayed click.
+    No scale effect.
+    ------------------------------------------------
+  */
 
   function openHref(href){
-    if(href){
-      window.open(href, '_blank', 'noopener');
+
+    if(!href){
+      return;
     }
+
+    window.open(
+      href,
+      '_blank',
+      'noopener,noreferrer'
+    );
+
   }
 
-  feed.addEventListener('touchstart', function(e){
-    if(!e.touches[0]){
-      return;
-    }
-    y0 = e.touches[0].clientY;
-    t0 = Date.now();
-    startI = i;
-    dragging = true;
-    tapMoved = false;
-    insideShop = isInShop(e.target);
-    track.style.transition = 'none';
-  }, {passive:true});
 
-  feed.addEventListener('touchmove', function(e){
-    if(!dragging ||!e.touches[0]){
-      return;
-    }
-    var dy = y0 - e.touches[0].clientY;
-    if(Math.abs(dy) > 8){
-      tapMoved = true;
-    }
-    if(insideShop && Math.abs(dy) > 5 && shopCanScroll(dy)){
-      return;
-    }
-    var y = startI * H + dy;
-    if(y < 0){
-      y = dy * 0.25;
-    }
-    if(y > (n-1)*H){
-      y = (n-1)*H + (dy * 0.25);
-    }
-    setY(y, false);
-    if(Math.abs(dy) > 10){
-      e.preventDefault();
-    }
-  }, {passive:false});
+  /*
+    ------------------------------------------------
+    TOUCH START
+    ------------------------------------------------
+  */
 
-  function settle(y1){
-    var dy = y0 - y1;
-    var dt = Math.max(Date.now() - t0, 1);
-    var vel = dy / dt;
-    var next = startI;
-    var strong = Math.abs(dy) > 56 || Math.abs(vel) > 0.35 || Math.abs(dy) > H * 0.12;
-    if(strong){
-      next = dy > 0? startI + 1 : startI - 1;
-    }
-    go(next, true);
-  }
+  feed.addEventListener(
+    'touchstart',
+    function(e){
 
-  feed.addEventListener('touchend', function(e){
-    if(!dragging){
-      return;
-    }
-    dragging = false;
-    var y1 = e.changedTouches[0]? e.changedTouches[0].clientY : y0;
-    var dy = y0 - y1;
-    if(insideShop && shopCanScroll(dy) && Math.abs(dy) < 120){
-      go(startI, true);
-      return;
-    }
-    settle(y1);
-  }, {passive:true});
-
-  document.querySelectorAll('.av[data-href]').forEach(function(el){
-    el.addEventListener('click', function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      var c = el.querySelector('.c');
-      if(c){
-        c.style.transition = 'transform .12s ease';
-        c.style.transform = 'scale(0.92)';
-        setTimeout(function(){
-          c.style.transform = 'scale(1)';
-          openHref(el.getAttribute('data-href'));
-        }, 120);
-      } else {
-        openHref(el.getAttribute('data-href'));
-      }
-    });
-  });
-
-  document.querySelectorAll('.open-link').forEach(function(el){
-    el.addEventListener('click', function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      if(tapMoved){
+      if(!e.touches[0]){
         return;
       }
-      openHref(el.getAttribute('data-href') || el.getAttribute('href'));
+
+      y0 =
+        e.touches[0].clientY;
+
+      t0 =
+        Date.now();
+
+      startI =
+        i;
+
+      dragging =
+        true;
+
+      tapMoved =
+        false;
+
+      insideShop =
+        isInShop(e.target);
+
+      track.style.transition =
+        'none';
+
+    },
+    {passive:true}
+  );
+
+
+  /*
+    ------------------------------------------------
+    TOUCH MOVE
+    ------------------------------------------------
+  */
+
+  feed.addEventListener(
+    'touchmove',
+    function(e){
+
+      if(
+        !dragging ||
+        !e.touches[0]
+      ){
+        return;
+      }
+
+      var dy =
+        y0 -
+        e.touches[0].clientY;
+
+      if(Math.abs(dy) > 8){
+
+        tapMoved = true;
+
+      }
+
+
+      /*
+        SHOP GETS FIRST PRIORITY.
+        This prevents the outer feed from
+        fighting with the shop's internal scroll.
+      */
+
+      if(
+        insideShop &&
+        Math.abs(dy) > 5 &&
+        shopCanScroll(dy)
+      ){
+
+        return;
+
+      }
+
+
+      var y =
+        startI * H +
+        dy;
+
+
+      if(y < 0){
+
+        y =
+          dy * .25;
+
+      }
+
+
+      if(
+        y >
+        (n - 1) * H
+      ){
+
+        y =
+          (n - 1) * H +
+          (dy * .25);
+
+      }
+
+
+      setY(
+        y,
+        false
+      );
+
+
+      if(Math.abs(dy) > 10){
+
+        e.preventDefault();
+
+      }
+
+    },
+    {passive:false}
+  );
+
+
+  /*
+    ------------------------------------------------
+    PAGE SETTLE
+    ------------------------------------------------
+  */
+
+  function settle(y1){
+
+    var dy =
+      y0 -
+      y1;
+
+    var dt =
+      Math.max(
+        Date.now() - t0,
+        1
+      );
+
+    var vel =
+      dy / dt;
+
+    var next =
+      startI;
+
+    var strong =
+      Math.abs(dy) > 56 ||
+      Math.abs(vel) > 0.35 ||
+      Math.abs(dy) > H * 0.12;
+
+
+    if(strong){
+
+      next =
+        dy > 0
+        ? startI + 1
+        : startI - 1;
+
+    }
+
+
+    go(
+      next,
+      true
+    );
+
+  }
+
+
+  /*
+    ------------------------------------------------
+    TOUCH END
+    ------------------------------------------------
+  */
+
+  feed.addEventListener(
+    'touchend',
+    function(e){
+
+      if(!dragging){
+        return;
+      }
+
+      dragging =
+        false;
+
+      var y1 =
+        e.changedTouches[0]
+        ? e.changedTouches[0].clientY
+        : y0;
+
+      var dy =
+        y0 -
+        y1;
+
+
+      if(
+        insideShop &&
+        shopCanScroll(dy) &&
+        Math.abs(dy) < 120
+      ){
+
+        go(
+          startI,
+          true
+        );
+
+        return;
+
+      }
+
+
+      settle(y1);
+
+    },
+    {passive:true}
+  );
+
+
+  /*
+    ------------------------------------------------
+    SEPHORA AVATAR
+    ------------------------------------------------
+    Direct native link behavior.
+    No JavaScript delay.
+    No scale animation.
+    No square/push-back effect.
+    ------------------------------------------------
+  */
+
+  var sephora =
+    document.querySelector(
+      '.av.seph'
+    );
+
+  if(sephora){
+
+    sephora.addEventListener(
+      'touchend',
+      function(e){
+
+        /*
+          If the user was actually scrolling,
+          do not open Sephora.
+        */
+
+        if(tapMoved){
+
+          e.preventDefault();
+
+          return;
+
+        }
+
+      },
+      {passive:false}
+    );
+
+  }
+
+
+  /*
+    ------------------------------------------------
+    OTHER SHOP AVATARS
+    ------------------------------------------------
+    Keep their existing destination behavior.
+    ------------------------------------------------
+  */
+
+  document
+    .querySelectorAll(
+      '.av:not(.seph)'
+    )
+    .forEach(function(el){
+
+      el.addEventListener(
+        'click',
+        function(e){
+
+          if(tapMoved){
+
+            e.preventDefault();
+
+            return;
+
+          }
+
+        }
+      );
+
     });
-  });
+
+
+  /*
+    ------------------------------------------------
+    FULL-PAGE LINKS
+    ------------------------------------------------
+    Keep existing behavior for Sharkbait / Kalshi.
+    ------------------------------------------------
+  */
+
+  document
+    .querySelectorAll(
+      '.open-link'
+    )
+    .forEach(function(el){
+
+      el.addEventListener(
+        'click',
+        function(e){
+
+          e.preventDefault();
+          e.stopPropagation();
+
+          if(tapMoved){
+
+            return;
+
+          }
+
+          openHref(
+            el.getAttribute(
+              'data-href'
+            ) ||
+            el.getAttribute(
+              'href'
+            )
+          );
+
+        }
+      );
+
+    });
+
+
+  /*
+    ------------------------------------------------
+    START APP
+    ------------------------------------------------
+  */
 
   size();
+
+  resetApp();
+
+
+  /*
+    ------------------------------------------------
+    RESIZE
+    ------------------------------------------------
+  */
+
   if(window.visualViewport){
-    window.visualViewport.addEventListener('resize', size);
+
+    window.visualViewport.addEventListener(
+      'resize',
+      size
+    );
+
   }
-  window.addEventListener('resize', size);
-  window.addEventListener('orientationchange', function(){
-    setTimeout(size, 250);
-  });
+
+  window.addEventListener(
+    'resize',
+    size
+  );
+
+
+  window.addEventListener(
+    'orientationchange',
+    function(){
+
+      setTimeout(
+        size,
+        250
+      );
+
+    }
+  );
+
+
+  /*
+    ------------------------------------------------
+    WHEN FISSHHFILET RETURNS TO FOREGROUND
+    ------------------------------------------------
+    If the browser returns from an external site,
+    keep the app usable instead of leaving it in
+    a broken/frozen state.
+    ------------------------------------------------
+  */
+
+  document.addEventListener(
+    'visibilitychange',
+    function(){
+
+      if(
+        document.visibilityState === 'visible'
+      ){
+
+        /*
+          Do not reset while the user is simply
+          switching tabs and coming back to the app.
+          Just make sure the current page/video
+          is healthy.
+        */
+
+        setTimeout(function(){
+
+          if(i >= 0 && i < n){
+
+            setY(
+              i * H,
+              false
+            );
+
+            play();
+
+          }
+
+        },80);
+
+      }
+
+    }
+  );
+
+
 })();
 </script>
+
 </body>
-</html>
+            </html>
