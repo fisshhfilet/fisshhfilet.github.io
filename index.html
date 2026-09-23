@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -129,8 +130,6 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  text-decoration:none;
-  cursor:pointer;
 }
 .ig svg{width:30px;height:30px;display:block}
 .restock-sub{
@@ -141,9 +140,6 @@ body{
   letter-spacing:.18em;
   font-weight:600;
   line-height:1.7;
-  text-decoration:none;
-  display:block;
-  cursor:pointer;
 }
 .betty{position:absolute;inset:0}
 .betty img{width:100%;height:100%;object-fit:contain}
@@ -237,7 +233,7 @@ body{
       <div class="restock">
         <div class="restock-title">Restocking</div>
         <div class="restock-row">
-          <a class="ig" href="https://www.instagram.com/club52vogue.shop" target="_blank" aria-label="Instagram">
+          <a class="ig" href="https://www.instagram.com/club52vogue.shop" target="_blank" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none">
               <rect x="3" y="3" width="18" height="18" rx="5" stroke="#fff" stroke-width="2"/>
               <circle cx="12" cy="12" r="4.2" stroke="#fff" stroke-width="2"/>
@@ -246,7 +242,7 @@ body{
           </a>
           <div class="restock-title">Soon</div>
         </div>
-        <a class="restock-sub" href="https://www.instagram.com/club52vogue.shop" target="_blank">DM &quot;WAITLIST&quot;<br>@CLUB52VOGUE.SHOP</a>
+        <a class="restock-sub" href="https://www.instagram.com/club52vogue.shop" target="_blank" style="text-decoration:none;">DM &quot;WAITLIST&quot;<br>@CLUB52VOGUE.SHOP</a>
       </div>
     </section>
     <section class="page">
@@ -334,12 +330,10 @@ body{
   var H = 0;
   var y0 = 0, t0 = 0, dragging = false, startI = 0, insideShop = false;
   var vids = [].slice.call(document.querySelectorAll('video'));
-
   function vh(){
     var vv = window.visualViewport;
     return Math.round((vv && vv.height) || feed.clientHeight || window.innerHeight);
   }
-
   function size(){
     H = vh();
     pages.forEach(function(p){
@@ -348,12 +342,10 @@ body{
     track.style.height = (n * H) + 'px';
     go(i, false);
   }
-
   function setY(y, animate){
     track.style.transition = animate? 'transform.28s cubic-bezier(.22,.9,.3,1)' : 'none';
     track.style.transform = 'translate3d(0,' + (-y) + 'px,0)';
   }
-
   function go(idx, animate){
     if(idx < 0) idx = 0;
     if(idx > n - 1) idx = n - 1;
@@ -361,7 +353,6 @@ body{
     setY(i * H, animate!== false);
     play();
   }
-
   vids.forEach(function(v){
     v.muted = true;
     v.loop = true;
@@ -371,7 +362,6 @@ body{
     v.setAttribute('webkit-playsinline','');
     v.disableRemotePlayback = true;
   });
-
   function play(){
     pages.forEach(function(p, idx){
       var v = p.querySelector('video');
@@ -390,11 +380,9 @@ body{
       }
     });
   }
-
   function isInShop(el){
     return shop && el && shop.contains(el);
   }
-
   function shopCanScroll(dir){
     if(!shop){
       return false;
@@ -409,24 +397,22 @@ body{
     }
     return true;
   }
-
   feed.addEventListener('touchstart', function(e){
-    if(!e.touches[0]){
+    if(!e.touches){
       return;
     }
-    y0 = e.touches[0].clientY;
+    y0 = e.touches.clientY;
     t0 = Date.now();
     startI = i;
     dragging = true;
     insideShop = isInShop(e.target);
     track.style.transition = 'none';
   }, {passive:true});
-
   feed.addEventListener('touchmove', function(e){
-    if(!dragging ||!e.touches[0]){
+    if(!dragging ||!e.touches){
       return;
     }
-    var dy = y0 - e.touches[0].clientY;
+    var dy = y0 - e.touches.clientY;
     if(insideShop && Math.abs(dy) > 5 && shopCanScroll(dy)){
       return;
     }
@@ -442,7 +428,6 @@ body{
       e.preventDefault();
     }
   }, {passive:false});
-
   function settle(y1){
     var dy = y0 - y1;
     var dt = Math.max(Date.now() - t0, 1);
@@ -454,13 +439,12 @@ body{
     }
     go(next, true);
   }
-
   feed.addEventListener('touchend', function(e){
     if(!dragging){
       return;
     }
     dragging = false;
-    var y1 = e.changedTouches[0]? e.changedTouches[0].clientY : y0;
+    var y1 = e.changedTouches? e.changedTouches.clientY : y0;
     var dy = y0 - y1;
     if(insideShop && shopCanScroll(dy) && Math.abs(dy) < 120){
       go(startI, true);
@@ -468,7 +452,6 @@ body{
     }
     settle(y1);
   }, {passive:true});
-
   var seph = document.getElementById('seph-link');
   if(seph){
     seph.addEventListener('click', function(e){
@@ -483,7 +466,6 @@ body{
       }, 120);
     });
   }
-
   document.querySelectorAll('.open-link:not(#seph-link)').forEach(function(el){
     el.addEventListener('click', function(e){
       e.stopPropagation();
@@ -493,7 +475,6 @@ body{
       }
     });
   });
-
   size();
   if(window.visualViewport){
     window.visualViewport.addEventListener('resize', size);
@@ -505,4 +486,4 @@ body{
 })();
 </script>
 </body>
-  </html>
+</html>[0]
