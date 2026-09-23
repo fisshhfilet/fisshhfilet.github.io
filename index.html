@@ -77,14 +77,14 @@ body{
   justify-content:center;
   z-index:20;
   pointer-events:none;
-  animation:openingOut .8s ease 2.3s forwards;
+  animation:openingOut.8s ease 2.3s forwards;
 }
 .opening span{
   color:#a8a8a8;
   font-size:10px;
   letter-spacing:.32em;
   opacity:0;
-  animation:txtIn .8s ease .3s forwards, txtOut .6s ease 1.8s forwards;
+  animation:txtIn.8s ease.3s forwards, txtOut.6s ease 1.8s forwards;
 }
 @keyframes txtIn{to{opacity:1}}
 @keyframes txtOut{to{opacity:0}}
@@ -99,7 +99,7 @@ body{
   justify-content:center;
   text-align:center;
   padding:24px;
-  animation:restockIn .7s ease 2.4s both;
+  animation:restockIn.7s ease 2.4s both;
 }
 @keyframes restockIn{
   from{opacity:0}
@@ -129,6 +129,8 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
+  text-decoration:none;
+  cursor:pointer;
 }
 .ig svg{width:30px;height:30px;display:block}
 .restock-sub{
@@ -139,6 +141,9 @@ body{
   letter-spacing:.18em;
   font-weight:600;
   line-height:1.7;
+  text-decoration:none;
+  display:block;
+  cursor:pointer;
 }
 .betty{position:absolute;inset:0}
 .betty img{width:100%;height:100%;object-fit:contain}
@@ -173,7 +178,7 @@ body{
   color:inherit;
 }
 .av.active{opacity:1}
-.av .c{
+.av.c{
   width:52px;
   height:52px;
   border-radius:50%;
@@ -183,11 +188,11 @@ body{
   border:2px solid #2a2a2a;
   flex-shrink:0;
 }
-.av.active .c{
+.av.active.c{
   border-color:#fff;
   box-shadow:0 0 0 2px #fff;
 }
-.av .c img{
+.av.c img{
   width:100%;
   height:100%;
   object-fit:cover;
@@ -205,7 +210,7 @@ body{
   letter-spacing:.08em;
 }
 .av.seph{opacity:1;cursor:pointer}
-.av.seph.active .c{border-color:#fff;box-shadow:0 0 0 2px #fff}
+.av.seph.active.c{border-color:#fff;box-shadow:0 0 0 2px #fff}
 .av.seph i{color:#fff;font-weight:900}
 .toggle{margin:4px 12px 10px;background:#111;border-radius:999px;display:grid;grid-template-columns:1fr 1fr;padding:3px;gap:3px;flex-shrink:0}
 .toggle button{height:36px;border-radius:999px;border:0;font-size:9px;font-weight:800;letter-spacing:.08em;background:#1a1a1a;color:#8a8a8a}
@@ -232,16 +237,16 @@ body{
       <div class="restock">
         <div class="restock-title">Restocking</div>
         <div class="restock-row">
-          <div class="ig" aria-hidden="true">
+          <a class="ig" href="https://www.instagram.com/club52vogue.shop" target="_blank" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="none">
               <rect x="3" y="3" width="18" height="18" rx="5" stroke="#fff" stroke-width="2"/>
               <circle cx="12" cy="12" r="4.2" stroke="#fff" stroke-width="2"/>
               <circle cx="17.2" cy="6.8" r="1.1" fill="#fff"/>
             </svg>
-          </div>
+          </a>
           <div class="restock-title">Soon</div>
         </div>
-        <div class="restock-sub">DM &quot;WAITLIST&quot;<br>@CLUB52VOGUE.SHOP</div>
+        <a class="restock-sub" href="https://www.instagram.com/club52vogue.shop" target="_blank">DM &quot;WAITLIST&quot;<br>@CLUB52VOGUE.SHOP</a>
       </div>
     </section>
     <section class="page">
@@ -345,7 +350,7 @@ body{
   }
 
   function setY(y, animate){
-    track.style.transition = animate ? 'transform .28s cubic-bezier(.22,.9,.3,1)' : 'none';
+    track.style.transition = animate? 'transform.28s cubic-bezier(.22,.9,.3,1)' : 'none';
     track.style.transform = 'translate3d(0,' + (-y) + 'px,0)';
   }
 
@@ -353,7 +358,7 @@ body{
     if(idx < 0) idx = 0;
     if(idx > n - 1) idx = n - 1;
     i = idx;
-    setY(i * H, animate !== false);
+    setY(i * H, animate!== false);
     play();
   }
 
@@ -397,10 +402,10 @@ body{
     var atTop = shop.scrollTop <= 2;
     var atBot = shop.scrollTop + shop.clientHeight >= shop.scrollHeight - 3;
     if(dir < 0){
-      return !atTop;
+      return!atTop;
     }
     if(dir > 0){
-      return !atBot;
+      return!atBot;
     }
     return true;
   }
@@ -418,7 +423,7 @@ body{
   }, {passive:true});
 
   feed.addEventListener('touchmove', function(e){
-    if(!dragging || !e.touches[0]){
+    if(!dragging ||!e.touches[0]){
       return;
     }
     var dy = y0 - e.touches[0].clientY;
@@ -445,7 +450,7 @@ body{
     var next = startI;
     var strong = Math.abs(dy) > 56 || Math.abs(vel) > 0.35 || Math.abs(dy) > H * 0.12;
     if(strong){
-      next = dy > 0 ? startI + 1 : startI - 1;
+      next = dy > 0? startI + 1 : startI - 1;
     }
     go(next, true);
   }
@@ -455,7 +460,7 @@ body{
       return;
     }
     dragging = false;
-    var y1 = e.changedTouches[0] ? e.changedTouches[0].clientY : y0;
+    var y1 = e.changedTouches[0]? e.changedTouches[0].clientY : y0;
     var dy = y0 - y1;
     if(insideShop && shopCanScroll(dy) && Math.abs(dy) < 120){
       go(startI, true);
@@ -470,7 +475,7 @@ body{
       e.preventDefault();
       e.stopPropagation();
       var c = seph.querySelector('.c');
-      c.style.transition = 'transform .12s ease';
+      c.style.transition = 'transform.12s ease';
       c.style.transform = 'scale(0.92)';
       setTimeout(function(){
         c.style.transform = 'scale(1)';
