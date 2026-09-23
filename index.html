@@ -73,7 +73,7 @@ body{
   background:#ffffff;
 }
 
-/* Generic full-page links remain available for the other pages */
+/* GENERIC FULL PAGE LINKS */
 .tap{
   position:absolute;
   inset:0;
@@ -82,17 +82,23 @@ body{
   -webkit-tap-highlight-color:transparent;
 }
 
-/* OPENING */
+/* =====================================================
+   FISSHHFILET OPENING
+   BLACK SCREEN STAYS SOLID UNTIL RESTOCKING IS READY
+   ===================================================== */
+
 .opening{
-  position:absolute;
+  position:fixed;
   inset:0;
   background:#000;
   display:flex;
   align-items:center;
   justify-content:center;
-  z-index:20;
+  z-index:9999;
   pointer-events:none;
-  animation:openingOut .8s ease 2.3s forwards;
+
+  /* DO NOT FADE INTO THE WHITE PAGE */
+  animation:openingOut .7s ease 2.8s forwards;
 }
 
 .opening span{
@@ -100,27 +106,45 @@ body{
   font-size:10px;
   letter-spacing:.32em;
   opacity:0;
+
   animation:
     txtIn .8s ease .3s forwards,
-    txtOut .6s ease 1.8s forwards;
+    txtOut .6s ease 2s forwards;
 }
 
 @keyframes txtIn{
-  to{opacity:1}
+  to{
+    opacity:1;
+  }
 }
 
 @keyframes txtOut{
-  to{opacity:0}
+  to{
+    opacity:0;
+  }
 }
 
+/*
+  The black opening remains above everything until
+  this point. It fades away only after the white
+  Restocking page has already been prepared.
+*/
 @keyframes openingOut{
+  from{
+    opacity:1;
+    visibility:visible;
+  }
+
   to{
     opacity:0;
     visibility:hidden;
   }
 }
 
-/* RESTOCKING */
+/* =====================================================
+   RESTOCKING
+   ===================================================== */
+
 .restock{
   width:100%;
   height:100%;
@@ -131,12 +155,25 @@ body{
   justify-content:center;
   text-align:center;
   padding:24px;
-  animation:restockIn .7s ease 2.4s both;
+
+  /*
+    Keep the white page completely invisible while
+    the FISSHHFILET opening is playing.
+  */
+  opacity:0;
+
+  animation:
+    restockIn .7s ease 3.05s forwards;
 }
 
 @keyframes restockIn{
-  from{opacity:0}
-  to{opacity:1}
+  from{
+    opacity:0;
+  }
+
+  to{
+    opacity:1;
+  }
 }
 
 .restock-title{
@@ -217,7 +254,10 @@ body{
   text-align:center;
 }
 
-/* SHOP */
+/* =====================================================
+   SHOP
+   ===================================================== */
+
 .shop{
   width:100%;
   max-width:430px;
@@ -442,6 +482,7 @@ body{
 
 <div id="feed">
 
+  <!-- FISSHHFILET OPENING -->
   <div class="opening">
     <span>@fisshhfilet</span>
   </div>
@@ -453,7 +494,9 @@ body{
 
       <div class="restock">
 
-        <div class="restock-title">Restocking</div>
+        <div class="restock-title">
+          Restocking
+        </div>
 
         <!-- ONLY THIS AREA OPENS INSTAGRAM -->
         <a
@@ -463,8 +506,11 @@ body{
           rel="noopener noreferrer"
           aria-label="Open Club52Vogue Shop Instagram"
         >
+
           <span class="ig" aria-hidden="true">
+
             <svg viewBox="0 0 24 24" fill="none">
+
               <rect
                 x="3"
                 y="3"
@@ -474,6 +520,7 @@ body{
                 stroke="#fff"
                 stroke-width="2"
               />
+
               <circle
                 cx="12"
                 cy="12"
@@ -481,16 +528,22 @@ body{
                 stroke="#fff"
                 stroke-width="2"
               />
+
               <circle
                 cx="17.2"
                 cy="6.8"
                 r="1.1"
                 fill="#fff"
               />
+
             </svg>
+
           </span>
 
-          <div class="restock-title">Soon</div>
+          <div class="restock-title">
+            Soon
+          </div>
+
         </a>
 
         <div class="restock-sub">
@@ -505,30 +558,37 @@ body{
 
     <!-- 2. BETTY -->
     <section class="page">
+
       <div class="betty">
+
         <img
           src="betty.jpg"
           width="1080"
           height="1920"
           alt="Betty Top 10"
         >
+
       </div>
+
     </section>
 
 
     <!-- 3. WAISTA -->
     <section class="page">
+
       <img
         src="waista.jpg"
         width="1080"
         height="1920"
         alt=""
       >
+
     </section>
 
 
     <!-- 4. LIQUID -->
     <section class="page">
+
       <video
         muted
         loop
@@ -536,14 +596,25 @@ body{
         webkit-playsinline
         preload="auto"
       >
-        <source src="Liquid.mp4" type="video/mp4">
-        <source src="ad.mp4" type="video/mp4">
+
+        <source
+          src="Liquid.mp4"
+          type="video/mp4"
+        >
+
+        <source
+          src="ad.mp4"
+          type="video/mp4"
+        >
+
       </video>
+
     </section>
 
 
     <!-- 5. SHARKBAIT -->
     <section class="page">
+
       <img
         src="Sharkbait.jpg"
         width="1080"
@@ -555,11 +626,13 @@ body{
         class="tap open-link"
         data-href="https://naturalcatchtuna.com/"
       ></div>
+
     </section>
 
 
     <!-- 6. SEPHORA VIDEO -->
     <section class="page">
+
       <video
         muted
         loop
@@ -567,24 +640,33 @@ body{
         webkit-playsinline
         preload="auto"
       >
-        <source src="Sephora.mp4" type="video/mp4">
+
+        <source
+          src="Sephora.mp4"
+          type="video/mp4"
+        >
+
       </video>
+
     </section>
 
 
     <!-- 7. QR -->
     <section class="page">
+
       <img
         src="qr-ware.jpg"
         width="1080"
         height="1920"
         alt=""
       >
+
     </section>
 
 
     <!-- 8. HAKRS -->
     <section class="page">
+
       <video
         muted
         loop
@@ -592,13 +674,22 @@ body{
         webkit-playsinline
         preload="auto"
       >
-        <source src="hakrs-flip-live.mp4" type="video/mp4">
+
+        <source
+          src="hakrs-flip-live.mp4"
+          type="video/mp4"
+        >
+
       </video>
+
     </section>
 
 
     <!-- 9. SHOP -->
-    <section class="page" style="background:#000">
+    <section
+      class="page"
+      style="background:#000"
+    >
 
       <div class="shop">
 
@@ -612,16 +703,22 @@ body{
             rel="noopener noreferrer"
             aria-label="Open Sephora"
           >
+
             <div class="c">
+
               <img
                 src="sephora.jpg"
                 width="104"
                 height="104"
                 alt=""
               >
+
             </div>
+
             <i>SEPHORA</i>
+
           </a>
+
 
           <a
             class="av"
@@ -629,16 +726,22 @@ body{
             target="_blank"
             rel="noopener noreferrer"
           >
+
             <div class="c">
+
               <img
                 src="betty.jpg"
                 width="104"
                 height="104"
                 alt=""
               >
+
             </div>
+
             <i>HOST</i>
+
           </a>
+
 
           <a
             class="av"
@@ -646,16 +749,22 @@ body{
             target="_blank"
             rel="noopener noreferrer"
           >
+
             <div class="c">
+
               <img
                 src="waista.jpg"
                 width="104"
                 height="104"
                 alt=""
               >
+
             </div>
+
             <i>HOME</i>
+
           </a>
+
 
           <a
             class="av"
@@ -663,16 +772,22 @@ body{
             target="_blank"
             rel="noopener noreferrer"
           >
+
             <div class="c">
+
               <img
                 src="qr-ware.jpg"
                 width="104"
                 height="104"
                 alt=""
               >
+
             </div>
+
             <i>PM</i>
+
           </a>
+
 
           <a
             class="av"
@@ -680,16 +795,22 @@ body{
             target="_blank"
             rel="noopener noreferrer"
           >
+
             <div class="c">
+
               <img
                 src="Sharkbait.jpg"
                 width="104"
                 height="104"
                 alt=""
               >
+
             </div>
+
             <i>FD</i>
+
           </a>
+
 
           <a
             class="av"
@@ -697,16 +818,22 @@ body{
             target="_blank"
             rel="noopener noreferrer"
           >
+
             <div class="c">
+
               <img
                 src="hakrs-pier-flip-clean.jpg"
                 width="104"
                 height="104"
                 alt=""
               >
+
             </div>
+
             <i>GD</i>
+
           </a>
+
 
           <a
             class="av"
@@ -714,75 +841,123 @@ body{
             target="_blank"
             rel="noopener noreferrer"
           >
+
             <div class="c">
+
               <img
                 src="adults-only-beach.jpg"
                 width="104"
                 height="104"
                 alt=""
               >
+
             </div>
+
             <i>ED</i>
+
           </a>
 
         </div>
 
+
         <div class="toggle">
-          <button>SHARK • ARCHIVE 5/9</button>
-          <button class="on">FLIPPED • HAKRs 4/9</button>
+
+          <button>
+            SHARK • ARCHIVE 5/9
+          </button>
+
+          <button class="on">
+            FLIPPED • HAKRs 4/9
+          </button>
+
         </div>
 
+
         <div class="img">
+
           <img
             src="hakrs-pier-flip-clean.jpg"
             width="800"
             height="500"
             alt=""
           >
+
         </div>
+
 
         <div class="swipe">
           SWIPE UP
         </div>
 
+
         <div class="live">
           SHARK IS LIVE — TAP TO FLIP CARDS 4/4 04/09
         </div>
 
+
         <div class="grid">
 
           <div class="card">
+
             <b>FABRIC?</b>
-            <p>HEAVY 14oz FLEECE CRYSTAL WASHED</p>
+
+            <p>
+              HEAVY 14oz FLEECE CRYSTAL WASHED
+            </p>
+
           </div>
 
+
           <div class="card">
+
             <b>FIT?</b>
-            <p>OVERSIZED BOXY CROPPED AT WAIST</p>
+
+            <p>
+              OVERSIZED BOXY CROPPED AT WAIST
+            </p>
+
           </div>
 
+
           <div class="card">
+
             <b>WHY FLIP?</b>
-            <p>RETAIL $285 → FLIP $32 DEADSTOCK ARCHIVE</p>
+
+            <p>
+              RETAIL $285 → FLIP $32 DEADSTOCK ARCHIVE
+            </p>
+
           </div>
 
+
           <div class="card">
+
             <b>SHIP?</b>
-            <p>NYC NEXT_DAY WORLDWIDE 3-5 DAYS</p>
+
+            <p>
+              NYC NEXT_DAY WORLDWIDE 3-5 DAYS
+            </p>
+
           </div>
 
         </div>
+
 
         <div class="cta">
           FLIP → $32
         </div>
 
+
         <div class="cta ghost">
           • § h o p •
         </div>
 
+
         <div class="add">
-          <span>ADD → $32</span>
+
+          <span>
+            ADD → $32
+          </span>
 
           <div
             style="
@@ -798,6 +973,7 @@ body{
           >
             ♥
           </div>
+
         </div>
 
       </div>
@@ -807,28 +983,33 @@ body{
 
     <!-- 10. RESTOCKING -->
     <section class="page">
+
       <img
         src="restocking-soon-fix.jpg"
         width="1080"
         height="1920"
         alt=""
       >
+
     </section>
 
 
     <!-- 11. WAISTA QUESTION -->
     <section class="page">
+
       <img
         src="waista-question.jpg"
         width="1080"
         height="1920"
         alt=""
       >
+
     </section>
 
 
     <!-- 12. HERSHEY -->
     <section class="page">
+
       <video
         muted
         loop
@@ -836,8 +1017,14 @@ body{
         webkit-playsinline
         preload="auto"
       >
-        <source src="Hershey.mp4" type="video/mp4">
+
+        <source
+          src="Hershey.mp4"
+          type="video/mp4"
+        >
+
       </video>
+
     </section>
 
 
@@ -861,12 +1048,14 @@ body{
 
     <!-- 14. BEACH -->
     <section class="page">
+
       <img
         src="adults-only-beach.jpg"
         width="1080"
         height="1920"
         alt=""
       >
+
     </section>
 
 
@@ -886,6 +1075,7 @@ body{
         @fisshhfilet
       </div>
 
+
       <div
         style="
           color:#fff;
@@ -895,6 +1085,7 @@ body{
       >
         PRIVATE ACCESS
       </div>
+
 
       <div
         style="
@@ -916,15 +1107,26 @@ body{
 <script>
 (function(){
 
-  var feed = document.getElementById('feed');
-  var track = document.getElementById('track');
-  var pages = [].slice.call(
-    document.querySelectorAll('.page')
-  );
+  var feed =
+    document.getElementById('feed');
 
-  var shop = document.querySelector('.shop');
+  var track =
+    document.getElementById('track');
 
-  var n = pages.length;
+  var pages =
+    [].slice.call(
+      document.querySelectorAll('.page')
+    );
+
+  var shop =
+    document.querySelector('.shop');
+
+  var opening =
+    document.querySelector('.opening');
+
+  var n =
+    pages.length;
+
   var i = 0;
   var H = 0;
 
@@ -934,63 +1136,68 @@ body{
   var startI = 0;
   var insideShop = false;
 
-  var vids = [].slice.call(
-    document.querySelectorAll('video')
-  );
+  var vids =
+    [].slice.call(
+      document.querySelectorAll('video')
+    );
 
   var tapMoved = false;
 
 
   /*
-    ------------------------------------------------
-    APP RESET
-    ------------------------------------------------
-    Every fresh visit starts at the FISSHHFILET
-    opening screen.
-    ------------------------------------------------
+  ====================================================
+  APP RESET
+  ====================================================
   */
 
   function resetApp(){
 
     i = 0;
 
-    track.style.transition = 'none';
+    track.style.transition =
+      'none';
+
     track.style.transform =
       'translate3d(0,0,0)';
 
-    setTimeout(function(){
+    /*
+      Make absolutely sure the opening is
+      black when the app starts.
+    */
 
-      track.style.transition = 'none';
+    if(opening){
 
-      if(
-        document.querySelector('.opening')
-      ){
-        document.querySelector('.opening').style.display =
-          'flex';
+      opening.style.display =
+        'flex';
 
-        document.querySelector('.opening').style.opacity =
-          '1';
+      opening.style.opacity =
+        '1';
 
-        document.querySelector('.opening').style.visibility =
-          'visible';
+      opening.style.visibility =
+        'visible';
 
-        setTimeout(function(){
+      opening.style.animation =
+        'none';
 
-          document.querySelector('.opening').style.animation =
-            'openingOut .8s ease 0s forwards';
+      /*
+        Force browser to acknowledge the reset
+        before starting the opening animation.
+      */
 
-        },50);
+      void opening.offsetWidth;
 
-      }
+      opening.style.animation =
+        'openingOut .7s ease 2.8s forwards';
 
-    },20);
+    }
 
   }
 
 
   function vh(){
 
-    var vv = window.visualViewport;
+    var vv =
+      window.visualViewport;
 
     return Math.round(
       (vv && vv.height) ||
@@ -1058,9 +1265,9 @@ body{
 
 
   /*
-    ------------------------------------------------
-    VIDEO CONTROL
-    ------------------------------------------------
+  ====================================================
+  VIDEO CONTROL
+  ====================================================
   */
 
   vids.forEach(function(v){
@@ -1100,7 +1307,9 @@ body{
 
         if(v.paused){
 
-          v.play().catch(function(){});
+          v.play().catch(
+            function(){}
+          );
 
         }
 
@@ -1126,9 +1335,9 @@ body{
 
 
   /*
-    ------------------------------------------------
-    SHOP SCROLL
-    ------------------------------------------------
+  ====================================================
+  SHOP SCROLL
+  ====================================================
   */
 
   function isInShop(el){
@@ -1172,14 +1381,9 @@ body{
 
 
   /*
-    ------------------------------------------------
-    EXTERNAL LINKS
-    ------------------------------------------------
-    Use direct browser navigation.
-    No artificial animation.
-    No delayed click.
-    No scale effect.
-    ------------------------------------------------
+  ====================================================
+  EXTERNAL LINKS
+  ====================================================
   */
 
   function openHref(href){
@@ -1198,9 +1402,9 @@ body{
 
 
   /*
-    ------------------------------------------------
-    TOUCH START
-    ------------------------------------------------
+  ====================================================
+  TOUCH START
+  ====================================================
   */
 
   feed.addEventListener(
@@ -1238,9 +1442,9 @@ body{
 
 
   /*
-    ------------------------------------------------
-    TOUCH MOVE
-    ------------------------------------------------
+  ====================================================
+  TOUCH MOVE
+  ====================================================
   */
 
   feed.addEventListener(
@@ -1264,12 +1468,6 @@ body{
 
       }
 
-
-      /*
-        SHOP GETS FIRST PRIORITY.
-        This prevents the outer feed from
-        fighting with the shop's internal scroll.
-      */
 
       if(
         insideShop &&
@@ -1325,9 +1523,9 @@ body{
 
 
   /*
-    ------------------------------------------------
-    PAGE SETTLE
-    ------------------------------------------------
+  ====================================================
+  PAGE SETTLE
+  ====================================================
   */
 
   function settle(y1){
@@ -1373,9 +1571,9 @@ body{
 
 
   /*
-    ------------------------------------------------
-    TOUCH END
-    ------------------------------------------------
+  ====================================================
+  TOUCH END
+  ====================================================
   */
 
   feed.addEventListener(
@@ -1423,14 +1621,14 @@ body{
 
 
   /*
-    ------------------------------------------------
-    SEPHORA AVATAR
-    ------------------------------------------------
-    Direct native link behavior.
-    No JavaScript delay.
-    No scale animation.
-    No square/push-back effect.
-    ------------------------------------------------
+  ====================================================
+  SEPHORA
+  ====================================================
+  DIRECT NATIVE LINK.
+  NO DELAY.
+  NO SCALE.
+  NO PUSH-BACK.
+  ====================================================
   */
 
   var sephora =
@@ -1443,11 +1641,6 @@ body{
     sephora.addEventListener(
       'touchend',
       function(e){
-
-        /*
-          If the user was actually scrolling,
-          do not open Sephora.
-        */
 
         if(tapMoved){
 
@@ -1465,11 +1658,9 @@ body{
 
 
   /*
-    ------------------------------------------------
-    OTHER SHOP AVATARS
-    ------------------------------------------------
-    Keep their existing destination behavior.
-    ------------------------------------------------
+  ====================================================
+  OTHER SHOP AVATARS
+  ====================================================
   */
 
   document
@@ -1497,11 +1688,9 @@ body{
 
 
   /*
-    ------------------------------------------------
-    FULL-PAGE LINKS
-    ------------------------------------------------
-    Keep existing behavior for Sharkbait / Kalshi.
-    ------------------------------------------------
+  ====================================================
+  OTHER FULL PAGE LINKS
+  ====================================================
   */
 
   document
@@ -1539,9 +1728,9 @@ body{
 
 
   /*
-    ------------------------------------------------
-    START APP
-    ------------------------------------------------
+  ====================================================
+  START
+  ====================================================
   */
 
   size();
@@ -1550,9 +1739,9 @@ body{
 
 
   /*
-    ------------------------------------------------
-    RESIZE
-    ------------------------------------------------
+  ====================================================
+  RESIZE
+  ====================================================
   */
 
   if(window.visualViewport){
@@ -1584,13 +1773,9 @@ body{
 
 
   /*
-    ------------------------------------------------
-    WHEN FISSHHFILET RETURNS TO FOREGROUND
-    ------------------------------------------------
-    If the browser returns from an external site,
-    keep the app usable instead of leaving it in
-    a broken/frozen state.
-    ------------------------------------------------
+  ====================================================
+  RETURN FROM EXTERNAL SITE
+  ====================================================
   */
 
   document.addEventListener(
@@ -1601,16 +1786,12 @@ body{
         document.visibilityState === 'visible'
       ){
 
-        /*
-          Do not reset while the user is simply
-          switching tabs and coming back to the app.
-          Just make sure the current page/video
-          is healthy.
-        */
-
         setTimeout(function(){
 
-          if(i >= 0 && i < n){
+          if(
+            i >= 0 &&
+            i < n
+          ){
 
             setY(
               i * H,
@@ -1633,4 +1814,4 @@ body{
 </script>
 
 </body>
-            </html>
+  </html>
