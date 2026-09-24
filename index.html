@@ -4,16 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#000000">
+
 <title>fisshhfilet.github.io</title>
 
 <link rel="preload" as="image" href="betty.jpg">
 <link rel="preload" as="image" href="waista.jpg">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
 
-html,body{
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box
+}
+
+html,
+body{
   width:100%;
   height:100%;
   background:#000;
@@ -24,7 +31,14 @@ html,body{
 }
 
 body{
-  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+
   overscroll-behavior:none;
   -webkit-font-smoothing:antialiased;
 }
@@ -45,9 +59,11 @@ body{
   width:100%;
   height:100%;
   background:#000;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   position:relative;
   overflow:hidden;
   flex-shrink:0;
@@ -58,53 +74,87 @@ body{
 .betty img{
   width:100%;
   height:100%;
+
   object-fit:contain;
   object-position:center center;
+
   background:#000;
+
   display:block;
   pointer-events:none;
 }
 
 .page.white-bg{
-  background:#ffffff;
+  background:#fff;
 }
 
 .page.white-bg img{
-  background:#ffffff;
+  background:#fff;
 }
 
-/* GENERIC FULL PAGE LINKS */
+
+/* =====================================================
+   GENERIC FULL PAGE LINKS
+   ===================================================== */
+
 .tap{
   position:absolute;
   inset:0;
   z-index:5;
+
   cursor:pointer;
+
   -webkit-tap-highlight-color:transparent;
 }
 
+
 /* =====================================================
    FISSHHFILET OPENING
-   BLACK SCREEN STAYS SOLID UNTIL RESTOCKING IS READY
+   BLACK → FISSHHFILET → HAKRs.shop
    ===================================================== */
 
 .opening{
+
   position:fixed;
   inset:0;
+
   background:#000;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   z-index:9999;
+
   pointer-events:none;
 
-  /* DO NOT FADE INTO THE WHITE PAGE */
-  animation:openingOut .7s ease 2.8s forwards;
+  /*
+    The HAKRs.shop page is already underneath this
+    black layer.
+
+    When this layer fades away, HAKRs.shop is revealed
+    directly.
+
+    NO WHITE SCREEN.
+    NO RESTOCKING SCREEN.
+  */
+
+  opacity:1;
+  visibility:visible;
+
+  animation:
+    openingOut .7s ease 2.8s forwards;
 }
 
+
 .opening span{
+
   color:#a8a8a8;
+
   font-size:10px;
+
   letter-spacing:.32em;
+
   opacity:0;
 
   animation:
@@ -112,24 +162,35 @@ body{
     txtOut .6s ease 2s forwards;
 }
 
+
 @keyframes txtIn{
+
+  from{
+    opacity:0;
+  }
+
   to{
     opacity:1;
   }
+
 }
 
+
 @keyframes txtOut{
+
+  from{
+    opacity:1;
+  }
+
   to{
     opacity:0;
   }
+
 }
 
-/*
-  The black opening remains above everything until
-  this point. It fades away only after the white
-  Restocking page has already been prepared.
-*/
+
 @keyframes openingOut{
+
   from{
     opacity:1;
     visibility:visible;
@@ -139,377 +200,713 @@ body{
     opacity:0;
     visibility:hidden;
   }
+
 }
+
 
 /* =====================================================
-   RESTOCKING
+   HAKRs.shop
+   FIRST PAGE UNDER FISSHHFILET OPENING
    ===================================================== */
 
-.restock{
+.hakrs-landing{
+
   width:100%;
   height:100%;
-  background:#fff;
+
+  background:#000;
+
   display:flex;
   flex-direction:column;
+
   align-items:center;
   justify-content:center;
+
   text-align:center;
-  padding:24px;
 
-  /*
-    Keep the white page completely invisible while
-    the FISSHHFILET opening is playing.
-  */
-  opacity:0;
-
-  animation:
-    restockIn .7s ease 3.05s forwards;
+  position:relative;
 }
 
-@keyframes restockIn{
-  from{
-    opacity:0;
-  }
 
-  to{
-    opacity:1;
-  }
+.hakrs-title{
+
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-weight:900;
+
+  font-size:
+    clamp(
+      48px,
+      13vw,
+      86px
+    );
+
+  line-height:.92;
+
+  letter-spacing:-.065em;
+
+  color:#fff;
+
+  white-space:nowrap;
 }
 
-.restock-title{
-  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
-  font-weight:800;
-  font-size:clamp(42px,11vw,64px);
-  line-height:.95;
-  letter-spacing:-.03em;
-  color:#00b3c6;
+
+.hakrs-count{
+
+  margin-top:42px;
+
+  color:#cfcfcf;
+
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size:
+    clamp(
+      15px,
+      4vw,
+      22px
+    );
+
+  font-weight:400;
+
+  letter-spacing:.02em;
 }
 
-.restock-row{
+
+/* =====================================================
+   HAKRs INSTAGRAM
+   ===================================================== */
+
+.hakrs-instagram{
+
+  margin-top:72px;
+
   display:flex;
+  flex-direction:column;
+
   align-items:center;
   justify-content:center;
-  gap:10px;
-  margin-top:6px;
-}
 
-/* ONLY THIS SMALL AREA IS CLICKABLE */
-.restock-link{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
   text-decoration:none;
+
+  color:#fff;
+
   -webkit-tap-highlight-color:transparent;
+
   cursor:pointer;
 }
 
-.ig{
-  width:52px;
-  height:52px;
-  flex:0 0 52px;
-  border-radius:14px;
-  background:#111;
+
+.hakrs-ig{
+
+  width:160px;
+  height:160px;
+
+  border-radius:40px;
+
+  background:
+    radial-gradient(
+      circle at 30% 107%,
+      #fdf497 0%,
+      #fdf497 5%,
+      #fd5949 45%,
+      #d6249f 60%,
+      #285AEB 90%
+    );
+
   display:flex;
   align-items:center;
   justify-content:center;
-  text-decoration:none;
-  cursor:pointer;
-  pointer-events:auto;
 }
 
-.ig svg{
-  width:30px;
-  height:30px;
+
+.hakrs-ig svg{
+
+  width:98px;
+  height:98px;
+
   display:block;
 }
 
-.restock-sub{
-  margin-top:22px;
-  color:#9a9a9a;
-  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
-  font-size:11px;
-  letter-spacing:.18em;
-  font-weight:600;
-  line-height:1.7;
-  text-decoration:none;
-  display:block;
-  pointer-events:none;
+
+.hakrs-click{
+
+  margin-top:28px;
+
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size:22px;
+
+  color:#cfcfcf;
+
+  font-weight:400;
 }
 
-.betty{
-  position:absolute;
-  inset:0;
+
+/* =====================================================
+   ADVERTISEMENT PAGE
+   ===================================================== */
+
+.ad-page{
+
+  background:#000;
+
 }
 
-.betty img{
+
+/*
+   PUT ANY JPG ADVERTISEMENT IN THE SAME FOLDER
+   AND NAME IT:
+
+   ad.jpg
+
+   Replace that JPG anytime you want.
+
+   The page automatically stays part of the
+   vertical swipe feed.
+*/
+
+
+.ad-page img{
+
   width:100%;
   height:100%;
+
   object-fit:contain;
+  object-position:center center;
+
+  display:block;
+
+  background:#000;
+
 }
 
-.final{
-  flex-direction:column;
-  gap:38px;
-  text-align:center;
-}
 
 /* =====================================================
    SHOP
    ===================================================== */
 
 .shop{
+
   width:100%;
   max-width:430px;
   height:100%;
+
   background:#000;
+
   display:flex;
   flex-direction:column;
+
   overflow-y:auto;
+
   color:#e8e8e8;
-  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+
+  padding:
+    env(safe-area-inset-top)
+    0
+    env(safe-area-inset-bottom);
+
   -webkit-overflow-scrolling:touch;
+
   overscroll-behavior:contain;
+
   touch-action:pan-y;
 }
 
+
 .avatars{
+
   display:flex;
+
   gap:10px;
+
   overflow-x:auto;
+
   padding:10px 12px 10px;
+
   -webkit-overflow-scrolling:touch;
+
   flex-shrink:0;
 }
 
+
 .av{
+
   flex:0 0 56px;
+
   text-align:center;
+
   text-decoration:none;
+
   opacity:.35;
+
   color:inherit;
+
   cursor:pointer;
+
   -webkit-tap-highlight-color:transparent;
+
   touch-action:manipulation;
 }
 
+
 .av.active{
+
   opacity:1;
+
 }
 
+
 .av .c{
+
   width:52px;
   height:52px;
+
   border-radius:50%;
+
   overflow:hidden;
+
   background:#111;
+
   margin:0 auto;
+
   border:2px solid #2a2a2a;
+
   flex-shrink:0;
 }
 
+
 .av.active .c{
+
   border-color:#fff;
-  box-shadow:0 0 0 2px #fff;
+
+  box-shadow:
+    0 0 0 2px #fff;
+
 }
 
+
 .av .c img{
+
   width:100%;
   height:100%;
+
   object-fit:cover;
+
   object-position:center center;
+
   pointer-events:none;
+
   display:block;
+
   border-radius:50%;
 }
 
+
 .av i{
+
   font-style:normal;
+
   font-size:7px;
+
   color:#666;
+
   margin-top:5px;
+
   display:block;
+
   letter-spacing:.08em;
 }
 
+
 .av.seph{
+
   opacity:1;
+
 }
 
+
 .av.seph i{
+
   color:#fff;
+
   font-weight:900;
 }
 
+
+/* =====================================================
+   SHOP TOGGLE
+   ===================================================== */
+
 .toggle{
+
   margin:4px 12px 10px;
+
   background:#111;
+
   border-radius:999px;
+
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
   padding:3px;
+
   gap:3px;
+
   flex-shrink:0;
 }
 
+
 .toggle button{
+
   height:36px;
+
   border-radius:999px;
+
   border:0;
+
   font-size:9px;
+
   font-weight:800;
+
   letter-spacing:.08em;
+
   background:#1a1a1a;
+
   color:#8a8a8a;
 }
 
+
 .toggle button.on{
+
   background:#ff2a6d;
+
   color:#fff;
 }
+
+
+/* =====================================================
+   SHOP IMAGE
+   ===================================================== */
 
 .img{
+
   margin:0 12px;
+
   border-radius:18px;
+
   overflow:hidden;
+
   border:3px solid #ff5a1f;
+
   background:#000;
+
   aspect-ratio:16/10;
+
   flex-shrink:0;
 }
+
 
 .img img{
+
   width:100%;
   height:100%;
+
   object-fit:cover;
+
   display:block;
 }
+
 
 .swipe{
+
   text-align:center;
-  padding:8px 12px 2px;
+
+  padding:
+    8px
+    12px
+    2px;
+
   font-size:8px;
+
   letter-spacing:.28em;
+
   color:#555;
+
   flex-shrink:0;
 }
+
 
 .live{
+
   text-align:center;
-  padding:0 12px 10px;
+
+  padding:
+    0
+    12px
+    10px;
+
   font-size:9px;
+
   color:#ff2a6d;
+
   letter-spacing:.06em;
+
   font-weight:700;
+
   flex-shrink:0;
 }
+
+
+/* =====================================================
+   SHOP CARDS
+   ===================================================== */
 
 .grid{
-  padding:0 12px 10px;
+
+  padding:
+    0
+    12px
+    10px;
+
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
   gap:8px;
+
   flex-shrink:0;
 }
+
 
 .card{
+
   background:#111;
+
   border:1px solid #1a1a1a;
+
   border-radius:10px;
-  padding:12px 10px;
+
+  padding:
+    12px
+    10px;
 }
+
 
 .card b{
+
   font-size:8px;
+
   color:#555;
+
   display:block;
+
   margin-bottom:8px;
+
   letter-spacing:.08em;
+
   font-weight:700;
 }
+
 
 .card p{
+
   font-size:10px;
+
   line-height:1.35;
+
   color:#ddd;
+
   font-weight:700;
 }
 
+
+/* =====================================================
+   SHOP BUTTONS
+   ===================================================== */
+
 .cta{
-  margin:0 12px 8px;
+
+  margin:
+    0
+    12px
+    8px;
+
   background:#fff;
+
   color:#000;
+
   border:0;
+
   height:40px;
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
+
   font-size:11px;
+
   font-weight:900;
+
   letter-spacing:.18em;
+
   flex-shrink:0;
 }
+
 
 .cta.ghost{
+
   background:#000;
+
   color:#fff;
+
   border:1px solid #333;
+
   letter-spacing:.46em;
+
   font-size:11px;
 }
 
+
 .add{
-  margin:0 12px 16px;
+
+  margin:
+    0
+    12px
+    16px;
+
   background:#111;
+
   border:1px solid #1a1a1a;
+
   border-radius:4px;
+
   display:flex;
+
   justify-content:space-between;
-  padding:14px 14px 14px 16px;
+
+  padding:
+    14px
+    14px
+    14px
+    16px;
+
   align-items:center;
+
   flex-shrink:0;
 }
 
+
 .add span{
+
   font-size:12px;
+
   font-weight:900;
+
   letter-spacing:.1em;
 }
+
+
+/* =====================================================
+   FINAL
+   ===================================================== */
+
+.final{
+
+  flex-direction:column;
+
+  gap:38px;
+
+  text-align:center;
+}
+
 </style>
 </head>
+
 
 <body>
 
 <div id="feed">
 
-  <!-- FISSHHFILET OPENING -->
+
+  <!-- =================================================
+       FISSHHFILET OPENING
+       ================================================= -->
+
   <div class="opening">
-    <span>@fisshhfilet</span>
+
+    <span>
+      @fisshhfilet
+    </span>
+
   </div>
+
 
   <div id="track">
 
-    <!-- 1. RESTOCKING / FIRST PAGE -->
-    <section class="page white-bg">
 
-      <div class="restock">
+    <!-- =================================================
+         1. HAKRs.shop
+         THIS IS DIRECTLY UNDER THE FISSHHFILET OPENING
+         ================================================= -->
 
-        <div class="restock-title">
-          Restocking
+    <section class="page">
+
+      <div class="hakrs-landing">
+
+
+        <div class="hakrs-title">
+          HAKRs.shop
         </div>
 
-        <!-- ONLY THIS AREA OPENS INSTAGRAM -->
+
+        <div class="hakrs-count">
+          1 of 52. No Restock.
+        </div>
+
+
         <a
-          class="restock-link"
+          class="hakrs-instagram"
           href="https://www.instagram.com/club52vogue.shop?stkn=MWhxYjhwaDAzamp5aw=="
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Open Club52Vogue Shop Instagram"
+          aria-label="Open HAKRs Shop Instagram"
         >
 
-          <span class="ig" aria-hidden="true">
 
-            <svg viewBox="0 0 24 24" fill="none">
+          <span class="hakrs-ig">
+
+
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+            >
 
               <rect
                 x="3"
@@ -521,6 +918,7 @@ body{
                 stroke-width="2"
               />
 
+
               <circle
                 cx="12"
                 cy="12"
@@ -528,6 +926,7 @@ body{
                 stroke="#fff"
                 stroke-width="2"
               />
+
 
               <circle
                 cx="17.2"
@@ -538,25 +937,27 @@ body{
 
             </svg>
 
+
           </span>
 
-          <div class="restock-title">
-            Soon
+
+          <div class="hakrs-click">
+            click
           </div>
+
 
         </a>
 
-        <div class="restock-sub">
-          DM &quot;WAITLIST&quot;<br>
-          @CLUB52VOGUE.SHOP
-        </div>
 
       </div>
 
     </section>
 
 
-    <!-- 2. BETTY -->
+    <!-- =================================================
+         2. BETTY
+         ================================================= -->
+
     <section class="page">
 
       <div class="betty">
@@ -573,7 +974,10 @@ body{
     </section>
 
 
-    <!-- 3. WAISTA -->
+    <!-- =================================================
+         3. WAISTA
+         ================================================= -->
+
     <section class="page">
 
       <img
@@ -586,7 +990,10 @@ body{
     </section>
 
 
-    <!-- 4. LIQUID -->
+    <!-- =================================================
+         4. LIQUID
+         ================================================= -->
+
     <section class="page">
 
       <video
@@ -612,7 +1019,10 @@ body{
     </section>
 
 
-    <!-- 5. SHARKBAIT -->
+    <!-- =================================================
+         5. SHARKBAIT
+         ================================================= -->
+
     <section class="page">
 
       <img
@@ -622,6 +1032,7 @@ body{
         alt=""
       >
 
+
       <div
         class="tap open-link"
         data-href="https://naturalcatchtuna.com/"
@@ -630,7 +1041,10 @@ body{
     </section>
 
 
-    <!-- 6. SEPHORA VIDEO -->
+    <!-- =================================================
+         6. SEPHORA VIDEO
+         ================================================= -->
+
     <section class="page">
 
       <video
@@ -651,7 +1065,10 @@ body{
     </section>
 
 
-    <!-- 7. QR -->
+    <!-- =================================================
+         7. QR
+         ================================================= -->
+
     <section class="page">
 
       <img
@@ -664,7 +1081,10 @@ body{
     </section>
 
 
-    <!-- 8. HAKRS -->
+    <!-- =================================================
+         8. HAKRS
+         ================================================= -->
+
     <section class="page">
 
       <video
@@ -685,17 +1105,24 @@ body{
     </section>
 
 
-    <!-- 9. SHOP -->
+    <!-- =================================================
+         9. SHOP
+         ================================================= -->
+
     <section
       class="page"
       style="background:#000"
     >
 
+
       <div class="shop">
+
 
         <div class="avatars">
 
+
           <!-- SEPHORA -->
+
           <a
             class="av seph active"
             href="https://www.sephora.com/"
@@ -715,7 +1142,9 @@ body{
 
             </div>
 
-            <i>SEPHORA</i>
+            <i>
+              SEPHORA
+            </i>
 
           </a>
 
@@ -738,7 +1167,9 @@ body{
 
             </div>
 
-            <i>HOST</i>
+            <i>
+              HOST
+            </i>
 
           </a>
 
@@ -761,7 +1192,9 @@ body{
 
             </div>
 
-            <i>HOME</i>
+            <i>
+              HOME
+            </i>
 
           </a>
 
@@ -784,7 +1217,9 @@ body{
 
             </div>
 
-            <i>PM</i>
+            <i>
+              PM
+            </i>
 
           </a>
 
@@ -807,7 +1242,9 @@ body{
 
             </div>
 
-            <i>FD</i>
+            <i>
+              FD
+            </i>
 
           </a>
 
@@ -830,7 +1267,9 @@ body{
 
             </div>
 
-            <i>GD</i>
+            <i>
+              GD
+            </i>
 
           </a>
 
@@ -853,9 +1292,12 @@ body{
 
             </div>
 
-            <i>ED</i>
+            <i>
+              ED
+            </i>
 
           </a>
+
 
         </div>
 
@@ -897,9 +1339,12 @@ body{
 
         <div class="grid">
 
+
           <div class="card">
 
-            <b>FABRIC?</b>
+            <b>
+              FABRIC?
+            </b>
 
             <p>
               HEAVY 14oz FLEECE CRYSTAL WASHED
@@ -910,7 +1355,9 @@ body{
 
           <div class="card">
 
-            <b>FIT?</b>
+            <b>
+              FIT?
+            </b>
 
             <p>
               OVERSIZED BOXY CROPPED AT WAIST
@@ -921,7 +1368,9 @@ body{
 
           <div class="card">
 
-            <b>WHY FLIP?</b>
+            <b>
+              WHY FLIP?
+            </b>
 
             <p>
               RETAIL $285 → FLIP $32 DEADSTOCK ARCHIVE
@@ -932,13 +1381,16 @@ body{
 
           <div class="card">
 
-            <b>SHIP?</b>
+            <b>
+              SHIP?
+            </b>
 
             <p>
               NYC NEXT_DAY WORLDWIDE 3-5 DAYS
             </p>
 
           </div>
+
 
         </div>
 
@@ -959,6 +1411,7 @@ body{
             ADD → $32
           </span>
 
+
           <div
             style="
               width:34px;
@@ -974,27 +1427,42 @@ body{
             ♥
           </div>
 
+
         </div>
+
 
       </div>
 
     </section>
 
 
-    <!-- 10. RESTOCKING -->
-    <section class="page">
+    <!-- =================================================
+         10. ADVERTISEMENT
+         
+         JUST UPLOAD ANY JPG NAMED:
+         ad.jpg
+
+         THIS REPLACES THE OLD BLACK RESTOCKING PAGE.
+         ================================================= -->
+
+    <section
+      class="page ad-page"
+    >
 
       <img
-        src="restocking-soon-fix.jpg"
+        src="ad.jpg"
         width="1080"
         height="1920"
-        alt=""
+        alt="Advertisement"
       >
 
     </section>
 
 
-    <!-- 11. WAISTA QUESTION -->
+    <!-- =================================================
+         11. WAISTA QUESTION
+         ================================================= -->
+
     <section class="page">
 
       <img
@@ -1007,7 +1475,10 @@ body{
     </section>
 
 
-    <!-- 12. HERSHEY -->
+    <!-- =================================================
+         12. HERSHEY
+         ================================================= -->
+
     <section class="page">
 
       <video
@@ -1028,7 +1499,10 @@ body{
     </section>
 
 
-    <!-- 13. KALSHI -->
+    <!-- =================================================
+         13. KALSHI
+         ================================================= -->
+
     <section class="page">
 
       <img
@@ -1038,6 +1512,7 @@ body{
         alt=""
       >
 
+
       <div
         class="tap open-link"
         data-href="https://kalshi.com"
@@ -1046,7 +1521,10 @@ body{
     </section>
 
 
-    <!-- 14. BEACH -->
+    <!-- =================================================
+         14. BEACH
+         ================================================= -->
+
     <section class="page">
 
       <img
@@ -1059,11 +1537,15 @@ body{
     </section>
 
 
-    <!-- 15. FINAL -->
+    <!-- =================================================
+         15. FINAL
+         ================================================= -->
+
     <section
       class="page final"
       style="background:#000"
     >
+
 
       <div
         style="
@@ -1098,71 +1580,107 @@ body{
         MEMBERS ONLY
       </div>
 
+
     </section>
 
+
   </div>
+
 </div>
 
 
 <script>
+
 (function(){
+
 
   var feed =
     document.getElementById('feed');
 
+
   var track =
     document.getElementById('track');
+
 
   var pages =
     [].slice.call(
       document.querySelectorAll('.page')
     );
 
+
   var shop =
     document.querySelector('.shop');
+
 
   var opening =
     document.querySelector('.opening');
 
+
   var n =
     pages.length;
 
+
   var i = 0;
+
   var H = 0;
 
+
   var y0 = 0;
+
   var t0 = 0;
+
   var dragging = false;
+
   var startI = 0;
+
   var insideShop = false;
+
 
   var vids =
     [].slice.call(
       document.querySelectorAll('video')
     );
 
+
   var tapMoved = false;
 
 
-  /*
-  ====================================================
-  APP RESET
-  ====================================================
-  */
+  /* ====================================================
+     APP RESET
+     ==================================================== */
 
   function resetApp(){
 
     i = 0;
 
+
     track.style.transition =
       'none';
+
 
     track.style.transform =
       'translate3d(0,0,0)';
 
+
     /*
-      Make absolutely sure the opening is
-      black when the app starts.
+      IMPORTANT:
+
+      The first page underneath the opening
+      is HAKRs.shop.
+
+      The opening starts completely black.
+
+      It then fades away.
+
+      Therefore:
+
+      FISSHHFILET
+          ↓
+      HAKRs.shop
+          ↓
+      REST OF FEED
+
+      No white page exists between them.
     */
 
     if(opening){
@@ -1179,12 +1697,13 @@ body{
       opening.style.animation =
         'none';
 
+
       /*
-        Force browser to acknowledge the reset
-        before starting the opening animation.
+        Force the browser to reset the animation.
       */
 
       void opening.offsetWidth;
+
 
       opening.style.animation =
         'openingOut .7s ease 2.8s forwards';
@@ -1194,45 +1713,78 @@ body{
   }
 
 
+  /* ====================================================
+     VIEWPORT HEIGHT
+     ==================================================== */
+
   function vh(){
 
     var vv =
       window.visualViewport;
 
+
     return Math.round(
+
       (vv && vv.height) ||
+
       feed.clientHeight ||
+
       window.innerHeight
+
     );
 
   }
 
 
+  /* ====================================================
+     SIZE
+     ==================================================== */
+
   function size(){
 
-    H = vh();
+    H =
+      vh();
 
-    pages.forEach(function(p){
 
-      p.style.height =
-        H + 'px';
+    pages.forEach(
+      function(p){
 
-    });
+        p.style.height =
+          H + 'px';
+
+      }
+    );
+
 
     track.style.height =
       (n * H) + 'px';
 
-    go(i,false);
+
+    go(
+      i,
+      false
+    );
 
   }
 
 
-  function setY(y,animate){
+  /* ====================================================
+     SET POSITION
+     ==================================================== */
+
+  function setY(
+    y,
+    animate
+  ){
 
     track.style.transition =
+
       animate
+
       ? 'transform .28s cubic-bezier(.22,.9,.3,1)'
+
       : 'none';
+
 
     track.style.transform =
       'translate3d(0,' +
@@ -1242,103 +1794,145 @@ body{
   }
 
 
-  function go(idx,animate){
+  /* ====================================================
+     GO TO PAGE
+     ==================================================== */
+
+  function go(
+    idx,
+    animate
+  ){
 
     if(idx < 0){
+
       idx = 0;
+
     }
+
 
     if(idx > n - 1){
+
       idx = n - 1;
+
     }
 
-    i = idx;
+
+    i =
+      idx;
+
 
     setY(
       i * H,
       animate !== false
     );
 
+
     play();
 
   }
 
 
-  /*
-  ====================================================
-  VIDEO CONTROL
-  ====================================================
-  */
+  /* ====================================================
+     VIDEO SETUP
+     ==================================================== */
 
-  vids.forEach(function(v){
+  vids.forEach(
+    function(v){
 
-    v.muted = true;
-    v.loop = true;
-    v.playsInline = true;
-    v.preload = 'auto';
+      v.muted =
+        true;
 
-    v.setAttribute(
-      'playsinline',
-      ''
-    );
+      v.loop =
+        true;
 
-    v.setAttribute(
-      'webkit-playsinline',
-      ''
-    );
+      v.playsInline =
+        true;
 
-    v.disableRemotePlayback = true;
+      v.preload =
+        'auto';
 
-  });
 
+      v.setAttribute(
+        'playsinline',
+        ''
+      );
+
+
+      v.setAttribute(
+        'webkit-playsinline',
+        ''
+      );
+
+
+      v.disableRemotePlayback =
+        true;
+
+    }
+  );
+
+
+  /* ====================================================
+     PLAY CURRENT VIDEO
+     ==================================================== */
 
   function play(){
 
-    pages.forEach(function(p,idx){
+    pages.forEach(
+      function(
+        p,
+        idx
+      ){
 
-      var v =
-        p.querySelector('video');
-
-      if(!v){
-        return;
-      }
-
-      if(idx === i){
-
-        if(v.paused){
-
-          v.play().catch(
-            function(){}
+        var v =
+          p.querySelector(
+            'video'
           );
 
-        }
 
-      }else{
+        if(!v){
 
-        if(!v.paused){
-
-          v.pause();
+          return;
 
         }
 
-        try{
 
-          v.currentTime = 0;
+        if(idx === i){
 
-        }catch(e){}
+          if(v.paused){
+
+            v.play().catch(
+              function(){}
+            );
+
+          }
+
+        }else{
+
+          if(!v.paused){
+
+            v.pause();
+
+          }
+
+
+          try{
+
+            v.currentTime =
+              0;
+
+          }catch(e){}
+
+        }
 
       }
-
-    });
+    );
 
   }
 
 
-  /*
-  ====================================================
-  SHOP SCROLL
-  ====================================================
-  */
+  /* ====================================================
+     SHOP
+     ==================================================== */
 
   function isInShop(el){
 
@@ -1352,16 +1946,21 @@ body{
   function shopCanScroll(dir){
 
     if(!shop){
+
       return false;
+
     }
+
 
     var atTop =
       shop.scrollTop <= 2;
+
 
     var atBot =
       shop.scrollTop +
       shop.clientHeight >=
       shop.scrollHeight - 3;
+
 
     if(dir < 0){
 
@@ -1369,28 +1968,33 @@ body{
 
     }
 
+
     if(dir > 0){
 
       return !atBot;
 
     }
 
+
     return true;
 
   }
 
 
-  /*
-  ====================================================
-  EXTERNAL LINKS
-  ====================================================
-  */
+  /* ====================================================
+     EXTERNAL LINKS
+     ==================================================== */
 
-  function openHref(href){
+  function openHref(
+    href
+  ){
 
     if(!href){
+
       return;
+
     }
+
 
     window.open(
       href,
@@ -1401,51 +2005,62 @@ body{
   }
 
 
-  /*
-  ====================================================
-  TOUCH START
-  ====================================================
-  */
+  /* ====================================================
+     TOUCH START
+     ==================================================== */
 
   feed.addEventListener(
     'touchstart',
     function(e){
 
-      if(!e.touches[0]){
+      if(
+        !e.touches[0]
+      ){
+
         return;
+
       }
+
 
       y0 =
         e.touches[0].clientY;
 
+
       t0 =
         Date.now();
+
 
       startI =
         i;
 
+
       dragging =
         true;
+
 
       tapMoved =
         false;
 
+
       insideShop =
-        isInShop(e.target);
+        isInShop(
+          e.target
+        );
+
 
       track.style.transition =
         'none';
 
     },
-    {passive:true}
+    {
+      passive:true
+    }
   );
 
 
-  /*
-  ====================================================
-  TOUCH MOVE
-  ====================================================
-  */
+  /* ====================================================
+     TOUCH MOVE
+     ==================================================== */
 
   feed.addEventListener(
     'touchmove',
@@ -1455,16 +2070,23 @@ body{
         !dragging ||
         !e.touches[0]
       ){
+
         return;
+
       }
+
 
       var dy =
         y0 -
         e.touches[0].clientY;
 
-      if(Math.abs(dy) > 8){
 
-        tapMoved = true;
+      if(
+        Math.abs(dy) > 8
+      ){
+
+        tapMoved =
+          true;
 
       }
 
@@ -1511,28 +2133,33 @@ body{
       );
 
 
-      if(Math.abs(dy) > 10){
+      if(
+        Math.abs(dy) > 10
+      ){
 
         e.preventDefault();
 
       }
 
     },
-    {passive:false}
+    {
+      passive:false
+    }
   );
 
 
-  /*
-  ====================================================
-  PAGE SETTLE
-  ====================================================
-  */
+  /* ====================================================
+     PAGE SETTLE
+     ==================================================== */
 
-  function settle(y1){
+  function settle(
+    y1
+  ){
 
     var dy =
       y0 -
       y1;
+
 
     var dt =
       Math.max(
@@ -1540,23 +2167,32 @@ body{
         1
       );
 
+
     var vel =
       dy / dt;
+
 
     var next =
       startI;
 
+
     var strong =
+
       Math.abs(dy) > 56 ||
-      Math.abs(vel) > 0.35 ||
-      Math.abs(dy) > H * 0.12;
+
+      Math.abs(vel) > .35 ||
+
+      Math.abs(dy) > H * .12;
 
 
     if(strong){
 
       next =
+
         dy > 0
+
         ? startI + 1
+
         : startI - 1;
 
     }
@@ -1570,27 +2206,33 @@ body{
   }
 
 
-  /*
-  ====================================================
-  TOUCH END
-  ====================================================
-  */
+  /* ====================================================
+     TOUCH END
+     ==================================================== */
 
   feed.addEventListener(
     'touchend',
     function(e){
 
       if(!dragging){
+
         return;
+
       }
+
 
       dragging =
         false;
 
+
       var y1 =
+
         e.changedTouches[0]
+
         ? e.changedTouches[0].clientY
+
         : y0;
+
 
       var dy =
         y0 -
@@ -1613,28 +2255,26 @@ body{
       }
 
 
-      settle(y1);
+      settle(
+        y1
+      );
 
     },
-    {passive:true}
+    {
+      passive:true
+    }
   );
 
 
-  /*
-  ====================================================
-  SEPHORA
-  ====================================================
-  DIRECT NATIVE LINK.
-  NO DELAY.
-  NO SCALE.
-  NO PUSH-BACK.
-  ====================================================
-  */
+  /* ====================================================
+     SEPHORA
+     ==================================================== */
 
   var sephora =
     document.querySelector(
       '.av.seph'
     );
+
 
   if(sephora){
 
@@ -1651,100 +2291,108 @@ body{
         }
 
       },
-      {passive:false}
+      {
+        passive:false
+      }
     );
 
   }
 
 
-  /*
-  ====================================================
-  OTHER SHOP AVATARS
-  ====================================================
-  */
+  /* ====================================================
+     OTHER SHOP AVATARS
+     ==================================================== */
 
   document
     .querySelectorAll(
       '.av:not(.seph)'
     )
-    .forEach(function(el){
+    .forEach(
+      function(el){
 
-      el.addEventListener(
-        'click',
-        function(e){
+        el.addEventListener(
+          'click',
+          function(e){
 
-          if(tapMoved){
+            if(tapMoved){
 
-            e.preventDefault();
+              e.preventDefault();
 
-            return;
+              return;
+
+            }
 
           }
+        );
 
-        }
-      );
-
-    });
+      }
+    );
 
 
-  /*
-  ====================================================
-  OTHER FULL PAGE LINKS
-  ====================================================
-  */
+  /* ====================================================
+     OTHER FULL PAGE LINKS
+     ==================================================== */
 
   document
     .querySelectorAll(
       '.open-link'
     )
-    .forEach(function(el){
+    .forEach(
+      function(el){
 
-      el.addEventListener(
-        'click',
-        function(e){
+        el.addEventListener(
+          'click',
+          function(e){
 
-          e.preventDefault();
-          e.stopPropagation();
+            e.preventDefault();
 
-          if(tapMoved){
+            e.stopPropagation();
 
-            return;
+
+            if(tapMoved){
+
+              return;
+
+            }
+
+
+            openHref(
+
+              el.getAttribute(
+                'data-href'
+              )
+
+              ||
+
+              el.getAttribute(
+                'href'
+              )
+
+            );
 
           }
+        );
 
-          openHref(
-            el.getAttribute(
-              'data-href'
-            ) ||
-            el.getAttribute(
-              'href'
-            )
-          );
-
-        }
-      );
-
-    });
+      }
+    );
 
 
-  /*
-  ====================================================
-  START
-  ====================================================
-  */
+  /* ====================================================
+     START
+     ==================================================== */
 
   size();
 
   resetApp();
 
 
-  /*
-  ====================================================
-  RESIZE
-  ====================================================
-  */
+  /* ====================================================
+     VISUAL VIEWPORT RESIZE
+     ==================================================== */
 
-  if(window.visualViewport){
+  if(
+    window.visualViewport
+  ){
 
     window.visualViewport.addEventListener(
       'resize',
@@ -1753,11 +2401,16 @@ body{
 
   }
 
+
   window.addEventListener(
     'resize',
     size
   );
 
+
+  /* ====================================================
+     ORIENTATION
+     ==================================================== */
 
   window.addEventListener(
     'orientationchange',
@@ -1772,37 +2425,40 @@ body{
   );
 
 
-  /*
-  ====================================================
-  RETURN FROM EXTERNAL SITE
-  ====================================================
-  */
+  /* ====================================================
+     RETURN FROM EXTERNAL SITE
+     ==================================================== */
 
   document.addEventListener(
     'visibilitychange',
     function(){
 
       if(
-        document.visibilityState === 'visible'
+        document.visibilityState ===
+        'visible'
       ){
 
-        setTimeout(function(){
+        setTimeout(
+          function(){
 
-          if(
-            i >= 0 &&
-            i < n
-          ){
+            if(
+              i >= 0 &&
+              i < n
+            ){
 
-            setY(
-              i * H,
-              false
-            );
+              setY(
+                i * H,
+                false
+              );
 
-            play();
 
-          }
+              play();
 
-        },80);
+            }
+
+          },
+          80
+        );
 
       }
 
@@ -1811,6 +2467,7 @@ body{
 
 
 })();
+
 </script>
 
 </body>
