@@ -128,17 +128,6 @@ body{
 
   pointer-events:none;
 
-  /*
-    The HAKRs.shop page is already underneath this
-    black layer.
-
-    When this layer fades away, HAKRs.shop is revealed
-    directly.
-
-    NO WHITE SCREEN.
-    NO RESTOCKING SCREEN.
-  */
-
   opacity:1;
   visibility:visible;
 
@@ -314,16 +303,16 @@ body{
 
 .hakrs-ig{
 
-  width:160px;
-  height:160px;
+  width:148px;
+  height:148px;
 
-  border-radius:40px;
+  border-radius:33px;
 
   background:
     radial-gradient(
       circle at 30% 107%,
       #fdf497 0%,
-      #fdf497 5%,
+      #fdf497 8%,
       #fd5949 45%,
       #d6249f 60%,
       #285AEB 90%
@@ -332,21 +321,27 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
+
+  transform:translateZ(0);
+  -webkit-transform:translateZ(0);
+  backface-visibility:hidden;
+  isolation:isolate;
 }
 
 
 .hakrs-ig svg{
 
-  width:98px;
-  height:98px;
+  width:86px;
+  height:86px;
 
   display:block;
+  overflow:visible;
 }
 
 
 .hakrs-click{
 
-  margin-top:28px;
+  margin-top:24px;
 
   font-family:
     ui-sans-serif,
@@ -358,7 +353,7 @@ body{
     Arial,
     sans-serif;
 
-  font-size:22px;
+  font-size:20px;
 
   color:#cfcfcf;
 
@@ -375,19 +370,6 @@ body{
   background:#000;
 
 }
-
-
-/*
-   PUT ANY JPG ADVERTISEMENT IN THE SAME FOLDER
-   AND NAME IT:
-
-   ad.jpg
-
-   Replace that JPG anytime you want.
-
-   The page automatically stays part of the
-   vertical swipe feed.
-*/
 
 
 .ad-page img{
@@ -906,6 +888,7 @@ body{
             <svg
               viewBox="0 0 24 24"
               fill="none"
+              aria-hidden="true"
             >
 
               <rect
@@ -915,23 +898,23 @@ body{
                 height="18"
                 rx="5"
                 stroke="#fff"
-                stroke-width="2"
+                stroke-width="1.8"
               />
 
 
               <circle
                 cx="12"
                 cy="12"
-                r="4.2"
+                r="4.15"
                 stroke="#fff"
-                stroke-width="2"
+                stroke-width="1.8"
               />
 
 
               <circle
-                cx="17.2"
-                cy="6.8"
-                r="1.1"
+                cx="17.15"
+                cy="6.85"
+                r="1.05"
                 fill="#fff"
               />
 
@@ -1662,27 +1645,6 @@ body{
       'translate3d(0,0,0)';
 
 
-    /*
-      IMPORTANT:
-
-      The first page underneath the opening
-      is HAKRs.shop.
-
-      The opening starts completely black.
-
-      It then fades away.
-
-      Therefore:
-
-      FISSHHFILET
-          ↓
-      HAKRs.shop
-          ↓
-      REST OF FEED
-
-      No white page exists between them.
-    */
-
     if(opening){
 
       opening.style.display =
@@ -1697,10 +1659,6 @@ body{
       opening.style.animation =
         'none';
 
-
-      /*
-        Force the browser to reset the animation.
-      */
 
       void opening.offsetWidth;
 
