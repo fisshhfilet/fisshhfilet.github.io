@@ -489,6 +489,22 @@ body{
 
 .grok-bubble:active{transform:scale(.92)}
 
+.grok-bubble.glow{
+  opacity:1;
+  border-color:#fff;
+  animation:grokFloat 3.6s ease-in-out infinite,grokGlow 1.8s ease-in-out infinite;
+}
+
+.grok-bubble.glow::after{
+  border-color:rgba(255,255,255,.9);
+  animation:grokPulse 1.6s ease-out infinite;
+}
+
+@keyframes grokGlow{
+  0%,100%{box-shadow:0 0 8px 2px rgba(255,255,255,.35),0 6px 22px rgba(0,0,0,.6)}
+  50%{box-shadow:0 0 26px 9px rgba(255,255,255,.85),0 6px 22px rgba(0,0,0,.6)}
+}
+
 @keyframes grokIn{
   from{opacity:0;transform:scale(.6)}
   to{opacity:1;transform:scale(1)}
@@ -536,7 +552,7 @@ body{
 </section>
 
 
-<section class="page">
+<section class="page" data-grok-glow>
 <video muted loop playsinline webkit-playsinline preload="auto">
 <source src="Liquid.mp4" type="video/mp4">
 <source src="ad.mp4" type="video/mp4">
@@ -675,11 +691,6 @@ body{
 </section>
 
 
-<section class="page ad-page">
-<img src="ad.jpg" width="1080" height="1920" alt="Advertisement">
-</section>
-
-
 <section class="page">
 <img src="waista-question.jpg" width="1080" height="1920" alt="">
 </section>
@@ -741,6 +752,12 @@ var startI = 0;
 var insideShop = false;
 var vids = [].slice.call(document.querySelectorAll('video'));
 var tapMoved = false;
+var grok = document.querySelector('.grok-bubble');
+var glowIdx = -1;
+
+pages.forEach(function(p, idx){
+  if(p.hasAttribute('data-grok-glow')){ glowIdx = idx; }
+});
 
 
 /* APP RESET */
@@ -812,6 +829,10 @@ function go(idx, animate){
   i = idx;
 
   setY(i * H, animate !== false);
+
+  if(grok && glowIdx > -1){
+    grok.classList.toggle('glow', i >= glowIdx);
+  }
 
   play();
 
