@@ -447,7 +447,7 @@ body{
 }
 
 
-/* GROK BUBBLE (floating, outside #feed) */
+/* GROK BUBBLE (visible only on YO GROK page) */
 
 .grok-bubble{
   position:fixed;
@@ -467,7 +467,8 @@ body{
   -webkit-tap-highlight-color:transparent;
   touch-action:manipulation;
   opacity:0;
-  animation:grokIn .6s ease 3.2s forwards,grokFloat 3.6s ease-in-out 3.8s infinite;
+  visibility:hidden;
+  transition:opacity .4s ease,visibility .4s ease;
 }
 
 .grok-bubble::after{
@@ -476,7 +477,7 @@ body{
   inset:-2px;
   border-radius:50%;
   border:1.5px solid rgba(255,255,255,.55);
-  animation:grokPulse 2.6s ease-out 3.8s infinite;
+  opacity:0;
   pointer-events:none;
 }
 
@@ -491,11 +492,13 @@ body{
 
 .grok-bubble.glow{
   opacity:1;
+  visibility:visible;
   border-color:#fff;
   animation:grokFloat 3.6s ease-in-out infinite,grokGlow 1.8s ease-in-out infinite;
 }
 
 .grok-bubble.glow::after{
+  opacity:1;
   border-color:rgba(255,255,255,.9);
   animation:grokPulse 1.6s ease-out infinite;
 }
@@ -505,14 +508,9 @@ body{
   50%{box-shadow:0 0 26px 9px rgba(255,255,255,.85),0 6px 22px rgba(0,0,0,.6)}
 }
 
-@keyframes grokIn{
-  from{opacity:0;transform:scale(.6)}
-  to{opacity:1;transform:scale(1)}
-}
-
 @keyframes grokFloat{
-  0%,100%{opacity:1;transform:translateY(0)}
-  50%{opacity:1;transform:translateY(-8px)}
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
 }
 
 @keyframes grokPulse{
@@ -547,11 +545,13 @@ body{
 </section>
 
 
+<!-- WA!STA -->
 <section class="page">
 <img src="waista.jpg" width="1080" height="1920" alt="">
 </section>
 
 
+<!-- YO GROK -->
 <section class="page" data-grok-glow>
 <video muted loop playsinline webkit-playsinline preload="auto">
 <source src="Liquid.mp4" type="video/mp4">
@@ -560,15 +560,16 @@ body{
 </section>
 
 
-<section class="page">
-<img src="Sharkbait.jpg" width="1080" height="1920" alt="">
-<div class="tap open-link" data-href="https://naturalcatchtuna.com/"></div>
-</section>
-
-
 <!-- LO-DON PAGE -->
 <section class="page">
 <img src="lodon.jpg" width="1080" height="1920" alt="LO-DON' Lemon">
+</section>
+
+
+<!-- SHARKBAIT -->
+<section class="page">
+<img src="Sharkbait.jpg" width="1080" height="1920" alt="">
+<div class="tap open-link" data-href="https://naturalcatchtuna.com/"></div>
 </section>
 
 
@@ -831,7 +832,7 @@ function go(idx, animate){
   setY(i * H, animate !== false);
 
   if(grok && glowIdx > -1){
-    grok.classList.toggle('glow', i >= glowIdx);
+    grok.classList.toggle('glow', i === glowIdx);
   }
 
   play();
