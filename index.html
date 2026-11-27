@@ -802,12 +802,14 @@ var tapMoved = false;
 var grok = document.querySelector('.grok-bubble');
 var glowIdx = -1;
 
+var RESUME_WINDOW = 30 * 60 * 1000;
+
 pages.forEach(function(p, idx){
   if(p.hasAttribute('data-grok-glow')){ glowIdx = idx; }
 });
 
 
-/* APP RESET */
+/* OPENING SCREEN */
 
 function hideOpening(){
   if(!opening){ return; }
@@ -817,34 +819,60 @@ function hideOpening(){
 
 function showOpening(){
   if(!opening){ return; }
-  // clear inline styles so .play CSS animation can run and fade out
   opening.style.cssText = '';
   opening.classList.remove('play');
   void opening.offsetWidth;
   opening.classList.add('play');
 }
 
-function resetApp(skipOpening){
 
-  var saved = -1;
+/* RESUME: only after tapping a link and coming back. A refresh starts over. */
+
+function readResume(){
+
+  var out = -1;
+
   try{
-    saved = parseInt(sessionStorage.getItem('ff_page'), 10);
+
+    var flag = localStorage.getItem('ff_return') === '1';
+    var ts = parseInt(localStorage.getItem('ff_ts'), 10);
+    var pg = parseInt(localStorage.getItem('ff_page'), 10);
+
+    // the flag works once, so a refresh after returning starts at the opening
+    localStorage.removeItem('ff_return');
+
+    if(
+      flag &&
+      !isNaN(ts) &&
+      !isNaN(pg) &&
+      (Date.now() - ts) < RESUME_WINDOW &&
+      pg >= 0 &&
+      pg < n
+    ){
+      out = pg;
+    }
+
   }catch(e){}
 
-  if(skipOpening && !isNaN(saved) && saved >= 0 && saved < n){
-    i = saved;
+  return out;
+
+}
+
+
+/* APP RESET */
+
+function resetApp(resumePage){
+
+  if(resumePage > -1){
+    i = resumePage;
+    hideOpening();
   }else{
     i = 0;
+    showOpening();
   }
 
   track.style.transition = 'none';
-  track.style.transform = 'translate3d(0,' + (-i * (H || vh())) + 'px,0)';
-
-  if(skipOpening){
-    hideOpening();
-  }else{
-    showOpening();
-  }
+  track.style.transform = 'translate3d(0,' + (-i * H) + 'px,0)';
 
 }
 
@@ -895,10 +923,6 @@ function go(idx, animate){
   if(idx > n - 1){ idx = n - 1; }
 
   i = idx;
-
-  try{
-    sessionStorage.setItem('ff_page', String(i));
-  }catch(e){}
 
   setY(i * H, animate !== false);
 
@@ -982,10 +1006,20 @@ function shopCanScroll(dir){
 }
 
 
-/* EXTERNAL LINKS — black fade then same-tab navigate (no white popup) */
+/* EXTERNAL LINKS: black fade, remember the page, then go */
 
 var exitOverlay = document.getElementById('exit-overlay');
 var navigating = false;
+
+function clearExit(){
+
+  if(exitOverlay){
+    exitOverlay.classList.remove('show');
+  }
+
+  navigating = false;
+
+}
 
 function openHref(href){
 
@@ -994,8 +1028,9 @@ function openHref(href){
   navigating = true;
 
   try{
-    sessionStorage.setItem('ff_page', String(i));
-    sessionStorage.setItem('ff_return', '1');
+    localStorage.setItem('ff_page', String(i));
+    localStorage.setItem('ff_ts', String(Date.now()));
+    localStorage.setItem('ff_return', '1');
   }catch(e){}
 
   if(exitOverlay){
@@ -1005,6 +1040,13 @@ function openHref(href){
   setTimeout(function(){
     window.location.href = href;
   }, 280);
+
+  // if an app (like Grok) takes over and this page stays alive, never stay stuck on black
+  setTimeout(function(){
+    if(document.visibilityState === 'visible'){
+      clearExit();
+    }
+  }, 3500);
 
 }
 
@@ -1106,7 +1148,7 @@ feed.addEventListener('touchend', function(e){
 }, { passive:true });
 
 
-/* SHOP AVATARS — smooth exit */
+/* SHOP AVATARS */
 
 document.querySelectorAll('.av').forEach(function(el){
 
@@ -1142,7 +1184,7 @@ document.querySelectorAll('.open-link').forEach(function(el){
 });
 
 
-/* GROK BUBBLE — smooth exit */
+/* GROK BUBBLE */
 
 if(grok){
 
@@ -1158,33 +1200,16 @@ if(grok){
 }
 
 
-/* START — only skip opening when we just came back from an external link via Back */
+/* START */
 
-function isReturning(){
-  try{
-    if(sessionStorage.getItem('ff_return') === '1'){
-      sessionStorage.removeItem('ff_return');
-      return true;
-    }
-  }catch(e){}
-  return false;
-}
-
-var returning = isReturning();
-
-if(returning){
-  hideOpening();
-}
+var resumePage = readResume();
 
 size();
-resetApp(returning);
+resetApp(resumePage);
+go(i, false);
 
-if(returning){
-  go(i, false);
-  if(exitOverlay){
-    exitOverlay.classList.remove('show');
-  }
-  navigating = false;
+if(resumePage > -1){
+  clearExit();
 }
 
 
@@ -1204,26 +1229,15 @@ window.addEventListener('orientationchange', function(){
 });
 
 
-/* RETURN FROM EXTERNAL SITE / BF CACHE */
+/* COMING BACK (back button or app switch) */
 
 window.addEventListener('pageshow', function(e){
 
-  if(exitOverlay){
-    exitOverlay.classList.remove('show');
-  }
-  navigating = false;
+  clearExit();
 
-  // Only for back-forward cache restore (page was frozen, not a full reload)
   if(e.persisted){
     hideOpening();
-    var saved = -1;
-    try{
-      saved = parseInt(sessionStorage.getItem('ff_page'), 10);
-    }catch(err){}
-    if(!isNaN(saved) && saved >= 0 && saved < n){
-      i = saved;
-      go(i, false);
-    }
+    go(i, false);
   }
 
 });
@@ -1238,10 +1252,8 @@ document.addEventListener('visibilitychange', function(){
         setY(i * H, false);
         play();
       }
-      if(exitOverlay){
-        exitOverlay.classList.remove('show');
-      }
-      navigating = false;
+
+      clearExit();
 
     }, 60);
 
@@ -1254,4 +1266,4 @@ document.addEventListener('visibilitychange', function(){
 </script>
 
 </body>
-  </html>
+</html>
