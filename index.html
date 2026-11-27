@@ -85,7 +85,7 @@ body{
   -webkit-tap-highlight-color:transparent;
 }
 
-/* FISSHHFILET OPENING — controlled by JS */
+/* FISSHHFILET OPENING — VISIBLE BY DEFAULT, NO FLASH */
 
 .opening{
   position:fixed;
@@ -96,26 +96,26 @@ body{
   justify-content:center;
   z-index:9999;
   pointer-events:none;
-  opacity:0;
-  visibility:hidden;
+  opacity:1;
+  visibility:visible;
   transition:opacity .6s ease, visibility .6s ease;
 }
 
-.opening.show{
-  opacity:1;
-  visibility:visible;
+.opening.hide{
+  opacity:0;
+  visibility:hidden;
 }
 
 .opening span{
   color:#a8a8a8;
   font-size:10px;
   letter-spacing:.32em;
-  opacity:0;
+  opacity:1;
   transition:opacity .7s ease;
 }
 
-.opening.show span{
-  opacity:1;
+.opening.hide span{
+  opacity:0;
 }
 
 /* HAKRs.shop LANDING */
@@ -701,7 +701,7 @@ body{
 
 <section class="page">
 <video muted loop playsinline webkit-playsinline preload="auto">
-<source src="Hershey.mp4" type="video/mp4">
+<source src="【entity-Hershey¦canonical_name=Hershey】.mp4" type="video/mp4">
 </video>
 </section>
 
@@ -754,23 +754,37 @@ var grok = document.querySelector('.grok-bubble');
 var glowIdx = -1;
 var exitOverlay = document.getElementById('exit-overlay');
 var navigating = false;
+var openingTimer = null;
 
 pages.forEach(function(p, idx){
   if(p.hasAttribute('data-grok-glow')){ glowIdx = idx; }
 });
 
-/* ---------- OPENING (JS controlled, no flash) ---------- */
+/* ---------- OPENING - VISIBLE BY DEFAULT, NO FLASH ---------- */
 
 function hideOpening(){
   if(!opening) return;
-  opening.classList.remove('show');
+  opening.classList.add('hide');
 }
 
 function showOpening(){
   if(!opening) return;
-  opening.classList.add('show');
+  if(openingTimer) clearTimeout(openingTimer);
+  opening.classList.remove('hide');
   // auto-hide after ~3 seconds
-  setTimeout(hideOpening, 3000);
+  openingTimer = setTimeout(hideOpening, 3000);
+}
+
+function showOpeningInstant(){
+  if(!opening) return;
+  if(openingTimer) clearTimeout(openingTimer);
+  // kill transition so it snaps on instantly for back-button snapshot
+  var old = opening.style.transition;
+  opening.style.transition = 'none';
+  opening.classList.remove('hide');
+  // force paint
+  void opening.offsetWidth;
+  opening.style.transition = old || '';
 }
 
 /* ---------- RESUME OFF - ALWAYS RESTART AT OPENING ---------- */
@@ -868,6 +882,11 @@ function openHref(href){
   navigating = true;
 
   clearResumeData();
+
+  // Show opening BEFORE leaving, so back-button snapshot = opening, not Instagram
+  i = 0;
+  go(0, false);
+  showOpeningInstant();
 
   if(exitOverlay) exitOverlay.classList.add('show');
 
@@ -978,28 +997,37 @@ window.addEventListener('orientationchange', function(){
   setTimeout(size, 250);
 });
 
-/* ---------- RETURN HANDLERS - ALWAYS REFRESH TO OPENING ---------- */
+/* ---------- RETURN HANDLERS - ALWAYS REFRESH TO OPENING, NO FLASH ---------- */
+
+// Before the page is frozen for back-button, force snapshot to opening
+window.addEventListener('pagehide', function(){
+  i = 0;
+  try{ go(0, false); }catch(e){}
+  showOpeningInstant();
+});
 
 window.addEventListener('pageshow', function(e){
   clearExit();
   clearResumeData();
-  if(e.persisted){
-    i = 0;
-    go(0, false);
-    showOpening();
-  }
+  // Always reset, even if not bfcache
+  i = 0;
+  go(0, false);
+  showOpening();
 });
 
 document.addEventListener('visibilitychange', function(){
   if(document.visibilityState === 'visible'){
-    setTimeout(function(){
-      clearExit();
-      clearResumeData();
-      // Coming back from any link = fresh opening
-      i = 0;
-      go(0, false);
-      showOpening();
-    }, 60);
+    // No delay - show instantly so no Instagram frame flashes
+    clearExit();
+    clearResumeData();
+    i = 0;
+    go(0, false);
+    showOpening();
+  } else {
+    // Leaving - snapshot should be opening
+    i = 0;
+    try{ go(0, false); }catch(e){}
+    showOpeningInstant();
   }
 });
 
