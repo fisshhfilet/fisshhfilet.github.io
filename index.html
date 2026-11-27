@@ -520,10 +520,32 @@ body{
   100%{transform:scale(1.6);opacity:0}
 }
 
+
+/* LINK EXIT TRANSITION */
+
+#exit-overlay{
+  position:fixed;
+  inset:0;
+  background:#000;
+  z-index:99999;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .38s ease,visibility .38s ease;
+}
+
+#exit-overlay.show{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+
 </style>
 </head>
 
 <body>
+
+<div id="exit-overlay"></div>
 
 <div id="feed">
 
@@ -922,13 +944,24 @@ function shopCanScroll(dir){
 }
 
 
-/* EXTERNAL LINKS */
+/* EXTERNAL LINKS — smooth fade then navigate */
+
+var exitOverlay = document.getElementById('exit-overlay');
+var navigating = false;
 
 function openHref(href){
 
-  if(!href){ return; }
+  if(!href || navigating){ return; }
 
-  window.open(href, '_blank', 'noopener,noreferrer');
+  navigating = true;
+
+  if(exitOverlay){
+    exitOverlay.classList.add('show');
+  }
+
+  setTimeout(function(){
+    window.location.href = href;
+  }, 380);
 
 }
 
@@ -1030,34 +1063,18 @@ feed.addEventListener('touchend', function(e){
 }, { passive:true });
 
 
-/* SEPHORA */
+/* SHOP AVATARS — smooth exit */
 
-var sephora = document.querySelector('.av.seph');
-
-if(sephora){
-
-  sephora.addEventListener('touchend', function(e){
-
-    if(tapMoved){
-      e.preventDefault();
-      return;
-    }
-
-  }, { passive:false });
-
-}
-
-
-/* OTHER SHOP AVATARS */
-
-document.querySelectorAll('.av:not(.seph)').forEach(function(el){
+document.querySelectorAll('.av').forEach(function(el){
 
   el.addEventListener('click', function(e){
 
-    if(tapMoved){
-      e.preventDefault();
-      return;
-    }
+    e.preventDefault();
+    e.stopPropagation();
+
+    if(tapMoved){ return; }
+
+    openHref(el.getAttribute('href'));
 
   });
 
@@ -1080,6 +1097,22 @@ document.querySelectorAll('.open-link').forEach(function(el){
   });
 
 });
+
+
+/* GROK BUBBLE — smooth exit */
+
+if(grok){
+
+  grok.addEventListener('click', function(e){
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    openHref(grok.getAttribute('href'));
+
+  });
+
+}
 
 
 /* START */
@@ -1128,4 +1161,4 @@ document.addEventListener('visibilitychange', function(){
 </script>
 
 </body>
-</html>
+  </html>
