@@ -87,24 +87,23 @@ body{
 }
 
 
-/* FISSHHFILET OPENING */
+/* FISSHHFILET OPENING — controlled by JS */
 
 .opening{
   position:fixed;
   inset:0;
   background:#000;
-  display:none;
+  display:flex;
   align-items:center;
   justify-content:center;
   z-index:9999;
   pointer-events:none;
   opacity:0;
   visibility:hidden;
-  transition:opacity .7s ease, visibility .7s ease;
+  transition:opacity .6s ease, visibility .6s ease;
 }
 
 .opening.show{
-  display:flex;
   opacity:1;
   visibility:visible;
 }
@@ -114,7 +113,7 @@ body{
   font-size:10px;
   letter-spacing:.32em;
   opacity:0;
-  transition:opacity .8s ease;
+  transition:opacity .7s ease;
 }
 
 .opening.show span{
@@ -452,7 +451,7 @@ body{
 }
 
 
-/* GROK BUBBLE (visible only on YO GROK page) */
+/* GROK BUBBLE */
 
 .grok-bubble{
   position:fixed;
@@ -801,32 +800,22 @@ pages.forEach(function(p, idx){
 });
 
 
-/* ---------- OPENING SCREEN (JS controlled) ---------- */
+/* ---------- OPENING (JS controlled, no flash) ---------- */
 
 function hideOpening(){
   if(!opening) return;
   opening.classList.remove('show');
-  // force hide after transition
-  setTimeout(function(){
-    opening.style.display = 'none';
-  }, 700);
 }
 
 function showOpening(){
   if(!opening) return;
-  opening.style.display = 'flex';
-  // force reflow
-  void opening.offsetWidth;
   opening.classList.add('show');
-
-  // hide after \~3 seconds
-  setTimeout(function(){
-    hideOpening();
-  }, 3000);
+  // auto-hide after \~3 seconds
+  setTimeout(hideOpening, 3000);
 }
 
 
-/* ---------- RESUME LOGIC ---------- */
+/* ---------- RESUME ---------- */
 
 function clearResumeData(){
   try{
@@ -837,10 +826,8 @@ function clearResumeData(){
 }
 
 function readResume(){
-  var out = -1;
-
   try{
-    // Always force opening on a real Refresh
+    // Force clean opening on every Refresh
     var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
     if(nav && nav.type === 'reload'){
       clearResumeData();
@@ -851,8 +838,7 @@ function readResume(){
     var ts   = parseInt(localStorage.getItem('ff_ts'), 10);
     var pg   = parseInt(localStorage.getItem('ff_page'), 10);
 
-    // consume the one-time flag
-    localStorage.removeItem('ff_return');
+    localStorage.removeItem('ff_return'); // one-time use
 
     if(
       flag &&
@@ -862,12 +848,10 @@ function readResume(){
       pg >= 0 &&
       pg < n
     ){
-      out = pg;
+      return pg;
     }
-
   }catch(e){}
-
-  return out;
+  return -1;
 }
 
 
@@ -931,7 +915,7 @@ vids.forEach(function(v){
 });
 
 
-/* ---------- SHOP HELPERS ---------- */
+/* ---------- SHOP ---------- */
 
 function isInShop(el){
   return shop && el && shop.contains(el);
@@ -947,7 +931,7 @@ function shopCanScroll(dir){
 }
 
 
-/* ---------- EXIT / EXTERNAL LINKS ---------- */
+/* ---------- EXIT ---------- */
 
 function clearExit(){
   if(exitOverlay) exitOverlay.classList.remove('show');
@@ -970,16 +954,14 @@ function openHref(href){
     window.location.href = href;
   }, 280);
 
-  // safety: never stay stuck on black if the browser/app keeps the page alive
+  // safety net
   setTimeout(function(){
-    if(document.visibilityState === 'visible'){
-      clearExit();
-    }
+    if(document.visibilityState === 'visible') clearExit();
   }, 3500);
 }
 
 
-/* ---------- TOUCH HANDLERS ---------- */
+/* ---------- TOUCH ---------- */
 
 feed.addEventListener('touchstart', function(e){
   if(!e.touches[0]) return;
@@ -1031,7 +1013,7 @@ feed.addEventListener('touchend', function(e){
 }, {passive:true});
 
 
-/* ---------- CLICK HANDLERS ---------- */
+/* ---------- CLICKS ---------- */
 
 document.querySelectorAll('.av').forEach(function(el){
   el.addEventListener('click', function(e){
@@ -1060,25 +1042,28 @@ if(grok){
 }
 
 
-/* ---------- START ---------- */
+/* ---------- START (critical for no flash) ---------- */
 
 var resumePage = readResume();
 
+// Size first so layout is correct
 size();
 
 if(resumePage > -1){
+  // Coming back from a link → go straight to that page, no opening
   i = resumePage;
   hideOpening();
   go(i, false);
   clearExit();
 }else{
+  // Normal load or Refresh → show opening immediately (covers any flash)
   i = 0;
   go(0, false);
   showOpening();
 }
 
 
-/* ---------- RESIZE / ORIENTATION ---------- */
+/* ---------- RESIZE ---------- */
 
 if(window.visualViewport){
   window.visualViewport.addEventListener('resize', size);
@@ -1089,13 +1074,11 @@ window.addEventListener('orientationchange', function(){
 });
 
 
-/* ---------- RETURN FROM EXTERNAL (bfcache + normal) ---------- */
+/* ---------- RETURN HANDLERS ---------- */
 
 window.addEventListener('pageshow', function(e){
   clearExit();
-
   if(e.persisted){
-    // restored from bfcache → stay on current page, clear resume flag
     try{ localStorage.removeItem('ff_return'); }catch(err){}
     hideOpening();
     go(i, false);
@@ -1119,4 +1102,4 @@ document.addEventListener('visibilitychange', function(){
 </script>
 
 </body>
-  </html>
+</html>
