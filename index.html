@@ -533,32 +533,10 @@ body{
   100%{transform:scale(1.6);opacity:0}
 }
 
-
-/* LINK EXIT TRANSITION */
-
-#exit-overlay{
-  position:fixed;
-  inset:0;
-  background:#000;
-  z-index:99999;
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-  transition:opacity .28s ease,visibility .28s ease;
-}
-
-#exit-overlay.show{
-  opacity:1;
-  visibility:visible;
-  pointer-events:auto;
-}
-
 </style>
 </head>
 
 <body>
-
-<div id="exit-overlay"></div>
 
 <div id="feed">
 
@@ -802,14 +780,12 @@ var tapMoved = false;
 var grok = document.querySelector('.grok-bubble');
 var glowIdx = -1;
 
-var RESUME_WINDOW = 30 * 60 * 1000;
-
 pages.forEach(function(p, idx){
   if(p.hasAttribute('data-grok-glow')){ glowIdx = idx; }
 });
 
 
-/* OPENING SCREEN */
+/* OPENING SCREEN — only on real first visit */
 
 function hideOpening(){
   if(!opening){ return; }
@@ -826,57 +802,6 @@ function showOpening(){
 }
 
 
-/* RESUME: only after tapping a link and coming back. A refresh starts over. */
-
-function readResume(){
-
-  var out = -1;
-
-  try{
-
-    var flag = localStorage.getItem('ff_return') === '1';
-    var ts = parseInt(localStorage.getItem('ff_ts'), 10);
-    var pg = parseInt(localStorage.getItem('ff_page'), 10);
-
-    // the flag works once, so a refresh after returning starts at the opening
-    localStorage.removeItem('ff_return');
-
-    if(
-      flag &&
-      !isNaN(ts) &&
-      !isNaN(pg) &&
-      (Date.now() - ts) < RESUME_WINDOW &&
-      pg >= 0 &&
-      pg < n
-    ){
-      out = pg;
-    }
-
-  }catch(e){}
-
-  return out;
-
-}
-
-
-/* APP RESET */
-
-function resetApp(resumePage){
-
-  if(resumePage > -1){
-    i = resumePage;
-    hideOpening();
-  }else{
-    i = 0;
-    showOpening();
-  }
-
-  track.style.transition = 'none';
-  track.style.transform = 'translate3d(0,' + (-i * H) + 'px,0)';
-
-}
-
-
 /* VIEWPORT HEIGHT */
 
 function vh(){
@@ -888,100 +813,69 @@ function vh(){
 /* SIZE */
 
 function size(){
-
   H = vh();
-
   pages.forEach(function(p){
     p.style.height = H + 'px';
   });
-
   track.style.height = (n * H) + 'px';
-
   go(i, false);
-
 }
 
 
 /* SET POSITION */
 
 function setY(y, animate){
-
   track.style.transition = animate
     ? 'transform .28s cubic-bezier(.22,.9,.3,1)'
     : 'none';
-
   track.style.transform = 'translate3d(0,' + (-y) + 'px,0)';
-
 }
 
 
 /* GO TO PAGE */
 
 function go(idx, animate){
-
   if(idx < 0){ idx = 0; }
   if(idx > n - 1){ idx = n - 1; }
-
   i = idx;
-
   setY(i * H, animate !== false);
-
   if(grok && glowIdx > -1){
     grok.classList.toggle('glow', i === glowIdx);
   }
-
   play();
-
 }
 
 
 /* VIDEO SETUP */
 
 vids.forEach(function(v){
-
   v.muted = true;
   v.loop = true;
   v.playsInline = true;
   v.preload = 'auto';
-
   v.setAttribute('playsinline', '');
   v.setAttribute('webkit-playsinline', '');
-
   v.disableRemotePlayback = true;
-
 });
 
 
 /* PLAY CURRENT VIDEO */
 
 function play(){
-
   pages.forEach(function(p, idx){
-
     var v = p.querySelector('video');
-
     if(!v){ return; }
-
     if(idx === i){
-
       if(v.paused){
         v.play().catch(function(){});
       }
-
     }else{
-
       if(!v.paused){
         v.pause();
       }
-
-      try{
-        v.currentTime = 0;
-      }catch(e){}
-
+      try{ v.currentTime = 0; }catch(e){}
     }
-
   });
-
 }
 
 
@@ -992,273 +886,167 @@ function isInShop(el){
 }
 
 function shopCanScroll(dir){
-
   if(!shop){ return false; }
-
   var atTop = shop.scrollTop <= 2;
   var atBot = shop.scrollTop + shop.clientHeight >= shop.scrollHeight - 3;
-
   if(dir < 0){ return !atTop; }
   if(dir > 0){ return !atBot; }
-
   return true;
-
 }
 
 
-/* EXTERNAL LINKS: black fade, remember the page, then go */
-
-var exitOverlay = document.getElementById('exit-overlay');
-var navigating = false;
-
-function clearExit(){
-
-  if(exitOverlay){
-    exitOverlay.classList.remove('show');
-  }
-
-  navigating = false;
-
-}
+/* EXTERNAL LINKS — open without leaving the feed */
 
 function openHref(href){
-
-  if(!href || navigating){ return; }
-
-  navigating = true;
-
-  try{
-    localStorage.setItem('ff_page', String(i));
-    localStorage.setItem('ff_ts', String(Date.now()));
-    localStorage.setItem('ff_return', '1');
-  }catch(e){}
-
-  if(exitOverlay){
-    exitOverlay.classList.add('show');
-  }
-
-  setTimeout(function(){
-    window.location.href = href;
-  }, 280);
-
-  // if an app (like Grok) takes over and this page stays alive, never stay stuck on black
-  setTimeout(function(){
-    if(document.visibilityState === 'visible'){
-      clearExit();
-    }
-  }, 3500);
-
+  if(!href){ return; }
+  // Opens in a new tab / external browser so the original feed stays alive
+  window.open(href, '_blank', 'noopener,noreferrer');
 }
 
 
 /* TOUCH START */
 
 feed.addEventListener('touchstart', function(e){
-
   if(!e.touches[0]){ return; }
-
   y0 = e.touches[0].clientY;
   t0 = Date.now();
   startI = i;
   dragging = true;
   tapMoved = false;
   insideShop = isInShop(e.target);
-
   track.style.transition = 'none';
-
 }, { passive:true });
 
 
 /* TOUCH MOVE */
 
 feed.addEventListener('touchmove', function(e){
-
   if(!dragging || !e.touches[0]){ return; }
-
   var dy = y0 - e.touches[0].clientY;
-
   if(Math.abs(dy) > 8){
     tapMoved = true;
   }
-
   if(insideShop && Math.abs(dy) > 5 && shopCanScroll(dy)){
     return;
   }
-
   var y = startI * H + dy;
-
   if(y < 0){
     y = dy * .25;
   }
-
   if(y > (n - 1) * H){
     y = (n - 1) * H + (dy * .25);
   }
-
   setY(y, false);
-
   if(Math.abs(dy) > 10){
     e.preventDefault();
   }
-
 }, { passive:false });
 
 
 /* PAGE SETTLE */
 
 function settle(y1){
-
   var dy = y0 - y1;
   var dt = Math.max(Date.now() - t0, 1);
   var vel = dy / dt;
   var next = startI;
-
   var strong =
     Math.abs(dy) > 56 ||
     Math.abs(vel) > .35 ||
     Math.abs(dy) > H * .12;
-
   if(strong){
     next = dy > 0 ? startI + 1 : startI - 1;
   }
-
   go(next, true);
-
 }
 
 
 /* TOUCH END */
 
 feed.addEventListener('touchend', function(e){
-
   if(!dragging){ return; }
-
   dragging = false;
-
   var y1 = e.changedTouches[0] ? e.changedTouches[0].clientY : y0;
   var dy = y0 - y1;
-
   if(insideShop && shopCanScroll(dy) && Math.abs(dy) < 120){
     go(startI, true);
     return;
   }
-
   settle(y1);
-
 }, { passive:true });
 
 
 /* SHOP AVATARS */
 
 document.querySelectorAll('.av').forEach(function(el){
-
   el.addEventListener('click', function(e){
-
     e.preventDefault();
     e.stopPropagation();
-
     if(tapMoved){ return; }
-
     openHref(el.getAttribute('href'));
-
   });
-
 });
 
 
-/* OTHER FULL PAGE LINKS */
+/* FULL-PAGE TAP LINKS */
 
 document.querySelectorAll('.open-link').forEach(function(el){
-
   el.addEventListener('click', function(e){
-
     e.preventDefault();
     e.stopPropagation();
-
     if(tapMoved){ return; }
-
     openHref(el.getAttribute('data-href') || el.getAttribute('href'));
-
   });
-
 });
 
 
 /* GROK BUBBLE */
 
 if(grok){
-
   grok.addEventListener('click', function(e){
-
     e.preventDefault();
     e.stopPropagation();
-
     openHref(grok.getAttribute('href'));
-
   });
-
 }
 
 
 /* START */
 
-var resumePage = readResume();
-
 size();
-resetApp(resumePage);
-go(i, false);
-
-if(resumePage > -1){
-  clearExit();
-}
+showOpening();          // only plays on real first load
+go(0, false);
 
 
-/* VISUAL VIEWPORT RESIZE */
+/* RESIZE / ORIENTATION */
 
 if(window.visualViewport){
   window.visualViewport.addEventListener('resize', size);
 }
-
 window.addEventListener('resize', size);
-
-
-/* ORIENTATION */
-
 window.addEventListener('orientationchange', function(){
   setTimeout(size, 250);
 });
 
 
-/* COMING BACK (back button or app switch) */
+/* COMING BACK (back button / app switch) — feed is still alive */
 
 window.addEventListener('pageshow', function(e){
-
-  clearExit();
-
   if(e.persisted){
     hideOpening();
     go(i, false);
   }
-
 });
 
 document.addEventListener('visibilitychange', function(){
-
   if(document.visibilityState === 'visible'){
-
     setTimeout(function(){
-
       if(i >= 0 && i < n){
         setY(i * H, false);
         play();
       }
-
-      clearExit();
-
     }, 60);
-
   }
-
 });
 
 })();
