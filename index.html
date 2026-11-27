@@ -87,34 +87,20 @@ body{
 }
 
 
-/* FISSHHFILET OPENING — starts hidden, JS shows it only on real first visit */
+/* FISSHHFILET OPENING */
 
 .opening{
   position:fixed;
   inset:0;
   background:#000;
-  display:none;
+  display:flex;
   align-items:center;
   justify-content:center;
   z-index:9999;
   pointer-events:none;
-  opacity:0;
-  visibility:hidden;
-}
-
-.opening.play{
-  display:flex;
   opacity:1;
   visibility:visible;
   animation:openingOut .7s ease 2.8s forwards;
-}
-
-.opening.play span{
-  color:#a8a8a8;
-  font-size:10px;
-  letter-spacing:.32em;
-  opacity:0;
-  animation:txtIn .8s ease .3s forwards,txtOut .6s ease 2s forwards;
 }
 
 .opening span{
@@ -122,6 +108,7 @@ body{
   font-size:10px;
   letter-spacing:.32em;
   opacity:0;
+  animation:txtIn .8s ease .3s forwards,txtOut .6s ease 2s forwards;
 }
 
 @keyframes txtIn{from{opacity:0}to{opacity:1}}
@@ -533,10 +520,32 @@ body{
   100%{transform:scale(1.6);opacity:0}
 }
 
+
+/* LINK EXIT TRANSITION */
+
+#exit-overlay{
+  position:fixed;
+  inset:0;
+  background:#000;
+  z-index:99999;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .38s ease,visibility .38s ease;
+}
+
+#exit-overlay.show{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+
 </style>
 </head>
 
 <body>
+
+<div id="exit-overlay"></div>
 
 <div id="feed">
 
@@ -785,20 +794,24 @@ pages.forEach(function(p, idx){
 });
 
 
-/* OPENING SCREEN — only on real first visit */
+/* APP RESET */
 
-function hideOpening(){
-  if(!opening){ return; }
-  opening.classList.remove('play');
-  opening.style.cssText = 'display:none;opacity:0;visibility:hidden;';
-}
+function resetApp(){
 
-function showOpening(){
-  if(!opening){ return; }
-  opening.style.cssText = '';
-  opening.classList.remove('play');
-  void opening.offsetWidth;
-  opening.classList.add('play');
+  i = 0;
+
+  track.style.transition = 'none';
+  track.style.transform = 'translate3d(0,0,0)';
+
+  if(opening){
+    opening.style.display = 'flex';
+    opening.style.opacity = '1';
+    opening.style.visibility = 'visible';
+    opening.style.animation = 'none';
+    void opening.offsetWidth;
+    opening.style.animation = 'openingOut .7s ease 2.8s forwards';
+  }
+
 }
 
 
@@ -813,69 +826,100 @@ function vh(){
 /* SIZE */
 
 function size(){
+
   H = vh();
+
   pages.forEach(function(p){
     p.style.height = H + 'px';
   });
+
   track.style.height = (n * H) + 'px';
+
   go(i, false);
+
 }
 
 
 /* SET POSITION */
 
 function setY(y, animate){
+
   track.style.transition = animate
     ? 'transform .28s cubic-bezier(.22,.9,.3,1)'
     : 'none';
+
   track.style.transform = 'translate3d(0,' + (-y) + 'px,0)';
+
 }
 
 
 /* GO TO PAGE */
 
 function go(idx, animate){
+
   if(idx < 0){ idx = 0; }
   if(idx > n - 1){ idx = n - 1; }
+
   i = idx;
+
   setY(i * H, animate !== false);
+
   if(grok && glowIdx > -1){
     grok.classList.toggle('glow', i === glowIdx);
   }
+
   play();
+
 }
 
 
 /* VIDEO SETUP */
 
 vids.forEach(function(v){
+
   v.muted = true;
   v.loop = true;
   v.playsInline = true;
   v.preload = 'auto';
+
   v.setAttribute('playsinline', '');
   v.setAttribute('webkit-playsinline', '');
+
   v.disableRemotePlayback = true;
+
 });
 
 
 /* PLAY CURRENT VIDEO */
 
 function play(){
+
   pages.forEach(function(p, idx){
+
     var v = p.querySelector('video');
+
     if(!v){ return; }
+
     if(idx === i){
+
       if(v.paused){
         v.play().catch(function(){});
       }
+
     }else{
+
       if(!v.paused){
         v.pause();
       }
-      try{ v.currentTime = 0; }catch(e){}
+
+      try{
+        v.currentTime = 0;
+      }catch(e){}
+
     }
+
   });
+
 }
 
 
@@ -886,167 +930,230 @@ function isInShop(el){
 }
 
 function shopCanScroll(dir){
+
   if(!shop){ return false; }
+
   var atTop = shop.scrollTop <= 2;
   var atBot = shop.scrollTop + shop.clientHeight >= shop.scrollHeight - 3;
+
   if(dir < 0){ return !atTop; }
   if(dir > 0){ return !atBot; }
+
   return true;
+
 }
 
 
-/* EXTERNAL LINKS — open without leaving the feed */
+/* EXTERNAL LINKS — smooth fade then navigate */
+
+var exitOverlay = document.getElementById('exit-overlay');
+var navigating = false;
 
 function openHref(href){
-  if(!href){ return; }
-  // Opens in a new tab / external browser so the original feed stays alive
-  window.open(href, '_blank', 'noopener,noreferrer');
+
+  if(!href || navigating){ return; }
+
+  navigating = true;
+
+  if(exitOverlay){
+    exitOverlay.classList.add('show');
+  }
+
+  setTimeout(function(){
+    window.location.href = href;
+  }, 380);
+
 }
 
 
 /* TOUCH START */
 
 feed.addEventListener('touchstart', function(e){
+
   if(!e.touches[0]){ return; }
+
   y0 = e.touches[0].clientY;
   t0 = Date.now();
   startI = i;
   dragging = true;
   tapMoved = false;
   insideShop = isInShop(e.target);
+
   track.style.transition = 'none';
+
 }, { passive:true });
 
 
 /* TOUCH MOVE */
 
 feed.addEventListener('touchmove', function(e){
+
   if(!dragging || !e.touches[0]){ return; }
+
   var dy = y0 - e.touches[0].clientY;
+
   if(Math.abs(dy) > 8){
     tapMoved = true;
   }
+
   if(insideShop && Math.abs(dy) > 5 && shopCanScroll(dy)){
     return;
   }
+
   var y = startI * H + dy;
+
   if(y < 0){
     y = dy * .25;
   }
+
   if(y > (n - 1) * H){
     y = (n - 1) * H + (dy * .25);
   }
+
   setY(y, false);
+
   if(Math.abs(dy) > 10){
     e.preventDefault();
   }
+
 }, { passive:false });
 
 
 /* PAGE SETTLE */
 
 function settle(y1){
+
   var dy = y0 - y1;
   var dt = Math.max(Date.now() - t0, 1);
   var vel = dy / dt;
   var next = startI;
+
   var strong =
     Math.abs(dy) > 56 ||
     Math.abs(vel) > .35 ||
     Math.abs(dy) > H * .12;
+
   if(strong){
     next = dy > 0 ? startI + 1 : startI - 1;
   }
+
   go(next, true);
+
 }
 
 
 /* TOUCH END */
 
 feed.addEventListener('touchend', function(e){
+
   if(!dragging){ return; }
+
   dragging = false;
+
   var y1 = e.changedTouches[0] ? e.changedTouches[0].clientY : y0;
   var dy = y0 - y1;
+
   if(insideShop && shopCanScroll(dy) && Math.abs(dy) < 120){
     go(startI, true);
     return;
   }
+
   settle(y1);
+
 }, { passive:true });
 
 
-/* SHOP AVATARS */
+/* SHOP AVATARS — smooth exit */
 
 document.querySelectorAll('.av').forEach(function(el){
+
   el.addEventListener('click', function(e){
+
     e.preventDefault();
     e.stopPropagation();
+
     if(tapMoved){ return; }
+
     openHref(el.getAttribute('href'));
+
   });
+
 });
 
 
-/* FULL-PAGE TAP LINKS */
+/* OTHER FULL PAGE LINKS */
 
 document.querySelectorAll('.open-link').forEach(function(el){
+
   el.addEventListener('click', function(e){
+
     e.preventDefault();
     e.stopPropagation();
+
     if(tapMoved){ return; }
+
     openHref(el.getAttribute('data-href') || el.getAttribute('href'));
+
   });
+
 });
 
 
-/* GROK BUBBLE */
+/* GROK BUBBLE — smooth exit */
 
 if(grok){
+
   grok.addEventListener('click', function(e){
+
     e.preventDefault();
     e.stopPropagation();
+
     openHref(grok.getAttribute('href'));
+
   });
+
 }
 
 
 /* START */
 
 size();
-showOpening();          // only plays on real first load
-go(0, false);
+resetApp();
 
 
-/* RESIZE / ORIENTATION */
+/* VISUAL VIEWPORT RESIZE */
 
 if(window.visualViewport){
   window.visualViewport.addEventListener('resize', size);
 }
+
 window.addEventListener('resize', size);
+
+
+/* ORIENTATION */
+
 window.addEventListener('orientationchange', function(){
   setTimeout(size, 250);
 });
 
 
-/* COMING BACK (back button / app switch) — feed is still alive */
-
-window.addEventListener('pageshow', function(e){
-  if(e.persisted){
-    hideOpening();
-    go(i, false);
-  }
-});
+/* RETURN FROM EXTERNAL SITE */
 
 document.addEventListener('visibilitychange', function(){
+
   if(document.visibilityState === 'visible'){
+
     setTimeout(function(){
+
       if(i >= 0 && i < n){
         setY(i * H, false);
         play();
       }
-    }, 60);
+
+    }, 80);
+
   }
+
 });
 
 })();
