@@ -1236,6 +1236,12 @@ window.addEventListener('pageshow', function(e){
   clearExit();
 
   if(e.persisted){
+    // Clear the one-time resume flag so a refresh after returning
+    // from bfcache starts at the opening instead of staying stuck.
+    try {
+      localStorage.removeItem('ff_return');
+    } catch(err){}
+
     hideOpening();
     go(i, false);
   }
@@ -1266,4 +1272,4 @@ document.addEventListener('visibilitychange', function(){
 </script>
 
 </body>
-</html>
+  </html>
