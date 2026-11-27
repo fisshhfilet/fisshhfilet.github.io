@@ -75,6 +75,7 @@ body{
 .page.white-bg{background:#fff}
 .page.white-bg img{background:#fff}
 
+
 /* GENERIC FULL PAGE LINKS */
 
 .tap{
@@ -85,38 +86,41 @@ body{
   -webkit-tap-highlight-color:transparent;
 }
 
-/* FISSHHFILET OPENING — VISIBLE BY DEFAULT, NO FLASH */
+
+/* FISSHHFILET OPENING */
 
 .opening{
   position:fixed;
   inset:0;
   background:#000;
-  display:flex;
+  display:none;
   align-items:center;
   justify-content:center;
   z-index:9999;
   pointer-events:none;
-  opacity:1;
-  visibility:visible;
-  transition:opacity .6s ease, visibility .6s ease;
-}
-
-.opening.hide{
   opacity:0;
   visibility:hidden;
+  transition:opacity .7s ease, visibility .7s ease;
+}
+
+.opening.show{
+  display:flex;
+  opacity:1;
+  visibility:visible;
 }
 
 .opening span{
   color:#a8a8a8;
   font-size:10px;
   letter-spacing:.32em;
-  opacity:1;
-  transition:opacity .7s ease;
+  opacity:0;
+  transition:opacity .8s ease;
 }
 
-.opening.hide span{
-  opacity:0;
+.opening.show span{
+  opacity:1;
 }
+
 
 /* HAKRs.shop LANDING */
 
@@ -150,6 +154,7 @@ body{
   font-weight:400;
   letter-spacing:.02em;
 }
+
 
 /* HAKRs INSTAGRAM */
 
@@ -194,6 +199,7 @@ body{
   font-weight:400;
 }
 
+
 /* ADVERTISEMENT PAGE */
 
 .ad-page{background:#000}
@@ -206,6 +212,7 @@ body{
   display:block;
   background:#000;
 }
+
 
 /* SHOP */
 
@@ -288,6 +295,7 @@ body{
   font-weight:900;
 }
 
+
 /* SHOP TOGGLE */
 
 .toggle{
@@ -316,6 +324,7 @@ body{
   background:#ff2a6d;
   color:#fff;
 }
+
 
 /* SHOP IMAGE */
 
@@ -355,6 +364,7 @@ body{
   flex-shrink:0;
 }
 
+
 /* SHOP CARDS */
 
 .grid{
@@ -387,6 +397,7 @@ body{
   color:#ddd;
   font-weight:700;
 }
+
 
 /* SHOP BUTTONS */
 
@@ -431,6 +442,7 @@ body{
   letter-spacing:.1em;
 }
 
+
 /* FINAL */
 
 .final{
@@ -439,7 +451,8 @@ body{
   text-align:center;
 }
 
-/* GROK BUBBLE */
+
+/* GROK BUBBLE (visible only on YO GROK page) */
 
 .grok-bubble{
   position:fixed;
@@ -510,6 +523,7 @@ body{
   100%{transform:scale(1.6);opacity:0}
 }
 
+
 /* LINK EXIT TRANSITION */
 
 #exit-overlay{
@@ -544,10 +558,12 @@ body{
 
 <div id="track">
 
+
 <section class="page">
 <img src="hakrs.jpg" width="1080" height="1920" alt="HAKRs.shop">
 <div class="tap open-link" data-href="https://www.instagram.com/hakrs.shop?stkn=MWhxYjhwaDAzamp5aw=="></div>
 </section>
+
 
 <section class="page">
 <div class="betty">
@@ -555,25 +571,30 @@ body{
 </div>
 </section>
 
+
 <!-- WA!STA -->
 <section class="page">
 <img src="waista.jpg" width="1080" height="1920" alt="">
 </section>
+
 
 <!-- YO GROK: GLOW STARTS ON THIS PAGE -->
 <section class="page" data-grok-glow>
 <img src="Yogrok.jpg" width="1080" height="2340" alt="yo grok">
 </section>
 
+
 <!-- LO-DON' LEMON: INSIDE DELI COUNTER -->
 <section class="page">
 <img src="lodondeli.jpg" width="1080" height="1920" alt="LO-DON' LEMON inside the deli">
 </section>
 
+
 <!-- LO-DON' LEMON: OUTSIDE STOREFRONT -->
 <section class="page">
 <img src="lodon.jpg" width="1080" height="1920" alt="LO-DON' Lemon storefront">
 </section>
+
 
 <!-- SHARKBAIT -->
 <section class="page">
@@ -581,20 +602,24 @@ body{
 <div class="tap open-link" data-href="https://naturalcatchtuna.com/"></div>
 </section>
 
+
 <!-- REDFRIES -->
 <section class="page">
 <img src="redfries.jpg" width="1080" height="1920" alt="">
 </section>
 
+
 <section class="page">
 <video muted loop playsinline webkit-playsinline preload="auto">
-<source src="【entity-Sephora¦canonical_name=Sephora】.mp4" type="video/mp4">
+<source src="Sephora.mp4" type="video/mp4">
 </video>
 </section>
+
 
 <section class="page">
 <img src="qr-ware.jpg" width="1080" height="1920" alt="">
 </section>
+
 
 <section class="page">
 <video muted loop playsinline webkit-playsinline preload="auto">
@@ -602,15 +627,16 @@ body{
 </video>
 </section>
 
+
 <section class="page" style="background:#000">
 
 <div class="shop">
 
 <div class="avatars">
 
-<a class="av seph active" href="https://www.sephora.com/" target="_blank" rel="noopener noreferrer" aria-label="Open 【entity-Sephora¦canonical_name=Sephora】">
-<div class="c"><img src="【entity-sephora¦canonical_name=Sephora】.jpg" width="104" height="104" alt=""></div>
-<i>【entity-SEPHORA¦canonical_name=Sephora】</i>
+<a class="av seph active" href="https://www.sephora.com/" target="_blank" rel="noopener noreferrer" aria-label="Open Sephora">
+<div class="c"><img src="sephora.jpg" width="104" height="104" alt=""></div>
+<i>SEPHORA</i>
 </a>
 
 <a class="av" href="https://www.sephora.com/" target="_blank" rel="noopener noreferrer">
@@ -645,18 +671,22 @@ body{
 
 </div>
 
+
 <div class="toggle">
 <button>SHARK • ARCHIVE 5/9</button>
 <button class="on">FLIPPED • HAKRs 4/9</button>
 </div>
 
+
 <div class="img">
 <img src="hakrs-pier-flip-clean.jpg" width="800" height="500" alt="">
 </div>
 
+
 <div class="swipe">SWIPE UP</div>
 
 <div class="live">SHARK IS LIVE — TAP TO FLIP CARDS 4/4 04/09</div>
+
 
 <div class="grid">
 
@@ -682,9 +712,11 @@ body{
 
 </div>
 
+
 <div class="cta">FLIP → $32</div>
 
 <div class="cta ghost">• § h o p •</div>
+
 
 <div class="add">
 <span>ADD → $32</span>
@@ -695,24 +727,29 @@ body{
 
 </section>
 
+
 <section class="page">
 <img src="waista-question.jpg" width="1080" height="1920" alt="">
 </section>
 
+
 <section class="page">
 <video muted loop playsinline webkit-playsinline preload="auto">
-<source src="【entity-Hershey¦canonical_name=Hershey】.mp4" type="video/mp4">
+<source src="Hershey.mp4" type="video/mp4">
 </video>
 </section>
 
+
 <section class="page">
-<img src="【entity-kalshi¦canonical_name=Kalshi】-trade.jpg" width="1080" height="1920" alt="">
+<img src="kalshi-trade.jpg" width="1080" height="1920" alt="">
 <div class="tap open-link" data-href="https://kalshi.com"></div>
 </section>
+
 
 <section class="page">
 <img src="adults-only-beach.jpg" width="1080" height="1920" alt="">
 </section>
+
 
 <section class="page final" style="background:#000">
 <div style="color:#a8a8a8;font-size:10px;letter-spacing:.32em">@fisshhfilet</div>
@@ -723,6 +760,7 @@ body{
 </div>
 </div>
 
+
 <!-- GROK BUBBLE -->
 <a class="grok-bubble" href="https://grok.com" target="_blank" rel="noopener noreferrer" aria-label="Open Grok">
 <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
@@ -730,6 +768,7 @@ body{
 <path d="M7 17 L18 6"/>
 </svg>
 </a>
+
 
 <script>
 
@@ -754,40 +793,40 @@ var grok = document.querySelector('.grok-bubble');
 var glowIdx = -1;
 var exitOverlay = document.getElementById('exit-overlay');
 var navigating = false;
-var openingTimer = null;
+
+var RESUME_WINDOW = 30 * 60 * 1000;
 
 pages.forEach(function(p, idx){
   if(p.hasAttribute('data-grok-glow')){ glowIdx = idx; }
 });
 
-/* ---------- OPENING - VISIBLE BY DEFAULT, NO FLASH ---------- */
+
+/* ---------- OPENING SCREEN (JS controlled) ---------- */
 
 function hideOpening(){
   if(!opening) return;
-  opening.classList.add('hide');
+  opening.classList.remove('show');
+  // force hide after transition
+  setTimeout(function(){
+    opening.style.display = 'none';
+  }, 700);
 }
 
 function showOpening(){
   if(!opening) return;
-  if(openingTimer) clearTimeout(openingTimer);
-  opening.classList.remove('hide');
-  // auto-hide after ~3 seconds
-  openingTimer = setTimeout(hideOpening, 3000);
-}
-
-function showOpeningInstant(){
-  if(!opening) return;
-  if(openingTimer) clearTimeout(openingTimer);
-  // kill transition so it snaps on instantly for back-button snapshot
-  var old = opening.style.transition;
-  opening.style.transition = 'none';
-  opening.classList.remove('hide');
-  // force paint
+  opening.style.display = 'flex';
+  // force reflow
   void opening.offsetWidth;
-  opening.style.transition = old || '';
+  opening.classList.add('show');
+
+  // hide after \~3 seconds
+  setTimeout(function(){
+    hideOpening();
+  }, 3000);
 }
 
-/* ---------- RESUME OFF - ALWAYS RESTART AT OPENING ---------- */
+
+/* ---------- RESUME LOGIC ---------- */
 
 function clearResumeData(){
   try{
@@ -796,6 +835,41 @@ function clearResumeData(){
     localStorage.removeItem('ff_ts');
   }catch(e){}
 }
+
+function readResume(){
+  var out = -1;
+
+  try{
+    // Always force opening on a real Refresh
+    var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+    if(nav && nav.type === 'reload'){
+      clearResumeData();
+      return -1;
+    }
+
+    var flag = localStorage.getItem('ff_return') === '1';
+    var ts   = parseInt(localStorage.getItem('ff_ts'), 10);
+    var pg   = parseInt(localStorage.getItem('ff_page'), 10);
+
+    // consume the one-time flag
+    localStorage.removeItem('ff_return');
+
+    if(
+      flag &&
+      !isNaN(ts) &&
+      !isNaN(pg) &&
+      (Date.now() - ts) < RESUME_WINDOW &&
+      pg >= 0 &&
+      pg < n
+    ){
+      out = pg;
+    }
+
+  }catch(e){}
+
+  return out;
+}
+
 
 /* ---------- CORE ---------- */
 
@@ -843,6 +917,7 @@ function play(){
   });
 }
 
+
 /* ---------- VIDEO SETUP ---------- */
 
 vids.forEach(function(v){
@@ -855,7 +930,8 @@ vids.forEach(function(v){
   v.disableRemotePlayback = true;
 });
 
-/* ---------- SHOP ---------- */
+
+/* ---------- SHOP HELPERS ---------- */
 
 function isInShop(el){
   return shop && el && shop.contains(el);
@@ -870,7 +946,8 @@ function shopCanScroll(dir){
   return true;
 }
 
-/* ---------- EXIT ---------- */
+
+/* ---------- EXIT / EXTERNAL LINKS ---------- */
 
 function clearExit(){
   if(exitOverlay) exitOverlay.classList.remove('show');
@@ -881,12 +958,11 @@ function openHref(href){
   if(!href || navigating) return;
   navigating = true;
 
-  clearResumeData();
-
-  // Show opening BEFORE leaving, so back-button snapshot = opening, not Instagram
-  i = 0;
-  go(0, false);
-  showOpeningInstant();
+  try{
+    localStorage.setItem('ff_page', String(i));
+    localStorage.setItem('ff_ts', String(Date.now()));
+    localStorage.setItem('ff_return', '1');
+  }catch(e){}
 
   if(exitOverlay) exitOverlay.classList.add('show');
 
@@ -894,13 +970,16 @@ function openHref(href){
     window.location.href = href;
   }, 280);
 
-  // safety net
+  // safety: never stay stuck on black if the browser/app keeps the page alive
   setTimeout(function(){
-    if(document.visibilityState === 'visible') clearExit();
+    if(document.visibilityState === 'visible'){
+      clearExit();
+    }
   }, 3500);
 }
 
-/* ---------- TOUCH ---------- */
+
+/* ---------- TOUCH HANDLERS ---------- */
 
 feed.addEventListener('touchstart', function(e){
   if(!e.touches[0]) return;
@@ -951,7 +1030,8 @@ feed.addEventListener('touchend', function(e){
   settle(y1);
 }, {passive:true});
 
-/* ---------- CLICKS ---------- */
+
+/* ---------- CLICK HANDLERS ---------- */
 
 document.querySelectorAll('.av').forEach(function(el){
   el.addEventListener('click', function(e){
@@ -979,15 +1059,26 @@ if(grok){
   });
 }
 
-/* ---------- START - ALWAYS OPENING ---------- */
 
-clearResumeData();
+/* ---------- START ---------- */
+
+var resumePage = readResume();
+
 size();
-i = 0;
-go(0, false);
-showOpening();
 
-/* ---------- RESIZE ---------- */
+if(resumePage > -1){
+  i = resumePage;
+  hideOpening();
+  go(i, false);
+  clearExit();
+}else{
+  i = 0;
+  go(0, false);
+  showOpening();
+}
+
+
+/* ---------- RESIZE / ORIENTATION ---------- */
 
 if(window.visualViewport){
   window.visualViewport.addEventListener('resize', size);
@@ -997,37 +1088,29 @@ window.addEventListener('orientationchange', function(){
   setTimeout(size, 250);
 });
 
-/* ---------- RETURN HANDLERS - ALWAYS REFRESH TO OPENING, NO FLASH ---------- */
 
-// Before the page is frozen for back-button, force snapshot to opening
-window.addEventListener('pagehide', function(){
-  i = 0;
-  try{ go(0, false); }catch(e){}
-  showOpeningInstant();
-});
+/* ---------- RETURN FROM EXTERNAL (bfcache + normal) ---------- */
 
 window.addEventListener('pageshow', function(e){
   clearExit();
-  clearResumeData();
-  // Always reset, even if not bfcache
-  i = 0;
-  go(0, false);
-  showOpening();
+
+  if(e.persisted){
+    // restored from bfcache → stay on current page, clear resume flag
+    try{ localStorage.removeItem('ff_return'); }catch(err){}
+    hideOpening();
+    go(i, false);
+  }
 });
 
 document.addEventListener('visibilitychange', function(){
   if(document.visibilityState === 'visible'){
-    // No delay - show instantly so no Instagram frame flashes
-    clearExit();
-    clearResumeData();
-    i = 0;
-    go(0, false);
-    showOpening();
-  } else {
-    // Leaving - snapshot should be opening
-    i = 0;
-    try{ go(0, false); }catch(e){}
-    showOpeningInstant();
+    setTimeout(function(){
+      if(i >= 0 && i < n){
+        setY(i * H, false);
+        play();
+      }
+      clearExit();
+    }, 60);
   }
 });
 
