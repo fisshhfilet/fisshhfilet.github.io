@@ -803,7 +803,7 @@ function resetApp(skipOpening){
     saved = parseInt(sessionStorage.getItem('ff_page'), 10);
   }catch(e){}
 
-  if(!isNaN(saved) && saved >= 0 && saved < n){
+  if(skipOpening && !isNaN(saved) && saved >= 0 && saved < n){
     i = saved;
   }else{
     i = 0;
@@ -812,7 +812,7 @@ function resetApp(skipOpening){
   track.style.transition = 'none';
   track.style.transform = 'translate3d(0,' + (-i * (H || vh())) + 'px,0)';
 
-  if(skipOpening || (!isNaN(saved) && saved >= 0)){
+  if(skipOpening){
     if(opening){
       opening.style.display = 'none';
       opening.style.opacity = '0';
@@ -1222,4 +1222,4 @@ document.addEventListener('visibilitychange', function(){
 </script>
 
 </body>
-</html>
+  </html>
