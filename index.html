@@ -6,658 +6,541 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#000000">
 
-<title>
-fisshhfilet.github.io
-</title>
+<title>fisshhfilet.github.io</title>
 
-<link
-rel="preload"
-as="image"
-href="betty.jpg"
->
-<link
-rel="preload"
-as="image"
-href="waista.jpg"
->
-<link
-rel="preload"
-as="image"
-href="hakrs.jpg"
->
-<link
-rel="preload"
-as="image"
-href="lodondeli.jpg"
->
-<link
-rel="preload"
-as="image"
-href="lodon.jpg"
->
-<link
-rel="preload"
-as="image"
-href="Yogrok.jpg"
->
+<link rel="preload" as="image" href="betty.jpg">
+<link rel="preload" as="image" href="waista.jpg">
+<link rel="preload" as="image" href="hakrs.jpg">
+<link rel="preload" as="image" href="lodondeli.jpg">
+<link rel="preload" as="image" href="lodon.jpg">
+<link rel="preload" as="image" href="Yogrok.jpg">
 
 <style>
 
-*
-{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
 html,
-body
-{
-width:100%;
-height:100%;
-background:#000;
-position:fixed;
-inset:0;
-overflow:hidden;
-touch-action:none;
+body{
+  width:100%;
+  height:100%;
+  background:#000;
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  touch-action:none;
 }
 
-body
-{
-font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
-overscroll-behavior:none;
--webkit-font-smoothing:antialiased;
+body{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  overscroll-behavior:none;
+  -webkit-font-smoothing:antialiased;
 }
 
-#feed
-{
-position:absolute;
-inset:0;
-overflow:hidden;
-background:#000;
+#feed{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  background:#000;
 }
 
-#track
-{
-width:100%;
-will-change:transform;
-opacity:0;
+#track{
+  width:100%;
+  will-change:transform;
 }
 
-body.ready #track
-{
-opacity:1;
-}
-
-.page
-{
-width:100%;
-height:100%;
-background:#000;
-display:flex;
-align-items:center;
-justify-content:center;
-position:relative;
-overflow:hidden;
-flex-shrink:0;
+.page{
+  width:100%;
+  height:100%;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+  flex-shrink:0;
 }
 
 .page > img,
 .page > video,
-.betty img
-{
-width:100%;
-height:100%;
-object-fit:contain;
-object-position:center center;
-background:#000;
-display:block;
-pointer-events:none;
+.betty img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center center;
+  background:#000;
+  display:block;
+  pointer-events:none;
 }
 
-.page.white-bg
-{
-background:#fff;
-}
+.page.white-bg{background:#fff}
+.page.white-bg img{background:#fff}
 
-.page.white-bg img
-{
-background:#fff;
-}
 
 /* GENERIC FULL PAGE LINKS */
 
-.tap
-{
-position:absolute;
-inset:0;
-z-index:5;
-cursor:pointer;
--webkit-tap-highlight-color:transparent;
+.tap{
+  position:absolute;
+  inset:0;
+  z-index:5;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
 }
 
-/* FISSHHFILET OPENING — INSTANT CUT, NO FADE, NO CLASH */
-/* NO TRANSITION HERE ON PURPOSE */
-/* IF IT FADES, IT OVERLAPS THE INSTAGRAM PAGE */
-/* INSTANT CUT = NO DOUBLE IMAGE */
 
-.opening
-{
-position:fixed;
-inset:0;
-background:#000;
-display:flex;
-align-items:center;
-justify-content:center;
-z-index:9999;
-pointer-events:none;
-opacity:1;
-visibility:visible;
+/* FISSHHFILET OPENING */
+
+.opening{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  pointer-events:none;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .7s ease, visibility .7s ease;
 }
 
-.opening.hide
-{
-opacity:0;
-visibility:hidden;
-display:none;
+.opening.show{
+  display:flex;
+  opacity:1;
+  visibility:visible;
 }
 
-.opening span
-{
-color:#a8a8a8;
-font-size:10px;
-letter-spacing:.32em;
-opacity:1;
+.opening span{
+  color:#a8a8a8;
+  font-size:10px;
+  letter-spacing:.32em;
+  opacity:0;
+  transition:opacity .8s ease;
 }
 
-.opening.hide span
-{
-opacity:0;
+.opening.show span{
+  opacity:1;
 }
+
 
 /* HAKRs.shop LANDING */
 
-.hakrs-landing
-{
-width:100%;
-height:100%;
-background:#000;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
-position:relative;
+.hakrs-landing{
+  width:100%;
+  height:100%;
+  background:#000;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
 }
 
-.hakrs-title
-{
-font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
-font-weight:900;
-font-size:clamp(48px,13vw,86px);
-line-height:.92;
-letter-spacing:-.065em;
-color:#fff;
-white-space:nowrap;
+.hakrs-title{
+  font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-weight:900;
+  font-size:clamp(48px,13vw,86px);
+  line-height:.92;
+  letter-spacing:-.065em;
+  color:#fff;
+  white-space:nowrap;
 }
 
-.hakrs-count
-{
-margin-top:42px;
-color:#cfcfcf;
-font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
-font-size:clamp(15px,4vw,22px);
-font-weight:400;
-letter-spacing:.02em;
+.hakrs-count{
+  margin-top:42px;
+  color:#cfcfcf;
+  font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:clamp(15px,4vw,22px);
+  font-weight:400;
+  letter-spacing:.02em;
 }
+
 
 /* HAKRs INSTAGRAM */
 
-.hakrs-instagram
-{
-margin-top:72px;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-decoration:none;
-color:#fff;
--webkit-tap-highlight-color:transparent;
-cursor:pointer;
+.hakrs-instagram{
+  margin-top:72px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  color:#fff;
+  -webkit-tap-highlight-color:transparent;
+  cursor:pointer;
 }
 
-.hakrs-ig
-{
-width:148px;
-height:148px;
-border-radius:33px;
-background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fdf497 8%,#fd5949 45%,#d6249f 60%,#285AEB 90%);
-display:flex;
-align-items:center;
-justify-content:center;
-transform:translateZ(0);
--webkit-transform:translateZ(0);
-backface-visibility:hidden;
-isolation:isolate;
+.hakrs-ig{
+  width:148px;
+  height:148px;
+  border-radius:33px;
+  background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fdf497 8%,#fd5949 45%,#d6249f 60%,#285AEB 90%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform:translateZ(0);
+  -webkit-transform:translateZ(0);
+  backface-visibility:hidden;
+  isolation:isolate;
 }
 
-.hakrs-ig svg
-{
-width:86px;
-height:86px;
-display:block;
-overflow:visible;
+.hakrs-ig svg{
+  width:86px;
+  height:86px;
+  display:block;
+  overflow:visible;
 }
 
-.hakrs-click
-{
-margin-top:24px;
-font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
-font-size:20px;
-color:#cfcfcf;
-font-weight:400;
+.hakrs-click{
+  margin-top:24px;
+  font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:20px;
+  color:#cfcfcf;
+  font-weight:400;
 }
+
 
 /* ADVERTISEMENT PAGE */
 
-.ad-page
-{
-background:#000;
+.ad-page{background:#000}
+
+.ad-page img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center center;
+  display:block;
+  background:#000;
 }
 
-.ad-page img
-{
-width:100%;
-height:100%;
-object-fit:contain;
-object-position:center center;
-display:block;
-background:#000;
-}
 
 /* SHOP */
 
-.shop
-{
-width:100%;
-max-width:430px;
-height:100%;
-background:#000;
-display:flex;
-flex-direction:column;
-overflow-y:auto;
-color:#e8e8e8;
-padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
--webkit-overflow-scrolling:touch;
-overscroll-behavior:contain;
-touch-action:pan-y;
+.shop{
+  width:100%;
+  max-width:430px;
+  height:100%;
+  background:#000;
+  display:flex;
+  flex-direction:column;
+  overflow-y:auto;
+  color:#e8e8e8;
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  touch-action:pan-y;
 }
 
-.avatars
-{
-display:flex;
-gap:10px;
-overflow-x:auto;
-padding:10px 12px 10px;
--webkit-overflow-scrolling:touch;
-flex-shrink:0;
+.avatars{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding:10px 12px 10px;
+  -webkit-overflow-scrolling:touch;
+  flex-shrink:0;
 }
 
-.av
-{
-flex:0 0 56px;
-text-align:center;
-text-decoration:none;
-opacity:.35;
-color:inherit;
-cursor:pointer;
--webkit-tap-highlight-color:transparent;
-touch-action:manipulation;
+.av{
+  flex:0 0 56px;
+  text-align:center;
+  text-decoration:none;
+  opacity:.35;
+  color:inherit;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
 }
 
-.av.active
-{
-opacity:1;
+.av.active{opacity:1}
+
+.av .c{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  overflow:hidden;
+  background:#111;
+  margin:0 auto;
+  border:2px solid #2a2a2a;
+  flex-shrink:0;
 }
 
-.av .c
-{
-width:52px;
-height:52px;
-border-radius:50%;
-overflow:hidden;
-background:#111;
-margin:0 auto;
-border:2px solid #2a2a2a;
-flex-shrink:0;
+.av.active .c{
+  border-color:#fff;
+  box-shadow:0 0 0 2px #fff;
 }
 
-.av.active .c
-{
-border-color:#fff;
-box-shadow:0 0 0 2px #fff;
+.av .c img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+  pointer-events:none;
+  display:block;
+  border-radius:50%;
 }
 
-.av .c img
-{
-width:100%;
-height:100%;
-object-fit:cover;
-object-position:center center;
-pointer-events:none;
-display:block;
-border-radius:50%;
+.av i{
+  font-style:normal;
+  font-size:7px;
+  color:#666;
+  margin-top:5px;
+  display:block;
+  letter-spacing:.08em;
 }
 
-.av i
-{
-font-style:normal;
-font-size:7px;
-color:#666;
-margin-top:5px;
-display:block;
-letter-spacing:.08em;
+.av.seph{opacity:1}
+
+.av.seph i{
+  color:#fff;
+  font-weight:900;
 }
 
-.av.seph
-{
-opacity:1;
-}
-
-.av.seph i
-{
-color:#fff;
-font-weight:900;
-}
 
 /* SHOP TOGGLE */
 
-.toggle
-{
-margin:4px 12px 10px;
-background:#111;
-border-radius:999px;
-display:grid;
-grid-template-columns:1fr 1fr;
-padding:3px;
-gap:3px;
-flex-shrink:0;
+.toggle{
+  margin:4px 12px 10px;
+  background:#111;
+  border-radius:999px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  padding:3px;
+  gap:3px;
+  flex-shrink:0;
 }
 
-.toggle button
-{
-height:36px;
-border-radius:999px;
-border:0;
-font-size:9px;
-font-weight:800;
-letter-spacing:.08em;
-background:#1a1a1a;
-color:#8a8a8a;
+.toggle button{
+  height:36px;
+  border-radius:999px;
+  border:0;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.08em;
+  background:#1a1a1a;
+  color:#8a8a8a;
 }
 
-.toggle button.on
-{
-background:#ff2a6d;
-color:#fff;
+.toggle button.on{
+  background:#ff2a6d;
+  color:#fff;
 }
+
 
 /* SHOP IMAGE */
 
-.img
-{
-margin:0 12px;
-border-radius:18px;
-overflow:hidden;
-border:3px solid #ff5a1f;
-background:#000;
-aspect-ratio:16/10;
-flex-shrink:0;
+.img{
+  margin:0 12px;
+  border-radius:18px;
+  overflow:hidden;
+  border:3px solid #ff5a1f;
+  background:#000;
+  aspect-ratio:16/10;
+  flex-shrink:0;
 }
 
-.img img
-{
-width:100%;
-height:100%;
-object-fit:cover;
-display:block;
+.img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
 
-.swipe
-{
-text-align:center;
-padding:8px 12px 2px;
-font-size:8px;
-letter-spacing:.28em;
-color:#555;
-flex-shrink:0;
+.swipe{
+  text-align:center;
+  padding:8px 12px 2px;
+  font-size:8px;
+  letter-spacing:.28em;
+  color:#555;
+  flex-shrink:0;
 }
 
-.live
-{
-text-align:center;
-padding:0 12px 10px;
-font-size:9px;
-color:#ff2a6d;
-letter-spacing:.06em;
-font-weight:700;
-flex-shrink:0;
+.live{
+  text-align:center;
+  padding:0 12px 10px;
+  font-size:9px;
+  color:#ff2a6d;
+  letter-spacing:.06em;
+  font-weight:700;
+  flex-shrink:0;
 }
+
 
 /* SHOP CARDS */
 
-.grid
-{
-padding:0 12px 10px;
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:8px;
-flex-shrink:0;
+.grid{
+  padding:0 12px 10px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  flex-shrink:0;
 }
 
-.card
-{
-background:#111;
-border:1px solid #1a1a1a;
-border-radius:10px;
-padding:12px 10px;
+.card{
+  background:#111;
+  border:1px solid #1a1a1a;
+  border-radius:10px;
+  padding:12px 10px;
 }
 
-.card b
-{
-font-size:8px;
-color:#555;
-display:block;
-margin-bottom:8px;
-letter-spacing:.08em;
-font-weight:700;
+.card b{
+  font-size:8px;
+  color:#555;
+  display:block;
+  margin-bottom:8px;
+  letter-spacing:.08em;
+  font-weight:700;
 }
 
-.card p
-{
-font-size:10px;
-line-height:1.35;
-color:#ddd;
-font-weight:700;
+.card p{
+  font-size:10px;
+  line-height:1.35;
+  color:#ddd;
+  font-weight:700;
 }
+
 
 /* SHOP BUTTONS */
 
-.cta
-{
-margin:0 12px 8px;
-background:#fff;
-color:#000;
-border:0;
-height:40px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:11px;
-font-weight:900;
-letter-spacing:.18em;
-flex-shrink:0;
+.cta{
+  margin:0 12px 8px;
+  background:#fff;
+  color:#000;
+  border:0;
+  height:40px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.18em;
+  flex-shrink:0;
 }
 
-.cta.ghost
-{
-background:#000;
-color:#fff;
-border:1px solid #333;
-letter-spacing:.46em;
-font-size:11px;
+.cta.ghost{
+  background:#000;
+  color:#fff;
+  border:1px solid #333;
+  letter-spacing:.46em;
+  font-size:11px;
 }
 
-.add
-{
-margin:0 12px 16px;
-background:#111;
-border:1px solid #1a1a1a;
-border-radius:4px;
-display:flex;
-justify-content:space-between;
-padding:14px 14px 14px 16px;
-align-items:center;
-flex-shrink:0;
+.add{
+  margin:0 12px 16px;
+  background:#111;
+  border:1px solid #1a1a1a;
+  border-radius:4px;
+  display:flex;
+  justify-content:space-between;
+  padding:14px 14px 14px 16px;
+  align-items:center;
+  flex-shrink:0;
 }
 
-.add span
-{
-font-size:12px;
-font-weight:900;
-letter-spacing:.1em;
+.add span{
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.1em;
 }
+
 
 /* FINAL */
 
-.final
-{
-flex-direction:column;
-gap:38px;
-text-align:center;
+.final{
+  flex-direction:column;
+  gap:38px;
+  text-align:center;
 }
 
-/* GROK BUBBLE */
 
-.grok-bubble
-{
-position:fixed;
-right:14px;
-bottom:calc(env(safe-area-inset-bottom) + 96px);
-width:56px;
-height:56px;
-border-radius:50%;
-z-index:9000;
-display:flex;
-align-items:center;
-justify-content:center;
-background:#0b0b0b;
-border:1.5px solid rgba(255,255,255,.85);
-box-shadow:0 6px 22px rgba(0,0,0,.6);
-text-decoration:none;
--webkit-tap-highlight-color:transparent;
-touch-action:manipulation;
-opacity:0;
-visibility:hidden;
-transition:opacity .4s ease,visibility .4s ease;
-}
+/* GROK BUBBLE (visible only on YO GROK page) */
 
-.grok-bubble::after
-{
-content:"";
-position:absolute;
-inset:-2px;
-border-radius:50%;
-border:1.5px solid rgba(255,255,255,.55);
-opacity:0;
-pointer-events:none;
+.grok-bubble{
+  position:fixed;
+  right:14px;
+  bottom:calc(env(safe-area-inset-bottom) + 96px);
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  z-index:9000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#0b0b0b;
+  border:1.5px solid rgba(255,255,255,.85);
+  box-shadow:0 6px 22px rgba(0,0,0,.6);
+  text-decoration:none;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .4s ease,visibility .4s ease;
 }
 
-.grok-bubble svg
-{
-width:28px;
-height:28px;
-display:block;
-pointer-events:none;
+.grok-bubble::after{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.55);
+  opacity:0;
+  pointer-events:none;
 }
 
-.grok-bubble:active
-{
-transform:scale(.92);
+.grok-bubble svg{
+  width:28px;
+  height:28px;
+  display:block;
+  pointer-events:none;
 }
 
-.grok-bubble.glow
-{
-opacity:1;
-visibility:visible;
-border-color:#fff;
-animation:grokFloat 3.6s ease-in-out infinite,grokGlow 1.8s ease-in-out infinite;
+.grok-bubble:active{transform:scale(.92)}
+
+.grok-bubble.glow{
+  opacity:1;
+  visibility:visible;
+  border-color:#fff;
+  animation:grokFloat 3.6s ease-in-out infinite,grokGlow 1.8s ease-in-out infinite;
 }
 
-.grok-bubble.glow::after
-{
-opacity:1;
-border-color:rgba(255,255,255,.9);
-animation:grokPulse 1.6s ease-out infinite;
+.grok-bubble.glow::after{
+  opacity:1;
+  border-color:rgba(255,255,255,.9);
+  animation:grokPulse 1.6s ease-out infinite;
 }
 
-@keyframes grokGlow
-{
-0%,100%
-{
-box-shadow:0 0 8px 2px rgba(255,255,255,.35),0 6px 22px rgba(0,0,0,.6);
-}
-50%
-{
-box-shadow:0 0 26px 9px rgba(255,255,255,.85),0 6px 22px rgba(0,0,0,.6);
-}
+@keyframes grokGlow{
+  0%,100%{box-shadow:0 0 8px 2px rgba(255,255,255,.35),0 6px 22px rgba(0,0,0,.6)}
+  50%{box-shadow:0 0 26px 9px rgba(255,255,255,.85),0 6px 22px rgba(0,0,0,.6)}
 }
 
-@keyframes grokFloat
-{
-0%,100%
-{
-transform:translateY(0);
-}
-50%
-{
-transform:translateY(-8px);
-}
+@keyframes grokFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
 }
 
-@keyframes grokPulse
-{
-0%
-{
-transform:scale(1);
-opacity:.7;
+@keyframes grokPulse{
+  0%{transform:scale(1);opacity:.7}
+  100%{transform:scale(1.6);opacity:0}
 }
-100%
-{
-transform:scale(1.6);
-opacity:0;
-}
-}
+
 
 /* LINK EXIT TRANSITION */
 
-#exit-overlay
-{
-position:fixed;
-inset:0;
-background:#000;
-z-index:99999;
-opacity:0;
-visibility:hidden;
-pointer-events:none;
-transition:opacity .28s ease,visibility .28s ease;
+#exit-overlay{
+  position:fixed;
+  inset:0;
+  background:#000;
+  z-index:99999;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .28s ease,visibility .28s ease;
 }
 
-#exit-overlay.show
-{
-opacity:1;
-visibility:visible;
-pointer-events:auto;
+#exit-overlay.show{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
 }
 
 </style>
@@ -665,484 +548,227 @@ pointer-events:auto;
 
 <body>
 
-<div id="exit-overlay">
-</div>
+<div id="exit-overlay"></div>
 
 <div id="feed">
 
 <div class="opening">
-<span>
-@fisshhfilet
-</span>
+<span>@fisshhfilet</span>
 </div>
 
 <div id="track">
 
-<!-- PAGE 1 — HAKRs / INSTAGRAM -->
+
 <section class="page">
-<img
-src="hakrs.jpg"
-width="1080"
-height="1920"
-alt="HAKRs.shop"
->
-<div
-class="tap open-link"
-data-href="https://www.instagram.com/hakrs.shop?stkn=MWhxYjhwaDAzamp5aw=="
->
-</div>
+<img src="hakrs.jpg" width="1080" height="1920" alt="HAKRs.shop">
+<div class="tap open-link" data-href="https://www.instagram.com/hakrs.shop?stkn=MWhxYjhwaDAzamp5aw=="></div>
 </section>
 
-<!-- PAGE 2 — BETTY -->
+
 <section class="page">
 <div class="betty">
-<img
-src="betty.jpg"
-width="1080"
-height="1920"
-alt="Betty Top 10"
->
+<img src="betty.jpg" width="1080" height="1920" alt="Betty Top 10">
 </div>
 </section>
 
-<!-- PAGE 3 — WA!STA -->
+
+<!-- WA!STA -->
 <section class="page">
-<img
-src="waista.jpg"
-width="1080"
-height="1920"
-alt=""
->
+<img src="waista.jpg" width="1080" height="1920" alt="">
 </section>
 
-<!-- PAGE 4 — YO GROK: GLOW STARTS ON THIS PAGE -->
-<section
-class="page"
-data-grok-glow
->
-<img
-src="Yogrok.jpg"
-width="1080"
-height="2340"
-alt="yo grok"
->
+
+<!-- YO GROK: GLOW STARTS ON THIS PAGE -->
+<section class="page" data-grok-glow>
+<img src="Yogrok.jpg" width="1080" height="2340" alt="yo grok">
 </section>
 
-<!-- PAGE 5 — LO-DON' LEMON: INSIDE DELI COUNTER -->
+
+<!-- LO-DON' LEMON: INSIDE DELI COUNTER -->
 <section class="page">
-<img
-src="lodondeli.jpg"
-width="1080"
-height="1920"
-alt="LO-DON' LEMON inside the deli"
->
+<img src="lodondeli.jpg" width="1080" height="1920" alt="LO-DON' LEMON inside the deli">
 </section>
 
-<!-- PAGE 6 — LO-DON' LEMON: OUTSIDE STOREFRONT -->
+
+<!-- LO-DON' LEMON: OUTSIDE STOREFRONT -->
 <section class="page">
-<img
-src="lodon.jpg"
-width="1080"
-height="1920"
-alt="LO-DON' Lemon storefront"
->
+<img src="lodon.jpg" width="1080" height="1920" alt="LO-DON' Lemon storefront">
 </section>
 
-<!-- PAGE 7 — SHARKBAIT -->
+
+<!-- SHARKBAIT -->
 <section class="page">
-<img
-src="Sharkbait.jpg"
-width="1080"
-height="1920"
-alt=""
->
-<div
-class="tap open-link"
-data-href="https://naturalcatchtuna.com/"
->
-</div>
+<img src="Sharkbait.jpg" width="1080" height="1920" alt="">
+<div class="tap open-link" data-href="https://naturalcatchtuna.com/"></div>
 </section>
 
-<!-- PAGE 8 — REDFRIES -->
+
+<!-- REDFRIES -->
 <section class="page">
-<img
-src="redfries.jpg"
-width="1080"
-height="1920"
-alt=""
->
+<img src="redfries.jpg" width="1080" height="1920" alt="">
 </section>
 
-<!-- PAGE 9 — 【entity-SEPHORA¦canonical_name=Sephora】 VIDEO -->
+
 <section class="page">
-<video
-muted
-loop
-playsinline
-webkit-playsinline
-preload="auto"
->
-<source
-src="【entity-Sephora¦canonical_name=Sephora】.mp4"
-type="video/mp4"
->
+<video muted loop playsinline webkit-playsinline preload="auto">
+<source src="Sephora.mp4" type="video/mp4">
 </video>
 </section>
 
-<!-- PAGE 10 — QR WARE -->
+
 <section class="page">
-<img
-src="qr-ware.jpg"
-width="1080"
-height="1920"
-alt=""
->
+<img src="qr-ware.jpg" width="1080" height="1920" alt="">
 </section>
 
-<!-- PAGE 11 — HAKRs FLIP LIVE VIDEO -->
+
 <section class="page">
-<video
-muted
-loop
-playsinline
-webkit-playsinline
-preload="auto"
->
-<source
-src="hakrs-flip-live.mp4"
-type="video/mp4"
->
+<video muted loop playsinline webkit-playsinline preload="auto">
+<source src="hakrs-flip-live.mp4" type="video/mp4">
 </video>
 </section>
 
-<!-- PAGE 12 — SHOP -->
-<section
-class="page"
-style="background:#000"
->
+
+<section class="page" style="background:#000">
 
 <div class="shop">
 
 <div class="avatars">
 
-<a
-class="av seph active"
-href="https://www.sephora.com/"
-target="_blank"
-rel="noopener noreferrer"
-aria-label="Open 【entity-Sephora¦canonical_name=Sephora】"
->
-<div class="c">
-<img
-src="【entity-sephora¦canonical_name=Sephora】.jpg"
-width="104"
-height="104"
-alt=""
->
-</div>
-<i>
-【entity-SEPHORA¦canonical_name=Sephora】
-</i>
+<a class="av seph active" href="https://www.sephora.com/" target="_blank" rel="noopener noreferrer" aria-label="Open Sephora">
+<div class="c"><img src="sephora.jpg" width="104" height="104" alt=""></div>
+<i>SEPHORA</i>
 </a>
 
-<a
-class="av"
-href="https://www.sephora.com/"
-target="_blank"
-rel="noopener noreferrer"
->
-<div class="c">
-<img
-src="betty.jpg"
-width="104"
-height="104"
-alt=""
->
-</div>
-<i>
-HOST
-</i>
+<a class="av" href="https://www.sephora.com/" target="_blank" rel="noopener noreferrer">
+<div class="c"><img src="betty.jpg" width="104" height="104" alt=""></div>
+<i>HOST</i>
 </a>
 
-<a
-class="av"
-href="https://www.sephora.com/"
-target="_blank"
-rel="noopener noreferrer"
->
-<div class="c">
-<img
-src="waista.jpg"
-width="104"
-height="104"
-alt=""
->
-</div>
-<i>
-HOME
-</i>
+<a class="av" href="https://www.sephora.com/" target="_blank" rel="noopener noreferrer">
+<div class="c"><img src="waista.jpg" width="104" height="104" alt=""></div>
+<i>HOME</i>
 </a>
 
-<a
-class="av"
-href="https://www.sephora.com/"
-target="_blank"
-rel="noopener noreferrer"
->
-<div class="c">
-<img
-src="qr-ware.jpg"
-width="104"
-height="104"
-alt=""
->
-</div>
-<i>
-PM
-</i>
+<a class="av" href="https://www.sephora.com/" target="_blank" rel="noopener noreferrer">
+<div class="c"><img src="qr-ware.jpg" width="104" height="104" alt=""></div>
+<i>PM</i>
 </a>
 
-<a
-class="av"
-href="https://www.sephora.com/"
-target="_blank"
-rel="noopener noreferrer"
->
-<div class="c">
-<img
-src="Sharkbait.jpg"
-width="104"
-height="104"
-alt=""
->
-</div>
-<i>
-FD
-</i>
+<a class="av" href="https://www.sephora.com/" target="_blank" rel="noopener noreferrer">
+<div class="c"><img src="Sharkbait.jpg" width="104" height="104" alt=""></div>
+<i>FD</i>
 </a>
 
-<a
-class="av"
-href="https://www.sephora.com/"
-target="_blank"
-rel="noopener noreferrer"
->
-<div class="c">
-<img
-src="hakrs-pier-flip-clean.jpg"
-width="104"
-height="104"
-alt=""
->
-</div>
-<i>
-GD
-</i>
+<a class="av" href="https://www.sephora.com/" target="_blank" rel="noopener noreferrer">
+<div class="c"><img src="hakrs-pier-flip-clean.jpg" width="104" height="104" alt=""></div>
+<i>GD</i>
 </a>
 
-<a
-class="av"
-href="https://www.sephora.com/"
-target="_blank"
-rel="noopener noreferrer"
->
-<div class="c">
-<img
-src="adults-only-beach.jpg"
-width="104"
-height="104"
-alt=""
->
-</div>
-<i>
-ED
-</i>
+<a class="av" href="https://www.sephora.com/" target="_blank" rel="noopener noreferrer">
+<div class="c"><img src="adults-only-beach.jpg" width="104" height="104" alt=""></div>
+<i>ED</i>
 </a>
 
 </div>
+
 
 <div class="toggle">
-<button>
-SHARK • ARCHIVE 5/9
-</button>
-<button class="on">
-FLIPPED • HAKRs 4/9
-</button>
+<button>SHARK • ARCHIVE 5/9</button>
+<button class="on">FLIPPED • HAKRs 4/9</button>
 </div>
+
 
 <div class="img">
-<img
-src="hakrs-pier-flip-clean.jpg"
-width="800"
-height="500"
-alt=""
->
+<img src="hakrs-pier-flip-clean.jpg" width="800" height="500" alt="">
 </div>
 
-<div class="swipe">
-SWIPE UP
-</div>
 
-<div class="live">
-SHARK IS LIVE — TAP TO FLIP CARDS 4/4 04/09
-</div>
+<div class="swipe">SWIPE UP</div>
+
+<div class="live">SHARK IS LIVE — TAP TO FLIP CARDS 4/4 04/09</div>
+
 
 <div class="grid">
 
 <div class="card">
-<b>
-FABRIC?
-</b>
-<p>
-HEAVY 14oz FLEECE CRYSTAL WASHED
-</p>
+<b>FABRIC?</b>
+<p>HEAVY 14oz FLEECE CRYSTAL WASHED</p>
 </div>
 
 <div class="card">
-<b>
-FIT?
-</b>
-<p>
-OVERSIZED BOXY CROPPED CLASS WAIST
-</p>
+<b>FIT?</b>
+<p>OVERSIZED BOXY CROPPED CLASS WAIST</p>
 </div>
 
 <div class="card">
-<b>
-WHY FLIP?
-</b>
-<p>
-RETAIL $285 → FLIP $32 DEADSTOCK ARCHIVE
-</p>
+<b>WHY FLIP?</b>
+<p>RETAIL $285 → FLIP $32 DEADSTOCK ARCHIVE</p>
 </div>
 
 <div class="card">
-<b>
-SHIP?
-</b>
-<p>
-NYC NEXT_DAY WORLDWIDE 3-5 DAYS
-</p>
+<b>SHIP?</b>
+<p>NYC NEXT_DAY WORLDWIDE 3-5 DAYS</p>
 </div>
 
 </div>
 
-<div class="cta">
-FLIP → $32
-</div>
 
-<div class="cta ghost">
-• § h o p •
-</div>
+<div class="cta">FLIP → $32</div>
+
+<div class="cta ghost">• § h o p •</div>
+
 
 <div class="add">
-<span>
-ADD → $32
-</span>
-<div style="width:34px;height:34px;border-radius:50%;background:#ff7a00;display:flex;align-items:center;justify-content:center;color:#fff">
-♥
-</div>
+<span>ADD → $32</span>
+<div style="width:34px;height:34px;border-radius:50%;background:#ff7a00;display:flex;align-items:center;justify-content:center;color:#fff">♥</div>
 </div>
 
 </div>
 
 </section>
 
-<!-- PAGE 13 — WAISTA QUESTION -->
+
 <section class="page">
-<img
-src="waista-question.jpg"
-width="1080"
-height="1920"
-alt=""
->
+<img src="waista-question.jpg" width="1080" height="1920" alt="">
 </section>
 
-<!-- PAGE 14 — 【entity-HERSHEY¦canonical_name=Hershey】 VIDEO -->
+
 <section class="page">
-<video
-muted
-loop
-playsinline
-webkit-playsinline
-preload="auto"
->
-<source
-src="【entity-Hershey¦canonical_name=Hershey】.mp4"
-type="video/mp4"
->
+<video muted loop playsinline webkit-playsinline preload="auto">
+<source src="Hershey.mp4" type="video/mp4">
 </video>
 </section>
 
-<!-- PAGE 15 — 【entity-KALSHI¦canonical_name=Kalshi】 -->
+
 <section class="page">
-<img
-src="【entity-kalshi¦canonical_name=Kalshi】-trade.jpg"
-width="1080"
-height="1920"
-alt=""
->
-<div
-class="tap open-link"
-data-href="https://kalshi.com"
->
-</div>
+<img src="kalshi-trade.jpg" width="1080" height="1920" alt="">
+<div class="tap open-link" data-href="https://kalshi.com"></div>
 </section>
 
-<!-- PAGE 16 — ADULTS ONLY BEACH -->
+
 <section class="page">
-<img
-src="adults-only-beach.jpg"
-width="1080"
-height="1920"
-alt=""
->
+<img src="adults-only-beach.jpg" width="1080" height="1920" alt="">
 </section>
 
-<!-- PAGE 17 — FINAL -->
-<section
-class="page final"
-style="background:#000"
->
-<div style="color:#a8a8a8;font-size:10px;letter-spacing:.32em">
-@fisshhfilet
-</div>
-<div style="color:#fff;font-size:11px;letter-spacing:.36em">
-PRIVATE ACCESS
-</div>
-<div style="color:#39e66f;font-size:10px;letter-spacing:.32em;font-weight:800">
-MEMBERS ONLY
-</div>
+
+<section class="page final" style="background:#000">
+<div style="color:#a8a8a8;font-size:10px;letter-spacing:.32em">@fisshhfilet</div>
+<div style="color:#fff;font-size:11px;letter-spacing:.36em">PRIVATE ACCESS</div>
+<div style="color:#39e66f;font-size:10px;letter-spacing:.32em;font-weight:800">MEMBERS ONLY</div>
 </section>
 
 </div>
 </div>
+
 
 <!-- GROK BUBBLE -->
-<a
-class="grok-bubble"
-href="https://grok.com"
-target="_blank"
-rel="noopener noreferrer"
-aria-label="Open Grok"
->
-<svg
-viewBox="0 0 24 24"
-fill="none"
-stroke="#fff"
-stroke-width="2"
-stroke-linecap="round"
->
-<circle
-cx="12"
-cy="12"
-r="8"
-/>
-<path
-d="M7 17 L18 6"
-/>
+<a class="grok-bubble" href="https://grok.com" target="_blank" rel="noopener noreferrer" aria-label="Open Grok">
+<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+<circle cx="12" cy="12" r="8"/>
+<path d="M7 17 L18 6"/>
 </svg>
 </a>
+
 
 <script>
 
@@ -1167,271 +793,325 @@ var grok = document.querySelector('.grok-bubble');
 var glowIdx = -1;
 var exitOverlay = document.getElementById('exit-overlay');
 var navigating = false;
-var openingTimer = null;
+
+var RESUME_WINDOW = 30 * 60 * 1000;
 
 pages.forEach(function(p, idx){
-if(p.hasAttribute('data-grok-glow')){
-glowIdx = idx;
-}
+  if(p.hasAttribute('data-grok-glow')){ glowIdx = idx; }
 });
 
-/* ---------- OPENING - INSTANT CUT, NO FADE ---------- */
-/* THIS IS THE FIX */
-/* hideOpening does NOT fade */
-/* It cuts the opening off with display:none */
-/* Then it shows the feed */
-/* They are never on screen at the same time */
-/* So refresh cannot clash */
+
+/* ---------- OPENING SCREEN (JS controlled) ---------- */
 
 function hideOpening(){
-if(!opening) return;
-opening.classList.add('hide');
-document.body.classList.add('ready');
+  if(!opening) return;
+  opening.classList.remove('show');
+  // force hide after transition
+  setTimeout(function(){
+    opening.style.display = 'none';
+  }, 700);
 }
 
 function showOpening(){
-if(!opening) return;
-if(openingTimer) clearTimeout(openingTimer);
-document.body.classList.remove('ready');
-opening.classList.remove('hide');
-openingTimer = setTimeout(hideOpening, 3000);
+  if(!opening) return;
+  opening.style.display = 'flex';
+  // force reflow
+  void opening.offsetWidth;
+  opening.classList.add('show');
+
+  // hide after \~3 seconds
+  setTimeout(function(){
+    hideOpening();
+  }, 3000);
 }
 
-function showOpeningInstant(){
-if(!opening) return;
-if(openingTimer) clearTimeout(openingTimer);
-document.body.classList.remove('ready');
-opening.classList.remove('hide');
-}
 
-/* ---------- RESUME OFF - ALWAYS RESTART AT OPENING ---------- */
+/* ---------- RESUME LOGIC ---------- */
 
 function clearResumeData(){
-try{
-localStorage.removeItem('ff_return');
-localStorage.removeItem('ff_page');
-localStorage.removeItem('ff_ts');
-}catch(e){}
+  try{
+    localStorage.removeItem('ff_return');
+    localStorage.removeItem('ff_page');
+    localStorage.removeItem('ff_ts');
+  }catch(e){}
 }
+
+function readResume(){
+  var out = -1;
+
+  try{
+    // Always force opening on a real Refresh
+    var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+    if(nav && nav.type === 'reload'){
+      clearResumeData();
+      return -1;
+    }
+
+    var flag = localStorage.getItem('ff_return') === '1';
+    var ts   = parseInt(localStorage.getItem('ff_ts'), 10);
+    var pg   = parseInt(localStorage.getItem('ff_page'), 10);
+
+    // consume the one-time flag
+    localStorage.removeItem('ff_return');
+
+    if(
+      flag &&
+      !isNaN(ts) &&
+      !isNaN(pg) &&
+      (Date.now() - ts) < RESUME_WINDOW &&
+      pg >= 0 &&
+      pg < n
+    ){
+      out = pg;
+    }
+
+  }catch(e){}
+
+  return out;
+}
+
 
 /* ---------- CORE ---------- */
 
 function vh(){
-var vv = window.visualViewport;
-return Math.round((vv && vv.height) || feed.clientHeight || window.innerHeight);
+  var vv = window.visualViewport;
+  return Math.round((vv && vv.height) || feed.clientHeight || window.innerHeight);
 }
 
 function size(){
-H = vh();
-pages.forEach(function(p){
-p.style.height = H + 'px';
-});
-track.style.height = (n * H) + 'px';
-go(i, false);
+  H = vh();
+  pages.forEach(function(p){ p.style.height = H + 'px'; });
+  track.style.height = (n * H) + 'px';
+  go(i, false);
 }
 
 function setY(y, animate){
-track.style.transition = animate
-? 'transform .28s cubic-bezier(.22,.9,.3,1)'
-: 'none';
-track.style.transform = 'translate3d(0,' + (-y) + 'px,0)';
+  track.style.transition = animate
+    ? 'transform .28s cubic-bezier(.22,.9,.3,1)'
+    : 'none';
+  track.style.transform = 'translate3d(0,' + (-y) + 'px,0)';
 }
 
 function go(idx, animate){
-if(idx < 0) idx = 0;
-if(idx > n - 1) idx = n - 1;
-i = idx;
-setY(i * H, animate !== false);
-if(grok && glowIdx > -1){
-grok.classList.toggle('glow', i === glowIdx);
-}
-play();
+  if(idx < 0) idx = 0;
+  if(idx > n - 1) idx = n - 1;
+  i = idx;
+  setY(i * H, animate !== false);
+
+  if(grok && glowIdx > -1){
+    grok.classList.toggle('glow', i === glowIdx);
+  }
+  play();
 }
 
 function play(){
-pages.forEach(function(p, idx){
-var v = p.querySelector('video');
-if(!v) return;
-if(idx === i){
-if(v.paused) v.play().catch(function(){});
-}else{
-if(!v.paused) v.pause();
-try{ v.currentTime = 0; }catch(e){}
+  pages.forEach(function(p, idx){
+    var v = p.querySelector('video');
+    if(!v) return;
+    if(idx === i){
+      if(v.paused) v.play().catch(function(){});
+    }else{
+      if(!v.paused) v.pause();
+      try{ v.currentTime = 0; }catch(e){}
+    }
+  });
 }
-});
-}
+
 
 /* ---------- VIDEO SETUP ---------- */
 
 vids.forEach(function(v){
-v.muted = true;
-v.loop = true;
-v.playsInline = true;
-v.preload = 'auto';
-v.setAttribute('playsinline', '');
-v.setAttribute('webkit-playsinline', '');
-v.disableRemotePlayback = true;
+  v.muted = true;
+  v.loop = true;
+  v.playsInline = true;
+  v.preload = 'auto';
+  v.setAttribute('playsinline', '');
+  v.setAttribute('webkit-playsinline', '');
+  v.disableRemotePlayback = true;
 });
 
-/* ---------- SHOP ---------- */
+
+/* ---------- SHOP HELPERS ---------- */
 
 function isInShop(el){
-return shop && el && shop.contains(el);
+  return shop && el && shop.contains(el);
 }
 
 function shopCanScroll(dir){
-if(!shop) return false;
-var atTop = shop.scrollTop <= 2;
-var atBot = shop.scrollTop + shop.clientHeight >= shop.scrollHeight - 3;
-if(dir < 0) return !atTop;
-if(dir > 0) return !atBot;
-return true;
+  if(!shop) return false;
+  var atTop = shop.scrollTop <= 2;
+  var atBot = shop.scrollTop + shop.clientHeight >= shop.scrollHeight - 3;
+  if(dir < 0) return !atTop;
+  if(dir > 0) return !atBot;
+  return true;
 }
 
-/* ---------- EXIT ---------- */
+
+/* ---------- EXIT / EXTERNAL LINKS ---------- */
 
 function clearExit(){
-if(exitOverlay) exitOverlay.classList.remove('show');
-navigating = false;
+  if(exitOverlay) exitOverlay.classList.remove('show');
+  navigating = false;
 }
 
 function openHref(href){
-if(!href || navigating) return;
-navigating = true;
-clearResumeData();
-i = 0;
-go(0, false);
-showOpeningInstant();
-if(exitOverlay) exitOverlay.classList.add('show');
-setTimeout(function(){
-window.location.href = href;
-}, 280);
-setTimeout(function(){
-if(document.visibilityState === 'visible') clearExit();
-}, 3500);
+  if(!href || navigating) return;
+  navigating = true;
+
+  try{
+    localStorage.setItem('ff_page', String(i));
+    localStorage.setItem('ff_ts', String(Date.now()));
+    localStorage.setItem('ff_return', '1');
+  }catch(e){}
+
+  if(exitOverlay) exitOverlay.classList.add('show');
+
+  setTimeout(function(){
+    window.location.href = href;
+  }, 280);
+
+  // safety: never stay stuck on black if the browser/app keeps the page alive
+  setTimeout(function(){
+    if(document.visibilityState === 'visible'){
+      clearExit();
+    }
+  }, 3500);
 }
 
-/* ---------- TOUCH ---------- */
+
+/* ---------- TOUCH HANDLERS ---------- */
 
 feed.addEventListener('touchstart', function(e){
-if(!e.touches[0]) return;
-y0 = e.touches[0].clientY;
-t0 = Date.now();
-startI = i;
-dragging = true;
-tapMoved = false;
-insideShop = isInShop(e.target);
-track.style.transition = 'none';
+  if(!e.touches[0]) return;
+  y0 = e.touches[0].clientY;
+  t0 = Date.now();
+  startI = i;
+  dragging = true;
+  tapMoved = false;
+  insideShop = isInShop(e.target);
+  track.style.transition = 'none';
 }, {passive:true});
 
 feed.addEventListener('touchmove', function(e){
-if(!dragging || !e.touches[0]) return;
-var dy = y0 - e.touches[0].clientY;
-if(Math.abs(dy) > 8) tapMoved = true;
-if(insideShop && Math.abs(dy) > 5 && shopCanScroll(dy)) return;
-var y = startI * H + dy;
-if(y < 0) y = dy * .25;
-if(y > (n-1)*H) y = (n-1)*H + (dy * .25);
-setY(y, false);
-if(Math.abs(dy) > 10) e.preventDefault();
+  if(!dragging || !e.touches[0]) return;
+  var dy = y0 - e.touches[0].clientY;
+  if(Math.abs(dy) > 8) tapMoved = true;
+
+  if(insideShop && Math.abs(dy) > 5 && shopCanScroll(dy)) return;
+
+  var y = startI * H + dy;
+  if(y < 0) y = dy * .25;
+  if(y > (n-1)*H) y = (n-1)*H + (dy * .25);
+  setY(y, false);
+
+  if(Math.abs(dy) > 10) e.preventDefault();
 }, {passive:false});
 
 function settle(y1){
-var dy = y0 - y1;
-var dt = Math.max(Date.now() - t0, 1);
-var vel = dy / dt;
-var next = startI;
-var strong = Math.abs(dy) > 56 || Math.abs(vel) > .35 || Math.abs(dy) > H * .12;
-if(strong) next = dy > 0 ? startI + 1 : startI - 1;
-go(next, true);
+  var dy = y0 - y1;
+  var dt = Math.max(Date.now() - t0, 1);
+  var vel = dy / dt;
+  var next = startI;
+  var strong = Math.abs(dy) > 56 || Math.abs(vel) > .35 || Math.abs(dy) > H * .12;
+  if(strong) next = dy > 0 ? startI + 1 : startI - 1;
+  go(next, true);
 }
 
 feed.addEventListener('touchend', function(e){
-if(!dragging) return;
-dragging = false;
-var y1 = e.changedTouches[0] ? e.changedTouches[0].clientY : y0;
-var dy = y0 - y1;
-if(insideShop && shopCanScroll(dy) && Math.abs(dy) < 120){
-go(startI, true);
-return;
-}
-settle(y1);
+  if(!dragging) return;
+  dragging = false;
+  var y1 = e.changedTouches[0] ? e.changedTouches[0].clientY : y0;
+  var dy = y0 - y1;
+
+  if(insideShop && shopCanScroll(dy) && Math.abs(dy) < 120){
+    go(startI, true);
+    return;
+  }
+  settle(y1);
 }, {passive:true});
 
-/* ---------- CLICKS ---------- */
+
+/* ---------- CLICK HANDLERS ---------- */
 
 document.querySelectorAll('.av').forEach(function(el){
-el.addEventListener('click', function(e){
-e.preventDefault();
-e.stopPropagation();
-if(tapMoved) return;
-openHref(el.getAttribute('href'));
-});
+  el.addEventListener('click', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    if(tapMoved) return;
+    openHref(el.getAttribute('href'));
+  });
 });
 
 document.querySelectorAll('.open-link').forEach(function(el){
-el.addEventListener('click', function(e){
-e.preventDefault();
-e.stopPropagation();
-if(tapMoved) return;
-openHref(el.getAttribute('data-href') || el.getAttribute('href'));
-});
+  el.addEventListener('click', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    if(tapMoved) return;
+    openHref(el.getAttribute('data-href') || el.getAttribute('href'));
+  });
 });
 
 if(grok){
-grok.addEventListener('click', function(e){
-e.preventDefault();
-e.stopPropagation();
-openHref(grok.getAttribute('href'));
-});
+  grok.addEventListener('click', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    openHref(grok.getAttribute('href'));
+  });
 }
 
-/* ---------- START - ALWAYS OPENING ---------- */
 
-clearResumeData();
+/* ---------- START ---------- */
+
+var resumePage = readResume();
+
 size();
-i = 0;
-go(0, false);
-showOpening();
 
-/* ---------- RESIZE ---------- */
+if(resumePage > -1){
+  i = resumePage;
+  hideOpening();
+  go(i, false);
+  clearExit();
+}else{
+  i = 0;
+  go(0, false);
+  showOpening();
+}
+
+
+/* ---------- RESIZE / ORIENTATION ---------- */
 
 if(window.visualViewport){
-window.visualViewport.addEventListener('resize', size);
+  window.visualViewport.addEventListener('resize', size);
 }
 window.addEventListener('resize', size);
 window.addEventListener('orientationchange', function(){
-setTimeout(size, 250);
+  setTimeout(size, 250);
 });
 
-/* ---------- RETURN HANDLERS - ALWAYS REFRESH TO OPENING, NO FLASH ---------- */
 
-window.addEventListener('pagehide', function(){
-i = 0;
-try{ go(0, false); }catch(e){}
-showOpeningInstant();
-});
+/* ---------- RETURN FROM EXTERNAL (bfcache + normal) ---------- */
 
 window.addEventListener('pageshow', function(e){
-clearExit();
-clearResumeData();
-i = 0;
-go(0, false);
-showOpening();
+  clearExit();
+
+  if(e.persisted){
+    // restored from bfcache → stay on current page, clear resume flag
+    try{ localStorage.removeItem('ff_return'); }catch(err){}
+    hideOpening();
+    go(i, false);
+  }
 });
 
 document.addEventListener('visibilitychange', function(){
-if(document.visibilityState === 'visible'){
-clearExit();
-clearResumeData();
-i = 0;
-go(0, false);
-showOpening();
-} else {
-i = 0;
-try{ go(0, false); }catch(e){}
-showOpeningInstant();
-}
+  if(document.visibilityState === 'visible'){
+    setTimeout(function(){
+      if(i >= 0 && i < n){
+        setY(i * H, false);
+        play();
+      }
+      clearExit();
+    }, 60);
+  }
 });
 
 })();
