@@ -531,7 +531,13 @@ body{
   opacity:0;
   visibility:hidden;
   pointer-events:none;
-  /* transitions controlled in JS so we can force instant black */
+  transition:opacity .32s ease,visibility .32s ease;
+}
+
+#exit-overlay.show{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
 }
 
 </style>
@@ -938,7 +944,7 @@ function shopCanScroll(dir){
 }
 
 
-/* EXTERNAL LINKS — force solid black, then open new tab */
+/* EXTERNAL LINKS — smooth fade, open new tab, stay on feed */
 
 var exitOverlay = document.getElementById('exit-overlay');
 var navigating = false;
@@ -949,40 +955,22 @@ function openHref(href){
 
   navigating = true;
 
-  // 1. Instant solid black — no transition, force paint
   if(exitOverlay){
-    exitOverlay.style.transition = 'none';
-    exitOverlay.style.opacity = '1';
-    exitOverlay.style.visibility = 'visible';
-    exitOverlay.style.pointerEvents = 'auto';
-    void exitOverlay.offsetWidth; // force reflow so black is on screen
+    exitOverlay.classList.add('show');
   }
 
-  // 2. Wait two frames so the black paint is committed, then open
-  requestAnimationFrame(function(){
-    requestAnimationFrame(function(){
+  setTimeout(function(){
 
-      window.open(href, '_blank', 'noopener,noreferrer');
+    window.open(href, '_blank', 'noopener,noreferrer');
 
-      // 3. Keep this page black briefly, then fade the overlay out
-      //    (in case the user returns to this tab)
-      setTimeout(function(){
-        if(exitOverlay){
-          exitOverlay.style.transition = 'opacity .28s ease';
-          exitOverlay.style.opacity = '0';
-          setTimeout(function(){
-            exitOverlay.style.visibility = 'hidden';
-            exitOverlay.style.pointerEvents = 'none';
-            exitOverlay.style.transition = '';
-            navigating = false;
-          }, 300);
-        } else {
-          navigating = false;
-        }
-      }, 450);
+    setTimeout(function(){
+      if(exitOverlay){
+        exitOverlay.classList.remove('show');
+      }
+      navigating = false;
+    }, 180);
 
-    });
-  });
+  }, 320);
 
 }
 
