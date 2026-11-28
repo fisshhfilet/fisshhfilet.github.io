@@ -87,20 +87,34 @@ body{
 }
 
 
-/* FISSHHFILET OPENING */
+/* FISSHHFILET OPENING — starts hidden, JS shows it on every fresh start / refresh */
 
 .opening{
   position:fixed;
   inset:0;
   background:#000;
-  display:flex;
+  display:none;
   align-items:center;
   justify-content:center;
   z-index:9999;
   pointer-events:none;
+  opacity:0;
+  visibility:hidden;
+}
+
+.opening.play{
+  display:flex;
   opacity:1;
   visibility:visible;
   animation:openingOut .7s ease 2.8s forwards;
+}
+
+.opening.play span{
+  color:#a8a8a8;
+  font-size:10px;
+  letter-spacing:.32em;
+  opacity:0;
+  animation:txtIn .8s ease .3s forwards,txtOut .6s ease 2s forwards;
 }
 
 .opening span{
@@ -108,7 +122,6 @@ body{
   font-size:10px;
   letter-spacing:.32em;
   opacity:0;
-  animation:txtIn .8s ease .3s forwards,txtOut .6s ease 2s forwards;
 }
 
 @keyframes txtIn{from{opacity:0}to{opacity:1}}
@@ -531,7 +544,7 @@ body{
   opacity:0;
   visibility:hidden;
   pointer-events:none;
-  transition:opacity .32s ease,visibility .32s ease;
+  transition:opacity .28s ease,visibility .28s ease;
 }
 
 #exit-overlay.show{
@@ -789,28 +802,77 @@ var tapMoved = false;
 var grok = document.querySelector('.grok-bubble');
 var glowIdx = -1;
 
+var RESUME_WINDOW = 30 * 60 * 1000;
+
 pages.forEach(function(p, idx){
   if(p.hasAttribute('data-grok-glow')){ glowIdx = idx; }
 });
 
 
+/* OPENING SCREEN */
+
+function hideOpening(){
+  if(!opening){ return; }
+  opening.classList.remove('play');
+  opening.style.cssText = 'display:none;opacity:0;visibility:hidden;';
+}
+
+function showOpening(){
+  if(!opening){ return; }
+  opening.style.cssText = '';
+  opening.classList.remove('play');
+  void opening.offsetWidth;
+  opening.classList.add('play');
+}
+
+
+/* RESUME: only right after tapping a link and coming back */
+
+function readResume(){
+
+  var out = -1;
+
+  try{
+
+    var flag = localStorage.getItem('ff_return') === '1';
+    var ts = parseInt(localStorage.getItem('ff_ts'), 10);
+    var pg = parseInt(localStorage.getItem('ff_page'), 10);
+
+    // the flag works once, so a refresh after returning starts at the opening
+    localStorage.removeItem('ff_return');
+
+    if(
+      flag &&
+      !isNaN(ts) &&
+      !isNaN(pg) &&
+      (Date.now() - ts) < RESUME_WINDOW &&
+      pg >= 0 &&
+      pg < n
+    ){
+      out = pg;
+    }
+
+  }catch(e){}
+
+  return out;
+
+}
+
+
 /* APP RESET */
 
-function resetApp(){
+function resetApp(resumePage){
 
-  i = 0;
+  if(resumePage > -1){
+    i = resumePage;
+    hideOpening();
+  }else{
+    i = 0;
+    showOpening();
+  }
 
   track.style.transition = 'none';
-  track.style.transform = 'translate3d(0,0,0)';
-
-  if(opening){
-    opening.style.display = 'flex';
-    opening.style.opacity = '1';
-    opening.style.visibility = 'visible';
-    opening.style.animation = 'none';
-    void opening.offsetWidth;
-    opening.style.animation = 'openingOut .7s ease 2.8s forwards';
-  }
+  track.style.transform = 'translate3d(0,' + (-i * H) + 'px,0)';
 
 }
 
@@ -944,10 +1006,20 @@ function shopCanScroll(dir){
 }
 
 
-/* EXTERNAL LINKS — smooth fade, open new tab, stay on feed */
+/* EXTERNAL LINKS: black fade, remember the page, then go */
 
 var exitOverlay = document.getElementById('exit-overlay');
 var navigating = false;
+
+function clearExit(){
+
+  if(exitOverlay){
+    exitOverlay.classList.remove('show');
+  }
+
+  navigating = false;
+
+}
 
 function openHref(href){
 
@@ -955,22 +1027,26 @@ function openHref(href){
 
   navigating = true;
 
+  try{
+    localStorage.setItem('ff_page', String(i));
+    localStorage.setItem('ff_ts', String(Date.now()));
+    localStorage.setItem('ff_return', '1');
+  }catch(e){}
+
   if(exitOverlay){
     exitOverlay.classList.add('show');
   }
 
   setTimeout(function(){
+    window.location.href = href;
+  }, 280);
 
-    window.open(href, '_blank', 'noopener,noreferrer');
-
-    setTimeout(function(){
-      if(exitOverlay){
-        exitOverlay.classList.remove('show');
-      }
-      navigating = false;
-    }, 180);
-
-  }, 320);
+  // if an app (like Grok) takes over and this page stays alive, never stay stuck on black
+  setTimeout(function(){
+    if(document.visibilityState === 'visible'){
+      clearExit();
+    }
+  }, 3500);
 
 }
 
@@ -1072,7 +1148,7 @@ feed.addEventListener('touchend', function(e){
 }, { passive:true });
 
 
-/* SHOP AVATARS — smooth exit */
+/* SHOP AVATARS */
 
 document.querySelectorAll('.av').forEach(function(el){
 
@@ -1108,7 +1184,7 @@ document.querySelectorAll('.open-link').forEach(function(el){
 });
 
 
-/* GROK BUBBLE — smooth exit */
+/* GROK BUBBLE */
 
 if(grok){
 
@@ -1126,8 +1202,15 @@ if(grok){
 
 /* START */
 
+var resumePage = readResume();
+
 size();
-resetApp();
+resetApp(resumePage);
+go(i, false);
+
+if(resumePage > -1){
+  clearExit();
+}
 
 
 /* VISUAL VIEWPORT RESIZE */
@@ -1146,11 +1229,31 @@ window.addEventListener('orientationchange', function(){
 });
 
 
-/* RETURN FROM EXTERNAL SITE */
+/* COMING BACK (back button or app switch) */
+
+function clearReturnFlag(){
+  try{
+    localStorage.removeItem('ff_return');
+  }catch(e){}
+}
+
+window.addEventListener('pageshow', function(e){
+
+  clearExit();
+  clearReturnFlag();
+
+  if(e.persisted){
+    hideOpening();
+    go(i, false);
+  }
+
+});
 
 document.addEventListener('visibilitychange', function(){
 
   if(document.visibilityState === 'visible'){
+
+    clearReturnFlag();
 
     setTimeout(function(){
 
@@ -1159,7 +1262,9 @@ document.addEventListener('visibilitychange', function(){
         play();
       }
 
-    }, 80);
+      clearExit();
+
+    }, 60);
 
   }
 
