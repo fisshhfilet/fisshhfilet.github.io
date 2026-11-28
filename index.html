@@ -87,34 +87,25 @@ body{
 }
 
 
-/* FISSHHFILET OPENING — starts hidden, JS shows it on every fresh start / refresh */
+/* ===================== OPENING ===================== */
 
 .opening{
   position:fixed;
   inset:0;
   background:#000;
-  display:none;
+  display:flex;
   align-items:center;
   justify-content:center;
-  z-index:9999;
+  z-index:99999;
   pointer-events:none;
   opacity:0;
   visibility:hidden;
+  transition: opacity 0.55s ease, visibility 0.55s ease;
 }
 
 .opening.play{
-  display:flex;
   opacity:1;
   visibility:visible;
-  animation:openingOut .7s ease 2.8s forwards;
-}
-
-.opening.play span{
-  color:#a8a8a8;
-  font-size:10px;
-  letter-spacing:.32em;
-  opacity:0;
-  animation:txtIn .8s ease .3s forwards,txtOut .6s ease 2s forwards;
 }
 
 .opening span{
@@ -122,13 +113,20 @@ body{
   font-size:10px;
   letter-spacing:.32em;
   opacity:0;
+  transition: opacity 0.7s ease;
 }
 
-@keyframes txtIn{from{opacity:0}to{opacity:1}}
-@keyframes txtOut{from{opacity:1}to{opacity:0}}
-@keyframes openingOut{
-  from{opacity:1;visibility:visible}
-  to{opacity:0;visibility:hidden}
+.opening.play span{
+  opacity:1;
+}
+
+.opening.hide span{
+  opacity:0;
+}
+
+.opening.hide{
+  opacity:0;
+  visibility:hidden;
 }
 
 
@@ -462,7 +460,7 @@ body{
 }
 
 
-/* GROK BUBBLE (visible only on YO GROK page) */
+/* GROK BUBBLE */
 
 .grok-bubble{
   position:fixed;
@@ -562,11 +560,12 @@ body{
 
 <div id="feed">
 
-<div class="opening">
-<span>@fisshhfilet</span>
-</div>
+  <!-- OPENING -->
+  <div class="opening" id="opening">
+    <span>@fisshhfilet</span>
+  </div>
 
-<div id="track">
+  <div id="track">
 
 
 <section class="page">
@@ -788,7 +787,7 @@ var feed = document.getElementById('feed');
 var track = document.getElementById('track');
 var pages = [].slice.call(document.querySelectorAll('.page'));
 var shop = document.querySelector('.shop');
-var opening = document.querySelector('.opening');
+var opening = document.getElementById('opening');
 var n = pages.length;
 var i = 0;
 var H = 0;
@@ -809,20 +808,23 @@ pages.forEach(function(p, idx){
 });
 
 
-/* OPENING SCREEN */
+/* ===================== OPENING ===================== */
 
 function hideOpening(){
-  if(!opening){ return; }
+  if(!opening) return;
   opening.classList.remove('play');
-  opening.style.cssText = 'display:none;opacity:0;visibility:hidden;';
+  opening.classList.add('hide');
 }
 
 function showOpening(){
-  if(!opening){ return; }
-  opening.style.cssText = '';
-  opening.classList.remove('play');
-  void opening.offsetWidth;
+  if(!opening) return;
+  opening.classList.remove('hide');
   opening.classList.add('play');
+
+  // Auto hide after 2.4 seconds
+  setTimeout(function(){
+    hideOpening();
+  }, 2400);
 }
 
 
