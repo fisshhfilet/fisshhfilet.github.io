@@ -87,7 +87,7 @@ body{
 }
 
 
-/* ===================== OPENING ===================== */
+/* FISSHHFILET OPENING */
 
 .opening{
   position:fixed;
@@ -96,16 +96,11 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  z-index:99999;
+  z-index:9999;
   pointer-events:none;
-  opacity:0;
-  visibility:hidden;
-  transition: opacity 0.55s ease, visibility 0.55s ease;
-}
-
-.opening.play{
   opacity:1;
   visibility:visible;
+  animation:openingOut .7s ease 2.8s forwards;
 }
 
 .opening span{
@@ -113,20 +108,14 @@ body{
   font-size:10px;
   letter-spacing:.32em;
   opacity:0;
-  transition: opacity 0.7s ease;
+  animation:txtIn .8s ease .3s forwards,txtOut .6s ease 2s forwards;
 }
 
-.opening.play span{
-  opacity:1;
-}
-
-.opening.hide span{
-  opacity:0;
-}
-
-.opening.hide{
-  opacity:0;
-  visibility:hidden;
+@keyframes txtIn{from{opacity:0}to{opacity:1}}
+@keyframes txtOut{from{opacity:1}to{opacity:0}}
+@keyframes openingOut{
+  from{opacity:1;visibility:visible}
+  to{opacity:0;visibility:hidden}
 }
 
 
@@ -460,7 +449,7 @@ body{
 }
 
 
-/* GROK BUBBLE */
+/* GROK BUBBLE (visible only on YO GROK page) */
 
 .grok-bubble{
   position:fixed;
@@ -542,7 +531,7 @@ body{
   opacity:0;
   visibility:hidden;
   pointer-events:none;
-  transition:opacity .28s ease,visibility .28s ease;
+  transition:opacity .32s ease,visibility .32s ease;
 }
 
 #exit-overlay.show{
@@ -560,12 +549,11 @@ body{
 
 <div id="feed">
 
-  <!-- OPENING -->
-  <div class="opening" id="opening">
-    <span>@fisshhfilet</span>
-  </div>
+<div class="opening">
+<span>@fisshhfilet</span>
+</div>
 
-  <div id="track">
+<div id="track">
 
 
 <section class="page">
@@ -787,7 +775,7 @@ var feed = document.getElementById('feed');
 var track = document.getElementById('track');
 var pages = [].slice.call(document.querySelectorAll('.page'));
 var shop = document.querySelector('.shop');
-var opening = document.getElementById('opening');
+var opening = document.querySelector('.opening');
 var n = pages.length;
 var i = 0;
 var H = 0;
@@ -801,80 +789,28 @@ var tapMoved = false;
 var grok = document.querySelector('.grok-bubble');
 var glowIdx = -1;
 
-var RESUME_WINDOW = 30 * 60 * 1000;
-
 pages.forEach(function(p, idx){
   if(p.hasAttribute('data-grok-glow')){ glowIdx = idx; }
 });
 
 
-/* ===================== OPENING ===================== */
-
-function hideOpening(){
-  if(!opening) return;
-  opening.classList.remove('play');
-  opening.classList.add('hide');
-}
-
-function showOpening(){
-  if(!opening) return;
-  opening.classList.remove('hide');
-  opening.classList.add('play');
-
-  // Auto hide after 2.4 seconds
-  setTimeout(function(){
-    hideOpening();
-  }, 2400);
-}
-
-
-/* RESUME: only right after tapping a link and coming back */
-
-function readResume(){
-
-  var out = -1;
-
-  try{
-
-    var flag = localStorage.getItem('ff_return') === '1';
-    var ts = parseInt(localStorage.getItem('ff_ts'), 10);
-    var pg = parseInt(localStorage.getItem('ff_page'), 10);
-
-    // the flag works once, so a refresh after returning starts at the opening
-    localStorage.removeItem('ff_return');
-
-    if(
-      flag &&
-      !isNaN(ts) &&
-      !isNaN(pg) &&
-      (Date.now() - ts) < RESUME_WINDOW &&
-      pg >= 0 &&
-      pg < n
-    ){
-      out = pg;
-    }
-
-  }catch(e){}
-
-  return out;
-
-}
-
-
 /* APP RESET */
 
-function resetApp(resumePage){
+function resetApp(){
 
-  if(resumePage > -1){
-    i = resumePage;
-    hideOpening();
-  }else{
-    i = 0;
-    showOpening();
-  }
+  i = 0;
 
   track.style.transition = 'none';
-  track.style.transform = 'translate3d(0,' + (-i * H) + 'px,0)';
+  track.style.transform = 'translate3d(0,0,0)';
+
+  if(opening){
+    opening.style.display = 'flex';
+    opening.style.opacity = '1';
+    opening.style.visibility = 'visible';
+    opening.style.animation = 'none';
+    void opening.offsetWidth;
+    opening.style.animation = 'openingOut .7s ease 2.8s forwards';
+  }
 
 }
 
@@ -1008,20 +944,10 @@ function shopCanScroll(dir){
 }
 
 
-/* EXTERNAL LINKS: black fade, remember the page, then go */
+/* EXTERNAL LINKS — smooth fade, open new tab, stay on feed */
 
 var exitOverlay = document.getElementById('exit-overlay');
 var navigating = false;
-
-function clearExit(){
-
-  if(exitOverlay){
-    exitOverlay.classList.remove('show');
-  }
-
-  navigating = false;
-
-}
 
 function openHref(href){
 
@@ -1029,26 +955,22 @@ function openHref(href){
 
   navigating = true;
 
-  try{
-    localStorage.setItem('ff_page', String(i));
-    localStorage.setItem('ff_ts', String(Date.now()));
-    localStorage.setItem('ff_return', '1');
-  }catch(e){}
-
   if(exitOverlay){
     exitOverlay.classList.add('show');
   }
 
   setTimeout(function(){
-    window.location.href = href;
-  }, 280);
 
-  // if an app (like Grok) takes over and this page stays alive, never stay stuck on black
-  setTimeout(function(){
-    if(document.visibilityState === 'visible'){
-      clearExit();
-    }
-  }, 3500);
+    window.open(href, '_blank', 'noopener,noreferrer');
+
+    setTimeout(function(){
+      if(exitOverlay){
+        exitOverlay.classList.remove('show');
+      }
+      navigating = false;
+    }, 180);
+
+  }, 320);
 
 }
 
@@ -1150,7 +1072,7 @@ feed.addEventListener('touchend', function(e){
 }, { passive:true });
 
 
-/* SHOP AVATARS */
+/* SHOP AVATARS — smooth exit */
 
 document.querySelectorAll('.av').forEach(function(el){
 
@@ -1186,7 +1108,7 @@ document.querySelectorAll('.open-link').forEach(function(el){
 });
 
 
-/* GROK BUBBLE */
+/* GROK BUBBLE — smooth exit */
 
 if(grok){
 
@@ -1204,15 +1126,8 @@ if(grok){
 
 /* START */
 
-var resumePage = readResume();
-
 size();
-resetApp(resumePage);
-go(i, false);
-
-if(resumePage > -1){
-  clearExit();
-}
+resetApp();
 
 
 /* VISUAL VIEWPORT RESIZE */
@@ -1231,31 +1146,11 @@ window.addEventListener('orientationchange', function(){
 });
 
 
-/* COMING BACK (back button or app switch) */
-
-function clearReturnFlag(){
-  try{
-    localStorage.removeItem('ff_return');
-  }catch(e){}
-}
-
-window.addEventListener('pageshow', function(e){
-
-  clearExit();
-  clearReturnFlag();
-
-  if(e.persisted){
-    hideOpening();
-    go(i, false);
-  }
-
-});
+/* RETURN FROM EXTERNAL SITE */
 
 document.addEventListener('visibilitychange', function(){
 
   if(document.visibilityState === 'visible'){
-
-    clearReturnFlag();
 
     setTimeout(function(){
 
@@ -1264,9 +1159,7 @@ document.addEventListener('visibilitychange', function(){
         play();
       }
 
-      clearExit();
-
-    }, 60);
+    }, 80);
 
   }
 
